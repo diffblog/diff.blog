@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+        {% for post in posts %}
+        <article class="media">
+                <figure class="media-left">
+                  <p class="image is-64x64">
+                    <img src="https://avatars.githubusercontent.com/{{post.blog.github_id}}">
+                  </p>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                      {{ post.blog.name }} <small>@{{ post.blog.github_id }}</small> <small>31m</small>
+                      <h4>
+                        {{ post.title }}
+                      </h4>
+                  </div>
+                  <nav class="level is-mobile">
+                    <div class="level-left">
+                      <a class="level-item">
+                        <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                      </a>
+                      <a class="level-item">
+                        <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                      </a>
+                    </div>
+                  </nav>
+                </div>
+              </article>
+        {% endfor %}
+    </div>
+  </section>
+  </body>
+</html>

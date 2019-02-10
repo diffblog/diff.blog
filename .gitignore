@@ -119,3 +119,4 @@ bin/
 .idea
 pip-selfcheck.json
 share/
+include/
