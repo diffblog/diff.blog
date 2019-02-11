@@ -1,62 +1,18 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  </head>
-  <body>
+{% extends "base.html" %}
 
-  <nav class="navbar is-fixed-top is-black" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="https://bulma.io">
-        <h2>Diff.blog()</h2>
-    </a>
-
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-end">
-      <div class="navbar-item">
-        {% if not user.is_authenticated %}
-        <div class="buttons">
-          <a href="{% url "social:begin" "github" %}" class="button is-light" herf="">
-            Log in &nbsp; <i class="fab fa-github"></i>
-          </a>
-          {% else %}
-            {{ user.username }}
-            &nbsp;
-            <figure class="image is-32x32">
-              <img src="https://avatars.githubusercontent.com/{{user.username}}">
-            </figure>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
-
-  <br>
-
-  <section class="section">
+{% block content %}
+<section class="section">
     <div class="container">
         {% for post in posts %}
         <article class="media">
                 <figure class="media-left">
                   <p class="image is-64x64">
-                    <img src="https://avatars.githubusercontent.com/{{post.blog.github_id}}">
+                    <img src="https://avatars.githubusercontent.com/{{post.user.github_id}}">
                   </p>
                 </figure>
                 <div class="media-content">
                   <div class="content">
-                      {{ post.blog.name }} <small>@{{ post.blog.github_id }}</small> <small>31m</small>
+                      {{ post.user.name }} <small>@{{ post.user.github_id }}</small> <small>31m</small>
                       <h4>
                         {{ post.title }}
                       </h4>
@@ -76,5 +32,4 @@
         {% endfor %}
     </div>
   </section>
-  </body>
-</html>
+{% endblock %}
