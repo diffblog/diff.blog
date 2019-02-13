@@ -9,3 +9,14 @@ class Post(models.Model):
     content = models.TextField()
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     updated_on = models.DateTimeField(null=True)
+
+    def serialize(self):
+        return {
+            "title": self.title,
+            "link": self.link,
+            "content": self.content,
+            "profile": {
+                "github_username": self.profile.github_username,
+                "full_name": self.profile.full_name,
+            }
+        }

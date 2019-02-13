@@ -6,47 +6,53 @@
     <title>Hello Bulma!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
   </head>
   <body>
 
   <nav class="navbar is-fixed-top is-black" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="/">
-        <h2>Diff.blog()</h2>
-    </a>
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+          <h2>Diff.blog()</h2>
+      </a>
 
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
 
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-end">
-      <div class="navbar-item">
-        {% if not user.is_authenticated %}
-        <div class="buttons">
-          <a href="{% url "social:begin" "github" %}" class="button is-light" herf="">
-            Log in &nbsp; <i class="fab fa-github"></i>
-          </a>
-          {% else %}
-            {{ user.profile.github_username }}
-            &nbsp;
-            <figure class="image is-32x32">
-              <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
-            </figure>
-          {% endif %}
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          {% if not user.is_authenticated %}
+          <div class="buttons">
+            <a href="{% url "social:begin" "github" %}" class="button is-light" herf="">
+              Log in &nbsp; <i class="fab fa-github"></i>
+            </a>
+            {% else %}
+              {{ user.profile.github_username }}
+              &nbsp;
+              <figure class="image is-32x32">
+                <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
+              </figure>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</nav>
-
+  </nav>
   <br>
 
   {% block content %}{% endblock %}
 
 
   </body>
+  <script src="static/js/home.js"></script>
+
 </html>
