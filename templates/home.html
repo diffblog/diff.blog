@@ -7,12 +7,12 @@
         <article class="media">
                 <figure class="media-left">
                   <p class="image is-64x64">
-                    <img src="https://avatars.githubusercontent.com/{{post.user.github_id}}">
+                    <img src="https://avatars.githubusercontent.com/{{post.profile.github_username}}">
                   </p>
                 </figure>
                 <div class="media-content">
                   <div class="content">
-                      {{ post.user.name }} <small>@{{ post.user.github_id }}</small> <small>31m</small>
+                      {{ post.profile.full_name }} <small>@{{ post.profile.github_username }}</small> <small>31m</small>
                       <h4>
                         {{ post.title }}
                       </h4>
