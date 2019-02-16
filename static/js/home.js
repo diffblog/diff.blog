@@ -4,10 +4,6 @@ var template = Handlebars.compile(source);
 var latest_id;
 var post_ids = [];
 
-function is_in_array(value, array) {
-    return array.indexOf(value) > -1;
-}
-
 function add_post_to_feed(post) {
     var html = template(post);
     $("#home_feed").append(html);
@@ -15,31 +11,12 @@ function add_post_to_feed(post) {
 }
 
 function check_post_in_feed(post) {
-    return is_in_array(post.id, post_ids);
-}
-
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-  
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-  
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-  
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-  
-    return array;
+    return _.contains(post_ids, post.id);
 }
 
 function update_feed(posts) {
     latest_id = posts[posts.length -1].id;
-    posts = shuffle(posts);
+    posts = _.shuffle(posts);
     for (index in posts) {
         post = posts[index];
         if (!check_post_in_feed(post)) {
