@@ -35,30 +35,35 @@ function shuffle(array) {
     }
   
     return array;
-  }
+}
+
+function update_feed(posts) {
+    latest_id = posts[posts.length -1].id;
+    posts = shuffle(posts);
+    for (index in posts) {
+        post = posts[index];
+        if (!check_post_in_feed(post)) {
+            add_post_to_feed(post);
+        }
+    }
+
+    $(".vote_button").unbind("click");
+    $(".vote_button").on("click", function(event) {
+        console.log("hello")
+    });
+}
 
 $(function () {
     $.get("/api/posts", function (posts) {
-        latest_id = posts[posts.length -1].id;
-        posts = shuffle(posts);
-        for (index in posts) {
-            var html = template(posts[index]);
-            $("#home_feed").append(html);
-        }
+       update_feed(posts);
     });
 
     $(window).scroll(function () { 
         if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
             $.get("/api/posts", {latest_id: latest_id}).done(function (posts) {
-                latest_id = posts[posts.length -1].id;
-                posts = shuffle(posts);
-                for (index in posts) {
-                    post = posts[index];
-                    if (!check_post_in_feed(post)) {
-                        add_post_to_feed(post);
-                    }
-                }
+               update_feed(posts);
             })
         }
      });
+
 });

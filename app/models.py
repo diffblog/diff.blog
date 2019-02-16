@@ -11,3 +11,31 @@ class UserProfile(models.Model):
     github_token = models.CharField(max_length=50, null=True)
     is_activated = models.BooleanField(default=False)
     full_name = models.CharField(max_length=50)
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    link = models.CharField(max_length=200)
+    content = models.TextField()
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    updated_on = models.DateTimeField(null=True)
+    upvotes_count = models.IntegerField(default=0)
+    comments_count = models.IntegerField(default=0)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "link": self.link,
+            "content": self.content,
+            "updated_on": self.updated_on,
+            "upvotes_count": self.upvotes_count,
+            "messages_count": self.comments_count,
+            "profile": {
+                "github_username": self.profile.github_username,
+                "full_name": self.profile.full_name,
+            }
+        }
+
+class Vote(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
