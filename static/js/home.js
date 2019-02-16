@@ -4,6 +4,18 @@ var template = Handlebars.compile(source);
 var latest_id;
 var post_ids = [];
 
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
 function add_post_to_feed(post) {
     var html = template(post);
     $("#home_feed").append(html);
@@ -26,7 +38,14 @@ function update_feed(posts) {
 
     $(".vote_button").unbind("click");
     $(".vote_button").on("click", function(event) {
-        console.log("hello")
+        $.ajax({
+            type: "POST",
+            url: "/api/post/vote",
+            data: {"post_id": $(this).data("post-id")},
+            success: function() {
+                console.log("done")
+            }
+        })
     });
 }
 
