@@ -16,6 +16,7 @@ class Post(models.Model):
             "title": self.title,
             "link": self.link,
             "content": self.content,
+            "updated_on": self.updated_on,
             "profile": {
                 "github_username": self.profile.github_username,
                 "full_name": self.profile.full_name,
