@@ -28,7 +28,6 @@ function check_post_in_feed(post) {
 
 function update_feed(posts) {
     latest_id = posts[posts.length -1].id;
-    posts = _.shuffle(posts);
     for (index in posts) {
         post = posts[index];
         if (!check_post_in_feed(post)) {
