@@ -39,3 +39,20 @@ class Post(models.Model):
 class Vote(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
+class Comment(models.Model):
+    content = models.TextField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    posted_on = models.DateTimeField(auto_now_add=True)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "content": self.content,
+            "profile": {
+                "github_username": self.profile.github_username,
+                "full_name": self.profile.full_name,
+            },
+            "post_id": self.post.id,
+        }
