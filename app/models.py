@@ -29,7 +29,7 @@ class Post(models.Model):
             "content": self.content,
             "updated_on": self.updated_on,
             "upvotes_count": self.upvotes_count,
-            "messages_count": self.comments_count,
+            "comments_count": self.comments_count,
             "profile": {
                 "github_username": self.profile.github_username,
                 "full_name": self.profile.full_name,
