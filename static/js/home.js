@@ -37,12 +37,25 @@ function update_feed(posts) {
 
     $(".vote_button").unbind("click");
     $(".vote_button").on("click", function(event) {
+        var already_upvoted = $(this).data("vote-upvoted");
+        var post_id = $(this).data("post-id");
+        var upvotes_counter = $("#feed_upvotes_counter_" + post_id);
+        var upvotes_count = upvotes_counter.text()
+        if (already_upvoted) {
+            $(this).html('<i class="far fa-heart"></i>');
+            $(this).data("vote-upvoted", false);
+            upvotes_counter.text(parseInt(upvotes_count) - 1);
+
+        } else {
+            $(this).html('<i class="fas fa-heart"></i>');
+            $(this).data("vote-upvoted", true);
+            upvotes_counter.text(parseInt(upvotes_count) + 1);
+        }
         $.ajax({
             type: "POST",
             url: "/api/post/vote",
-            data: {"post_id": $(this).data("post-id")},
+            data: {"post_id": post_id},
             success: function() {
-                console.log("done")
             }
         })
     });

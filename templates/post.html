@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+      <h3 class="title is-3">{{post.title}}</h3>
+      <article class="media">
+            <figure class="media-left">
+              <p class="image is-64x64">
+                <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="field">
+                <p class="control">
+                  <textarea id="comment-content" class="textarea" placeholder="Add a comment..."></textarea>
+                </p>
+              </div>
+              <nav class="level">
+                <div class="level-left">
+                  <div class="level-item">
+                    <a id="submit-comment-button" data-post-id='{{post.id}}' class="button is-info">Submit</a>
+                  </div>
+                </div>
+              </nav>
+            </div>
+        </article>
+        
+        <hr>
+        <div id="comments-holder">
+        </div>
+  </div>
+</section>
+{% verbatim %}
+<script id="comment-item-template" type="text/x-handlebars-template">
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <img src="https://avatars.githubusercontent.com/{{profile.github_username}}">
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong>{{ profile.full_name}}</strong>
+        <br>
+          {{ content }}
+        <br>
+        <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+      </p>
+    </div>
+  </div>
+</article>
+</script>
+{% endverbatim %}
+<script>
+  var page_params = {
+    post_id: {{post.id}},
+    profile: {
+      github_username: "{{user.profile.github_username}}",
+      full_name: "{{user.profile.full_name}}"
+    }
+  }
+</script>
+<script src="/static/js/post.js"></script>
+{% endblock %}
