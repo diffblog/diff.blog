@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractUser, User
 
 class Topic(models.Model):
     name = models.TextField()
-
 class UserProfile(models.Model):
     extra_data = models.TextField()
     auth = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="profile")
