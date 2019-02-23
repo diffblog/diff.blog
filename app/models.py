@@ -15,6 +15,11 @@ class UserProfile(models.Model):
     is_activated = models.BooleanField(default=False)
     full_name = models.CharField(max_length=50)
     topics = models.ManyToManyField(Topic)
+    followers_count = models.IntegerField(null=True)
+    following_count = models.IntegerField(null=True)
+    blog_url = models.CharField(max_length=100, null=True)
+    bio = models.CharField(max_length=200, null=True)
+    company = models.CharField(max_length=50, null=True)
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
