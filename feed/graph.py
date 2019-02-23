@@ -16,6 +16,20 @@ def initialize_top_users():
             user.save()
         time.sleep(2)
 
+def populate_user_profile_details():
+    users = UserProfile.objects.all()
+    for user in users:
+        response = r.get("https://api.github.com/user/{}}".format(user.github_username))
+        user_response = response.json()
+        user.full_name = user_response["name"]
+        user.company = user_response["company"]
+        user.bio = user_response["bio"]
+        user.location = user_response["location"]
+        user.blog_url = user_response["blog"]
+        user.followers_count = user_response["followers"]
+        user.following_count = user_response["following"]
+        user.save()
+
 def create_social_graph(initial_user):
     q = Queue()
     processed = set()
