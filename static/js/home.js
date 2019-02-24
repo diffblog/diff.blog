@@ -17,7 +17,7 @@ $.ajaxSetup({
 });
 
 function add_post_to_feed(post) {
-    post.time = moment(post.updated_on).startOf('hour').fromNow();
+    post.time = moment(post.updated_on).fromNow();
     var html = template(post);
     $("#home_feed").append(html);
     post_ids.push(post.id);
