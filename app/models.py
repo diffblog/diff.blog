@@ -43,7 +43,7 @@ class Post(models.Model):
             "title": self.title,
             "link": self.link,
             "content": self.content,
-            "updated_on": self.updated_on,
+            "updated_on": self.updated_on.isoformat(),
             "upvotes_count": self.upvotes_count,
             "comments_count": self.comments_count,
             "profile": {

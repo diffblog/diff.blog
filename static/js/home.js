@@ -17,6 +17,7 @@ $.ajaxSetup({
 });
 
 function add_post_to_feed(post) {
+    post.time = moment(post.updated_on).startOf('hour').fromNow();
     var html = template(post);
     $("#home_feed").append(html);
     post_ids.push(post.id);
@@ -28,7 +29,6 @@ function check_post_in_feed(post) {
 
 function update_feed(posts) {
     latest_id = posts[posts.length -1].id;
-    posts = _.shuffle(posts);
     for (index in posts) {
         post = posts[index];
         if (!check_post_in_feed(post)) {
