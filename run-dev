@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+source bin/activate
+./manage.py runserver
+./manage.py rqworker default
