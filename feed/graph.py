@@ -3,6 +3,7 @@ import requests as r
 from multiprocessing import Queue, Pool
 import time
 from diffblog.secrets import github_access_token
+from feedfinder2 import find_feeds
 
 headers = {'Authorization': 'token {}'.format(github_access_token)}
 
@@ -40,6 +41,22 @@ def populate_user_profile_details():
     users = UserProfile.objects.all()
     pool = Pool()
     pool.map(_populate_user_profile_details, users)
+
+def _populate_feed_urls(user):
+    if not user.blog_url:
+        return
+    if user.feed_url:
+        return
+
+    feed_urls = find_feeds(user.blog_url)
+    if len(feed_urls) != 0:
+        user.feed_url = feed_urls[0]
+        user.save()
+
+def populate_feed_urls():
+    users = UserProfile.objects.all()
+    pool = Pool()
+    pool.map(_populate_feed_urls, users)
 
 def create_social_graph(initial_user):
     q = Queue()
