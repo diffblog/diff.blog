@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser, User
 
 class Topic(models.Model):
     name = models.TextField()
+
 class UserProfile(models.Model):
     extra_data = models.TextField()
     auth = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="profile")
@@ -20,6 +21,11 @@ class UserProfile(models.Model):
     blog_url = models.CharField(max_length=100, null=True)
     bio = models.CharField(max_length=200, null=True)
     company = models.CharField(max_length=50, null=True)
+
+    FROM_GITHUB = 1
+    FROM_GOOGLE = 2
+    HANDPICKED = 3
+    blog_url_type = models.IntegerField(null=True)
 
 class Post(models.Model):
     title = models.CharField(max_length=200)

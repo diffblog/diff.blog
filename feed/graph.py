@@ -4,6 +4,7 @@ from multiprocessing import Queue, Pool
 import time
 from diffblog.secrets import github_access_token
 from feedfinder2 import find_feeds
+from googlesearch import search 
 
 headers = {'Authorization': 'token {}'.format(github_access_token)}
 
@@ -43,20 +44,42 @@ def populate_user_profile_details():
     pool.map(_populate_user_profile_details, users)
 
 def _populate_feed_urls(user):
-    if not user.blog_url:
+    if user.blog_url_type:
         return
-    if user.feed_url:
-        return
+    print(user.full_name)
+    if user.blog_url:
+        feed_urls = find_feeds(user.blog_url)
+        if len(feed_urls) != 0:
+            user.feed_url = feed_urls[0]
+            user.blog_url_type = UserProfile.FROM_GITHUB
+            user.save()
+            print(user.feed_url)
+            return
 
-    feed_urls = find_feeds(user.blog_url)
-    if len(feed_urls) != 0:
-        user.feed_url = feed_urls[0]
+    for url in search("{} blog".format(user.full_name, user.github_username), stop=1):
+        if "github.com" in url:
+            continue
+        if "twitter.com" in url:
+            continue
+        if "linkedin.com" in url:
+            continue
+        if "facebook.com" in url:
+            continue
+        feeds = find_feeds(url)
+        if len(feeds) == 0:
+            continue
+        user.feed_url = feeds[0]
+        user.blog_url_type = UserProfile.FROM_GOOGLE
         user.save()
+        print(user.feed_url)
+        break
 
 def populate_feed_urls():
     users = UserProfile.objects.all()
-    pool = Pool()
-    pool.map(_populate_feed_urls, users)
+    #pool = Pool()
+    #pool.map(_populate_feed_urls, users)
+    for user in users:
+        _populate_feed_urls(user)
 
 def create_social_graph(initial_user):
     q = Queue()
