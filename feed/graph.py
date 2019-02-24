@@ -1,7 +1,10 @@
 from app.models import UserProfile, Topic
 import requests as r
-from multiprocessing import Queue
+from multiprocessing import Queue, Pool
 import time
+from diffblog.secrets import github_access_token
+
+headers = {'Authorization': 'token {}'.format(github_access_token)}
 
 def initialize_top_users():
     topics = Topic.objects.all()
@@ -16,19 +19,27 @@ def initialize_top_users():
             user.save()
         time.sleep(2)
 
+def _populate_user_profile_details(user):
+    response = r.get("https://api.github.com/users/{}".format(user.github_username),headers=headers)
+    if response.status_code != 200:
+        print("Unxpected status code ", response.status_code)
+        print(response.content)
+        return
+    user_response = response.json()
+    if user_response["name"]:
+        user.full_name = user_response["name"]
+    user.company = user_response["company"]
+    user.bio = user_response["bio"]
+    user.location = user_response["location"]
+    user.blog_url = user_response["blog"]
+    user.followers_count = user_response["followers"]
+    user.following_count = user_response["following"]
+    user.save()
+
 def populate_user_profile_details():
     users = UserProfile.objects.all()
-    for user in users:
-        response = r.get("https://api.github.com/user/{}}".format(user.github_username))
-        user_response = response.json()
-        user.full_name = user_response["name"]
-        user.company = user_response["company"]
-        user.bio = user_response["bio"]
-        user.location = user_response["location"]
-        user.blog_url = user_response["blog"]
-        user.followers_count = user_response["followers"]
-        user.following_count = user_response["following"]
-        user.save()
+    pool = Pool()
+    pool.map(_populate_user_profile_details, users)
 
 def create_social_graph(initial_user):
     q = Queue()

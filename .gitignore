@@ -120,3 +120,4 @@ bin/
 pip-selfcheck.json
 share/
 include/
+diffblog/secrets.py
