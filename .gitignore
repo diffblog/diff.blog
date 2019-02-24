@@ -121,3 +121,8 @@ pip-selfcheck.json
 share/
 include/
 diffblog/secrets.py
+
+# Redis
+dumb.rdb
+
+etc
