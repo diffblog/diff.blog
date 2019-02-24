@@ -71,4 +71,5 @@ class Comment(models.Model):
                 "full_name": self.profile.full_name,
             },
             "post_id": self.post.id,
+            "posted_on": self.posted_on.isoformat(),
         }
