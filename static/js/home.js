@@ -28,6 +28,7 @@ function check_post_in_feed(post) {
 
 function update_feed(posts) {
     latest_id = posts[posts.length -1].id;
+    posts = _.shuffle(posts);
     for (index in posts) {
         post = posts[index];
         if (!check_post_in_feed(post)) {
@@ -62,13 +63,13 @@ function update_feed(posts) {
 }
 
 $(function () {
-    $.get("/api/posts", function (posts) {
+    $.get("/api/posts/following", function (posts) {
        update_feed(posts);
     });
 
     $(window).scroll(function () { 
         if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
-            $.get("/api/posts", {latest_id: latest_id}).done(function (posts) {
+            $.get("/api/posts/following", {latest_id: latest_id}).done(function (posts) {
                update_feed(posts);
             })
         }
