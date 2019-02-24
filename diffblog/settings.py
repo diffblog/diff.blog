@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'feed',
     'app',
     'social_django',
+    'django_rq',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+    }
+}
 
 ROOT_URLCONF = 'diffblog.urls'
 

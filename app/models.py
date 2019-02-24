@@ -21,6 +21,7 @@ class UserProfile(models.Model):
     blog_url = models.CharField(max_length=100, null=True)
     bio = models.CharField(max_length=200, null=True)
     company = models.CharField(max_length=50, null=True)
+    following = models.ManyToManyField("self", related_name="followers")
 
     FROM_GITHUB = 1
     FROM_GOOGLE = 2

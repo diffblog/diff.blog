@@ -22,7 +22,7 @@ def initialize_top_users():
         time.sleep(2)
 
 def _populate_user_profile_details(user):
-    response = r.get("https://api.github.com/users/{}".format(user.github_username),headers=headers)
+    response = r.get("https://api.github.com/users/{}".format(user.github_username), headers=headers)
     if response.status_code != 200:
         print("Unxpected status code ", response.status_code)
         print(response.content)
@@ -43,7 +43,7 @@ def populate_user_profile_details():
     pool = Pool()
     pool.map(_populate_user_profile_details, users)
 
-def _populate_feed_urls(user):
+def _populate_user_model_feed_urls(user):
     if user.blog_url_type:
         return
     print(user.full_name)
@@ -74,12 +74,26 @@ def _populate_feed_urls(user):
         print(user.feed_url)
         break
 
-def populate_feed_urls():
+def populate_user_model_feed_urls():
     users = UserProfile.objects.all()
     #pool = Pool()
-    #pool.map(_populate_feed_urls, users)
+    #pool.map(_populate_user_model_feed_urls, users)
     for user in users:
-        _populate_feed_urls(user)
+        _populate_user_model_feed_urls(user)
+
+def initialize_following_users(from_user):
+    headers = {'Authorization': 'token {}'.format(from_user.github_token)}
+    i = 1
+    while True:
+        url = "https://api.github.com/users/{}/following?page={}".format(from_user.github_username, str(i))
+        response = r.get(url, headers=headers)
+        i += 1
+        following = response.json()
+        if len(following) == 0:
+            break
+        for item in following:
+            to_user, created = UserProfile.objects.get_or_create(github_username=item["login"], github_id=item["id"])
+            from_user.following.add(to_user)
 
 def create_social_graph(initial_user):
     q = Queue()
