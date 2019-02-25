@@ -28,6 +28,14 @@ class UserProfile(models.Model):
     HANDPICKED = 3
     blog_url_type = models.IntegerField(null=True)
 
+    def serialize(self):
+        return {
+            "full_name": self.full_name,
+            "github_username": self.github_username,
+            "company": self.company,
+            "bio": self.bio,
+        }
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     link = models.CharField(max_length=200)

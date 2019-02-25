@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+      <div id="following_list" class="columns is-multiline is-centered">
+
+      </div>
+  </div>
+</section>
+{% verbatim %}
+<script id="follow-item-template" type="text/x-handlebars-template">
+    <div class="column is-half">
+        <div class="card">
+            <div class="card-content">
+                <div class="media">
+                <div class="media-left">
+                    <figure class="image is-48x48">
+                    <img src="https://avatars.githubusercontent.com/{{github_username}}" alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <p class="title is-4">{{ full_name }}</p>
+                    <p class="subtitle is-6">@{{ github_username }}</p>
+                </div>
+                </div>
+            
+                <div class="content">
+                {{ bio }}
+                <br>
+                </div>
+            </div>
+        </div>
+</div>
+</script>
+{% endverbatim %}
+<script>
+    var page_params = {
+        username: "{{username}}" 
+    }
+</script>
+<script src="/static/js/following.js"></script>
+{% endblock %}
