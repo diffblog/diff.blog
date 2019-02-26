@@ -30,6 +30,7 @@ class UserProfile(models.Model):
 
     def serialize(self):
         return {
+            "id": self.id,
             "full_name": self.full_name,
             "github_username": self.github_username,
             "company": self.company,
