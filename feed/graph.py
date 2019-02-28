@@ -76,10 +76,10 @@ def _populate_user_model_feed_urls(user):
 
 def populate_user_model_feed_urls():
     users = UserProfile.objects.all()
-    #pool = Pool()
-    #pool.map(_populate_user_model_feed_urls, users)
-    for user in users:
-        _populate_user_model_feed_urls(user)
+    pool = Pool()
+    pool.map(_populate_user_model_feed_urls, users)
+    #for user in users:
+    #    _populate_user_model_feed_urls(user)
 
 def initialize_following_users(from_user):
     headers = {'Authorization': 'token {}'.format(from_user.github_token)}
