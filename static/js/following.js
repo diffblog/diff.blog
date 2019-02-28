@@ -24,7 +24,7 @@ $(function () {
                 var html = template(user);
                 $("#following_list").append(html);
             }
-            $(".following").on("click", function() {
+            $("#following_list").on("click", ".following", function() {
                 $(this).removeClass("is-light");
                 $(this).removeClass("following");
                 $(this).addClass("is-dark");
@@ -40,7 +40,7 @@ $(function () {
                     }
                 })
             });
-            $(".follow").on("click", function() {
+            $("#following_list").on("click", ".follow", function() {
                 $(this).removeClass("is-dark");
                 $(this).removeClass("follow");
                 $(this).addClass("is-light");
