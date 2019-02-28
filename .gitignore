@@ -123,6 +123,6 @@ include/
 diffblog/secrets.py
 
 # Redis
-dumb.rdb
+dump.rdb
 
 etc
