@@ -36,8 +36,22 @@ function update_feed(posts) {
         }
     }
 
-    $(".vote_button").unbind("click");
-    $(".vote_button").on("click", function(event) {
+}
+
+$(function () {
+    $.get("/api/posts/following", function (posts) {
+       update_feed(posts);
+    });
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
+            $.get("/api/posts/following", {latest_id: latest_id}).done(function (posts) {
+               update_feed(posts);
+            })
+        }
+     });
+
+    $("#home_feed").on("click", ".vote_button", function(event) {
         var already_upvoted = $(this).data("vote-upvoted");
         var post_id = $(this).data("post-id");
         var upvotes_counter = $("#feed_upvotes_counter_" + post_id);
@@ -60,18 +74,4 @@ function update_feed(posts) {
             }
         })
     });
-}
-
-$(function () {
-    $.get("/api/posts/following", function (posts) {
-       update_feed(posts);
-    });
-
-    $(window).scroll(function () { 
-        if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
-            $.get("/api/posts/following", {latest_id: latest_id}).done(function (posts) {
-               update_feed(posts);
-            })
-        }
-     });
 });
