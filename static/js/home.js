@@ -28,7 +28,6 @@ function check_post_in_feed(post) {
 }
 
 function update_feed(posts) {
-    latest_id = posts[posts.length -1].id;
     for (index in posts) {
         post = posts[index];
         if (!check_post_in_feed(post)) {
@@ -54,12 +53,26 @@ function set_menu_active_section() {
     }
 }
 
+function initialize_feed() {
+    var path = window.location.pathname;
+    if (path === "/") {
+        $.get("/api/posts/following", function (posts) {
+            latest_id = posts[posts.length -1].id;
+            update_feed(posts);
+         });
+    }
+
+    if (path === "/new/") {
+        $.get("/api/posts/new", function (posts) {
+            latest_id = posts[posts.length -1].id;
+            update_feed(posts);
+         });
+    }
+}
+
 $(function () {
     set_menu_active_section();
-
-    $.get("/api/posts/following", function (posts) {
-       update_feed(posts);
-    });
+    initialize_feed();
 
     $(window).scroll(function () {
         if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
