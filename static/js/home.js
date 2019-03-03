@@ -16,6 +16,21 @@ $.ajaxSetup({
     }
 });
 
+function get_feed_type() {
+    var pathname = window.location.pathname;
+    if (pathname === "/") {
+        return "following";
+    }
+    if (pathname[0] === "/") {
+        pathname = pathname.substr(1);
+    }
+
+    if (pathname[pathname.length - 1] === "/") {
+        pathname = pathname.substring(0, pathname.length - 1);
+    }
+    return pathname;
+}
+
 function add_post_to_feed(post) {
     post.time = moment(post.updated_on).fromNow();
     var html = template(post);
@@ -105,4 +120,17 @@ $(function () {
             }
         })
     });
+
+    $("#feed-menu .menu-item").on("click", function() {
+        var current_feed_type = get_feed_type();
+        var new_feed_type = $(this).attr("name");
+        $("#feed-menu [name=" + current_feed_type + "]").removeClass("is-active");
+        $("#feed-menu [name=" + new_feed_type + "]").addClass("is-active");
+        if (new_feed_type !== "following") {
+            history.pushState(new_feed_type, "Diff.Blog()", "/" + new_feed_type + "/");
+        } else {
+            history.pushState(new_feed_type, "Diff.Blog()", "/");
+        }
+    });
+
 });
