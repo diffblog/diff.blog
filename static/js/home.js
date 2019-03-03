@@ -59,6 +59,7 @@ function set_menu_active_section() {
 
 function initialize_feed() {
     var feed_type = get_feed_type();
+    post_ids = [];
     if (feed_type === "following") {
         $.get("/api/posts/following", function (posts) {
             $("#home_feed").html("");
@@ -122,6 +123,7 @@ $(function () {
         } else {
             history.pushState(new_feed_type, "Diff.Blog()", "/");
         }
+        initialize_feed();
     });
 
 });
