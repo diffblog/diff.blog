@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
+from datetime import datetime, timedelta
+from math import log
 
-# Create your models here.
 
 class Topic(models.Model):
     name = models.TextField()
@@ -46,6 +47,7 @@ class Post(models.Model):
     updated_on = models.DateTimeField(null=True)
     upvotes_count = models.IntegerField(default=0)
     comments_count = models.IntegerField(default=0)
+    score = models.IntegerField(default=0)
 
     def serialize(self):
         return {
@@ -61,6 +63,19 @@ class Post(models.Model):
                 "full_name": self.profile.full_name,
             }
         }
+
+    def update_score(self):
+        def epoch_seconds():
+            epoch = datetime(1970, 1, 1)
+            td = self.updated_on.replace(tzinfo=None) - epoch
+            return td.days * 86400 + td.seconds + (float(td.microseconds) / 1000000)
+
+        s = self.upvotes_count - 0
+        order = log(max(abs(s), 1), 10)
+        sign = 1 if s > 0 else -1 if s < 0 else 0
+        seconds = epoch_seconds() - 1134028003
+        self.score = round(sign * order + seconds / 45000, 7)
+        self.save(update_fields=['score'])
 
 class Vote(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
