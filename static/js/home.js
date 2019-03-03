@@ -53,19 +53,8 @@ function update_feed(posts) {
 }
 
 function set_menu_active_section() {
-    var path = window.location.pathname;
-    if (path === "/") {
-        $("#following-option").addClass("is-active");
-    }
-    if (path === "/recommended/") {
-        $("#recommended-option").addClass("is-active");
-    }
-    if (path === "/top/") {
-        $("#top-option").addClass("is-active");
-    }
-    if (path === "/new/") {
-        $("#new-option").addClass("is-active");
-    }
+    var feed_type = get_feed_type();
+    $("#feed-menu [name=" + feed_type + "]").addClass("is-active");
 }
 
 function initialize_feed() {
