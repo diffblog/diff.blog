@@ -38,7 +38,25 @@ function update_feed(posts) {
 
 }
 
+function set_menu_active_section() {
+    var path = window.location.pathname;
+    if (path === "/") {
+        $("#following-option").addClass("is-active");
+    }
+    if (path === "/recommended/") {
+        $("#recommended-option").addClass("is-active");
+    }
+    if (path === "/top/") {
+        $("#top-option").addClass("is-active");
+    }
+    if (path === "/new/") {
+        $("#new-option").addClass("is-active");
+    }
+}
+
 $(function () {
+    set_menu_active_section();
+
     $.get("/api/posts/following", function (posts) {
        update_feed(posts);
     });
