@@ -58,16 +58,18 @@ function set_menu_active_section() {
 }
 
 function initialize_feed() {
-    var path = window.location.pathname;
-    if (path === "/") {
+    var feed_type = get_feed_type();
+    if (feed_type === "following") {
         $.get("/api/posts/following", function (posts) {
+            $("#home_feed").html("");
             latest_id = posts[posts.length -1].id;
             update_feed(posts);
          });
     }
 
-    if (path === "/new/") {
+    if (feed_type === "new") {
         $.get("/api/posts/new", function (posts) {
+            $("#home_feed").html("");
             latest_id = posts[posts.length -1].id;
             update_feed(posts);
          });
