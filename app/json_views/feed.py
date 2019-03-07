@@ -5,38 +5,24 @@ from dateutil.parser import parse as iso_date_parser
 from app.models import Vote, Post, Comment
 import random
 
-def get_new_posts(request):
-    last_post_date = request.GET.get("last_post_updated_on", None)
-    if last_post_date is not None:
-        last_post_date = iso_date_parser(last_post_date)
-        posts = Post.objects.filter(updated_on__lte = last_post_date).order_by('-updated_on')[:30]
-    else:
-        posts = Post.objects.filter().order_by('-updated_on')[:30]
-
-    posts = [post.serialize() for post in posts]
-
-    if request.user.is_authenticated:
-        user_votes = Vote.objects.filter(profile=request.user.profile).values_list("post__id", flat=True)
-    else:
-        user_votes = []
-
-    for post in posts:
-        if post["id"] in user_votes:
-            post["upvoted"] = True
+def get_posts(request, feed_type):
+    if feed_type == "new":
+        last_post_date = request.GET.get("last_post_updated_on", None)
+        if last_post_date is not None:
+            last_post_date = iso_date_parser(last_post_date)
+            posts = Post.objects.filter(updated_on__lte = last_post_date).order_by('-updated_on')[:30]
         else:
-            post["upvoted"] = False
-    return JsonResponse(posts, safe=False)
+            posts = Post.objects.filter().order_by('-updated_on')[:30]
 
-def get_following_posts(request):
-    last_post_date = request.GET.get("last_post_updated_on", None)
-    if last_post_date is not None:
-        last_post_date = iso_date_parser(last_post_date)
-        posts = Post.objects.filter(updated_on__lte = last_post_date, profile__in=request.user.profile.following.all()).order_by('-updated_on')[:30]
-    else:
-        posts = Post.objects.filter(profile__in=request.user.profile.following.all()).order_by('-updated_on')[:30]
+    if feed_type == "following":
+        last_post_date = request.GET.get("last_post_updated_on", None)
+        if last_post_date is not None:
+            last_post_date = iso_date_parser(last_post_date)
+            posts = Post.objects.filter(updated_on__lte = last_post_date, profile__in=request.user.profile.following.all()).order_by('-updated_on')[:30]
+        else:
+            posts = Post.objects.filter(profile__in=request.user.profile.following.all()).order_by('-updated_on')[:30]
 
     posts = [post.serialize() for post in posts]
-
     if request.user.is_authenticated:
         user_votes = Vote.objects.filter(profile=request.user.profile).values_list("post__id", flat=True)
     else:
