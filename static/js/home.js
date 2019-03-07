@@ -72,7 +72,7 @@ function initialize_feed() {
     if (feed_type === "new") {
         $.get("/api/posts/new", function (posts) {
             $("#home_feed").html("");
-            latest_id = posts[posts.length -1].id;
+            last_post_updated_on = posts[posts.length -1].updated_on;
             update_feed(posts);
          });
     }
@@ -84,9 +84,18 @@ $(function () {
 
     $(window).scroll(function () {
         if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
-            $.get("/api/posts/following", {last_post_updated_on: last_post_updated_on}).done(function (posts) {
-               update_feed(posts);
-            })
+            var feed_type = get_feed_type();
+            if (feed_type === "following") {
+                $.get("/api/posts/following", {last_post_updated_on: last_post_updated_on}).done(function (posts) {
+                    last_post_updated_on = posts[posts.length -1].updated_on;
+                    update_feed(posts);
+                 })
+            } else if (feed_type === "new") {
+                $.get("/api/posts/new", {last_post_updated_on: last_post_updated_on}).done(function (posts) {
+                    last_post_updated_on = posts[posts.length -1].updated_on;
+                    update_feed(posts);
+                 })
+            }
         }
      });
 

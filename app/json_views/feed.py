@@ -6,11 +6,12 @@ from app.models import Vote, Post, Comment
 import random
 
 def get_new_posts(request):
-    latest_id = request.GET.get("latest_id", None)
-    if latest_id is not None:
-        posts = Post.objects.filter(id__lte = latest_id).order_by('-id')[:30]
+    last_post_date = request.GET.get("last_post_updated_on", None)
+    if last_post_date is not None:
+        last_post_date = iso_date_parser(last_post_date)
+        posts = Post.objects.filter(updated_on__lte = last_post_date).order_by('-updated_on')[:30]
     else:
-        posts = Post.objects.filter().order_by('-id')[:30]
+        posts = Post.objects.filter().order_by('-updated_on')[:30]
 
     posts = [post.serialize() for post in posts]
 
