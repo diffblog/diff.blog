@@ -54,10 +54,12 @@ def vote(request):
         vote.delete()
         post.upvotes_count = post.upvotes_count - 1
         post.save()
+        post.update_score()
     except Vote.DoesNotExist:
         Vote.objects.create(post=post, profile=request.user.profile)
         post.upvotes_count = post.upvotes_count + 1
         post.save()
+        post.update_score()
     return JsonResponse("Success", safe=False)
 
 def comment(request):
