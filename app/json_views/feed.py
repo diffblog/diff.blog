@@ -22,6 +22,13 @@ def get_posts(request, feed_type):
         else:
             posts = Post.objects.filter(profile__in=request.user.profile.following.all()).order_by('-updated_on')[:30]
 
+    if feed_type == "top":
+        last_post_score = request.GET.get("last_post_score", None)
+        if last_post_score is not None:
+            posts = Post.objects.filter(score__lte=last_post_score).order_by('-score')[:30]
+        else:
+            posts = Post.objects.filter().order_by('-score')[:30]
+
     posts = [post.serialize() for post in posts]
     if request.user.is_authenticated:
         user_votes = Vote.objects.filter(profile=request.user.profile).values_list("post__id", flat=True)

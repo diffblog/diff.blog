@@ -3,6 +3,7 @@ var template = Handlebars.compile(source);
     
 var latest_id;
 var last_post_updated_on;
+var last_post_score;
 var post_ids = [];
 
 function csrfSafeMethod(method) {
@@ -76,6 +77,14 @@ function initialize_feed() {
             update_feed(posts);
          });
     }
+
+    if (feed_type === "top") {
+        $.get("/api/posts/top", function (posts) {
+            $("#home_feed").html("");
+            last_post_score = posts[posts.length -1].score;
+            update_feed(posts);
+         });
+    }
 }
 
 $(function () {
@@ -95,7 +104,12 @@ $(function () {
                     last_post_updated_on = posts[posts.length -1].updated_on;
                     update_feed(posts);
                  })
-            }
+            } else if (feed_type === "top") {
+            $.get("/api/posts/top", {last_post_score: last_post_score}).done(function (posts) {
+                last_post_score = posts[posts.length -1].score;
+                update_feed(posts);
+             })
+        }
         }
      });
 
