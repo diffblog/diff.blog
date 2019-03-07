@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from dateutil.parser import parse as iso_date_parser
 
 from app.models import Vote, Post, Comment
 import random
@@ -26,9 +27,10 @@ def get_new_posts(request):
     return JsonResponse(posts, safe=False)
 
 def get_following_posts(request):
-    latest_id = request.GET.get("latest_id", None)
-    if latest_id is not None:
-        posts = Post.objects.filter(id__lte = latest_id, profile__in=request.user.profile.following.all()).order_by('-updated_on')[:30]
+    last_post_date = request.GET.get("last_post_updated_on", None)
+    if last_post_date is not None:
+        last_post_date = iso_date_parser(last_post_date)
+        posts = Post.objects.filter(updated_on__lte = last_post_date, profile__in=request.user.profile.following.all()).order_by('-updated_on')[:30]
     else:
         posts = Post.objects.filter(profile__in=request.user.profile.following.all()).order_by('-updated_on')[:30]
 

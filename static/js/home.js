@@ -2,6 +2,7 @@ var source = document.getElementById("feed-item-template").innerHTML;
 var template = Handlebars.compile(source);
     
 var latest_id;
+var last_post_updated_on;
 var post_ids = [];
 
 function csrfSafeMethod(method) {
@@ -63,7 +64,7 @@ function initialize_feed() {
     if (feed_type === "following") {
         $.get("/api/posts/following", function (posts) {
             $("#home_feed").html("");
-            latest_id = posts[posts.length -1].id;
+            last_post_updated_on = posts[posts.length -1].updated_on;
             update_feed(posts);
          });
     }
@@ -83,7 +84,7 @@ $(function () {
 
     $(window).scroll(function () {
         if ($(window).scrollTop() >= $(document).height() - $(window).height() - 10) {
-            $.get("/api/posts/following", {latest_id: latest_id}).done(function (posts) {
+            $.get("/api/posts/following", {last_post_updated_on: last_post_updated_on}).done(function (posts) {
                update_feed(posts);
             })
         }
