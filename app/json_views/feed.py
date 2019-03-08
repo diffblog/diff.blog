@@ -62,28 +62,3 @@ def vote(request):
         post.update_score()
     return JsonResponse("Success", safe=False)
 
-def comment(request):
-    content = request.POST.get("content")
-    post = Post.objects.get(id=request.POST.get("post_id"))
-    post.comments_count += 1
-    post.save(update_fields=["comments_count"])
-    Comment.objects.create(content=content, profile=request.user.profile, post=post)
-    return JsonResponse("Success", safe=False)
-
-def get_comments(request):
-    post_id = request.GET.get("post_id")
-    comments = Comment.objects.filter(post__id=post_id)
-    serialized_comments = [comment.serialize() for comment in comments]
-
-    if request.user.is_authenticated:
-        user_votes = CommentVote.objects.filter(profile=request.user.profile, comment__in=comments).values_list("comment__id", flat=True)
-    else:
-        user_votes = []
-
-    for comment in serialized_comments:
-        if comment["id"] in user_votes:
-            comment["upvoted"] = True
-        else:
-            comment["upvoted"] = False
-
-    return JsonResponse(serialized_comments, safe=False)
