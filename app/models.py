@@ -87,6 +87,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     posted_on = models.DateTimeField(auto_now_add=True)
+    upvotes_count = models.IntegerField(default=0)
 
     def serialize(self):
         return {
@@ -98,6 +99,7 @@ class Comment(models.Model):
             },
             "post_id": self.post.id,
             "posted_on": self.posted_on.isoformat(),
+            "upvotes_count": self.upvotes_count,
         }
 
 class CommentVote(models.Model):
