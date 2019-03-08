@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from dateutil.parser import parse as iso_date_parser
 
-from app.models import Vote, Post, Comment
+from app.models import Vote, Post, Comment, CommentVote
 import random
 
 def get_posts(request, feed_type):
@@ -73,5 +73,17 @@ def comment(request):
 def get_comments(request):
     post_id = request.GET.get("post_id")
     comments = Comment.objects.filter(post__id=post_id)
-    comments = [comment.serialize() for comment in comments]
-    return JsonResponse(comments, safe=False)
+    serialized_comments = [comment.serialize() for comment in comments]
+
+    if request.user.is_authenticated:
+        user_votes = CommentVote.objects.filter(profile=request.user.profile, comment__in=comments).values_list("comment__id", flat=True)
+    else:
+        user_votes = []
+
+    for comment in serialized_comments:
+        if comment["id"] in user_votes:
+            comment["upvoted"] = True
+        else:
+            comment["upvoted"] = False
+
+    return JsonResponse(serialized_comments, safe=False)
