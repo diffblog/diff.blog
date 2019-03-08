@@ -99,3 +99,7 @@ class Comment(models.Model):
             "post_id": self.post.id,
             "posted_on": self.posted_on.isoformat(),
         }
+
+class CommentVote(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
