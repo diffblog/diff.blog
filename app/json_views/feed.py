@@ -46,7 +46,7 @@ def get_user_votes(request):
     votes = Vote.objects.filter(profile=request.user.profile)
     return JsonResponse([{"post_id": votes.post.id for vote in votes}], safe=False)
 
-def vote(request):
+def upvote_or_downvote_post(request):
     post_id = request.POST.get("post_id")
     post = Post.objects.get(id=post_id)
     try:
