@@ -46,7 +46,19 @@
         <br>
           {{ content }}
         <br>
-        <small><a>Like</a> · <a>Reply</a> · {{ time }}</small>
+        <small>
+            <span class="icon is-small">
+              <span data-comment-id="{{id}}" data-vote-upvoted="{{upvoted}}" class="comment_vote_button">
+                  {{#if upvoted}}
+                  <i class="fas fa-heart"></i>
+                  {{else}}
+                  <i class="far fa-heart"></i>
+                  {{/if}}
+              </span>
+            </span>
+            <span id="feed_upvotes_counter_{{id}}">{{ upvotes_count }}</span>&nbsp;
+          {{ time }}
+        </small>
       </p>
     </div>
   </div>
