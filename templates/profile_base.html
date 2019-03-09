@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-one-fifth">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img src="https://avatars.githubusercontent.com/{{profile.github_username}}" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4">{{ profile.full_name }}</p>
+                    <p class="subtitle is-6">@{{ profile.github_username }}</p>
+                  </div>
+                </div>
+                <div class="content">
+                  {{ profile.bio }}
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="column is-8">
+            <div class="tabs is-toggle is-fullwidth">
+                <ul>
+                  <li {% if type == "posts"%}class="is-active"{% endif %}>
+                    <a>
+                      <span>Posts</span>
+                    </a>
+                  </li>
+                  <li {% if type == "liked"%}class="is-active"{% endif %}>
+                    <a>
+                      <span>Liked</span>
+                    </a>
+                  </li>
+                  <li {% if type == "following"%}class="is-active"{% endif %}>
+                    <a>
+                      <span>Following</span>
+                    </a>
+                  </li>
+                  <li {% if type == "followers"%}class="is-active"{% endif %}>
+                    <a>
+                      <span>Followers</span>
+                    </a>
+                  </li>
+                </ul>
+            </div>
+              {% block info %}
+              {% endblock %}
+          </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

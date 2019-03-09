@@ -1,13 +1,8 @@
-{% extends "base.html" %}
+{% extends "profile_base.html" %}
 
-{% block content %}
-<section class="section">
-  <div class="container">
-      <div id="following_list" class="columns is-multiline is-centered">
-
-      </div>
-  </div>
-</section>
+{% block info %}
+<div id="following_list" class="columns is-multiline is-centered">
+</div>
 {% verbatim %}
 <script id="follow-item-template" type="text/x-handlebars-template">
     <div class="column is-half">
