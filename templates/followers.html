@@ -1,13 +1,8 @@
-{% extends "base.html" %}
+{% extends "profile_base.html" %}
 
-{% block content %}
-<section class="section">
-  <div class="container">
-      <div id="followers_list" class="columns is-multiline is-centered">
-
-      </div>
-  </div>
-</section>
+{% block info %}
+<div id="follow_list" class="columns is-multiline is-centered">
+</div>
 {% verbatim %}
 <script id="follow-item-template" type="text/x-handlebars-template">
     <div class="column is-half">
@@ -20,7 +15,7 @@
                     </figure>
                 </div>
                 <div class="media-content">
-                    <p class="title is-4">{{ full_name }}</p>
+                    <p class="title is-4">{{ full_name }}<a data-user-id="{{ id }}" class="button is-light is-pulled-right followers">Following</a></p>
                     <p class="subtitle is-6">@{{ github_username }}</p>
                 </div>
                 </div>

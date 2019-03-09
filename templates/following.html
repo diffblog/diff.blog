@@ -1,7 +1,7 @@
 {% extends "profile_base.html" %}
 
 {% block info %}
-<div id="following_list" class="columns is-multiline is-centered">
+<div id="follow_list" class="columns is-multiline is-centered">
 </div>
 {% verbatim %}
 <script id="follow-item-template" type="text/x-handlebars-template">
@@ -35,4 +35,5 @@
     }
 </script>
 <script src="/static/js/following.js"></script>
+<script src="/static/js/follow.js"></script>
 {% endblock %}

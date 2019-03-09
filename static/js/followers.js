@@ -22,7 +22,7 @@ $(function () {
             for (index in following) {
                 user = following[index];
                 var html = template(user);
-                $("#followers_list").append(html);
+                $("#follow_list").append(html);
             }
         }
     })
