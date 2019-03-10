@@ -26,48 +26,6 @@
   </div>
 </section>
 {% verbatim %}
-<script id="feed-item-template" type="text/x-handlebars-template">
-<div class="box">
-  <article class="media">
-    <figure class="media-left">
-      <p class="image is-64x64">
-        <img src="https://avatars.githubusercontent.com/{{profile.github_username}}">
-      </p>
-    </figure>
-    <div class="media-content">
-      <div class="content">
-          {{ profile.full_name }} <small>@{{ profile.github_username }}</small> <small>{{ time }}</small>
-          <a href="{{link}}" target="_blank">
-          <h4>
-            {{ title }}
-          </h4>
-          </a>
-      </div>
-      <nav class="level is-mobile">
-        <div class="level-left">
-          <a class="level-item">
-            <span class="icon is-small">
-              <span id="feed_upvotes_counter_{{id}}">{{ upvotes_count }}</span>&nbsp;
-              <span data-post-id="{{id}}" data-vote-upvoted="{{upvoted}}" class="vote_button">
-                {{#if upvoted}}
-                <i class="fas fa-heart"></i>
-                {{else}}
-                <i class="far fa-heart"></i>
-                {{/if}}
-              </span>
-            </span>
-          </a>
-          <a class="level-item" href="/post/{{id}}">
-              &nbsp;&nbsp;
-              {{ comments_count }}&nbsp;
-              <i class="far fa-comment"></i>
-          </a>
-        </div>
-      </nav>
-    </div>
-  </article>
-</div>
-</script>
 {% endverbatim %}
-<script src="/static/js/home.js"></script>
+<script src="/static/home.bundle.js"></script>
 {% endblock %}

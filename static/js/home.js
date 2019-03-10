@@ -1,6 +1,5 @@
-var source = document.getElementById("feed-item-template").innerHTML;
-var template = Handlebars.compile(source);
-    
+var template = require("./../templates/feed-item.handlebars");
+
 var latest_id;
 var last_post_updated_on;
 var last_post_score;

@@ -8,6 +8,7 @@ module.exports = {
         followers: './static/js/followers.js',
         following: './static/js/following.js',
         follow: './static/js/follow.js',
+        home: './static/js/home.js',
     },
     devtool: 'inline-source-map',
     plugins: [
