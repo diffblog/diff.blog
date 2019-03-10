@@ -1,0 +1,30 @@
+{
+  "name": "diffblog",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackerkid/diff.blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hackerkid/diff.blog/issues"
+  },
+  "homepage": "https://github.com/hackerkid/diff.blog#readme",
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
