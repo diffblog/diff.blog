@@ -31,40 +31,6 @@
         </div>
   </div>
 </section>
-{% verbatim %}
-<script id="comment-item-template" type="text/x-handlebars-template">
-<article class="media">
-  <figure class="media-left">
-    <p class="image is-64x64">
-      <img src="https://avatars.githubusercontent.com/{{profile.github_username}}">
-    </p>
-  </figure>
-  <div class="media-content">
-    <div class="content">
-      <p>
-        <strong>{{ profile.full_name}}</strong>
-        <br>
-          {{ content }}
-        <br>
-        <small>
-            <span class="icon is-small">
-              <span data-comment-id="{{id}}" data-vote-upvoted="{{upvoted}}" class="comment_vote_button">
-                  {{#if upvoted}}
-                  <i class="fas fa-heart"></i>
-                  {{else}}
-                  <i class="far fa-heart"></i>
-                  {{/if}}
-              </span>
-            </span>
-            <span id="feed_upvotes_counter_{{id}}">{{ upvotes_count }}</span>&nbsp;
-          {{ time }}
-        </small>
-      </p>
-    </div>
-  </div>
-</article>
-</script>
-{% endverbatim %}
 <script>
   var page_params = {
     post_id: {{post.id}},
@@ -74,5 +40,5 @@
     }
   }
 </script>
-<script src="/static/js/post.js"></script>
+<script src="/static/post.bundle.js"></script>
 {% endblock %}
