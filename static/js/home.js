@@ -1,21 +1,12 @@
+import { setup_ajax } from "./helpers";
+setup_ajax();
+
 var template = require("./../templates/feed-item.handlebars");
 
 var latest_id;
 var last_post_updated_on;
 var last_post_score;
 var post_ids = [];
-
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-$.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
-    }
-});
 
 function get_feed_type() {
     var pathname = window.location.pathname;
@@ -44,8 +35,8 @@ function check_post_in_feed(post) {
 }
 
 function update_feed(posts) {
-    for (index in posts) {
-        post = posts[index];
+    for (let index in posts) {
+        let post = posts[index];
         if (!check_post_in_feed(post)) {
             add_post_to_feed(post);
         }
