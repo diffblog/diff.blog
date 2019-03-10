@@ -8,7 +8,15 @@
                 </figure>
             </div>
             <div class="media-content">
-                <p class="title is-4">{{ full_name }}<a data-user-id="{{ id }}" class="button is-light is-pulled-right following">Following</a></p>
+                <p class="title is-4">{{ full_name }}
+                    {{#unless is_me}}
+                    {{#if following}}
+                        <a data-user-id="{{ id }}" class="button is-light is-pulled-right following">Following</a>
+                    {{else}}
+                        <a data-user-id="{{ id }}" class="button is-light is-pulled-right follow">Follow</a>
+                    {{/if}}
+                    {{/unless}}
+                </p>
                 <p class="subtitle is-6">@{{ github_username }}</p>
             </div>
             </div>
