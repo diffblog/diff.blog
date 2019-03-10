@@ -126,3 +126,6 @@ diffblog/secrets.py
 dump.rdb
 
 etc
+
+# Node
+node_modules/
