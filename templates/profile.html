@@ -1,5 +1,11 @@
 {% extends "profile_base.html" %}
 
 {% block info %}
-
+<div id="home_feed"></div>
+<script src="/static/feed.bundle.js"></script>
+<script>
+    var page_params = {
+        profile_username: "{{profile.github_username}}",
+    }
+</script>
 {% endblock %}
