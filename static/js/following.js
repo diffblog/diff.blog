@@ -1,5 +1,4 @@
-var source = document.getElementById("follow-item-template").innerHTML;
-var template = Handlebars.compile(source);
+var template = require("./../templates/follow.handlebars");
 
 $(function () {
     $.ajax({

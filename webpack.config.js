@@ -6,6 +6,7 @@ module.exports = {
     mode: 'development',
     entry: {
         followers: './static/js/followers.js',
+        following: './static/js/following.js',
     },
     devtool: 'inline-source-map',
     plugins: [
