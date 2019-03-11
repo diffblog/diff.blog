@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 source bin/activate
-./manage.py runserver
-./manage.py rqworker default
+./manage.py runserver &
+./manage.py rqworker default &
+npm run watch
