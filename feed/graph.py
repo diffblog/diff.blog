@@ -38,7 +38,7 @@ def _populate_user_profile_details(user):
     user.following_count = user_response["following"]
     user.save()
 
-def populate_user_profile_details():
+def populate_user_profile_details(search_google=False):
     users = UserProfile.objects.all()
     pool = Pool()
     pool.map(_populate_user_profile_details, users)
@@ -53,7 +53,6 @@ def _populate_user_model_feed_urls(user):
             user.feed_url = feed_urls[0]
             user.blog_url_type = UserProfile.FROM_GITHUB
             user.save()
-            print(user.feed_url)
             return
 
     for url in search("{} blog".format(user.full_name, user.github_username), stop=1):

@@ -1,0 +1,15 @@
+{% extends "base_settings.html" %}
+
+{% block settings %}
+<p class="subtitle is-4">Blog settings</p>
+<div class="box">
+    Blog or RSS/Atom Feed URL
+    <br><br>
+    <form method="POST">
+        {% csrf_token %}
+        <input class="input" name="blog_url" type="text" placeholder="eg https://ma.tt" value="{{blog_url}}" required>
+        <br><br>
+        <button type="submit" class="button is-success">Save</button>
+    </form>
+</div>
+{% endblock %}
