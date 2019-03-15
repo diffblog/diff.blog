@@ -30,10 +30,11 @@ class UserProfile(models.Model):
     HANDPICKED = 3
     blog_url_type = models.IntegerField(null=True)
 
-    PROCESSING = 1
-    ACTIVE = 2
-    NOT_FOUND = 3
-    ERROR = 4
+    FEED_PROCESSING = 1
+    FEED_NOT_FOUND = 2
+    FEED_ERROR = 3
+    FEED_ACTIVATED = 4
+    FEED_POSTS_NOT_FOUND = 5
     feed_status = models.IntegerField(null=True)
 
     def serialize(self):

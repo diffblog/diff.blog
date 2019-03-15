@@ -5,6 +5,37 @@
 <div class="box">
     Blog or RSS/Atom Feed URL
     <br><br>
+
+    {% if feed_status == 1 %}
+    <div class="notification is-info">
+        Scanning the URL for blog posts. Please wait for a few seconds and try reloading the page later.
+    </div>
+    {% endif %}
+
+    {% if feed_status == 2 %}
+    <div class="notification is-warning">
+        Unable to find any RSS/ATOM feed in the URL. Please enter a different URL and try again.
+    </div>
+    {% endif %}
+
+    {% if feed_status == 3 %}
+    <div class="notification is-warning">
+        Error while parsing the RSS/ATOM feed.
+    </div>
+    {% endif %}
+
+    {% if feed_status == 4 %}
+    <div class="notification is-success">
+        Everything looks great. New posts would appear on your profile as you publish them in your blog.
+    </div>
+    {% endif %}
+
+    {% if feed_status == 5 %}
+    <div class="notification is-warning">
+        We couldn't find any posts in the feed. Try publishing a new post in your blog.
+    </div>
+    {% endif %}
+
     <form method="POST">
         {% csrf_token %}
         <input class="input" name="blog_url" type="text" placeholder="eg https://ma.tt" value="{{blog_url}}" required>
