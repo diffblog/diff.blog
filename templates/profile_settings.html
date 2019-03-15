@@ -1,0 +1,42 @@
+{% extends "settings_base.html" %}
+
+{% block settings %}
+<form method="POST">
+    {% if message %}
+    <div class="notification is-success">
+        {{ message }}
+    </div>
+    {% endif %}
+
+    {% csrf_token %}
+    <div class="field">
+        <label class="label">Full name</label>
+        <div class="control">
+          <input class="input" name="full_name" type="text" placeholder="Your name" value="{{ profile.full_name }}" required>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Your email" value="{{ profile.auth.email }}" disabled>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">GitHub username</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Your GitHub username" value="{{ profile.github_username }}" disabled>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Bio</label>
+        <div class="control">
+          <textarea class="textarea" name="bio" placeholder="Your short bio" placeholder="{{ profile.bio }}">{{ profile.bio }}</textarea>
+        </div>
+    </div>
+
+    <button type="submit" class="button is-success">Save</button>
+</form>
+{% endblock %}
