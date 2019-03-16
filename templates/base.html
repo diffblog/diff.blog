@@ -45,11 +45,26 @@
               Log in &nbsp; <i class="fab fa-github"></i>
             </a>
             {% else %}
-              {{ user.profile.github_username }}
-              &nbsp;
-              <figure class="image is-32x32">
-                <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
-              </figure>
+            <div id="navbar-dropdown" class="dropdown is-right">
+                <div class="dropdown-trigger">
+                  <span class="button is-black" aria-haspopup="true" aria-controls="dropdown-menu">
+                    <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
+                    <span class="icon is-small" aria-haspopup="true" aria-controls="dropdown-menu">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </span>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div class="dropdown-content">
+                    <a href="/user/{{ user.profile.github_username }}" class="dropdown-item">
+                     Profile
+                    </a>
+                    <a href="/account/settings/profile/" class="dropdown-item">
+                      Settings
+                    </a>
+                  </div>
+                </div>
+              </div>
             {% endif %}
           </div>
         </div>
@@ -57,9 +72,8 @@
     </div>
   </nav>
   <br>
-
-  {% block content %}{% endblock %}
-
-
+  {% block content %}
+  {% endblock %}
   </body>
+  <script src="/static/js/navbar.js"></script>
 </html>
