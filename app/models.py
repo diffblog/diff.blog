@@ -4,8 +4,12 @@ from datetime import datetime, timedelta
 from math import log
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=30)
+
 class Topic(models.Model):
-    name = models.TextField()
+    display_name = models.CharField(max_length=30)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 
 class UserProfile(models.Model):
     extra_data = models.TextField()

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <h6 class="subtitle is-4">What areas are you interested?</h6>
+    <div class="field is-grouped is-grouped-multiline">
+        {% for domain in domains %}
+        <p class="control">
+            <a class="button topic-option" data-id="{{ domain.id }}">
+                &nbsp
+                {{ domain.display_name }}
+            </a>
+        </p>
+        {% endfor %}
+    </div>
+    <a class="button is-primary" id="submit-button">Done</a>
+</div>
+<script src="/static/signup_finish.bundle.js"></script>
+{% endblock %}
