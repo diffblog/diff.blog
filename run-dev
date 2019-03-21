@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 source bin/activate
 ./manage.py runserver &
-./manage.py rqworker default &
+./manage.py rqworker following followers feed &
 npm run watch

@@ -58,7 +58,17 @@ MIDDLEWARE = [
 ]
 
 RQ_QUEUES = {
-    'default': {
+    'following': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+    },
+    'followers': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+    },
+    'feed': {
         'HOST': 'localhost',
         'PORT': 6379,
         'DB': 0,
