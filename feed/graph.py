@@ -33,7 +33,7 @@ def _populate_user_profile_details(user):
     user.company = user_response["company"]
     user.bio = user_response["bio"]
     user.location = user_response["location"]
-    user.blog_url = user_response["blog"]
+    user.website_url = user_response["blog"]
     user.followers_count = user_response["followers"]
     user.following_count = user_response["following"]
     user.save()
@@ -47,8 +47,8 @@ def _populate_user_model_feed_urls(user):
     if user.blog_url_type:
         return
     print(user.full_name)
-    if user.blog_url:
-        feed_urls = find_feeds(user.blog_url)
+    if user.website_url:
+        feed_urls = find_feeds(user.website_url)
         if len(feed_urls) != 0:
             user.feed_url = feed_urls[0]
             user.blog_url_type = UserProfile.FROM_GITHUB
