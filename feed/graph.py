@@ -96,6 +96,22 @@ def initialize_following_users(from_user):
             to_user, created = UserProfile.objects.get_or_create(github_username=item["login"], github_id=item["id"])
             from_user.following.add(to_user)
 
+def initialize_followers(from_user):
+    headers = {'Authorization': 'token {}'.format(from_user.github_token)}
+    i = 1
+    while True:
+        if i == 20:
+            break
+        url = "https://api.github.com/users/{}/followers?page={}".format(from_user.github_username, str(i))
+        response = r.get(url, headers=headers)
+        i += 1
+        following = response.json()
+        if len(following) == 0:
+            break
+        for item in following:
+            to_user, created = UserProfile.objects.get_or_create(github_username=item["login"], github_id=item["id"])
+            to_user.following.add(from_user)
+
 def create_social_graph(initial_user):
     q = Queue()
     processed = set()
