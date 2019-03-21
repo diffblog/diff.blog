@@ -84,6 +84,8 @@ def initialize_following_users(from_user):
     headers = {'Authorization': 'token {}'.format(from_user.github_token)}
     i = 1
     while True:
+        if i == 20:
+            break
         url = "https://api.github.com/users/{}/following?page={}".format(from_user.github_username, str(i))
         response = r.get(url, headers=headers)
         i += 1
