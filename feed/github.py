@@ -142,3 +142,56 @@ def create_social_graph(initial_user):
                 print("-", user["login"])
             time.sleep(2)
         time.sleep(5)
+
+def set_user_language_tags(user):
+    language_category = Category.objects.get(name="Language")
+    headers = {'Authorization': 'token {}'.format(user.github_token)}
+    url = "https://api.github.com/users/{}/repos?sort=pushed".format(user.github_username)
+    response = r.get(url, headers=headers)
+    repos = response.json()
+
+    language_set = set()
+    for repo in repos:
+        language = repo["language"]
+        if language:
+            language_set.add(language)
+
+    for language in list(language_set):
+        topic, created = Topic.objects.get_or_create(display_name=language, category=language_category)
+    user.topics.add(topic)
+
+def sort_map_desc(input_map):
+    import operator
+    return sorted(input_map.items(), key=operator.itemgetter(1), reverse=True)
+
+def get_starred_repo_data(gh_username):
+    user = UserProfile.objects.get(github_username="hackerkid")
+    language_category = Category.objects.get(name="Language")
+    headers = {'Authorization': 'token {}'.format(user.github_token)}
+
+    owner_map = {}
+    language_map = {}
+    count = 0
+
+    while True:
+        url = "https://api.github.com/users/{}/starred?page={}".format(gh_username, str(count))
+        response = r.get(url, headers=headers)
+        repos = response.json()
+        if len(repos) == 0 or count == 10:
+            print(response)
+            print(count)
+            break
+        for repo in repos:
+            username = repo["owner"]["login"]
+            if username in owner_map:
+                owner_map[username] += 1
+            else:
+                owner_map[username] = 1
+
+            language = repo["language"]
+            if language:
+                if language in language_map:
+                    language_map[language] += 1
+                else:
+                    language_map[language] = 1
+        count += 1
