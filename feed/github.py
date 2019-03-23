@@ -43,7 +43,7 @@ def populate_user_profile_details(search_google=False):
     pool = Pool()
     pool.map(_populate_user_profile_details, users)
 
-def _populate_user_model_feed_urls(user):
+def _populate_user_model_feed_urls_from_google(user):
     if user.blog_url_type:
         return
     print(user.full_name)
@@ -73,12 +73,12 @@ def _populate_user_model_feed_urls(user):
         print(user.feed_url)
         break
 
-def populate_user_model_feed_urls():
+def populate_user_model_feed_urls_from_google():
     users = UserProfile.objects.all()
     pool = Pool()
-    pool.map(_populate_user_model_feed_urls, users)
+    pool.map(_populate_user_model_feed_urls_from_google, users)
     #for user in users:
-    #    _populate_user_model_feed_urls(user)
+    #    _populate_user_model_feed_urls_from_google(user)
 
 def initialize_following_users(from_user):
     headers = {'Authorization': 'token {}'.format(from_user.github_token)}
