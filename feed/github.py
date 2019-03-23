@@ -12,7 +12,7 @@ def initialize_top_users():
     topics = Topic.objects.all()
 
     for topic in topics:
-        url = "https://api.github.com/search/users?&q=followers:>=600+language:{}&order=desc".format(topic.name)
+        url = "https://api.github.com/search/users?&q=followers:>=600+language:{}&order=desc".format(topic.display_name)
         response = r.get(url).json()
         items = response["items"]
         for item in items:
@@ -30,6 +30,7 @@ def _populate_user_profile_details(user):
     user_response = response.json()
     if user_response["name"]:
         user.full_name = user_response["name"]
+    user.github_id = user_response["id"]
     user.company = user_response["company"]
     user.bio = user_response["bio"]
     user.location = user_response["location"]
