@@ -10,6 +10,7 @@ class Category(models.Model):
 class Topic(models.Model):
     display_name = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    recommended = models.ManyToManyField("UserProfile", related_name="featured_in")
 
 class UserProfile(models.Model):
     extra_data = models.TextField()
