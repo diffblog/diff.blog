@@ -182,3 +182,15 @@ def set_user_language_tags(user):
         language = language_tuple[0]
         topic, _ = Topic.objects.get_or_create(display_name=language, category=language_category)
         user.topics.add(topic)
+
+def follow_organizations(user):
+    url = "https://api.github.com/users/{}/orgs".format(user.github_username)
+    response = r.get(url, headers=headers)
+    organizations = response.json()
+    for organization_dict in organizations:
+        organization_id = organization_dict["id"]
+        organization_username = organization_dict["login"]
+        organization, _ = UserProfile.objects.get_or_create(github_username=organization_username,
+                                                                  github_id=organization_id,
+                                                                  is_organization=True)
+        user.following.add(organization)

@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from math import log
 from django.forms.models import model_to_dict
 
-
 class Category(models.Model):
     name = models.CharField(max_length=30)
 
@@ -37,6 +36,7 @@ class UserProfile(models.Model):
     company = models.CharField(max_length=50, null=True)
     location = models.CharField(max_length=50, null=True)
     following = models.ManyToManyField("self", related_name="followers", symmetrical=False)
+    is_organization = models.BooleanField(default=False)
 
     FROM_GITHUB = 1
     FROM_GOOGLE = 2

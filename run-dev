@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 source bin/activate
 ./manage.py runserver &
-./manage.py rqworker following followers feed language_scanner &
+./manage.py rqworker following followers feed language_scanner follow_organizations &
 npm run watch
