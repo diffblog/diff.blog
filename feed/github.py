@@ -154,7 +154,7 @@ def set_user_language_tags(user):
 
     language_map = {}
 
-    url = "https://api.github.com/users/{}/starred?per_page=100".format(user.github_username)
+    url = "https://api.github.com/users/{}/repos?per_page=50".format(user.github_username)
     response = r.get(url, headers=headers)
     repos = response.json()
     for repo in repos:
@@ -165,16 +165,17 @@ def set_user_language_tags(user):
             else:
                 language_map[language] = 1
 
-    url = "https://api.github.com/users/{}/repos?per_page=100".format(user.github_username)
-    response = r.get(url, headers=headers)
-    repos = response.json()
-    for repo in repos:
-        language = repo["language"]
-        if language:
-            if language in language_map:
-                language_map[language] += 1
-            else:
-                language_map[language] = 1
+    if len(repos) < 20:
+        url = "https://api.github.com/users/{}/starred?per_page=50".format(user.github_username)
+        response = r.get(url, headers=headers)
+        repos = response.json()
+        for repo in repos:
+            language = repo["language"]
+            if language:
+                if language in language_map:
+                    language_map[language] += 1
+                else:
+                    language_map[language] = 1
 
     language_map = sort_map_desc(language_map)
     for language_tuple in language_map[:5]:
