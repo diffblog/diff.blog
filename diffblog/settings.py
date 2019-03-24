@@ -58,12 +58,12 @@ MIDDLEWARE = [
 ]
 
 RQ_QUEUES = {
-    'following': {
+    'following_bootstrapper': {
         'HOST': 'localhost',
         'PORT': 6379,
         'DB': 0,
     },
-    'followers': {
+    'followers_bootstrapper': {
         'HOST': 'localhost',
         'PORT': 6379,
         'DB': 0,

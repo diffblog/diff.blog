@@ -191,6 +191,6 @@ def follow_organizations(user):
         organization_id = organization_dict["id"]
         organization_username = organization_dict["login"]
         organization, _ = UserProfile.objects.get_or_create(github_username=organization_username,
-                                                                  github_id=organization_id,
-                                                                  is_organization=True)
+                                                            github_id=organization_id,
+                                                            is_organization=True)
         user.following.add(organization)
