@@ -81,13 +81,13 @@ def populate_user_model_feed_urls_from_google():
     #for user in users:
     #    _populate_user_model_feed_urls_from_google(user)
 
-def initialize_following_users(from_user):
+def initialize_following_users(from_user, limit=1, start=0):
     headers = {'Authorization': 'token {}'.format(from_user.github_token)}
-    i = 1
+    i = start
     while True:
-        if i == 20:
+        if i >= limit:
             break
-        url = "https://api.github.com/users/{}/following?page={}".format(from_user.github_username, str(i))
+        url = "https://api.github.com/users/{}/following?page={}&per_page=100".format(from_user.github_username, str(i))
         response = r.get(url, headers=headers)
         i += 1
         following = response.json()
@@ -97,13 +97,13 @@ def initialize_following_users(from_user):
             to_user, created = UserProfile.objects.get_or_create(github_username=item["login"], github_id=item["id"])
             from_user.following.add(to_user)
 
-def initialize_followers(from_user):
+def initialize_followers(from_user, limit=1, start=0):
     headers = {'Authorization': 'token {}'.format(from_user.github_token)}
-    i = 1
+    i = start
     while True:
-        if i == 20:
+        if i >= limit:
             break
-        url = "https://api.github.com/users/{}/followers?page={}".format(from_user.github_username, str(i))
+        url = "https://api.github.com/users/{}/followers?page={}&per_page=100".format(from_user.github_username, str(i))
         response = r.get(url, headers=headers)
         i += 1
         following = response.json()
