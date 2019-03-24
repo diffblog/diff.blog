@@ -21,7 +21,7 @@ class UserProfile(models.Model):
     github_token = models.CharField(max_length=50, null=True)
     is_activated = models.BooleanField(default=False)
     full_name = models.CharField(max_length=50)
-    topics = models.ManyToManyField(Topic)
+    topics = models.ManyToManyField(Topic, related_name="users")
     followers_count = models.IntegerField(null=True)
     following_count = models.IntegerField(null=True)
     blog_url = models.CharField(max_length=100, null=True)

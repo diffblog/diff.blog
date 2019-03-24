@@ -11,6 +11,7 @@ module.exports = {
         feed: './static/js/feed.js',
         post: './static/js/post.js',
         signup_finish: './static/js/signup_finish.js',
+        user_suggestions: './static/js/user_suggestions.js',
     },
     devtool: 'inline-source-map',
     plugins: [
