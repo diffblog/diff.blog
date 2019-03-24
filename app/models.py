@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
+from django.core import serializers
 from datetime import datetime, timedelta
 from math import log
+from django.forms.models import model_to_dict
 
 
 class Category(models.Model):
@@ -11,6 +13,11 @@ class Topic(models.Model):
     display_name = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     recommended = models.ManyToManyField("UserProfile", related_name="reccomended_in")
+
+    def serialize(self):
+        return {
+            "display_name": self.display_name,
+        }
 
 class UserProfile(models.Model):
     extra_data = models.TextField()
@@ -43,13 +50,19 @@ class UserProfile(models.Model):
     FEED_POSTS_NOT_FOUND = 5
     feed_status = models.IntegerField(null=True)
 
-    def serialize(self):
+    def serialize(self, get_topics=False):
+        topics = []
+        if get_topics:
+            for topic in self.topics.all():
+                topics.append(topic.serialize())
+
         return {
             "id": self.id,
             "full_name": self.full_name,
             "github_username": self.github_username,
             "company": self.company,
             "bio": self.bio,
+            "topics": topics,
         }
 
 class Post(models.Model):

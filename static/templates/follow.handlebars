@@ -24,6 +24,9 @@
             <div class="content">
             {{ bio }}
             <br>
+            {{#each topics}}
+                <span class="tag is-light">{{ display_name }}</span>
+            {{/each}}
             </div>
         </div>
     </div>
