@@ -37,6 +37,7 @@ class UserProfile(models.Model):
     location = models.CharField(max_length=50, null=True)
     following = models.ManyToManyField("self", related_name="followers", symmetrical=False)
     is_organization = models.BooleanField(default=False)
+    fetched_following_users = models.BooleanField(default=False)
 
     FROM_GITHUB = 1
     FROM_GOOGLE = 2
