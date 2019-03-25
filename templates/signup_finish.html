@@ -5,18 +5,24 @@
     <br>
     <br>
     <br>
-    <h6 class="subtitle is-4">What areas are you interested?</h6>
-    <div class="field is-grouped is-grouped-multiline">
-        {% for domain in domains %}
-        <p class="control">
-            <a class="button topic-option" data-id="{{ domain.id }}">
-                &nbsp
-                {{ domain.display_name }}
-            </a>
-        </p>
-        {% endfor %}
+    <div id="topics-selection-box">
+        <h6 class="subtitle is-4">What areas are you interested?</h6>
+        <div class="field is-grouped is-grouped-multiline">
+            {% for domain in domains %}
+            <p class="control">
+                <a class="button topic-option" data-id="{{ domain.id }}">
+                    &nbsp
+                    {{ domain.display_name }}
+                </a>
+            </p>
+            {% endfor %}
+        </div>
+        <a class="button is-primary" id="submit-button">Done</a>
     </div>
-    <a class="button is-primary" id="submit-button">Done</a>
+    <div id="profile-scanning-box">
+        <h6 class="subtitle is-4">Hold on. We are setting up your profile.</h6>
+        <progress class="progress is-medium is-dark" max="100">45%</progress>
+    </div>
 </div>
 <script src="/static/signup_finish.bundle.js"></script>
 {% endblock %}
