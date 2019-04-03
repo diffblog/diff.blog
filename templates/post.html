@@ -3,32 +3,51 @@
 {% block content %}
 <section class="section">
   <div class="container">
-      <h3 class="title is-3">{{post.title}}</h3>
-      <article class="media">
-            <figure class="media-left">
-              <p class="image is-64x64">
-                <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
-              </p>
+    <div class="columns">
+      <div class="column is-9">
+      <div class="box">
+      <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="https://avatars.githubusercontent.com/{{post.profile.github_username}}" alt="Placeholder image">
             </figure>
-            <div class="media-content">
-              <div class="field">
-                <p class="control">
-                  <textarea id="comment-content" class="textarea" placeholder="Add a comment..."></textarea>
-                </p>
-              </div>
-              <nav class="level">
-                <div class="level-left">
-                  <div class="level-item">
-                    <a id="submit-comment-button" data-post-id='{{post.id}}' class="button is-info">Submit</a>
-                  </div>
-                </div>
-              </nav>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">{{ post.title }}</p>
+            <p class="subtitle is-6">
+              {{ post.profile.full_name }} -
+              {{ post.updated_on }}
+            </p>
+          </div>
+      </div>
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-48x48">
+            <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
+          </p>
+        </figure>
+        <div class="media-content">
+            <div class="field">
+              <p class="control">
+                <textarea id="comment-content" class="textarea" placeholder="Add a comment..."></textarea>
+              </p>
             </div>
+            <nav class="level">
+              <div class="level-left">
+                <div class="level-item">
+                  <a id="submit-comment-button" data-post-id='{{post.id}}' class="button is-info">Submit</a>
+                </div>
+              </div>
+            </nav>
+          </div>
         </article>
-        
-        <hr>
+        <br>
         <div id="comments-holder">
         </div>
+      </div>
+
+        </div>
+      </div>
   </div>
 </section>
 <script>
