@@ -5,47 +5,49 @@
   <div class="container">
     <div class="columns">
       <div class="column is-9">
-      <div class="box">
-      <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="https://avatars.githubusercontent.com/{{post.profile.github_username}}" alt="Placeholder image">
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-4">{{ post.title }}</p>
-            <p class="subtitle is-6">
-              {{ post.profile.full_name }} -
-              {{ post.updated_on }}
-            </p>
-          </div>
-      </div>
-      <article class="media">
-        <figure class="media-left">
-          <p class="image is-48x48">
-            <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
-          </p>
-        </figure>
-        <div class="media-content">
-            <div class="field">
-              <p class="control">
-                <textarea id="comment-content" class="textarea" placeholder="Add a comment..."></textarea>
-              </p>
-            </div>
-            <nav class="level">
-              <div class="level-left">
-                <div class="level-item">
-                  <a id="submit-comment-button" data-post-id='{{post.id}}' class="button is-info">Submit</a>
-                </div>
+        <div class="box">
+          <div class="media">
+              <div class="media-left">
+                <figure class="image is-48x48">
+                  <img src="https://avatars.githubusercontent.com/{{post.profile.github_username}}" alt="Placeholder image">
+                </figure>
               </div>
-            </nav>
+              <div class="media-content">
+                <p class="title is-4">{{ post.title }}</p>
+                <p class="subtitle is-6">
+                  {{ post.profile.full_name }} -
+                  {{ post.updated_on }}
+                </p>
+              </div>
           </div>
-        </article>
-        <br>
-        <div id="comments-holder">
+          <article class="media">
+            <figure class="media-left">
+              <p class="image is-48x48">
+                <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
+              </p>
+            </figure>
+            <div class="media-content">
+                <div class="field">
+                  <p class="control">
+                    <textarea id="comment-content" class="textarea" placeholder="Add a comment..."></textarea>
+                  </p>
+                </div>
+                <nav class="level">
+                  <div class="level-left">
+                    <div class="level-item">
+                      <a id="submit-comment-button" data-post-id='{{post.id}}' class="button is-info">Submit</a>
+                    </div>
+                  </div>
+                </nav>
+              </div>
+          </article>
+          <br>
+          <div id="comments-holder">
+          </div>
         </div>
-      </div>
-
+        </div>
+        <div class="column is-7">
+          <div id="follow_list"></div>
         </div>
       </div>
   </div>
@@ -53,11 +55,19 @@
 <script>
   var page_params = {
     post_id: {{post.id}},
+    posted_by: {
+      full_name: "{{post.profile.full_name}}",
+      github_username: "{{post.profile.github_username}}",
+      bio: "{{ post.profile.bio }}",
+      id: "{{ post.profile.id }}",
+      following: {{ following }},
+    },
     profile: {
       github_username: "{{user.profile.github_username}}",
-      full_name: "{{user.profile.full_name}}"
+      full_name: "{{user.profile.full_name}}",
     }
   }
 </script>
 <script src="/static/post.bundle.js"></script>
+<script src="/static/follow.bundle.js"></script>
 {% endblock %}

@@ -20,9 +20,11 @@
                 <p class="subtitle is-6">@{{ github_username }}</p>
             </div>
             </div>
-        
+            
             <div class="content">
-            {{ bio }}
+            {{#if bio}}
+                {{ bio }}
+            {{/if}}
             <br>
             {{#each topics}}
                 <span class="tag is-light">{{ display_name }}</span>
