@@ -26,3 +26,6 @@ pip install virtualenv
 virtualenv -p python3.6 .
 source bin/activate
 pip install -r requirements.txt
+
+# Generate secrets.py
+cp -n diffblog/secrets.py.template diffblog/secrets.py
