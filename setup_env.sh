@@ -15,6 +15,8 @@ python3.6 get-pip.py
 
 # Install NVM, Node and NPM
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+
+# This currently dont work correctly through bash script
 source ~/.profile
 nvm install 10.15.3
 nvm use 10.15.3
