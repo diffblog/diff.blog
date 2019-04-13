@@ -7,6 +7,7 @@ sudo apt-get install build-essential libssl-dev
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt-get update
 sudo apt-get install python3.6
+sudo apt-get install python3.6-dev
 
 # Install PIP
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
