@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from diffblog.secrets import social_auth_github_key, social_auth_github_secret
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -207,6 +208,6 @@ SOCIAL_AUTH_PIPELINE = (
 
 STATIC_URL = '/static/'
 
-SOCIAL_AUTH_GITHUB_KEY = 'eb9cbac09a831e433f7c'
-SOCIAL_AUTH_GITHUB_SECRET = '***REMOVED***'
+SOCIAL_AUTH_GITHUB_KEY = social_auth_github_key
+SOCIAL_AUTH_GITHUB_SECRET = social_auth_github_secret
 USE_TZ = True
