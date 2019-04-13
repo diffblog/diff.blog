@@ -25,7 +25,7 @@ SECRET_KEY = '***REMOVED***'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["diff.blog"]
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
