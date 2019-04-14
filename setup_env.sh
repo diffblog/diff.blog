@@ -13,6 +13,9 @@ sudo apt-get install python3.6-dev
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3.6 get-pip.py
 
+# Postgresql
+sudo apt-get install libpq-dev postgresql postgresql-contrib
+
 # Install NVM, Node and NPM
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
