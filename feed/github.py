@@ -24,6 +24,7 @@ def initialize_top_users():
 def _populate_user_profile_details(user):
     response = r.get("https://api.github.com/users/{}".format(user.github_username), headers=headers)
     if response.status_code != 200:
+        print(user.github_username)
         print("Unxpected status code ", response.status_code)
         print(response.content)
         return
