@@ -40,10 +40,15 @@ def _populate_user_profile_details(user):
     user.following_count = user_response["following"]
     user.save()
 
-def populate_user_profile_details(search_google=False):
+def populate_user_profile_details_parallel():
     users = UserProfile.objects.all()
     pool = Pool()
     pool.map(_populate_user_profile_details, users)
+
+def populate_user_profile_details_serial():
+    users = UserProfile.objects.all()
+    for user in users:
+        _populate_user_profile_details(user)
 
 def _populate_user_model_feed_urls_from_google(user):
     if user.blog_url_type:
