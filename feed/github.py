@@ -5,6 +5,7 @@ import time
 from diffblog.secrets import github_access_token
 from feedfinder2 import find_feeds
 from googlesearch import search 
+from django.db import connection
 
 headers = {'Authorization': 'token {}'.format(github_access_token)}
 
@@ -30,7 +31,7 @@ def _populate_user_profile_details(user):
         return
     user_response = response.json()
     if user_response["name"]:
-        user.full_name = user_response["name"]
+        user.full_name = user_response["name"].encode('utf-8')
     user.github_id = user_response["id"]
     user.company = user_response["company"]
     user.bio = user_response["bio"]
@@ -43,6 +44,7 @@ def _populate_user_profile_details(user):
 def populate_user_profile_details_parallel():
     users = UserProfile.objects.all()
     pool = Pool()
+    connection.close()
     pool.map(_populate_user_profile_details, users)
 
 def populate_user_profile_details_serial():
