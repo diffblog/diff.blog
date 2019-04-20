@@ -1,3 +1,7 @@
 #profile-scanning-box {
     display: none;
 }
+
+.small-follow-card {
+    margin: -11px !important;
+}

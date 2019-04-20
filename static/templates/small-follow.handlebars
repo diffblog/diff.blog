@@ -1,0 +1,27 @@
+<div class="column {{#if custom_size}}{{custom_size}}{{else}}is-half{{/if}}">
+    <div class="card small-follow-card">
+        <div class="card-content">
+            <div class="media">
+            <div class="media-left">
+                <figure class="image is-48x48">
+                <img src="https://avatars.githubusercontent.com/{{github_username}}" alt="Placeholder image">
+                </figure>
+            </div>
+            <div class="media-content">
+                <b>{{ full_name }}</b>
+                <div class="subtitle is-6">@{{ github_username }}</div>
+                <p class="title is-5">
+                    {{#unless is_me}}
+                    {{#if following}}
+                        <a data-user-id="{{ id }}" class="button is-pulled-left is-light following">Following</a>
+                    {{else}}
+                        <a data-user-id="{{ id }}" class="button is-pulled-left is-dark follow">Follow</a>
+                    {{/if}}
+                    {{/unless}}
+                </p>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

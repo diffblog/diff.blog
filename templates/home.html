@@ -16,11 +16,19 @@
                   <li><a id="top-option" name="top" class="menu-item">All Top</a></li>
                   <li><a id="new-option" name="new" class="menu-item">All New</a></li>
                 </ul>
-              </aside>
-            </div>
+            </aside>
+          </div>
         </div>
         <div class="column is-6">
           <div id="home_feed"></div>
+        </div>
+        <div class="column is-one-quarter">
+            <aside class="menu">
+                <p class="menu-label">
+                  Recommended users
+                </p>
+            </aside>
+            <div id="follow_list"></div>
         </div>
       </div>
   </div>
@@ -33,4 +41,5 @@
   };
 </script>
 <script src="/static/dist/feed.bundle.js"></script>
+<script src="/static/dist/follow.bundle.js"></script>
 {% endblock %}
