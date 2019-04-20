@@ -5,3 +5,8 @@
 .small-follow-card {
     margin: -11px !important;
 }
+
+body {
+    background-color: aliceblue;
+    min-height: 100vh;
+}
