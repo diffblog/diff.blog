@@ -9,7 +9,7 @@ $(function () {
                 var user = data[index];
                 user["custom_size"] = "is-9"
                 const html = template(user);
-                $("#suggestions_list").append(html)
+                $("#follow_list").append(html)
             }
         }
     })
