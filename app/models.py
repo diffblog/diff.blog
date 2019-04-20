@@ -69,6 +69,7 @@ class UserProfile(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=200)
     link = models.CharField(max_length=200)
+    summary = models.TextField(null=True)
     content = models.TextField()
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     updated_on = models.DateTimeField(null=True)
@@ -76,12 +77,18 @@ class Post(models.Model):
     comments_count = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
 
+    def get_summary(self):
+        #TODO: Don't stop the summary in between words.
+        if len(self.summary) < 250:
+            return self.summary
+        return self.summary[:200] + "..."
+
     def serialize(self):
         return {
             "id": self.id,
             "title": self.title,
             "link": self.link,
-            "content": self.content,
+            "summary": self.get_summary(),
             "updated_on": self.updated_on.isoformat(),
             "score": self.score,
             "upvotes_count": self.upvotes_count,
