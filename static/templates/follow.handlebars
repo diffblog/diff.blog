@@ -4,20 +4,23 @@
             <div class="media">
             <div class="media-left">
                 <figure class="image is-48x48">
-                <img src="https://avatars.githubusercontent.com/{{github_username}}" alt="Placeholder image">
+                    <a href="/user/{{github_username}}">
+                        <img src="https://avatars.githubusercontent.com/{{github_username}}" alt="Placeholder image">
+                    </a>
                 </figure>
             </div>
             <div class="media-content">
-                <p class="title is-4">{{ full_name }}
-                    {{#unless is_me}}
-                    {{#if following}}
-                        <a data-user-id="{{ id }}" class="button is-light is-pulled-right following">Following</a>
-                    {{else}}
-                        <a data-user-id="{{ id }}" class="button is-dark is-pulled-right follow">Follow</a>
-                    {{/if}}
-                    {{/unless}}
-                </p>
-                <p class="subtitle is-6">@{{ github_username }}</p>
+                <a href="/user/{{github_username}}" class="title is-5">
+                {{ full_name }}
+                </a>
+                {{#unless is_me}}
+                {{#if following}}
+                    <a data-user-id="{{ id }}" class="button is-light is-pulled-right following">Following</a>
+                {{else}}
+                    <a data-user-id="{{ id }}" class="button is-dark is-pulled-right follow">Follow</a>
+                {{/if}}
+                {{/unless}}
+                <a class="subtitle is-6" href="/user/{{github_username}}">@{{ github_username }}</a>
             </div>
             </div>
             
