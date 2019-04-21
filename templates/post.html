@@ -57,15 +57,15 @@
   var page_params = {
     post_id: {{post.id}},
     posted_by: {
-      full_name: "{{post.profile.full_name}}",
-      github_username: "{{post.profile.github_username}}",
-      bio: "{{ post.profile.bio }}",
-      id: "{{ post.profile.id }}",
-      following: {{ following }},
+      full_name: "{{post.profile.full_name|escapejs}}",
+      github_username: "{{post.profile.github_username|escapejs}}",
+      bio: "{{ post.profile.bio|escapejs }}",
+      id: "{{ post.profile.id|escapejs }}",
+      following: {{ following|escapejs }},
     },
     profile: {
-      github_username: "{{user.profile.github_username}}",
-      full_name: "{{user.profile.full_name}}",
+      github_username: "{{user.profile.github_username|escapejs}}",
+      full_name: "{{user.profile.full_name|escapejs}}",
     }
   }
 </script>
