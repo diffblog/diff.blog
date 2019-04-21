@@ -79,6 +79,9 @@ class Post(models.Model):
 
     def get_summary(self):
         #TODO: Don't stop the summary in between words.
+        if not self.summary:
+            return ""
+
         if len(self.summary) < 250:
             return self.summary
         return self.summary[:200] + "..."
