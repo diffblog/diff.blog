@@ -2,7 +2,7 @@ import { setup_ajax } from "./helpers";
 setup_ajax();
 
 $(function () {
-    $("#follow_list").on("click", ".following", function() {
+    $("body").on("click", ".following", function() {
         $(this).removeClass("is-light");
         $(this).removeClass("following");
         $(this).addClass("is-dark");
@@ -18,7 +18,7 @@ $(function () {
             }
         })
     });
-    $("#follow_list").on("click", ".follow", function() {
+    $("body").on("click", ".follow", function() {
         $(this).removeClass("is-dark");
         $(this).removeClass("follow");
         $(this).addClass("is-light");
