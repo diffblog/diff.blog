@@ -13,13 +13,7 @@
                 <a href="/user/{{github_username}}" class="title is-5">
                 {{ full_name }}
                 </a>
-                {{#unless is_me}}
-                {{#if following}}
-                    <a data-user-id="{{ id }}" class="button is-light is-pulled-right following">Following</a>
-                {{else}}
-                    <a data-user-id="{{ id }}" class="button is-dark is-pulled-right follow">Follow</a>
-                {{/if}}
-                {{/unless}}
+               {{> follow_button}}
                 <a class="subtitle is-6" href="/user/{{github_username}}">@{{ github_username }}</a>
             </div>
             </div>

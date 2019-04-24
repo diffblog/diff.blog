@@ -10,6 +10,7 @@ module.exports = {
         follow: './static/js/follow.js',
         feed: './static/js/feed.js',
         post: './static/js/post.js',
+        profile: './static/js/profile.js',
         signup_finish: './static/js/signup_finish.js',
         user_suggestions: './static/js/user_suggestions.js',
     },

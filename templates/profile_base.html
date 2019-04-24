@@ -14,12 +14,15 @@
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
+                    <div id="follow_button" class="is-pulled-left"></div><br><br>
                     <p class="title is-4">{{ profile.full_name }}</p>
                     <p class="subtitle is-6">@{{ profile.github_username }}</p>
                   </div>
                 </div>
                 <div class="content">
+                  {% if profile.bio %}
                   {{ profile.bio }}
+                  {% endif %}
                 </div>
               </div>
           </div>
@@ -55,4 +58,14 @@
     </div>
   </div>
 </section>
+<script src="/static/dist/follow.bundle.js"></script>
+<script src="/static/dist/profile.bundle.js"></script>
+<script>
+    var page_params = {
+        profile_username: "{{profile.github_username|escapejs}}",
+        is_me: {{ is_me|escapejs }},
+        following: {{ is_following|escapejs }},
+        id: {{profile.id}}
+    }
+</script>
 {% endblock %}
