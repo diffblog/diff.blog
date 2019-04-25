@@ -215,6 +215,8 @@ SOCIAL_AUTH_PIPELINE = (
     'app.lib.get_github_info'
 )
 
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = "/signup/topics"
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
