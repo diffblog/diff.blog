@@ -5,11 +5,12 @@ $(function () {
         method: "GET",
         url: "/api/users/suggestions",
         success: function(data) {
-            for (index in data) {
+            for (index in data.users) {
                 var user = data[index];
                 user["custom_size"] = "is-9"
+                user["show_topics"] = true
                 const html = template(user);
-                $("#follow_list").append(html)
+                $("#user_list").append(html)
             }
         }
     })

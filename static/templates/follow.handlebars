@@ -23,9 +23,11 @@
                 {{ bio }}
             {{/if}}
             <br>
+            {{#if show_topics }}
             {{#each topics}}
                 <span class="tag is-light">{{ display_name }}</span>
             {{/each}}
+            {{/if}}
             </div>
         </div>
     </div>

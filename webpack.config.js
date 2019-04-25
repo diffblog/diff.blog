@@ -13,6 +13,7 @@ module.exports = {
         profile: './static/js/profile.js',
         signup_finish: './static/js/signup_finish.js',
         user_suggestions: './static/js/user_suggestions.js',
+        search: './static/js/search.js',
     },
     devtool: 'inline-source-map',
     plugins: [

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container">
+        <div class="columns">
+          <div class="column is-one-quarter">
+            <div class="box">
+              <aside class="menu">
+                  <p class="menu-label">
+                    Posts
+                  </p>
+                  <ul class="menu-list" id="feed-menu">
+                    <li><a href="/" id="following-option" name="following" class="menu-item">Following</a></li>
+                    <li><a href="/recommended" id="recommended-option" name="recommended" class="menu-item">Recommended</a></li>
+                    <li><a href="/top" id="top-option" name="top" class="menu-item">All Top</a></li>
+                    <li><a href="/new" id="new-option" name="new" class="menu-item">All New</a></li>
+                  </ul>
+                </aside>
+              </div>
+          </div>
+          <div class="column">
+            <div id="user_list"></div>
+          </div>
+        </div>
+    </div>
+  </section>
+{% block footer %}
+{% endblock %}
+
+{% endblock %}

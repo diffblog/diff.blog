@@ -31,6 +31,11 @@
     </div>
 
     <div class="navbar-end">
+      <a class="navbar-item">
+        <form method="GET" action="/search">
+          <input name="q" class="input" type="text" placeholder="Search diff.blog" autocomplete="off" pattern=".{3,}" required title="3 characters minimum">
+        </form>
+      </a>
       <div class="navbar-brand">
         <div class="navbar-item">
           {% if not user.is_authenticated %}
