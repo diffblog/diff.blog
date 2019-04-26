@@ -19,6 +19,18 @@
                     <p class="subtitle is-6">@{{ profile.github_username }}</p>
                   </div>
                 </div>
+                <a target="_blank" href="https://github.com/{{profile.github_username}}">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                </a>
+                {% if profile.feed_url %}
+                <a target="_blank" href="{{profile.feed_url}}">
+                  <span class="icon">
+                    <i class="fas fa-rss"></i>
+                  </span>
+                </a>
+                {% endif %}
                 <div class="content">
                   {% if profile.bio %}
                   {{ profile.bio }}
