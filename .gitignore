@@ -129,3 +129,5 @@ etc
 
 # Node
 node_modules/
+
+.vscode/
