@@ -5,7 +5,7 @@ $(function () {
         method: "GET",
         url: "/api/users/suggestions",
         success: function(data) {
-            for (index in data.users) {
+            for (index in data) {
                 var user = data[index];
                 user["custom_size"] = "is-9"
                 user["show_topics"] = true
