@@ -32,9 +32,9 @@ def _populate_user_profile_details(user):
     user_response = response.json()
     user.full_name = (user_response["name"] or "")[:50]
     user.github_id = user_response["id"]
-    user.company = (user_response["company"] or "")[:50]
-    user.bio = (user_response["bio"] or "")[:100]
-    user.location = (user_response["location"] or "")[:50]
+    user.company = (user_response["company"] or "")[:100]
+    user.bio = (user_response["bio"] or "")
+    user.location = (user_response["location"] or "")[:100]
     user.website_url = (user_response["blog"] or "")[:100]
     user.followers_count = user_response["followers"]
     user.following_count = user_response["following"]
