@@ -49,6 +49,7 @@ class UserProfile(models.Model):
     FEED_ERROR = 3
     FEED_ACTIVATED = 4
     FEED_POSTS_NOT_FOUND = 5
+    NO_BLOG_OR_FEED_URL = 6
     feed_status = models.IntegerField(null=True)
 
     def serialize(self, get_topics=False):

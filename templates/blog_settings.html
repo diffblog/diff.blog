@@ -3,44 +3,52 @@
 {% block settings %}
 <p class="subtitle is-4">Blog settings</p>
 <div class="box">
-    Blog or RSS/Atom Feed URL
-    <br><br>
+    <form id="blog_settings_form">
 
-    {% if feed_status == 1 %}
-    <div class="notification is-info">
-        Scanning the URL for blog posts. Please wait for a few seconds and try reloading the page later.
-    </div>
-    {% endif %}
+        Your Blog or RSS feed URL
+        <br><br>
 
-    {% if feed_status == 2 %}
-    <div class="notification is-warning">
-        Unable to find any RSS/ATOM feed in the URL. Please enter a different URL and try again.
-    </div>
-    {% endif %}
+        {% if feed_status == 1 %}
+        <div class="notification is-info">
+            Scanning the URL for blog posts. Come back later after a few minutes.
+        </div>
+        {% endif %}
 
-    {% if feed_status == 3 %}
-    <div class="notification is-warning">
-        Error while parsing the RSS/ATOM feed.
-    </div>
-    {% endif %}
+        {% if feed_status == 2 %}
+        <div class="notification is-warning">
+            Unable to find any RSS/ATOM feed in the URL. Please enter a different URL and try again.
+        </div>
+        {% endif %}
 
-    {% if feed_status == 4 %}
-    <div class="notification is-success">
-        Everything looks great. New posts would appear on your profile as you publish them in your blog.
-    </div>
-    {% endif %}
+        {% if feed_status == 3 %}
+        <div class="notification is-warning">
+            Error while parsing the RSS/ATOM feed.
+        </div>
+        {% endif %}
 
-    {% if feed_status == 5 %}
-    <div class="notification is-warning">
-        We couldn't find any posts in the feed. Try publishing a new post in your blog.
-    </div>
-    {% endif %}
+        {% if feed_status == 4 %}
+        <div class="notification is-success">
+            Everything looks great. New posts would appear on your profile as you publish them in your blog.
+        </div>
+        {% endif %}
 
-    <form method="POST">
+        {% if feed_status == 5 %}
+        <div class="notification is-warning">
+            We couldn't find any posts in the feed. Try publishing a new post in your blog.
+        </div>
+        {% endif %}
+
         {% csrf_token %}
         <input class="input" name="blog_url" type="text" placeholder="eg https://ma.tt" value="{{blog_url}}" required>
         <br><br>
-        <button type="submit" class="button is-success">Save</button>
+        <button id="blog_setting_submit_button" class="button is-success">Save</button>
     </form>
+    <div id="blog_settings_loading">
+        <div class="notification is-info">
+            Scanning the URL for blog posts. Hold on.
+        </div>
+        <progress class="progress is-small is-info" max="100">15%</progress>
+    </div>
 </div>
+<script src="/static/dist/blog_settings.bundle.js"
 {% endblock %}

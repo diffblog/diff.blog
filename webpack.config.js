@@ -14,6 +14,7 @@ module.exports = {
         signup_finish: './static/js/signup_finish.js',
         user_suggestions: './static/js/user_suggestions.js',
         search: './static/js/search.js',
+        blog_settings: './static/js/blog_settings.js',
     },
     devtool: 'inline-source-map',
     plugins: [

@@ -10,3 +10,7 @@ body {
     background-color: aliceblue;
     min-height: 100vh;
 }
+
+#blog_settings_loading {
+    display: none;
+}
