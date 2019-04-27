@@ -9,15 +9,16 @@
     </figure>
     <div class="media-content">
       <div class="content">
-          <a style="color: #4a4a4a;" href="/user/{{profile.github_username}}">{{ profile.full_name }}</a>
-          <a style="color: #4a4a4a;" href="/user/{{profile.github_username}}"><small>@{{ profile.github_username }}</small></a>
-          <a style="color: #4a4a4a;" href="/post/{{id}}"><small>{{ time }}</small></a>
+          <a class="has-text-dark" href="/user/{{profile.github_username}}"><small>{{ profile.full_name }}</small></a>
+          <a class="has-text-grey" href="/user/{{profile.github_username}}"><small>@{{ profile.github_username }}</small></a>
+          ·
+          <a class="has-text-grey" href="/post/{{id}}"><small>{{ time }}</small></a>
           <a href="{{link}}" target="_blank">
           <h4>
             {{ title }}
           </h4>
           </a>
-          <p>
+          <p class="post-content">
             {{ summary }}
           </p>
       </div>

@@ -14,3 +14,7 @@ body {
 #blog_settings_loading {
     display: none;
 }
+
+.post-content {
+    margin-top: -15px;
+}
