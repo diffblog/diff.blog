@@ -9,19 +9,6 @@ from django.db import connection
 
 headers = {'Authorization': 'token {}'.format(github_access_token)}
 
-def initialize_top_users():
-    topics = Topic.objects.all()
-
-    for topic in topics:
-        url = "https://api.github.com/search/users?&q=followers:>=600+language:{}&order=desc".format(topic.display_name)
-        response = r.get(url, headers=headers).json()
-        items = response["items"]
-        for item in items:
-            user, created = UserProfile.objects.get_or_create(github_id=item["id"], github_username=item["login"])
-            user.topics.add(topic)
-            user.save()
-        time.sleep(2)
-
 def _populate_user_profile_details(user):
     response = r.get("https://api.github.com/users/{}".format(user.github_username), headers=headers)
     if response.status_code != 200:
@@ -51,19 +38,22 @@ def populate_user_profile_details_serial():
     for user in users:
         _populate_user_profile_details(user)
 
-def _populate_user_model_feed_urls_from_google(user):
-    if user.blog_url_type:
+def _populate_user_model_feed_urls_from_google(username):
+    response = r.get("https://api.github.com/users/{}".format(username), headers=headers).json()
+    try:
+        blog_url = response["blog"]
+    except:
+        print(response)
+        print(response.content)
         return
-    print(user.full_name)
-    if user.website_url:
-        feed_urls = find_feeds(user.website_url)
-        if len(feed_urls) != 0:
-            user.feed_url = feed_urls[0]
-            user.blog_url_type = UserProfile.FROM_GITHUB
-            user.save()
-            return
 
-    for url in search("{} blog".format(user.full_name, user.github_username), stop=1):
+    if blog_url:
+        feed_urls = find_feeds(blog_url)
+        if len(feed_urls) != 0:
+            print('("{}", "{}"),'.format(username, feed_urls[0]))
+            return
+    return
+    for url in search("{} {} blog".format(response["name"], username), stop=1):
         if "github.com" in url:
             continue
         if "twitter.com" in url:
@@ -75,14 +65,20 @@ def _populate_user_model_feed_urls_from_google(user):
         feeds = find_feeds(url)
         if len(feeds) == 0:
             continue
-        user.feed_url = feeds[0]
-        user.blog_url_type = UserProfile.FROM_GOOGLE
-        user.save()
-        print(user.feed_url)
+        print('("{}", "{}"),'.format(username, feed_urls[0]))
         break
 
 def populate_user_model_feed_urls_from_google():
-    users = UserProfile.objects.all()
+    topics = ["python"]
+
+    for topic in topics:
+        url = "https://api.github.com/search/users?&q=followers:>=600+language:{}&order=desc&per_page=100".format(topic)
+        response = r.get(url, headers=headers).json()
+        items = response["items"]
+        users = []
+        for item in items:
+            users.append(item["login"])
+            print(item["login"])
     pool = Pool()
     pool.map(_populate_user_model_feed_urls_from_google, users)
     #for user in users:
