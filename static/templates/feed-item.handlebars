@@ -26,7 +26,6 @@
         <div class="level-left">
           <a class="level-item">
             <span class="icon is-small">
-              <span id="feed_upvotes_counter_{{id}}">{{ upvotes_count }}</span>&nbsp;
               <span data-post-id="{{id}}" data-vote-upvoted="{{upvoted}}" class="vote_button">
                 {{#if upvoted}}
                 <i class="fas fa-heart"></i>
@@ -35,10 +34,10 @@
                 {{/if}}
               </span>
             </span>
+            &nbsp;
+            <span id="feed_upvotes_counter_{{id}}">{{ upvotes_count }}</span>
           </a>
           <a class="level-item" href="/post/{{id}}">
-              &nbsp;&nbsp;
-              {{ comments_count }}&nbsp;
               <i class="far fa-comment"></i>
           </a>
         </div>
