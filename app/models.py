@@ -76,7 +76,7 @@ class Post(models.Model):
     updated_on = models.DateTimeField(null=True)
     upvotes_count = models.IntegerField(default=0)
     comments_count = models.IntegerField(default=0)
-    score = models.IntegerField(default=0)
+    score = models.FloatField(default=0)
 
     def get_summary(self):
         #TODO: Don't stop the summary in between words.
@@ -109,11 +109,10 @@ class Post(models.Model):
             td = self.updated_on.replace(tzinfo=None) - epoch
             return td.days * 86400 + td.seconds + (float(td.microseconds) / 1000000)
 
-        s = self.upvotes_count - 0
-        order = log(max(abs(s), 1), 10)
-        sign = 1 if s > 0 else -1 if s < 0 else 0
+        s = self.upvotes_count + 1
+        order = log(s, 10)
         seconds = epoch_seconds() - 1134028003
-        self.score = round(sign * order + seconds / 45000, 7)
+        self.score = round(order + seconds / 45000, 7)
         self.save(update_fields=['score'])
 
 class Vote(models.Model):
