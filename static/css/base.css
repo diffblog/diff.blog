@@ -18,3 +18,7 @@ body {
 .post-content {
     margin-top: -15px;
 }
+
+#user_suggestions_box {
+    display: none;
+}

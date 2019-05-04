@@ -23,17 +23,24 @@
           <div id="home_feed"></div>
         </div>
         <div class="column is-one-quarter">
-            <aside class="menu">
-                <p class="menu-label">
-                  Recommended users
-                </p>
-            </aside>
-            <div id="follow_list"></div>
-            <aside class="menu">
-                <a href="/users/suggestions/" style="font-size: 14px;">
-                    See more
-                </a>
-            </aside>
+          {% if user.is_authenticated %}
+          <div id="user_suggestions_box">
+              <aside class="menu">
+                  <p class="menu-label">
+                    Recommended users
+                  </p>
+              </aside>
+              <div id="follow_list"></div>
+              <aside class="menu">
+                  <a href="/users/suggestions/" style="font-size: 14px;">
+                      See more
+                  </a>
+              </aside>
+            </div>
+          {% else %}
+          <div class="box">
+          </div>
+          {% endif %}
         </div>
       </div>
   </div>
