@@ -1,8 +1,11 @@
-import { setup_ajax } from "./helpers";
+import { setup_ajax, show_login_prompt_if_required } from "./helpers";
 setup_ajax();
 
 $(function () {
     $("body").on("click", ".following", function() {
+        if(show_login_prompt_if_required()) {
+            return;
+        }
         $(this).removeClass("is-light");
         $(this).removeClass("following");
         $(this).addClass("is-dark");
@@ -19,6 +22,9 @@ $(function () {
         })
     });
     $("body").on("click", ".follow", function() {
+        if(show_login_prompt_if_required()) {
+            return;
+        }
         $(this).removeClass("is-dark");
         $(this).removeClass("follow");
         $(this).addClass("is-light");
