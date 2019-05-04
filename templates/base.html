@@ -40,11 +40,7 @@
       <div class="navbar-brand">
         <div class="navbar-item">
           <div class="buttons">
-          {% if not user.is_authenticated %}
-            <a href="{% url "social:begin" "github" %}" class="button is-light" herf="">
-              Log in &nbsp; <i class="fab fa-github"></i>
-            </a>
-            {% else %}
+          {% if user.is_authenticated %}
             <div id="navbar-dropdown" class="dropdown is-right">
                 <div class="dropdown-trigger">
                   <span class="button is-black" aria-haspopup="true" aria-controls="dropdown-menu">
