@@ -22,11 +22,13 @@
               </div>
           </div>
           <article class="media">
+            {% if user.is_authenticated %}
             <figure class="media-left">
               <p class="image is-48x48">
                 <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
               </p>
             </figure>
+            {% endif %}
             <div class="media-content">
                 <div class="field">
                   <p class="control">
