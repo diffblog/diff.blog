@@ -8,6 +8,7 @@ sudo add-apt-repository -y ppa:deadsnakes/ppa
 sudo apt-get update
 sudo apt-get install python3.6
 sudo apt-get install python3.6-dev
+sudo apt-get install python-numpy libicu-dev
 
 # Install PIP
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
