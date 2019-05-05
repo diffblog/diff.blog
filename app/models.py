@@ -69,7 +69,7 @@ class UserProfile(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
-    link = models.CharField(max_length=200)
+    link = models.CharField(max_length=300)
     summary = models.TextField(null=True)
     content = models.TextField()
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
