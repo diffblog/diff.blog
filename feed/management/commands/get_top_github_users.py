@@ -5,5 +5,8 @@ from feed.github import populate_user_model_feed_urls_from_google
 class Command(BaseCommand):
     help = 'Fetches the top users from GitHub'
 
+    def add_arguments(self, parser):
+        parser.add_argument('languages', nargs='+', type=str)
+
     def handle(self, *args, **options):
-        populate_user_model_feed_urls_from_google()
+        populate_user_model_feed_urls_from_google(options["languages"])

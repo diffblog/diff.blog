@@ -68,11 +68,9 @@ def _populate_user_model_feed_urls_from_google(username):
         print('("{}", "{}"),'.format(username, feed_urls[0]))
         break
 
-def populate_user_model_feed_urls_from_google():
-    topics = ["python"]
-
-    for topic in topics:
-        url = "https://api.github.com/search/users?&q=followers:>=600+language:{}&order=desc&per_page=100".format(topic)
+def populate_user_model_feed_urls_from_google(languages):
+    for language in languages:
+        url = "https://api.github.com/search/users?&q=followers:>=600+language:{}&order=desc&per_page=100".format(language)
         response = r.get(url, headers=headers).json()
         items = response["items"]
         users = []
