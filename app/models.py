@@ -38,6 +38,7 @@ class UserProfile(models.Model):
     following = models.ManyToManyField("self", related_name="followers", symmetrical=False)
     is_organization = models.BooleanField(default=False)
     fetched_following_users = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
 
     FROM_GITHUB = 1
     FROM_GOOGLE = 2

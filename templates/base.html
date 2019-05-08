@@ -20,6 +20,7 @@
     // using jQuery
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
     var logged_in = {{user.is_authenticated|yesno:"true,false"}};
+    var is_admin = {{user.profile.is_admin|yesno:"true,false"}};
     </script>
   </head>
   <body>

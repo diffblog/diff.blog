@@ -40,6 +40,13 @@
           <a class="level-item" href="/post/{{id}}">
               <i class="far fa-comment"></i>
           </a>
+          {{#if is_admin}}
+          <a class="level-item">
+            <span class="boost_button" data-post-id="{{id}}">
+              <i class="fas fa-magic"></i>
+            </span>
+          </a>
+          {{/if}}
         </div>
       </nav>
     </div>

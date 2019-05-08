@@ -15,6 +15,7 @@ module.exports = {
         user_suggestions: './static/js/user_suggestions.js',
         search: './static/js/search.js',
         blog_settings: './static/js/blog_settings.js',
+        admin: './static/js/admin.js',
     },
     devtool: 'inline-source-map',
     plugins: [
