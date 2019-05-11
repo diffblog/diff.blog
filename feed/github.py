@@ -22,7 +22,7 @@ blog_item = """
 """
 
 def _populate_user_profile_details(user):
-    if not user.github_id:
+    if user.github_id:
         return
     response = r.get("https://api.github.com/users/{}".format(user.github_username), headers=headers)
     if response.status_code != 200:
