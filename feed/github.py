@@ -6,8 +6,20 @@ from diffblog.secrets import github_access_token
 from feedfinder2 import find_feeds
 from googlesearch import search 
 from django.db import connection
+import feedparser
+
+from feed.blogs import recommended_blog_list
 
 headers = {'Authorization': 'token {}'.format(github_access_token)}
+
+blog_item = """
+"{}": [
+    "{}",
+    [
+        "{}"
+    ]
+],
+"""
 
 def _populate_user_profile_details(user):
     response = r.get("https://api.github.com/users/{}".format(user.github_username), headers=headers)
@@ -38,7 +50,10 @@ def populate_user_profile_details_serial():
     for user in users:
         _populate_user_profile_details(user)
 
-def _populate_user_model_feed_urls_from_google(username):
+def _populate_user_model_feed_urls_from_google(username, language=None):
+    if username in recommended_blog_list:
+        return
+
     response = r.get("https://api.github.com/users/{}".format(username), headers=headers).json()
     try:
         blog_url = response["blog"]
@@ -50,7 +65,24 @@ def _populate_user_model_feed_urls_from_google(username):
     if blog_url:
         feed_urls = find_feeds(blog_url)
         if len(feed_urls) != 0:
-            print('("{}", "{}"),'.format(username, feed_urls[0]))
+            blog_feed = feedparser.parse(feed_urls[0])
+            if len(blog_feed.entries) != 0:
+                try:
+                    content = blog_feed.entries[0]["content"][0]["value"]
+                    language = Detector(content).languages[0]
+                    if language.code != 'en':
+                        return
+                except:
+                    pass
+            else:
+                return
+
+            if language is None:
+                language_map = {}
+                set_language_tags_from_own_repos(username, language_map)
+                language_map = sort_map_desc(language_map)
+                language = language_map[0][0]
+            print(blog_item.format(username, feed_urls[0], language))
             return
     return
     for url in search("{} {} blog".format(response["name"], username), stop=1):
@@ -68,12 +100,16 @@ def _populate_user_model_feed_urls_from_google(username):
         print('("{}", "{}"),'.format(username, feed_urls[0]))
         break
 
-def populate_user_model_feed_urls_from_google(languages):
-    for language in languages:
-        url = "https://api.github.com/search/users?&q=followers:>=600+language:{}&order=desc&per_page=100".format(language)
+def get_most_followed_users(language, limit=10):
+    users = []
+    for i in range(0, limit):
+        if language:
+            url = "https://api.github.com/search/users?&q=followers:>=600+language:{}&order=desc&per_page=100&page={}".format(language, str(i))
+        else:
+            url = "https://api.github.com/search/users?&q=followers:>=600&order=desc&per_page=100&page={}".format(str(i))
+
         response = r.get(url, headers=headers).json()
         items = response["items"]
-        users = []
         for item in items:
             users.append(item["login"])
             print(item["login"])
@@ -154,13 +190,8 @@ def sort_map_desc(input_map):
     import operator
     return sorted(input_map.items(), key=operator.itemgetter(1), reverse=True)
 
-def set_user_language_tags(user):
-    language_category = Category.objects.get(name="Language")
-    headers = {'Authorization': 'token {}'.format(user.github_token)}
-
-    language_map = {}
-
-    url = "https://api.github.com/users/{}/repos?per_page=50".format(user.github_username)
+def set_language_tags_from_own_repos(github_username, language_map):
+    url = "https://api.github.com/users/{}/repos?per_page=50".format(github_username)
     response = r.get(url, headers=headers)
     repos = response.json()
     for repo in repos:
@@ -170,6 +201,13 @@ def set_user_language_tags(user):
                 language_map[language] += 1
             else:
                 language_map[language] = 1
+
+def set_user_language_tags(user):
+    language_category = Category.objects.get(name="Language")
+    headers = {'Authorization': 'token {}'.format(user.github_token)}
+
+    language_map = {}
+    set_language_tags_from_own_repos(user.github_username, language_map)
 
     if len(repos) < 20:
         url = "https://api.github.com/users/{}/starred?per_page=50".format(user.github_username)

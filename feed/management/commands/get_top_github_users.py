@@ -1,12 +1,12 @@
 from django.core.management.base import BaseCommand, CommandError
 
-from feed.github import populate_user_model_feed_urls_from_google
+from feed.github import get_most_followed_users
 
 class Command(BaseCommand):
     help = 'Fetches the top users from GitHub'
 
     def add_arguments(self, parser):
-        parser.add_argument('languages', nargs='+', type=str)
+        parser.add_argument('--language', action="store", default=None)
 
     def handle(self, *args, **options):
-        populate_user_model_feed_urls_from_google(options["languages"])
+        get_most_followed_users(options["language"])
