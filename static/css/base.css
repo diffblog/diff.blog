@@ -3,7 +3,7 @@
 }
 
 .small-follow-card {
-    margin: -11px !important;
+    margin-left: 2px !important;
 }
 
 body {
@@ -21,4 +21,9 @@ body {
 
 #user_suggestions_box {
     display: none;
+}
+
+.see-more-rusers {
+    margin-top: -15px;
+    color: #7a7a7a !important;
 }
