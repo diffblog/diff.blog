@@ -9,7 +9,8 @@ $(function () {
             for (index in following) {
                 user = following[index];
                 var html = template(user);
-                $("#follow_list").append(html);
+                var column = "<div class='column is-6'>" + html + "</div>";
+                $("#follow_list").append(column);
             }
         }
     });
