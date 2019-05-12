@@ -6,7 +6,7 @@ $(function () {
         if(show_login_prompt_if_required()) {
             return;
         }
-        ga('send', 'unfollow');
+        ga('send', 'event', 'unfollow');
         $(this).removeClass("is-light");
         $(this).removeClass("following");
         $(this).addClass("is-dark");
@@ -26,7 +26,7 @@ $(function () {
         if(show_login_prompt_if_required()) {
             return;
         }
-        ga('send', 'follow');
+        ga('send', 'event', 'follow');
         $(this).removeClass("is-dark");
         $(this).removeClass("follow");
         $(this).addClass("is-light");
