@@ -16,8 +16,21 @@
               </div>
               <div class="media-content">
                 <a href="{{post.link}}" target="_blank" rel="noopener noreferrer" class="title is-4">{{ post.title }}</a><br>
+                <a>
+                  <span class="icon is-small">
+                    <span data-post-id="{{post.id}}" data-vote-upvoted="{{upvoted|yesno:'true,false'}}" class="vote_button">
+                      {% if upvoted %}
+                        <i class="fas fa-heart"></i>
+                      {% else %}
+                        <i class="far fa-heart"></i>
+                      {% endif %}
+                    </span>
+                  </span>
+                </a>
+                <span id="feed_upvotes_counter_{{post.id}}">{{ post.upvotes_count }}</span>
+                ·
                 <a style="color: #4a4a4a;" href="/user/{{post.profile.github_username}}">{{ post.profile.full_name }}</a>
-                -
+                ·
                 <a style="color: #4a4a4a;" href="/post/{{post.id}}"><small>{{ post.updated_on }}</small></a>
               </div>
           </div>
@@ -87,5 +100,6 @@
   }
 </script>
 <script src="/static/dist/post.bundle.js"></script>
+<script src="/static/dist/like.bundle.js"></script>
 <script src="/static/dist/follow.bundle.js"></script>
 {% endblock %}

@@ -117,8 +117,8 @@ class Post(models.Model):
         self.save(update_fields=['score'])
 
 class Vote(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="votes")
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="votes")
 
 class Comment(models.Model):
     content = models.TextField()
