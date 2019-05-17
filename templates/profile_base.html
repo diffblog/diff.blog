@@ -43,22 +43,22 @@
             <div class="tabs is-boxed">
                 <ul>
                     <li {% if type == "posts"%}class="is-active"{% endif %}>
-                        <a href="/user/{{profile.github_username}}/">
+                        <a href="/{{profile.github_username}}/">
                       <span>Posts <span class="tag is-rounded is-light">{{posts_count}}</span></span>
                     </a>
                   </li>
                   <li {% if type == "liked"%}class="is-active"{% endif %}>
-                      <a href="/user/{{profile.github_username}}/liked">
+                      <a href="/{{profile.github_username}}/liked">
                       <span>Liked <span class="tag is-rounded is-light">{{votes_count}}</span></span>
                     </a>
                   </li>
                   <li {% if type == "following"%}class="is-active"{% endif %}>
-                      <a href="/user/{{profile.github_username}}/following">
+                      <a href="/{{profile.github_username}}/following">
                       <span>Following <span class="tag is-rounded is-light">{{following_count}}</span></span>
                     </a>
                   </li>
                   <li {% if type == "followers"%}class="is-active"{% endif %}>
-                      <a href="/user/{{profile.github_username}}/followers">
+                      <a href="/{{profile.github_username}}/followers">
                       <span>Followers <span class="tag is-rounded is-light">{{followers_count}}</span></span>
                     </a>
                   </li>

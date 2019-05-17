@@ -2,15 +2,15 @@
   <article class="media">
     <figure class="media-left">
       <p class="image is-48x48">
-        <a href="/user/{{profile.github_username}}">
+        <a href="/{{profile.github_username}}">
           <img src="https://avatars.githubusercontent.com/{{profile.github_username}}?s=64">
         </a>
       </p>
     </figure>
     <div class="media-content">
       <div class="content">
-          <a class="has-text-dark" href="/user/{{profile.github_username}}"><small>{{ profile.full_name }}</small></a>
-          <a class="has-text-grey" href="/user/{{profile.github_username}}"><small>@{{ profile.github_username }}</small></a>
+          <a class="has-text-dark" href="/{{profile.github_username}}"><small>{{ profile.full_name }}</small></a>
+          <a class="has-text-grey" href="/{{profile.github_username}}"><small>@{{ profile.github_username }}</small></a>
           ·
           <a class="has-text-grey" href="/post/{{id}}"><small>{{ time }}</small></a>
           <a href="{{link}}" target="_blank" rel="noopener noreferrer">

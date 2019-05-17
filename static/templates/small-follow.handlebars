@@ -2,19 +2,19 @@
     <div class="media">
         <div class="media-left">
             <figure class="image is-32x32">
-                <a href="/user/{{github_username}}">
+                <a href="/{{github_username}}">
                     <img src="https://avatars.githubusercontent.com/{{github_username}}?s=32" alt="Placeholder image">
                 </a>
             </figure>
         </div>
         <div class="media-content">
             {{#if full_name}}
-            <a href="/user/{{github_username}}" style="font-weight: bold; color: black;">
+            <a href="/{{github_username}}" style="font-weight: bold; color: black;">
             {{ full_name }}
             </a>
             <br>
             {{/if}}
-            <a href="/user/{{github_username}}" class="subtitle is-6">@{{ github_username }}</a><br>
+            <a href="/{{github_username}}" class="subtitle is-6">@{{ github_username }}</a><br>
             <p class="title is-5">
                 {{#unless is_me}}
                 {{#if following}}

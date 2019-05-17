@@ -9,7 +9,7 @@
           <div class="media">
               <div class="media-left">
                 <figure class="image is-48x48">
-                  <a href="/user/{{post.profile.github_username}}">
+                  <a href="/{{post.profile.github_username}}">
                     <img src="https://avatars.githubusercontent.com/{{post.profile.github_username}}?s=48" alt="Placeholder image">
                   </a>
                 </figure>
@@ -29,7 +29,7 @@
                 </a>
                 <span id="feed_upvotes_counter_{{post.id}}">{{ post.upvotes_count }}</span>
                 ·
-                <a style="color: #4a4a4a;" href="/user/{{post.profile.github_username}}">{{ post.profile.full_name }}</a>
+                <a style="color: #4a4a4a;" href="/{{post.profile.github_username}}">{{ post.profile.full_name }}</a>
                 ·
                 <a style="color: #4a4a4a;" href="/post/{{post.id}}"><small>{{ post.updated_on }}</small></a>
               </div>
