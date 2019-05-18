@@ -44,45 +44,47 @@
       </a>
     </div>
 
-    <div class="navbar-end">
-      <a class="navbar-item">
-        <form method="GET" action="/search">
-          <input name="q" class="input" type="text" placeholder="Search diff.blog()" autocomplete="off" pattern=".{3,}" required title="3 characters minimum">
-        </form>
-      </a>
-      <div class="navbar-brand">
-        <div class="navbar-item">
-          <div class="buttons">
-          {% if user.is_authenticated %}
-            <div id="navbar-dropdown" class="dropdown is-right">
-                <div class="dropdown-trigger">
-                  <span class="button is-black" aria-haspopup="true" aria-controls="dropdown-menu">
-                    <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
-                    <span class="icon is-small" aria-haspopup="true" aria-controls="dropdown-menu">
-                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item">
+          <form method="GET" action="/search">
+            <input name="q" class="input" type="text" placeholder="Search diff.blog()" autocomplete="off" pattern=".{3,}" required title="3 characters minimum">
+          </form>
+        </a>
+        <div class="navbar-brand">
+          <div class="navbar-item">
+            <div class="buttons">
+            {% if user.is_authenticated %}
+              <div id="navbar-dropdown" class="dropdown is-right">
+                  <div class="dropdown-trigger">
+                    <span class="button is-black" aria-haspopup="true" aria-controls="dropdown-menu">
+                      <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
+                      <span class="icon is-small" aria-haspopup="true" aria-controls="dropdown-menu">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                      </span>
                     </span>
-                  </span>
-                </div>
-                <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                  <div class="dropdown-content">
-                    <a href="/{{ user.profile.github_username }}" class="dropdown-item">
-                     Profile
-                    </a>
-                    <a href="/account/settings/profile/" class="dropdown-item">
-                      Settings
-                    </a>
-                    <hr class="navbar-divider">
-                    <a href="/logout" class="dropdown-item">
-                      Logout
-                    </a>
+                  </div>
+                  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                    <div class="dropdown-content">
+                      <a href="/{{ user.profile.github_username }}" class="dropdown-item">
+                      Profile
+                      </a>
+                      <a href="/account/settings/profile/" class="dropdown-item">
+                        Settings
+                      </a>
+                      <hr class="navbar-divider">
+                      <a href="/logout" class="dropdown-item">
+                        Logout
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            {% endif %}
+              {% endif %}
+            </div>
           </div>
         </div>
-      </div>
     </div>
+  </div>
   </nav>
   <br>
   {% block content %}
