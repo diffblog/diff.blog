@@ -143,3 +143,8 @@ class Comment(models.Model):
 class CommentVote(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
+class BlogSuggestion(models.Model):
+    username = models.CharField(max_length=100)
+    url = models.CharField(max_length=200)
+    suggested_by = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
