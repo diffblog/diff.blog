@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<br>
+    <div class="container">
+        <div class="columns">
+            <div class="column is-offset-1 is-6">
+                {% if show_confirmation %}
+                <div class="notification is-info">
+                    Request received
+                </div>
+                {% endif %}
+                <form method="POST">
+                    <h1 class="subtitle is-5">
+                        Want to follow a blog which is not there yet in diff.blog? You can make a request to add the blog here.
+                    </h1>
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                        {% csrf_token %}
+                        <input class="input" name="username" type="text" placeholder="GitHub username of the user/organization (optional)">
+                        <span class="icon is-small is-left">
+                            <i class="fab fa-github"></i>
+                        </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control has-icons-left">
+                        <input class="input" name="url" type="text" placeholder="Blog or RSS URL" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-rss"></i>
+                        </span>
+                        </p>
+                    </div>
+                    Note: If you want to add your own blog, add it by going to your <a href="/account/settings/blog/">profile settings</a>.
+                    <br>
+                    <input class="button is-dark" type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
