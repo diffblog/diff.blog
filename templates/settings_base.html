@@ -10,8 +10,16 @@
             <aside class="menu">
                 <p class="menu-label">Settings</p>
                 <ul class="menu-list">
-                    <li><a href="/account/settings/profile/" {% if type == "profile" %}class="is-active"{% endif %}>Profile</a></li>
-                    <li><a href="/account/settings/blog/" {% if type == "blog" %}class="is-active"{% endif %}>Blog</a></li>
+                    <li>
+                        <a href="/account/settings/profile/" {% if type == "profile" %}class="is-active"{% endif %}>
+                            <span class="fas fa-user"></span> &nbsp Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/account/settings/blog/" {% if type == "blog" %}class="is-active"{% endif %}>
+                            <span class="fas fa-rss"></span>&nbsp Blog
+                        </a>
+                    </li>
                 </ul>
             </aside>
         </div>
