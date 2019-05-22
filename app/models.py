@@ -40,6 +40,10 @@ class UserProfile(models.Model):
     fetched_following_users = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
 
+    pocket_api_key = models.CharField(max_length=100, null=True)
+    pocket_show_button = models.BooleanField(default=True)
+    pocket_auto_save = models.BooleanField(default=False)
+
     FROM_GITHUB = 1
     FROM_GOOGLE = 2
     HANDPICKED = 3
