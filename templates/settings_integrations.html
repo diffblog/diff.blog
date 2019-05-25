@@ -14,13 +14,17 @@
             <span class="fab fa-get-pocket"></span> Pocket
         </div>
         <input name="integration" type="hidden" value="pocket">
-        <div class="field">
-            <label class="label">API key</label>
-            <div class="control">
-                <input name="pocket_api_key" class="input" type="text" {% if profile.pocket_api_key %}value="{{ profile.pocket_api_key }}"{% endif %}
-                       placeholder="Consumer key from your Pocket account" autocomplete="off">
-            </div>
-        </div>
+        {% if profile.pocket_api_key %}
+        <a class="button is-small is-success">
+            <span>Pocket Account Linked</span>
+          </a>
+        <hr>
+        {% else %}
+        <a class="button is-small is-info">
+            <span>Link Pocket Account</span>
+          </a>
+        <hr>
+        {% endif %}
         <div class="field">
             <div class="control">
                 <label class="checkbox">
