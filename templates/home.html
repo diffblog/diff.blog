@@ -6,7 +6,7 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title has-text-white	">
-          Discover and follow amazing developer blogs from all over the Internet!
+          Discover and follow amazing developer blogs!
         </h1>
         <h2 class="subtitle has-text-white">
           Signup with GitHub to subscribe to blogs, join discussions, add your blog and more.
@@ -28,9 +28,9 @@
                   Posts
                 </p>
                 <ul class="menu-list" id="feed-menu">
-                  <li><a data-toggle="tooltip" title="Most popular posts in diff.blog" id="top-option" name="top" class="menu-item">Top</a></li>
-                  <li><a data-toggle="tooltip" title="Posts from people you follow" id="following-option" name="following" class="menu-item">Following</a></li>
-                  <li><a data-toggle="tooltip" title="Most recent posts in diff.blog" id="new-option" name="new" class="menu-item">All New</a></li>
+                  <li><a data-toggle="tooltip" title="Most popular posts in diff.blog" id="top-option" name="top" class="menu-item"><i class="em em-chart_with_upwards_trend"></i> Top</a></li>
+                  <li><a data-toggle="tooltip" title="Posts from people you follow" id="following-option" name="following" class="menu-item"><i class="em em-newspaper"></i> Following</a></li>
+                  <li><a data-toggle="tooltip" title="Most recent posts in diff.blog" id="new-option" name="new" class="menu-item"><i class="em em-sparkles"></i> All New</a></li>
                 </ul>
             </aside>
           </div>
@@ -66,17 +66,17 @@
           </div>
           {% else %}
           <div class="box">
-                  <div class="title is-4">
-                    Join diff.blog
-                  </div>
-                  <p class="subtitle is-6">
-                    Add your blog, follow developers, join discussions and more!
-                    <br>
-                    <br>
-                    <a href="{% url "social:begin" "github" %}" class="button is-light" herf="">
-                      Sign in with GitHub &nbsp<i class="fab fa-github"></i>
-                    </a>
-                  </p>
+            <div class="title is-4">
+              Join diff.blog to
+            </div>
+            <i class="em em-hammer"></i> &nbsp Add your blog<br>
+            <i class="em em-mailbox_with_mail"></i> &nbsp Save posts to Pocket<br>
+            <i class="em em-speech_balloon"></i> &nbsp Join discussions<br>
+            <i class="em em-gift"></i> &nbsp See blog recommendations<br>
+            <i class="em em-rocket"></i> &nbsp Automatically subscribe to blogs of users you follow on GitHub<br><br>
+            <a href="{% url "social:begin" "github" %}" class="button is-light" herf="">
+              Sign in with GitHub &nbsp<i class="fab fa-github"></i>
+            </a>
           </div>
           {% endif %}
         </div>
