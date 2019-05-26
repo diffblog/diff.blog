@@ -10,5 +10,5 @@ def pocket_add(request):
     if not request.user.profile.pocket_api_key:
         return JsonResponse({'status':'false','message':'authorize pocket'}, status=400)
     post = Post.objects.get(id=request.POST.get("post_id"))
-    save_to_pocket(user, post)
+    save_to_pocket(request.user.profile, post)
     return JsonResponse("Success", safe=False)
