@@ -4,16 +4,11 @@ from dateutil.parser import parse as iso_date_parser
 from django.contrib.auth.decorators import login_required
 
 from app.models import CommentVote, Comment, Post
-from diffblog.secrets import pocket_consumer_key
-
-import pocket
+from app.lib import save_to_pocket
 
 def pocket_add(request):
-    access_token = request.user.profile.pocket_api_key
-    if not access_token:
+    if not request.user.profile.pocket_api_key:
         return JsonResponse({'status':'false','message':'authorize pocket'}, status=400)
-
-    pocket_instance = pocket.Pocket(pocket_consumer_key, access_token)
     post = Post.objects.get(id=request.POST.get("post_id"))
-    pocket_instance.add(url=post.link, title=post.title)
+    save_to_pocket(user, post)
     return JsonResponse("Success", safe=False)
