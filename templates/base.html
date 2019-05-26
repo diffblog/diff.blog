@@ -105,19 +105,22 @@
   <div class="modal" id="signup-prompt-modal">
     <div class="modal-background"></div>
     <div class="modal-content">
-      <div class="card" style="min-height: 200px;">
-        <div class="card-content">
-          <div class="title is-3">
-            Join diff.blog
+      <div class="box">
+        <div class="content">
+          <div class="title is-4">
+            Join diff.blog to
           </div>
-          <p class="subtitle is-6">
-            Add your blog, follow developers, join discussions and more!
-            <br>
-            <br>
-            <a href="{% url "social:begin" "github" %}" class="button is-light is-medium" herf="">
-              Sign in with GitHub &nbsp; <i class="fab fa-github"></i>
+          <ul>
+            <li><i class="em em-newspaper"></i> &nbsp Follow blogs</li>
+            <li><i class="em em-speech_balloon"></i> &nbsp Join discussions</li>
+            <li><i class="em em-mailbox_with_mail"></i> &nbsp Save posts to Pocket</li>
+            <li><i class="em em-gift"></i> &nbsp See blog recommendations</li>
+            <li><i class="em em-hammer"></i> &nbsp Add your blog</li>
+            <li><i class="em em-rocket"></i> &nbsp Automatically subscribe to blogs of users you follow on GitHub</li>
+          </ul>
+          <a href="{% url "social:begin" "github" %}" class="button is-light" herf="">
+              Sign in with GitHub &nbsp<i class="fab fa-github"></i>
             </a>
-          </p>
         </div>
       </div>
     </div>
