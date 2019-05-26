@@ -1,0 +1,84 @@
+{% extends "search_base.html" %}
+
+{% block content2 %}
+<div class="content">
+    <h2>
+        What is diff.blog?
+    </h2>
+    <p>
+        You can think of diff.blog as a Medium.com alternative for developers. The difference between Medium and diff.blog is
+        <ul>
+            <li>
+                diff.blog don't host your blog. You can publish your blog anywhere you want. It can be in your own Wordpress
+                site or in a Jekyll site hosted in GitHub. You can even put your blog on Medium.com. No restrictions as long as
+                it has an RSS feed.
+            </li>
+            <li>
+                Most developer blogs hosted outside of Medium.com are having a hard time finding a large audience. Diff.blog's was built
+                to give visibility to these developer blogs that are spread across all over the Internet. It also has some cool
+                features that makes it easier to subscribe to blogs.
+            </li>
+        </ul>
+    </p>
+    <h2>
+        Sounds great. How do you fetch posts from these blogs?
+    </h2>
+    <p>
+        All most all the blogs have a RSS feed. RSS feeds makes it really easy to keep updated with the posts of a blog. No blockchain.
+        Nothing fancy. It's just a file. You can read more about RSS feeds at <a href="https://www.youneedfeeds.com/">https://www.youneedfeeds.com/</a>.
+    </p>
+    <h2>
+        Okay. So this is basically a RSS reader?
+    </h2>
+    <p>
+        Kind of but not really. It has a lot of features that are not present in a normal RSS reader that would should give you better experience.
+        Some of them are.
+        <ul>
+            <li>
+                User recommendations - diff.blog can recommend you blogs to follow depending upon your interests.
+                If you are interested in Rust for example diff.blog will suggest you awesome developers that blogs about
+                Rust. When you sign up with your GitHub account diff.blog analyzes your profile to get a
+                sense of what kind of topics you are interested in. Plus it also ask you to choose come more general
+                topics when you sign up.
+            </li>
+            <li>
+                Auto follow - diff.blog automatically make you follow the blogs of developers and organizations you follow on GitHub.
+                If you don't like some of them you can later unsubscribe as well.
+            </li>
+            <li>
+                Normal RSS readers knows only about blogs you follow. This might lead you to miss out on a lot of amazing
+                content. diff.blog has a top feed that contains the popular blog posts from all over diff.blog.
+            </li>
+            <li>
+                Likes and comments - You can like blog posts and comment on them. The likes and comments are visible to
+                other users of diff.blog.
+            </li>
+            <li>
+                Diff.blog has a Pocket integration. You can send articles you like to your Pocket account. There is even an option
+                to send blog posts to your Pocket account automatically when someone you follow publishes a blog post. More
+                integrations coming soon.
+            </li>
+        </ul>
+    </p>
+    <h2>
+        How do I add my blog?
+    </h2>
+    <p>
+        You can add your blog by going to <a href="account/settings/blog/">settings</a> page after signup.
+    </p>
+    <h2>
+        What if some blogs I want to follow are not there in diff.blog?
+    </h2>
+    <p>
+        You can suggest the blog <a href="/suggest">here</a> and we would manually add them. Currently most of the featured blogs in diff.blog
+        are added like that.
+    </p>
+    <h2>
+        Okay. How much I have to pay to use this?
+    </h2>
+    <p>
+        diff.blog is completely free to use. diff.blog is run on a $10 Digital Ocean droplet. It's currently my side project and
+        cost me hardly any money to run.
+    </p>
+</div>
+{% endblock %}
