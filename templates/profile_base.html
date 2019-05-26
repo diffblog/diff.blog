@@ -45,6 +45,11 @@
                 </div>
               </div>
           </div>
+          {% if not profile.is_activated %}
+          <div class="is-size-7 has-text-grey" style="margin-top: 5px;">
+            This user has not joined diff.blog yet
+          </div>
+          {% endif %}
         </div>
         <div class="column is-8">
             <div class="tabs is-boxed">
