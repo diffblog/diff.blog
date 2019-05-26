@@ -31,6 +31,13 @@
                   </span>
                 </a>
                 {% endif %}
+                {% if is_recommended %}
+                <a data-toggle="tooltip" title="Featured blog" target="_blank" rel="noopener noreferrer" href="{{profile.feed_url}}">
+                  <span class="icon">
+                    <i class="fas fa-star"></i>
+                  </span>
+                </a>
+                {% endif %}
                 <div class="content">
                   {% if profile.bio %}
                   {{ profile.bio }}
