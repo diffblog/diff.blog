@@ -19,13 +19,13 @@
                     <p class="subtitle is-6">@{{ profile.github_username }}</p>
                   </div>
                 </div>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/{{profile.github_username}}">
+                <a data-toggle="tooltip" title="GitHub profile" target="_blank" rel="noopener noreferrer" href="https://github.com/{{profile.github_username}}">
                   <span class="icon">
                     <i class="fab fa-github"></i>
                   </span>
                 </a>
                 {% if profile.feed_url %}
-                <a target="_blank" rel="noopener noreferrer" href="{{profile.feed_url}}">
+                <a data-toggle="tooltip" title="RSS Feed" target="_blank" rel="noopener noreferrer" href="{{profile.feed_url}}">
                   <span class="icon">
                     <i class="fas fa-rss"></i>
                   </span>
