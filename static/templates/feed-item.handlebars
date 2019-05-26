@@ -24,7 +24,7 @@
       </div>
       <nav class="level is-mobile">
         <div class="level-left">
-          <a class="level-item">
+          <a data-toggle="tooltip" title="Like post" class="level-item">
             <span class="icon is-small">
               <span data-post-id="{{id}}" data-vote-upvoted="{{upvoted}}" class="vote_button">
                 {{#if upvoted}}
@@ -37,7 +37,7 @@
             &nbsp;
             <span id="feed_upvotes_counter_{{id}}">{{ upvotes_count }}</span>
           </a>
-          <a class="level-item" href="/post/{{id}}">
+          <a class="level-item" data-toggle="tooltip" title="Discussions" href="/post/{{id}}">
               <i class="far fa-comment"></i>
           </a>
           {{#if is_admin}}
@@ -50,7 +50,7 @@
         </div>
         <div class="level-right">
           {{#if show_pocket }}
-          <a class="level-item">
+          <a data-toggle="tooltip" title="Save to Pocket" class="level-item">
             <span class="icon is-small">
               <span class="pocket_save_button" data-post-id="{{id}}">
                 <i class="fab fa-get-pocket"></i>
