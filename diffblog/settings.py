@@ -225,7 +225,7 @@ SOCIAL_AUTH_PIPELINE = (
 
     # Update the user record with any changed info from the auth service.
     'social_core.pipeline.user.user_details',
-    'app.lib.get_github_info'
+    'app.auth.get_github_info'
 )
 
 SOCIAL_AUTH_NEW_USER_REDIRECT_URL = "/signup/topics"
