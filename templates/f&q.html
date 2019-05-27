@@ -6,44 +6,55 @@
         What is diff.blog?
     </h2>
     <p>
-        You can think of diff.blog as a Medium.com alternative for developers. The difference between Medium and diff.blog is
-        <ul>
-            <li>
-                diff.blog don't host your blog. You can publish your blog anywhere you want. It can be in your own Wordpress
-                site or in a Jekyll site hosted in GitHub. You can even put your blog on Medium.com. No restrictions as long as
-                it has an RSS feed.
-            </li>
-            <li>
-                Most developer blogs hosted outside of Medium.com are having a hard time finding a large audience. Diff.blog's was built
-                to give visibility to these developer blogs that are spread across all over the Internet. It also has some cool
-                features that makes it easier to subscribe to blogs.
-            </li>
-        </ul>
+        diff.blog is a platform that helps you discover and follow amazing developer blogs. Whether your interests are in Python,
+        Rust, AI, Distributed Systems or XYZ diff.blog has got amazing blogs for you to follow!
     </p>
     <h2>
-        Sounds great. How do you fetch posts from these blogs?
+        How is it different from Medium?
     </h2>
     <p>
-        All most all the blogs have a RSS feed. RSS feeds makes it really easy to keep updated with the posts of a blog. No blockchain.
-        Nothing fancy. It's just a file. You can read more about RSS feeds at <a href="https://www.youneedfeeds.com/">https://www.youneedfeeds.com/</a>.
+        diff.blog unlike Medium does not host any blogs. diff.blog merely acts as a platform that makes it easier to
+        discover and subscribe to blogs. So you own your own blog and content. You can host your blog in a Wordpress site,
+        GitHub pages, Ghost, or wherever you want. This means even if diff.blog shut downs one day it won't affect your blog at all.
+    </p>
+    <h2>
+        Why build diff.blog?
+    </h2>
+    <p>
+        There are a lot of amazing developer blogs in the Internet. But very few of them gets visibility. Because of this visibility issue
+        a lot of the developers blogs are shutting down or is moving to Medium in search of views. I don't think a walled garden like Medium
+        is the solution to this problem. Developers should be able to own their blog without having to compromise on the views. Blogs are probably
+        the last remaining bits of Internet, a network that was supposed to be decentralized and not owned by a few companies. diff.blog's
+        mission is to bring the audience back to the blogs and make blogs popular again.
+    </p>
+    <h2>
+        Sounds great. How does this work?
+    </h2>
+    <p>
+        The underlying engine of diff.blog is similar to an RSS reader. All most all the blogs have RSS feed. RSS feeds makes it
+        really easy to keep updated with the posts of a blog. No blockchain. Nothing fancy. It's just a file. You can read more about
+        RSS feeds at <a href="https://www.youneedfeeds.com/">https://www.youneedfeeds.com/</a>.
     </p>
     <h2>
         Okay. So this is basically a RSS reader?
     </h2>
     <p>
-        Kind of but not really. It has a lot of features that are not present in a normal RSS reader that would should give you better experience.
+        Kind of but not really. diff.blog is to RSS reader is how Slack/Zulip is to IRC. If RSS readers were doing its job properly
+        there would not have been a Medium.com <i class="em em-upside_down_face"></i> diff.blog has a lot of features that are not present in a normal RSS reader that should give you
+        better experience.
         Some of them are.
         <ul>
             <li>
-                User recommendations - diff.blog can recommend you blogs to follow depending upon your interests.
+                Blog recommendations - diff.blog can recommend you blogs to follow depending upon your interests.
                 If you are interested in Rust for example diff.blog will suggest you awesome developers that blogs about
                 Rust. When you sign up with your GitHub account diff.blog analyzes your profile to get a
-                sense of what kind of topics you are interested in. Plus it also ask you to choose come more general
-                topics when you sign up.
+                sense of what kind of programming Languages you are interested in. Plus it also ask you to choose
+                what kind of Topics you are interested in during signup.
             </li>
             <li>
                 Auto follow - diff.blog automatically make you follow the blogs of developers and organizations you follow on GitHub.
-                If you don't like some of them you can later unsubscribe as well.
+                If you don't like some of them you can later unsubscribe them as well. This results in surfacing of interesting
+                blog posts.
             </li>
             <li>
                 Normal RSS readers knows only about blogs you follow. This might lead you to miss out on a lot of amazing
@@ -67,10 +78,11 @@
         You can add your blog by going to <a href="account/settings/blog/">settings</a> page after signup.
     </p>
     <h2>
-        What if some blogs I want to follow are not there in diff.blog?
+        What if a blog I want to follow is not there in diff.blog?
     </h2>
     <p>
-        You can suggest the blog <a href="/suggest">here</a> and we would manually add them. Currently most of the featured blogs in diff.blog
+        You can suggest the blog <a href="/suggest">here</a> and we would manually add it as long as the blog has as RSS
+        feed and the user/organization that runs the blog has an account on GitHub. Currently most of the featured blogs in diff.blog
         are added like that.
     </p>
     <h2>
@@ -79,6 +91,14 @@
     <p>
         diff.blog is completely free to use. diff.blog is run on a $10 Digital Ocean droplet. It's currently my side project and
         cost me hardly any money to run.
+    </p>
+    <h2>
+        Is this open source?
+    </h2>
+    <p>
+        diff.blog is not open source yet. The main reason I have not open sourced it yet is that it's not in a great state currently
+        for a new contributor to contribute. If diff.blog gets some traction and lot of people are interested, I would be making it
+        friendly to contribute and opensource it.
     </p>
 </div>
 {% endblock %}
