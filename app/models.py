@@ -77,11 +77,12 @@ class Post(models.Model):
     link = models.CharField(max_length=300)
     summary = models.TextField(null=True)
     content = models.TextField()
-    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="posts")
     updated_on = models.DateTimeField(null=True)
     upvotes_count = models.IntegerField(default=0)
     comments_count = models.IntegerField(default=0)
     score = models.FloatField(default=0)
+    topics = models.ManyToManyField(Topic, related_name="posts")
 
     def get_summary(self):
         #TODO: Don't stop the summary in between words.
@@ -93,6 +94,12 @@ class Post(models.Model):
         return self.summary[:200] + "..."
 
     def serialize(self):
+        topics = []
+        for topic in self.topics.all():
+            if topic.display_name == "Uncategorized":
+                continue
+            topics.append(topic.serialize())
+
         return {
             "id": self.id,
             "title": self.title,
@@ -102,6 +109,7 @@ class Post(models.Model):
             "score": self.score,
             "upvotes_count": self.upvotes_count,
             "comments_count": self.comments_count,
+            "topics": topics,
             "profile": {
                 "github_username": self.profile.github_username,
                 "full_name": self.profile.full_name,
