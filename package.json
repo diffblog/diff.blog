@@ -8,9 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "start": "webpack-dev-server --open",
-    "watch": "webpack --watch"
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack-dev-server --open --config webpack.dev.js",
+    "watch": "webpack --watch --config webpack.dev.js"
   },
   "repository": {
     "type": "git",
@@ -36,7 +36,8 @@
     "webpack-bundle-tracker": "^0.4.2-beta",
     "webpack-cli": "^3.2.3",
     "webpack-dev-middleware": "^3.6.1",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-dev-server": "^3.2.1",
+    "webpack-merge": "^4.2.1"
   },
   "dependencies": {
     "handlebars": "^4.1.0",
