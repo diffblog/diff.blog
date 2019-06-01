@@ -16,7 +16,6 @@ from diffblog.secrets import social_auth_github_key, social_auth_github_secret, 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEVELOPMENT = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -25,9 +24,9 @@ DEVELOPMENT = False
 SECRET_KEY = '***REMOVED***'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["diff.blog", "localhost"]
+ALLOWED_HOSTS = ["diff.blog", "www.diff.blog"]
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -125,16 +124,7 @@ WSGI_APPLICATION = 'diffblog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-if DEVELOPMENT:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-else:
-    DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'diffblog',
