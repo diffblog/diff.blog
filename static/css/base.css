@@ -27,3 +27,7 @@ body {
     margin-top: -15px;
     color: #7a7a7a !important;
 }
+
+.brand-title {
+    font-family: monospace;
+}
