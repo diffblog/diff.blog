@@ -95,7 +95,7 @@ class Post(models.Model):
 
     def serialize(self):
         topics = []
-        for topic in self.topics.all():
+        for topic in self.topics.all()[:4]:
             if topic.display_name == "Uncategorized":
                 continue
             topics.append(topic.serialize())

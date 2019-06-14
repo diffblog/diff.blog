@@ -21,6 +21,9 @@
           <p class="post-content">
             {{ summary }}
           </p>
+          {{#each topics}}
+              <span class="tag is-light">{{ display_name }}</span>
+          {{/each}}
       </div>
       <nav class="level is-mobile">
         <div class="level-left">
