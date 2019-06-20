@@ -1,5 +1,9 @@
 {% extends "profile_base.html" %}
 
+{% block title %}
+<title>{{ profile.full_name }} Liked Posts | diff.blog</title>
+{% endblock %}
+
 {% block info %}
 <div id="home_feed"></div>
 <script src="/static/dist/feed.bundle.js"></script>

@@ -1,5 +1,9 @@
 {% extends "profile_base.html" %}
 
+{% block title %}
+<title>{{ profile.full_name }} Posts | diff.blog</title>
+{% endblock %}
+
 {% block info %}
 {% if is_me and not profile.blog_url %}
 <div class="box" id="is-me-step-1">
