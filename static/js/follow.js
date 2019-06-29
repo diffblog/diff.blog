@@ -1,4 +1,4 @@
-import { setup_ajax, show_login_prompt_if_required } from "./helpers";
+import { setup_ajax, show_login_prompt_if_required, send_event } from "./helpers";
 setup_ajax();
 
 $(function () {
@@ -6,7 +6,7 @@ $(function () {
         if(show_login_prompt_if_required()) {
             return;
         }
-        ga('send', 'event', 'unfollow');
+        send_event('unfollow');
         $(this).removeClass("is-light");
         $(this).removeClass("following");
         $(this).addClass("is-dark");
@@ -26,7 +26,7 @@ $(function () {
         if(show_login_prompt_if_required()) {
             return;
         }
-        ga('send', 'event', 'follow');
+        send_event('follow');
         $(this).removeClass("is-dark");
         $(this).removeClass("follow");
         $(this).addClass("is-light");
