@@ -79,7 +79,7 @@ class Post(models.Model):
     content = models.TextField()
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="posts")
     updated_on = models.DateTimeField(null=True)
-    upvotes_count = models.IntegerField(default=0)
+    upvotes_count = models.IntegerField(default=1)
     comments_count = models.IntegerField(default=0)
     score = models.FloatField(default=0)
     topics = models.ManyToManyField(Topic, related_name="posts")
