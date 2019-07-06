@@ -25,6 +25,7 @@ SECRET_KEY = '***REMOVED***'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+DEVELOPMENT = False
 
 ALLOWED_HOSTS = ["diff.blog", "www.diff.blog"]
 
