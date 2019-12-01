@@ -234,7 +234,7 @@ if not DEVELOPMENT:
             'file': {
                 'level': 'DEBUG',
                 'class': 'logging.FileHandler',
-                'filename': '/home/vishnu/diff.blog/var/log/',
+                'filename': '/home/vishnu/diff.blog/var/log/django.log',
             },
         },
         'loggers': {
