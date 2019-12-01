@@ -237,10 +237,6 @@ if not DEVELOPMENT:
             },
         },
         'handlers': {
-            'null': {
-                'level':'DEBUG',
-                'class':'django.utils.log.NullHandler',
-            },
             'logfile': {
                 'level':'DEBUG',
                 'class':'logging.handlers.RotatingFileHandler',
