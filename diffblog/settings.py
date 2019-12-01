@@ -59,6 +59,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# After making change update /etc/supervisor/conf.d/rqueue.conf and restart the
+# process
 RQ_QUEUES = {
     'following_bootstrapper': {
         'HOST': 'localhost',
