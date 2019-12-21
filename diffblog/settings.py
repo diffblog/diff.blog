@@ -228,52 +228,51 @@ LOGIN_URL = "/"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-if not DEVELOPMENT:
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': True,
-        'formatters': {
-            'standard': {
-                'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-                'datefmt' : "%d/%b/%Y %H:%M:%S"
-            },
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
         },
-        'handlers': {
-            'logfile': {
-                'level':'DEBUG',
-                'class':'logging.handlers.RotatingFileHandler',
-                'filename': "/home/vishnu/diff.blog/var/log/django.log",
-                'maxBytes': 50000,
-                'backupCount': 2,
-                'formatter': 'standard',
-            },
-            'console':{
-                'level':'INFO',
-                'class':'logging.StreamHandler',
-                'formatter': 'standard'
-            },
+    },
+    'handlers': {
+        'logfile': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': "/home/vishnu/diff.blog/var/log/django.log",
+            'maxBytes': 50000,
+            'backupCount': 2,
+            'formatter': 'standard',
         },
-        'loggers': {
-            'django': {
-                'handlers':['console'],
-                'propagate': True,
-                'level':'WARN',
-            },
-            'django.db.backends': {
-                'handlers': ['console'],
-                'level': 'DEBUG',
-                'propagate': False,
-            },
-            'app': {
-                'handlers': ['console', 'logfile'],
-                'level': 'DEBUG',
-            },
-            'feed': {
-                'handlers': ['console', 'logfile'],
-                'level': 'DEBUG',
-            },
-        }
+        'console':{
+            'level':'INFO',
+            'class':'logging.StreamHandler',
+            'formatter': 'standard'
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers':['console'],
+            'propagate': True,
+            'level':'WARN',
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'app': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+        },
+        'feed': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+        },
     }
+}
 
 STATIC_URL = '/static/'
 
