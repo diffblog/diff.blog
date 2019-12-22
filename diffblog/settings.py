@@ -27,7 +27,7 @@ SECRET_KEY = '***REMOVED***'
 DEBUG = False
 DEVELOPMENT = False
 
-ALLOWED_HOSTS = ["diff.blog", "www.diff.blog"]
+ALLOWED_HOSTS = ["diff.blog", "www.diff.blog", "vishnuks.com"]
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'feed',
     'app',
+    'challenge',
     'social_django',
     'django_rq',
 ]
