@@ -27,8 +27,12 @@ SECRET_KEY = '***REMOVED***'
 DEBUG = False
 DEVELOPMENT = False
 
-ALLOWED_HOSTS = ["diff.blog", "www.diff.blog", "vishnuks.com"]
-
+ALLOWED_HOSTS = ["diff.blog", "www.diff.blog"]
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:8080",
+    "https://diff.blog",
+    "https://vishnuks.com"
+]
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "dist"),
@@ -48,9 +52,11 @@ INSTALLED_APPS = [
     'challenge',
     'social_django',
     'django_rq',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
