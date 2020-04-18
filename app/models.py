@@ -10,10 +10,16 @@ from math import log
 class Category(models.Model):
     name = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.name
+
 class Topic(models.Model):
     display_name = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     recommended = models.ManyToManyField("UserProfile", related_name="recommended_in")
+
+    def __str__(self):
+        return self.display_name
 
     def serialize(self):
         return {
@@ -73,6 +79,9 @@ class UserProfile(models.Model):
             "bio": self.bio,
             "topics": topics,
         }
+
+    def __str__(self):
+        return self.full_name
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
