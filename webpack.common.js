@@ -5,19 +5,19 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
     mode: 'production',
     entry: {
-        followers: './static/js/followers.js',
-        following: './static/js/following.js',
-        follow: './static/js/follow.js',
-        feed: './static/js/feed.js',
-        post: './static/js/post.js',
-        like: './static/js/like.js',
-        save: './static/js/save.js',
-        profile: './static/js/profile.js',
-        signup_finish: './static/js/signup_finish.js',
-        user_suggestions: './static/js/user_suggestions.js',
-        search: './static/js/search.js',
-        blog_settings: './static/js/blog_settings.js',
-        admin: './static/js/admin.js',
+        followers: './app/static/js/followers.js',
+        following: './app/static/js/following.js',
+        follow: './app/static/js/follow.js',
+        feed: './app/static/js/feed.js',
+        post: './app/static/js/post.js',
+        like: './app/static/js/like.js',
+        save: './app/static/js/save.js',
+        profile: './app/static/js/profile.js',
+        signup_finish: './app/static/js/signup_finish.js',
+        user_suggestions: './app/static/js/user_suggestions.js',
+        search: './app/static/js/search.js',
+        blog_settings: './app/static/js/blog_settings.js',
+        admin: './app/static/js/admin.js',
     },
     devtool: 'inline-source-map',
     plugins: [
@@ -30,6 +30,6 @@ module.exports = {
     },
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'static', 'dist')
+        path: path.resolve(__dirname, 'app','static', 'dist')
     }
 };

@@ -33,9 +33,8 @@ CORS_ORIGIN_WHITELIST = [
     "https://diff.blog",
     "https://vishnuks.com"
 ]
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, "dist"),
 ]
 
 # Application definition
@@ -233,9 +232,6 @@ SOCIAL_AUTH_NEW_USER_REDIRECT_URL = "/signup/topics"
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/"
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -281,8 +277,11 @@ LOGGING = {
         },
     }
 }
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 SOCIAL_AUTH_GITHUB_KEY = social_auth_github_key
 SOCIAL_AUTH_GITHUB_SECRET = social_auth_github_secret
