@@ -12,5 +12,5 @@ def boost(request):
     post = Post.objects.get(id=post_id)
     post.upvotes_count = post.upvotes_count + 1
     post.save()
-    post.update_score()
+    post.update_aggregate_votes_count_and_score()
     return JsonResponse("Success", safe=False)

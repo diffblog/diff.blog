@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'feed',
     'app',
+    'mirrors',
     'challenge',
     'social_django',
     'django_rq',
