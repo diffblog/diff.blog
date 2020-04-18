@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from datetime import timedelta
 from django.utils import timezone
+from django.core.cache import cache
 
 from app.models import Post
 
@@ -13,3 +14,4 @@ class Command(BaseCommand):
 
         for post in posts:
             post.update_aggregate_votes_count_and_score()
+        cache.delete('top')
