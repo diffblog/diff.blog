@@ -4,4 +4,4 @@ sudo systemctl restart gunicorn
 npm install
 pip install -r requirements.txt
 npm run-script build
-./manage.py collectstatic
+./manage.py collectstatic --noinput
