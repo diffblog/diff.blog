@@ -4,6 +4,10 @@
 <title>{{ post.title }} | diff.blog</title>
 {% endblock %}
 
+{% block seo_tags %}
+<meta name="description" content="{{ post.summary }}"">
+{% endblock %}
+
 {% block content %}
 <section class="section">
   <div class="container">
