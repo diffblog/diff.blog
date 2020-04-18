@@ -64,6 +64,12 @@
                 <a style="color: #4a4a4a;" href="/{{post.profile.github_username}}">{{ post.profile.full_name }}</a>
                 ·
                 <a style="color: #4a4a4a;" href="/post/{{post.id}}"><small>{{ post.updated_on }}</small></a>
+                <br>
+                <br>
+                <p id="post-summary">
+                  {{ post.summary|slice:"0:500" }}...
+                </p>
+                <br>
               </div>
           </div>
           <article class="media">
