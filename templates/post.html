@@ -114,9 +114,43 @@
                     Sign in with GitHub &nbsp<i class="fab fa-github"></i>
                   </a>
                 </p>
-             </div>
-             {% endif %}
-          <div id="follow_list"></div>
+            </div>
+            {% endif %}
+            <div id="follow_list"></div>
+            {% if featured_on %}
+            <hr>
+            <h2 class="subtitle is-5">
+              <i class="em em-trophy"></i> Blog post featured on
+            </h2>
+            {% for site in featured_on %}
+            <div class="card">
+              <div class="card-content">
+                  <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-48x48">
+                            <a href="{{ site.url }}" target="_blank">
+                                {% if site.source.name == "Hacker News" %}
+                                <img src="/static/images/hn.png" alt="Placeholder image">
+                                {% else %}
+                                <img src="/static/images/reddit.png" alt="Placeholder image">
+                                {% endif %}
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="media-content">
+                        <a href="{{ site.url }}" class="title is-5" target="_blank">
+                          {{ site.source.name }}
+                        </a>
+                        <div class="is-subtitle is-6">
+                          {{ site.votes }} points
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <br>
+            {% endfor %}
+            {% endif %}
         </div>
       </div>
   </div>
