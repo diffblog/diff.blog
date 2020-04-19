@@ -140,7 +140,7 @@ DATABASES = {
         'NAME': 'diffblog',
         'USER': postgresql_user,
         'PASSWORD': postgresql_password,
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '',
     }
 }
