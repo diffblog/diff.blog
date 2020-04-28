@@ -1,7 +1,11 @@
 {% extends "profile_base.html" %}
 
 {% block title %}
-<title>{{ profile.full_name }} Posts | diff.blog</title>
+    <title>{{ profile.full_name }} Blog Posts | diff.blog</title>
+{% endblock %}
+
+{% block seo_tags %}
+    <meta name="description" content="Read and subscribe to the latest blog posts of @{{ profile.github_username }}.">
 {% endblock %}
 
 {% block info %}
