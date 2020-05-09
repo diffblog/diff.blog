@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-source bin/activate
-./manage.py runserver --settings=diffblog.dev_settings &
-./manage.py rqworker following_bootstrapper followers_bootstrapper feed language_scanner follow_organizations &
-npm run watch
+./manage.py runserver 0.0.0.0:8000 --settings=diffblog.dev_settings &
+./manage.py rqworker --settings=diffblog.dev_settings following_bootstrapper followers_bootstrapper feed language_scanner follow_organizations &
+npm run watch & redis-server
