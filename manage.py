@@ -3,7 +3,7 @@ import os
 import sys
 
 if __name__ == "__main__":
-    if os.environ["DEVELOPMENT"]:
+    if "DEVELOPMENT" in os.environ:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "diffblog.dev_settings")
     else:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "diffblog.settings")
