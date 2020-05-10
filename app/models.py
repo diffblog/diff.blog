@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser, User
 from django.core import serializers
 from django.forms.models import model_to_dict
 from django.db.models import Sum
+from django.utils.text import slugify
 
 from datetime import datetime, timedelta
 from math import log
@@ -95,6 +96,11 @@ class Post(models.Model):
     comments_count = models.IntegerField(default=0)
     score = models.FloatField(default=0)
     topics = models.ManyToManyField(Topic, related_name="posts")
+    slug = models.SlugField(unique=True, null=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = "{}-{}".format(self.slug or slugify(self.title), str(self.id))
+        super().save(*args, **kwargs)
 
     def get_summary(self):
         #TODO: Don't stop the summary in between words.
@@ -195,3 +201,14 @@ class MirrorPost(models.Model):
     source = models.ForeignKey(MirrorSource, on_delete=models.CASCADE, related_name="mirror_posts")
     votes = models.IntegerField(default=0)
     url = models.CharField(max_length=200)
+
+class UserList(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    created_by = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="created_user_lists")
+    users = models.ManyToManyField("UserProfile", related_name="listed_in")
+    slug = models.SlugField(unique=True, null=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = self.slug or slugify(self.name)
+        super().save(*args, **kwargs)

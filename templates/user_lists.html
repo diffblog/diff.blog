@@ -1,0 +1,67 @@
+{% extends "search_base.html" %}
+
+
+{% block seo_tags %}
+    <meta name="description" content="{{ user_list.description }}">
+{% endblock %}
+
+{% block content2 %}
+<div id="users">
+    <section class="hero is-medium is-bold" style='background-image: linear-gradient( rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url("/static/images/top-engineering-blogs-of-tech-companies.jpeg"); background-size: cover;'>
+        <div class="hero-body">
+              <h1 class="title is-size-1 has-text-white	">
+                {{ user_list.name }}
+              </h1>
+              <h2 class="subtitle has-text-white">
+                {{ user_list.description }}
+              </h2>
+      </div>
+      </section>
+    
+    <br>
+    {% for profile in users %}
+    <div class="card">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                    <figure class="image is-48x48">
+                        <a href="/{{profile.github_username}}">
+                            <img src="https://avatars.githubusercontent.com/{{profile.github_username}}?s=48" alt="Placeholder image">
+                        </a>
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <h2>
+                    <a href="/{{profile.github_username}}" class="title is-5">
+                    {{ profile.full_name }}
+                    </a>
+                    <h2>
+                    {% if not my_profile or my_profile.github_username != profile.github_username %}
+                        {% if my_profile and profile in following %}
+                            <a data-user-id="{{ profile.id }}" class="button is-light is-pulled-right following">Following</a>
+                        {% else %}
+                            <a data-user-id="{{ profile.id }}" class="button is-dark is-pulled-right follow">Follow</a>
+                        {% endif %}
+                    {% endif %}
+                    <a class="subtitle is-6" href="/{{profile.github_username}}">@{{ profile.github_username }}</a>
+                </div>
+            </div>
+            
+            <div class="content">
+                {{ profile.bio }}
+            <br>
+            {% for post in profile.posts.filter|slice:":3" %}
+                <a target="_blank" href="{{post.link}}">{{ post.title }}</a>
+                <hr>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block footer %}
+<script src="/static/dist/follow.bundle.js"></script>
+{% endblock %}
