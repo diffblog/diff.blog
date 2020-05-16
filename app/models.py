@@ -96,7 +96,7 @@ class Post(models.Model):
     comments_count = models.IntegerField(default=0)
     score = models.FloatField(default=0)
     topics = models.ManyToManyField(Topic, related_name="posts")
-    slug = models.SlugField(unique=True, null=True)
+    slug = models.SlugField(unique=True, null=True, max_length=250)
 
     def save(self, *args, **kwargs):
         self.slug = "{}-{}".format(self.slug or slugify(self.title), str(self.id))
