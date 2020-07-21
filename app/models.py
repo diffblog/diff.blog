@@ -199,6 +199,7 @@ class BlogSuggestion(models.Model):
         (1, 'No GitHub account'),
         (2, 'No feed'),
         (3, 'Should be added by the user'),
+        (4, 'Non English blog'),
         (10, 'Blog added'),
     }
     status = models.IntegerField(default=0, choices=STATUS_CHOICES)
