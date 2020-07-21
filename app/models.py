@@ -191,6 +191,17 @@ class BlogSuggestion(models.Model):
     username = models.CharField(max_length=100)
     url = models.CharField(max_length=200)
     suggested_by = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
+    PENDING = 0
+    NO_GITHUB_ACCOUNT = 1
+    ADDED = 10
+    STATUS_CHOICES = {
+        (0, 'Pending'),
+        (1, 'No GitHub account'),
+        (2, 'No feed'),
+        (3, 'Should be added by the user'),
+        (10, 'Blog added'),
+    }
+    status = models.IntegerField(default=0, choices=STATUS_CHOICES)
 
 class MirrorSource(models.Model):
     name = models.CharField(max_length=100)
