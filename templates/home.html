@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% block title %}
+  {% if topic %}
+    <title>Top {{ topic }} blog posts | diff.blog</title>
+  {% endif %}
+{% endblock %}
 
 {% block content %}
 {% if not user.is_authenticated %}
@@ -82,7 +87,8 @@
 <script>
   var page_params = {
     pocket_show_button: {{ js_pocket_show_button }},
-    auth_username: "{{ auth_username }}"
+    auth_username: "{{ auth_username }}",
+    topic: "{{ topic }}",
   };
 </script>
 <script src="/static/dist/feed.bundle.js"></script>

@@ -22,7 +22,9 @@
             {{ summary }}
           </p>
           {{#each topics}}
-              <span class="tag is-light">{{ display_name }}</span>
+            <a href="/{{ ../feed_type }}/{{ slug }}">
+                <span class="tag is-light">{{ slug }}</span>
+            </a>
           {{/each}}
       </div>
       <nav class="level is-mobile">

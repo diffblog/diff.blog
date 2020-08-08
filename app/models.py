@@ -18,6 +18,11 @@ class Topic(models.Model):
     display_name = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     recommended = models.ManyToManyField("UserProfile", related_name="recommended_in")
+    slug = models.SlugField(unique=False, null=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.display_name)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.display_name
@@ -25,6 +30,7 @@ class Topic(models.Model):
     def serialize(self):
         return {
             "display_name": self.display_name,
+            "slug": self.slug,
         }
 
 class UserProfile(models.Model):
