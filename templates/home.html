@@ -1,9 +1,9 @@
 {% extends "base.html" %}
+{% if topic %}
 {% block title %}
-  {% if topic %}
     <title>Top {{ topic }} blog posts | diff.blog</title>
-  {% endif %}
 {% endblock %}
+{% endif %}
 
 {% block content %}
 {% if not user.is_authenticated %}
