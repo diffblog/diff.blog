@@ -1,9 +1,15 @@
 {% extends "base.html" %}
-{% if topic %}
 {% block title %}
-    <title>Top {{ topic }} blog posts | diff.blog</title>
+  {% if feed_type == "top" %}
+  <title>Top {{ topic }} blog posts | diff.blog</title>
+  {% elif feed_type == "following" %}
+  <title>New {{ topic }} blog posts from users you follow | diff.blog</title>
+  {% elif feed_type == "new" %}
+  <title>New {{ topic }} blog posts | diff.blog</title>
+  {% else %}
+  <title>Top {{ topic }} blog posts | diff.blog</title>
+  {% endif %}
 {% endblock %}
-{% endif %}
 
 {% block content %}
 {% if not user.is_authenticated %}
@@ -39,6 +45,19 @@
           {% include "main_side_menu.html" %}
         </div>
         <div class="column is-6">
+          {% if topic_display_name %}
+            {% if feed_type == "top" %}
+            <h1 class="is-size-4">Top blog posts in <b>{{ topic_display_name }}</b></h1>
+            {% endif %}
+            {% if feed_type == "new" %}
+            <h1 class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b></h1>
+            {% endif %}
+            {% if feed_type == "following" %}
+            <h1 class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b> from the users you follow</h1>
+            {% endif %}
+            <br>
+          {% endif %}
+
           <div id="home_feed"></div>
         </div>
         <div class="column is-one-quarter">
