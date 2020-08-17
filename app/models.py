@@ -164,6 +164,9 @@ class Post(models.Model):
         self.update_aggregate_votes_count()
         self.update_score()
 
+    def get_absolute_url(self):
+        return "/posts/" + str(self.id)
+
 class Vote(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="votes")
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="votes")
