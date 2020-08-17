@@ -12,7 +12,7 @@
           <a class="has-text-dark" href="/{{profile.github_username}}"><small>{{ profile.full_name }}</small></a>
           <a class="has-text-grey" href="/{{profile.github_username}}"><small>@{{ profile.github_username }}</small></a>
           ·
-          <a class="has-text-grey" href="/post/{{id}}"><small>{{ time }}</small></a>
+          <a class="has-text-grey" href="/post/{{slug}}"><small>{{ time }}</small></a>
           <a href="{{link}}" class="post_link" target="_blank" rel="noopener noreferrer">
           <h4>
             {{ title }}
@@ -42,7 +42,7 @@
             &nbsp;
             <span id="feed_upvotes_counter_{{id}}">{{ aggregate_votes_count }}</span>
           </a>
-          <a class="level-item" data-toggle="tooltip" title="Discussions" href="/post/{{id}}">
+          <a class="level-item" data-toggle="tooltip" title="Discussions" href="/post/{{slug}}">
               <i class="far fa-comment"></i>
           </a>
           {{#if is_admin}}

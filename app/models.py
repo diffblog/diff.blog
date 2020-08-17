@@ -105,8 +105,8 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, null=True, max_length=250)
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
         self.slug = "{}-{}".format(slugify(self.title), str(self.id))
+        super().save(*args, **kwargs)
 
     def get_summary(self):
         #TODO: Don't stop the summary in between words.
@@ -128,6 +128,7 @@ class Post(models.Model):
             "id": self.id,
             "title": self.title,
             "link": self.link,
+            "slug": self.slug,
             "summary": self.get_summary(),
             "updated_on": self.updated_on.isoformat(),
             "score": self.score,
@@ -165,7 +166,7 @@ class Post(models.Model):
         self.update_score()
 
     def get_absolute_url(self):
-        return "/posts/" + str(self.id)
+        return "/posts/" + str(self.slug)
 
 class Vote(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="votes")
