@@ -105,8 +105,10 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, null=True, max_length=250)
 
     def save(self, *args, **kwargs):
-        self.slug = "{}-{}".format(slugify(self.title), str(self.id))
         super().save(*args, **kwargs)
+        if not self.slug:
+            self.slug = "{}-{}".format(slugify(self.title), str(self.id))
+            self.save()
 
     def get_summary(self):
         #TODO: Don't stop the summary in between words.
