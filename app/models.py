@@ -192,7 +192,6 @@ class Comment(models.Model):
             "post_id": self.post.id,
             "posted_on": self.posted_on.isoformat(),
             "upvotes_count": self.upvotes_count,
-            "aggregate_votes_count": self.aggregate_votes_count,
         }
 
 class CommentVote(models.Model):
