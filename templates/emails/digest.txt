@@ -1,0 +1,11 @@
+ {% for post in top_posts %}
+    Title: {{ post.title }}
+    Link: {{ post.uri }}
+    Points: {{ post.aggregate_votes_count }}
+    Author: {{ post.profile.uri }}
+
+    Summary:
+    {{ post.summary|truncatechars:200 }}
+
+    ----
+{% endfor %}

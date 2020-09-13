@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    {% block title %}
+    {% endblock %}
+
+</head>
+
+<body>
+    <span class="preheader"></span>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+        <tr>
+            <td>&nbsp;</td>
+            <td class="container">
+                <div class="content">
+                    <table role="presentation" class="main">
+                        <tr>
+                            <td class="wrapper">
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            {% block content %}
+                                            {% endblock %}
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <div class="footer">
+                                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td class="content-block">
+                                                <a href="https://diff.blog" class="apple-link">diff.blog</a>
+                                                <br> Don't like these emails? <a
+                                                    href="https://diff.blog/account/settings/integrations/">Unsubscribe</a>.
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>

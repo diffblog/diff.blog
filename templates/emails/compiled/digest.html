@@ -1,0 +1,49 @@
+{% extends "emails/compiled/base.html" %}
+
+{% block title %}
+</p>
+<title>
+Popular blog posts of last week
+</title>
+{% endblock %}
+
+{% block content %}
+<h1 style="color:#444040; font-family:sans-serif; font-weight:300; line-height:1.4; margin:0; margin-bottom:30px; font-size:30px; text-align:center" align="center">
+    <img class="diff-logo" src="https://diff.blog/static/images/icons/apple-icon-76x76.png" style="-ms-interpolation-mode:bicubic; border:none; max-width:30px; border-radius:10%; position:relative; top:5px">
+    Popular blog posts of last week
+</h1>
+<table style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; width:100%" width="100%">
+    {% for post in top_posts %}
+    <tr>
+        <td class="avatar-col" style="font-family:sans-serif; font-size:14px; vertical-align:top" valign="top">
+            <img class="avatar" src="https://github.com/{{ post.profile.github_username }}.png" style="-ms-interpolation-mode:bicubic; border:none; max-width:30px; border-radius:100%">
+        </td>
+        <td class="title-col" style="font-family:sans-serif; font-size:14px; vertical-align:top; position:relative" valign="top">
+            <a class="post-title" href="{{ post.uri }}" style="color:#3498db; text-decoration:solid; font-size:20px">
+                {{ post.title }}
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-family:sans-serif; font-size:14px; vertical-align:top" valign="top"></td>
+        <td style="font-family:sans-serif; font-size:14px; vertical-align:top" valign="top">
+            <p class="post-summary" style='font-family:BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size:16px; font-weight:normal; margin:0; margin-bottom:15px; line-height:1.5em; text-decoration:none; color:hsl(210, 10%, 10%)'>
+                {{ post.summary|truncatechars:200 }}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-family:sans-serif; font-size:14px; vertical-align:top" valign="top">
+        </td>
+        <td class="post-info-col" style="font-family:sans-serif; font-size:14px; vertical-align:top; color:rgb(121, 115, 121)" valign="top">
+           {{ post.aggregate_votes_count }} points by <a class="author-name" href="{{ post.profile.uri }}" style="color:rgb(121, 115, 121); text-decoration:underline">@{{ post.profile.github_username }}</a>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-family:sans-serif; font-size:14px; vertical-align:top" valign="top"></td>
+        <td class="new-line" style="font-family:sans-serif; font-size:14px; vertical-align:top; border-bottom:2px solid hsl(209, 10%, 92%)" valign="top">
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

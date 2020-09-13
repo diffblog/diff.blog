@@ -1,0 +1,48 @@
+{% extends "emails/compiled/base.html" %}
+
+{% block title %}
+<title>
+Popular blog posts of last week
+</title>
+{% endblock %}
+
+{% block content %}
+<h1>
+    <img class="diff-logo" src="https://diff.blog/static/images/icons/apple-icon-76x76.png" />
+    Popular blog posts of last week
+</h1>
+<table>
+    {% for post in top_posts %}
+    <tr>
+        <td class="avatar-col">
+            <img class="avatar" src="https://github.com/{{ post.profile.github_username }}.png" />
+        </td>
+        <td class="title-col">
+            <a class="post-title" href="{{ post.uri }}">
+                {{ post.title }}
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <p class="post-summary">
+                {{ post.summary|truncatechars:200 }}
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+        </td>
+        <td class="post-info-col">
+           {{ post.aggregate_votes_count }} points by <a class="author-name" href="{{ post.profile.uri }}">@{{ post.profile.github_username }}</a>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="new-line">
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

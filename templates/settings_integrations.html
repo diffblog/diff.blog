@@ -48,5 +48,27 @@
         </div>
     </form>
 </div>
+<div class="box">
+    <form id="pocket_integration" method="POST">
+        {% csrf_token %}
+        <div class="subtitle is-5">
+            <span class="fa fa-envelope"></span> Email
+        </div>
+        <input name="integration" type="hidden" value="email">
+        <div class="field">
+            <div class="control">
+                <label class="checkbox">
+                <input name="send_weekly_digest_email" type="checkbox" {% if profile.send_weekly_digest_email %}checked{% endif %}>
+                    Receive weekly digest email
+                </label>
+            </div>
+        </div>
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-dark">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
 <script src="/static/dist/blog_settings.bundle.js"></script>
 {% endblock %}

@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 from diffblog.secrets import social_auth_github_key, social_auth_github_secret, \
-    postgresql_user, postgresql_password
+    postgresql_user, postgresql_password, smtp_hostname, smtp_username, \
+    smtp_password, smtp_port
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -292,3 +293,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 SOCIAL_AUTH_GITHUB_KEY = social_auth_github_key
 SOCIAL_AUTH_GITHUB_SECRET = social_auth_github_secret
 USE_TZ = True
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = smtp_hostname
+EMAIL_PORT = smtp_port
+EMAIL_HOST_USER = smtp_username
+EMAIL_HOST_PASSWORD = smtp_password
+DEFAULT_FROM_EMAIL = "diff.blog <noreply@diff.blog>"

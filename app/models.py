@@ -55,6 +55,8 @@ class UserProfile(models.Model):
     fetched_following_users = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
 
+    send_weekly_digest_email = models.BooleanField(default=True)
+
     pocket_api_key = models.CharField(max_length=100, null=True)
     pocket_show_button = models.BooleanField(default=True)
     pocket_auto_save = models.BooleanField(default=False)
@@ -89,6 +91,10 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.full_name
+
+    @property
+    def uri(self):
+        return "https://diff.blog/" + self.github_username
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
@@ -168,7 +174,11 @@ class Post(models.Model):
         self.update_score()
 
     def get_absolute_url(self):
-        return "/posts/" + str(self.slug)
+        return "/post/" + str(self.slug)
+
+    @property
+    def uri(self):
+        return "https://diff.blog/post/" + str(self.slug)
 
 class Vote(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="votes")
