@@ -15,12 +15,12 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('--username', action="store", default=None)
         parser.add_argument('--confirm', action="store_true", default=False)
+        parser.add_argument('--test-run', action="store_true", default=False)
 
     def handle(self, *args, **options):
         username = options["username"]
         if options["username"] is None:
-            assert(options["confirm"])
-            assert(settings.DEVELOPMENT is False)
+            assert(options["confirm"] or options["test_run"])
             users = UserProfile.objects.filter(is_activated=True)
         else:
             user = UserProfile.objects.get(github_username=username)
@@ -28,21 +28,21 @@ class Command(BaseCommand):
 
         top_posts = get_posts_for_weekly_digest()
 
-        connection = mail.get_connection()
-
-        messages = []
+        to_emails = []
         for user in users:
             if user.auth is None or not user.auth.email:
                 continue
-            
-            subject = 'Popular engineering blog posts of last week'
-            from_email = settings.DEFAULT_FROM_EMAIL
-            to = user.auth.email
+            to_emails.append(user.auth.email)
 
-            msg_plain = render_to_string('emails/digest.txt', {"top_posts": top_posts})
-            msg_html = render_to_string('emails/compiled/digest.html', {"top_posts": top_posts})
-            msg = EmailMultiAlternatives(subject, msg_plain, from_email, [to])
+        subject = 'Popular engineering blog posts of last week'
+        from_email = settings.DEFAULT_FROM_EMAIL
+        msg_plain = render_to_string('emails/digest.txt', {"top_posts": top_posts})
+        msg_html = render_to_string('emails/compiled/digest.html', {"top_posts": top_posts})
+
+        for to_email in to_emails:
+            msg = EmailMultiAlternatives(subject, msg_plain, from_email, [to_email])
             msg.attach_alternative(msg_html, "text/html")
-            messages.append(msg)
-    
-        connection.send_messages(messages)
+            if options["test_run"]:
+                print(to_email)
+            else:
+                msg.send()
