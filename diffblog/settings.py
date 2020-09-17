@@ -300,4 +300,4 @@ EMAIL_HOST = smtp_hostname
 EMAIL_PORT = smtp_port
 EMAIL_HOST_USER = smtp_username
 EMAIL_HOST_PASSWORD = smtp_password
-DEFAULT_FROM_EMAIL = "diff.blog <noreply@diff.blog>"
+DEFAULT_FROM_EMAIL = "diff.blog <noreply@ses.diff.blog>"
