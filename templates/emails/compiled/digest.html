@@ -36,7 +36,11 @@ Popular blog posts of last week
         <td style="font-family:sans-serif; font-size:14px; vertical-align:top" valign="top">
         </td>
         <td class="post-info-col" style="font-family:sans-serif; font-size:14px; vertical-align:top; color:rgb(121, 115, 121)" valign="top">
-           {{ post.aggregate_votes_count }} points by <a class="author-name" href="{{ post.profile.uri }}" style="color:rgb(121, 115, 121); text-decoration:underline">@{{ post.profile.github_username }}</a>
+            {% if post.profile.full_name %}
+           <b>{{ post.aggregate_votes_count }}</b> points by <a class="author-name" href="{{ post.profile.uri }}" style="color:rgb(121, 115, 121); text-decoration:underline">{{ post.profile.full_name }}</a>
+           {% else %}
+           <b>{{ post.aggregate_votes_count }}</b> points by <a class="author-name" href="{{ post.profile.uri }}" style="color:rgb(121, 115, 121); text-decoration:underline">{{ post.profile.github_username }}</a>
+            {% endif %}
         </td>
     </tr>
     <tr>
