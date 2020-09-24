@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
     mode: 'production',
@@ -18,14 +19,34 @@ module.exports = {
         search: './app/static/js/search.js',
         blog_settings: './app/static/js/blog_settings.js',
         admin: './app/static/js/admin.js',
+        base: './app/static/js/base.js',
     },
     devtool: 'inline-source-map',
     plugins: [
         new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin({
+            filename: 'bulma.css',
+            path: path.resolve(__dirname, 'app','static') 
+        }),
     ],
     module: {
         rules: [
-            { test: /\.handlebars$/, loader: "handlebars-loader" }
+            { test: /\.handlebars$/, loader: "handlebars-loader" },
+            {
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                      loader: 'css-loader'
+                    },
+                    {
+                      loader: 'sass-loader',
+                      options: {
+                        sourceMap: true,
+                      }
+                    }
+                ]
+            }
         ]
     },
     output: {
