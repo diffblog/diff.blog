@@ -13,6 +13,10 @@
   {% endif %}
 {% endblock %}
 
+{% block seo_tags %}
+<meta name="description" content="diff.blog is the home page of the developer community. Join diff.blog to keep updated with the blogs of developers from all over the internet.">
+{% endblock %}
+
 {% block content %}
 {% if not user.is_authenticated %}
 <section class="hero is-medium is-bold" style='background-image: url("/static/images/sky.jpg"); background-size: cover;'>
