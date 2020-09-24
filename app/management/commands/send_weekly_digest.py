@@ -21,7 +21,7 @@ class Command(BaseCommand):
         username = options["username"]
         if options["username"] is None:
             assert(options["confirm"] or options["test_run"])
-            users = UserProfile.objects.filter(is_activated=True)
+            users = UserProfile.objects.filter(is_activated=True, send_weekly_digest_email=True)
         else:
             user = UserProfile.objects.get(github_username=username)
             users = [user]
