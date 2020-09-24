@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% block title %}
-  {% if feed_type == "top" %}
+  {% if landing_page %}
+  <title>diff.blog</title>
+  {% elif feed_type == "top" %}
   <title>Top {{ topic }} blog posts | diff.blog</title>
   {% elif feed_type == "following" %}
-  <title>New {{ topic }} blog posts from users you follow | diff.blog</title>
+  <title>New {{ topic_display_name }} blog posts from users you follow | diff.blog</title>
   {% elif feed_type == "new" %}
-  <title>New {{ topic }} blog posts | diff.blog</title>
+  <title>New {{ topic_display_name }} blog posts | diff.blog</title>
   {% else %}
-  <title>Top {{ topic }} blog posts | diff.blog</title>
+  <title>Top {{ topic_display_name }} blog posts | diff.blog</title>
   {% endif %}
 {% endblock %}
 
