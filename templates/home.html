@@ -18,32 +18,6 @@
 {% endblock %}
 
 {% block content %}
-{% if not user.is_authenticated %}
-<section class="hero is-medium is-bold" style='background-image: url("/static/images/sky.jpg"); background-size: cover;'>
-    <div class="hero-body">
-      <div class="container">
-        <div class="columns">
-          <div class="column is-10">
-          <h1 class="title is-size-1 has-text-white	">
-            Home page of the developer community!
-          </h1>
-          <h2 class="subtitle has-text-white">
-            Discover and follow blogs of developers from all over the Internet. Whatever
-            your interests are diff.blog has amazing developers for you to follow!
-          </h2>
-          <a href="{% url "social:begin" "github" %}" class="button is-light" herf="">
-            Get started &nbsp<i class="fab fa-github"></i>
-          </a>
-          &nbsp
-          <a href="/FAQ" class="button is-light" herf="">
-            Learn more &nbsp <i class="fab fa-leanpub"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  </section>
-{% endif %}
 <section class="section">
   <div class="container">
       <div class="columns">
@@ -88,8 +62,16 @@
           {% else %}
           <div class="box">
             <div class="title is-4">
-              Join diff.blog to
+              diff.blog is the home page for developers!
             </div>
+            <p>
+              Follow software engineering and developer blogs from all over the Internet.
+            </p>
+            <br>
+            <p>
+              <b>Join diff.blog to</b>
+            </p>
+            <br>
             <i class="em em-newspaper"></i> &nbsp Follow blogs<br>
             <i class="em em-speech_balloon"></i> &nbsp Join discussions<br>
             <i class="em em-mailbox_with_mail"></i> &nbsp Save posts to Pocket<br>
