@@ -8,6 +8,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.core import mail
+from django.urls import reverse
 
 class Command(BaseCommand):
     help = 'Send the weekly email comprising of top blog posts'
@@ -30,19 +31,23 @@ class Command(BaseCommand):
 
         connection = mail.get_connection()   # Use default email connection
 
-        to_emails = []
+        to_users = []
         for user in users:
             if user.auth is None or not user.auth.email:
                 continue
-            to_emails.append(user.auth.email)
+            to_users.append(user)
 
         subject = 'Popular engineering blog posts of last week'
         from_email = settings.DEFAULT_FROM_EMAIL
-        msg_plain = render_to_string('emails/digest.txt', {"top_posts": top_posts})
-        msg_html = render_to_string('emails/compiled/digest.html', {"top_posts": top_posts})
+
 
         messages = []
-        for to_email in to_emails:
+        for to_user in to_users:
+            to_email = to_user.auth.email
+            unsubscribe_link = "https://diff.blog{}".format(reverse("unsubscribe_from_emails", kwargs={"key": to_user.unsubscribe_key}))
+            context = {"top_posts": top_posts, "unsubscribe_link": unsubscribe_link}
+            msg_plain = render_to_string('emails/digest.txt', context)
+            msg_html = render_to_string('emails/compiled/digest.html', context)
             msg = EmailMultiAlternatives(subject, msg_plain, from_email, [to_email])
             msg.attach_alternative(msg_html, "text/html")
             if options["test_run"]:

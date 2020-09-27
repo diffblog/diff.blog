@@ -9,3 +9,5 @@
 
     ----
 {% endfor %}
+
+Don't like these emails? Unsubscribe by going to {{ unsubscribe_link }}

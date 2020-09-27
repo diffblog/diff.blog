@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from datetime import datetime, timedelta
 from math import log
 
+
 class Category(models.Model):
     name = models.CharField(max_length=30)
 
@@ -55,6 +56,7 @@ class UserProfile(models.Model):
     fetched_following_users = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
 
+    unsubscribe_key = models.CharField(max_length=50, null=True)
     send_weekly_digest_email = models.BooleanField(default=True)
 
     pocket_api_key = models.CharField(max_length=100, null=True)
@@ -95,6 +97,10 @@ class UserProfile(models.Model):
     @property
     def uri(self):
         return "https://diff.blog/" + self.github_username
+
+    def unsubscribe_from_all_emails(self):
+        self.send_weekly_digest_email = False
+        self.save(update_fields=["send_weekly_digest_email"])
 
 class Post(models.Model):
     title = models.CharField(max_length=200)
