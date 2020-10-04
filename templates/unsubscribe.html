@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <br>
+        {% if request.method == "GET" %}
+        <form method="POST">
+            {% csrf_token %}
+            <h2 class="title is-3">Unsubscribe @{{ user.github_username }} from all future digest emails?</h2>
+            <h3 class="subtitle">
+                You can always enable it back later in <a style="text-decoration: underline;" href="/account/settings/profile">settings</a>.
+            </h3>
+            <button type="submit" class="button is-warning">Unsubscribe</button>
+        </form>
+        {% elif request.method == "POST" %}
+        <h2 class="title is-3">You have been unsubscribed from all future digest emails.</h2>
+        <img src="https://media.giphy.com/media/j0qSbeNFuzjhXKFVSP/giphy.gif" />
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

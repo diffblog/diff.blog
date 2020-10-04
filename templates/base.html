@@ -83,8 +83,8 @@
     <script type="text/javascript">
     // using jQuery
     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-    var logged_in = {{user.is_authenticated|yesno:"true,false"}};
-    var is_admin = {{user.profile.is_admin|yesno:"true,false"}};
+    var logged_in = {{request.user.is_authenticated|yesno:"true,false"}};
+    var is_admin = {{request.user.profile.is_admin|yesno:"true,false"}};
     </script>
   </head>
   <body>
@@ -108,14 +108,14 @@
             <input name="q" class="input" type="text" placeholder="Search diff.blog" autocomplete="off" pattern=".{3,}" required title="3 characters minimum">
           </form>
         </a>
-          {% if user.is_authenticated %}
+          {% if request.user.is_authenticated %}
             <nav class="navbar is-black" role="navigation" aria-label="dropdown navigation">
                 <div class="navbar-item has-dropdown is-hoverable">
                   <a class="navbar-link">
-                      <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}">
+                      <img src="https://avatars.githubusercontent.com/{{request.user.profile.github_username}}">
                   </a>
                   <div class="navbar-dropdown is-right">
-                    <a class="navbar-item" href="/{{ user.profile.github_username }}">
+                    <a class="navbar-item" href="/{{ request.user.profile.github_username }}">
                       Profile
                     </a>
                     <a class="navbar-item" href="/account/settings/profile/">
