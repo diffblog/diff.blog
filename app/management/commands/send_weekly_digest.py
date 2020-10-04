@@ -1,3 +1,5 @@
+import time
+
 from django.core.management.base import BaseCommand, CommandError
 from datetime import timedelta
 from django.utils import timezone
@@ -55,4 +57,7 @@ class Command(BaseCommand):
             else:
                 messages.append(msg)
 
+        if len(messages) > 1:
+            print("Waiting for 5 seconds before sending email")
+            time.sleep(5)
         connection.send_messages(messages)
