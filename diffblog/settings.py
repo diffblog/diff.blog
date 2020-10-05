@@ -115,6 +115,7 @@ CACHES = {
 }
 
 CACHE_TTL = 60 * 1
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 365
 
 ROOT_URLCONF = 'diffblog.urls'
 
