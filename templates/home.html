@@ -27,13 +27,13 @@
         <div class="column is-6">
           {% if topic_display_name %}
             {% if feed_type == "top" %}
-            <h1 class="is-size-4">Top blog posts in <b>{{ topic_display_name }}</b></h1>
+            <h1 id="topic-info-header" class="is-size-4">Top blog posts in <b>{{ topic_display_name }}</b></h1>
             {% endif %}
             {% if feed_type == "new" %}
-            <h1 class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b></h1>
+            <h1 id="topic-info-header" class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b></h1>
             {% endif %}
             {% if feed_type == "following" %}
-            <h1 class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b> from the users you follow</h1>
+            <h1 id="topic-info-header" class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b> from the users you follow</h1>
             {% endif %}
             <br>
           {% endif %}

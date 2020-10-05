@@ -21,11 +21,29 @@
           <p class="post-content">
             {{ summary }}
           </p>
-          {{#each topics}}
-            <a href="/{{ ../feed_type }}/{{ slug }}">
-                <span class="tag is-light">{{ slug }}</span>
-            </a>
-          {{/each}}
+          {{#ifeq feed_info.feed "main"}}
+            {{#each topics}}
+              <a href="/{{ ../feed_info.sort_by }}/{{ slug }}">
+                  <span class="tag is-light">{{ slug }}</span>
+              </a>
+            {{/each}}
+          {{/ifeq}}
+    
+          {{#ifeq feed_info.feed "user"}}
+            {{#ifeq feed_info.subcategory "following"}}
+              {{#each topics}}
+                <a href="/following/{{ slug }}">
+                    <span class="tag is-light">{{ slug }}</span>
+                </a>
+              {{/each}}
+            {{else}}
+              {{#each topics}}
+                <a href="/{{ ../feed_info.sort_by }}/{{ slug }}">
+                    <span class="tag is-light">{{ slug }}</span>
+                </a>
+              {{/each}}
+            {{/ifeq}}
+          {{/ifeq}}
       </div>
       <nav class="level is-mobile">
         <div class="level-left">

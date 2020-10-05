@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
+var Handlebars = require('handlebars/runtime');
+
 module.exports = {
     mode: 'production',
     entry: {
@@ -31,7 +33,13 @@ module.exports = {
     ],
     module: {
         rules: [
-            { test: /\.handlebars$/, loader: "handlebars-loader" },
+            {
+                test: /\.handlebars$/,
+                loader: "handlebars-loader",
+                options: {
+                    runtime: path.resolve(__dirname, 'app','static', 'js', 'handlebars') 
+                }
+            },
             {
                 test: /\.scss$/,
                 use: [
