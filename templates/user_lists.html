@@ -1,10 +1,7 @@
 {% extends "search_base.html" %}
 
-{% block title %}
-<title>{{ user_list.name }} | diff.blog</title>
-{% endblock %}
-
 {% block seo_tags %}
+    <title>{{ user_list.name }} - diff.blog</title>
     <meta name="description" content="{{ user_list.description }}">
 {% endblock %}
 

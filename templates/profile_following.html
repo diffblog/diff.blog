@@ -1,7 +1,12 @@
 {% extends "profile_base.html" %}
 
-{% block title %}
-<title>{{ profile.full_name }} Following | diff.blog</title>
+{% block seo_tags %}
+{% if profile.full_name %}
+<title>{{ profile.github_username }} ({{ profile.full_name }}) following - diff.blog</title>
+{% else %}
+<title>{{ profile.github_username }} following - diff.blog</title>
+<meta name="description" content="{{ profile.github_username }} is following {{ following_count }} users on diff.blog.">
+{% endif %}
 {% endblock %}
 
 {% block info %}

@@ -1,20 +1,22 @@
 {% extends "base.html" %}
-{% block title %}
-  {% if landing_page %}
-  <title>diff.blog</title>
-  {% elif feed_type == "top" %}
-  <title>Top {{ topic }} blog posts | diff.blog</title>
-  {% elif feed_type == "following" %}
-  <title>New {{ topic_display_name }} blog posts from users you follow | diff.blog</title>
-  {% elif feed_type == "new" %}
-  <title>New {{ topic_display_name }} blog posts | diff.blog</title>
-  {% else %}
-  <title>Top {{ topic_display_name }} blog posts | diff.blog</title>
-  {% endif %}
-{% endblock %}
 
 {% block seo_tags %}
-<meta name="description" content="diff.blog is the home page of the developer community. Join diff.blog to keep updated with the blogs of developers from all over the internet.">
+  {% if landing_page %}
+    <title>diff.blog - Home</title>
+    <meta name="description" content="diff.blog is the home page of the developer community. Join diff.blog to keep updated with the blogs of developers from all over the internet.">
+  {% elif feed_type == "top" %}
+    <title>Top {{ topic_display_name }} blog posts - diff.blog</title>
+    <meta name="description" content="Popular {{ topic_display_name }} blog posts in diff.blog.">
+  {% elif feed_type == "following" %}
+  <title>New {{ topic_display_name }} blog posts - diff.blog</title>
+  <meta name="description" content="Latest {{ topic_display_name }} blog posts from users you follow.">
+  {% elif feed_type == "new" %}
+  <title>New {{ topic_display_name }} blog posts | diff.blog</title>
+  <meta name="description" content="Popular {{ topic_display_name }} blog posts in diff.blog.">
+  {% else %}
+  <title>Top {{ topic_display_name }} blog posts | diff.blog</title>
+  <meta name="description" content="diff.blog is the home page of the developer community. Join diff.blog to keep updated with the blogs of developers from all over the internet.">
+  {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -27,7 +29,7 @@
         <div class="column is-6">
           {% if topic_display_name %}
             {% if feed_type == "top" %}
-            <h1 id="topic-info-header" class="is-size-4">Top blog posts in <b>{{ topic_display_name }}</b></h1>
+            <h1 id="topic-info-header" class="is-size-4">Popular blog posts in <b>{{ topic_display_name }}</b></h1>
             {% endif %}
             {% if feed_type == "new" %}
             <h1 id="topic-info-header" class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b></h1>
