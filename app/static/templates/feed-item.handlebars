@@ -23,7 +23,7 @@
           </p>
           {{#ifeq feed_info.feed "main"}}
             {{#each topics}}
-              <a href="/{{ ../feed_info.sort_by }}/{{ slug }}">
+              <a href="/tag/{{ slug }}/{{ ../feed_info.sort_by }}/">
                   <span class="tag is-light">{{ slug }}</span>
               </a>
             {{/each}}
@@ -32,13 +32,13 @@
           {{#ifeq feed_info.feed "user"}}
             {{#ifeq feed_info.subcategory "following"}}
               {{#each topics}}
-                <a href="/following/{{ slug }}">
+                <a href="/tag/{{ slug }}/following/">
                     <span class="tag is-light">{{ slug }}</span>
                 </a>
               {{/each}}
             {{else}}
               {{#each topics}}
-                <a href="/{{ ../feed_info.sort_by }}/{{ slug }}">
+                <a href="/tag/{{ slug }}/{{ ../feed_info.sort_by }}/">
                     <span class="tag is-light">{{ slug }}</span>
                 </a>
               {{/each}}
