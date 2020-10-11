@@ -122,7 +122,7 @@ ROOT_URLCONF = 'diffblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['templates', 'templates/emails'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
