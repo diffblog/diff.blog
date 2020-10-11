@@ -44,6 +44,14 @@
               {{/each}}
             {{/ifeq}}
           {{/ifeq}}
+
+          {{#ifeq feed_info.feed "search"}}
+            {{#each topics}}
+              <a href="/tag/{{ slug }}/new/">
+                  <span class="tag is-light">{{ slug }}</span>
+              </a>
+            {{/each}}
+          {{/ifeq}}
       </div>
       <nav class="level is-mobile">
         <div class="level-left">
