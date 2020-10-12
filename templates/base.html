@@ -108,6 +108,7 @@
         <a class="navbar-item">
           <form method="GET" action="/search">
             <input name="s" class="input" type="text" placeholder="Search diff.blog" autocomplete="off" pattern=".{3,}" required title="3 characters minimum" value="{{ search_query }}">
+            <input type="hidden" name="type" value="users">
           </form>
         </a>
           {% if request.user.is_authenticated %}

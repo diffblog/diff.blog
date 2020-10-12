@@ -7,8 +7,8 @@
 {% block content2 %}
 <div class="tabs">
     <ul>
-      <li {% if search_type == "posts" %}class="is-active"{% endif %}><a href="/search/?s={{ search_param }}" >Posts</a></li>
       <li {% if search_type == "users" %}class="is-active"{% endif %}><a href="/search/?s={{ search_param }}&type=users" >Users</a></li>
+      <li {% if search_type == "posts" %}class="is-active"{% endif %}><a href="/search/?s={{ search_param }}" >Posts</a></li>
     </ul>
   </div>
   <h2 id="status">Loading....</h2>
