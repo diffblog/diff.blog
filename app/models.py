@@ -34,6 +34,9 @@ class Topic(models.Model):
             "slug": self.slug,
         }
 
+    def get_absolute_url(self):
+        return "/tag/{}/new".format(self.slug)
+
 class UserProfile(models.Model):
     extra_data = models.TextField()
     auth = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="profile")
