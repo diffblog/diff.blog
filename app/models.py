@@ -98,6 +98,9 @@ class UserProfile(models.Model):
     def uri(self):
         return "https://diff.blog/" + self.github_username
 
+    def get_absolute_url(self):
+        return "/" + str(self.github_username)
+
     def unsubscribe_from_all_emails(self):
         self.send_weekly_digest_email = False
         self.save(update_fields=["send_weekly_digest_email"])
