@@ -2,15 +2,17 @@ from app.models import UserProfile, Topic, Category
 import requests as r
 from multiprocessing import Queue, Pool
 import time
-from diffblog.secrets import github_access_token
+from diffblog.secrets import github_access_token, diffblog_github_access_token
 from feedfinder2 import find_feeds
-from googlesearch import search 
+from googlesearch import search
 from django.db import connection
 import feedparser
+from polyglot.detect import Detector
 
 from feed.blogs import recommended_blog_list
 
 headers = {'Authorization': 'token {}'.format(github_access_token)}
+diffblog_headers = {'Authorization': 'token {}'.format(diffblog_github_access_token)}
 
 blog_item = """
 "{}": [
@@ -53,6 +55,25 @@ def populate_user_profile_details_serial():
     for user in users:
         _populate_user_profile_details(user)
 
+def get_rss_feed_url_from_blog_url(blog_url):
+    feed_urls = find_feeds(blog_url)
+    if len(feed_urls) == 0:
+        return False
+    return feed_urls[0]
+
+
+def feed_has_valid_english_posts(feed_url):
+    blog_feed = feedparser.parse(feed_url)
+    if len(blog_feed.entries) == 0:
+        return False
+
+    for entry in blog_feed.entries:
+        from feed.lib import get_valid_english_summary
+        if get_valid_english_summary(entry, feed_url):
+            return True
+
+    return False
+
 def _populate_user_model_feed_urls_from_google(username, language=None):
     if username in recommended_blog_list:
         return
@@ -66,28 +87,18 @@ def _populate_user_model_feed_urls_from_google(username, language=None):
         return
 
     if blog_url:
-        feed_urls = find_feeds(blog_url)
-        if len(feed_urls) != 0:
-            blog_feed = feedparser.parse(feed_urls[0])
-            if len(blog_feed.entries) != 0:
-                try:
-                    content = blog_feed.entries[0]["content"][0]["value"]
-                    language = Detector(content).languages[0]
-                    if language.code != 'en':
-                        return
-                except:
-                    pass
-            else:
-                return
-
+        feed_url = get_rss_feed_url_from_blog_url(blog_url)
+        if feed_url:
             if language is None:
                 language_map = {}
                 set_language_tags_from_own_repos(username, language_map)
                 language_map = sort_map_desc(language_map)
                 language = language_map[0][0]
-            print(blog_item.format(username, feed_urls[0], language))
+            print(blog_item.format(username, feed_url, language))
             return
+
     return
+
     for url in search("{} {} blog".format(response["name"], username), stop=1):
         if "github.com" in url:
             continue

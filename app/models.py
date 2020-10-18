@@ -257,3 +257,9 @@ class UserList(models.Model):
     def save(self, *args, **kwargs):
         self.slug = self.slug or slugify(self.name)
         super().save(*args, **kwargs)
+
+class GitHubCampaign(models.Model):
+    github_username = models.CharField(max_length=100)
+    repo_name = models.CharField(max_length=150)
+    ISSUE_CREATED_TO_ADD_BLOG_TO_DIFFBLOG = 60
+    status = models.IntegerField()
