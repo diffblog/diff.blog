@@ -10,14 +10,27 @@
 {% endblock %}
 
 {% block info %}
-{% if is_me and not profile.blog_url %}
-<div class="box" id="is-me-step-1">
-    Please set a blog URL so that we can start fetching your posts.
-    <br>
-    <br>
-    <a href ="/account/settings/blog/" class="button is-primary">Set blog URL</a>
-</div>
+
+{% if not profile.blog_url or not profile.feed_url %}
+    {% if is_me %}
+    <div class="box" id="is-me-step-1">
+        Please set a blog URL so that we can start fetching your posts.
+        <br>
+        <br>
+        <a href ="/account/settings/blog/" class="button is-primary">Set blog URL</a>
+    </div>
+    {% else %}
+    <div class="box" id="is-me-step-1">
+        <b>@{{ profile.github_username }}</b> has not set a blog URL yet.
+        <br><br>
+        If you know the blog URL of this user, you can can let us know and we will add it.
+        <br>
+        <br>
+        <a href ="/suggest/?username={{ profile.github_username }}" class="button is-primary">Suggest blog URL</a>
+    </div>
+    {% endif %}
 {% endif %}
+
 <div id="home_feed"></div>
 <script src="/static/dist/feed.bundle.js"></script>
 {% endblock %}
