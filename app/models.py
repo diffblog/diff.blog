@@ -270,4 +270,4 @@ class Search(models.Model):
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="searches", null=True)
 
     def get_absolute_url(self):
-        return "search/?s={}".format(self.term.replace(" ", "+"))
+        return "/search/{}".format(self.query.replace(" ", "+"))
