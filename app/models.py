@@ -263,3 +263,11 @@ class GitHubCampaign(models.Model):
     repo_name = models.CharField(max_length=150)
     ISSUE_CREATED_TO_ADD_BLOG_TO_DIFFBLOG = 60
     status = models.IntegerField()
+
+class Search(models.Model):
+    query = models.CharField(max_length=100)
+    time = models.DateTimeField(auto_now_add=True)
+    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="searches", null=True)
+
+    def get_absolute_url(self):
+        return "search/?s={}".format(self.term.replace(" ", "+"))
