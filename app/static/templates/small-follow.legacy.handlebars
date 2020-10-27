@@ -1,0 +1,30 @@
+<div class="small-follow-card">
+    <div class="media">
+        <div class="media-left">
+            <figure class="image is-32x32">
+                <a href="/{{github_username}}">
+                    <img src="https://avatars.githubusercontent.com/{{github_username}}?s=32" alt="Placeholder image">
+                </a>
+            </figure>
+        </div>
+        <div class="media-content">
+            {{#if full_name}}
+            <a href="/{{github_username}}" style="font-weight: bold; color: black;">
+            {{ full_name }}
+            </a>
+            <br>
+            {{/if}}
+            <a href="/{{github_username}}" class="subtitle is-6">@{{ github_username }}</a><br>
+            <p class="title is-5">
+                {{#unless is_me}}
+                {{#if following}}
+                    <a data-user-id="{{ id }}" class="button is-small is-pulled-left is-light following">Following</a>
+                {{else}}
+                    <a data-user-id="{{ id }}" class="button is-small is-pulled-left is-dark follow">Follow</a>
+                {{/if}}
+                {{/unless}}
+            </p>
+    </div>
+    </div>
+</div>
+<hr>

@@ -1,96 +1,87 @@
-<div class="box">
-  <article class="media">
-    <figure class="media-left">
-      <p class="image is-48x48">
-        <a href="/{{profile.github_username}}">
-          <img src="https://avatars.githubusercontent.com/{{profile.github_username}}?s=64">
-        </a>
-      </p>
-    </figure>
-    <div class="media-content">
-      <div class="content">
-          <a class="has-text-dark" href="/{{profile.github_username}}"><small>{{ profile.full_name }}</small></a>
-          <a class="has-text-grey" href="/{{profile.github_username}}"><small>@{{ profile.github_username }}</small></a>
-          ·
-          <a class="has-text-grey" href="/post/{{slug}}"><small>{{ time }}</small></a>
-          <a href="{{link}}" class="post_link" target="_blank" rel="noopener noreferrer">
-          <h4>
-            {{ title }}
-          </h4>
-          </a>
-          <p class="post-content">
-            {{ summary }}
-          </p>
-          {{#ifeq feed_info.feed "main"}}
-            {{#each topics}}
-              <a href="/tag/{{ slug }}/{{ ../feed_info.sort_by }}/">
-                  <span class="tag is-light">{{ slug }}</span>
-              </a>
-            {{/each}}
-          {{/ifeq}}
-    
-          {{#ifeq feed_info.feed "user"}}
-            {{#ifeq feed_info.subcategory "following"}}
-              {{#each topics}}
-                <a href="/tag/{{ slug }}/following/">
-                    <span class="tag is-light">{{ slug }}</span>
-                </a>
-              {{/each}}
-            {{else}}
-              {{#each topics}}
-                <a href="/tag/{{ slug }}/{{ ../feed_info.sort_by }}/">
-                    <span class="tag is-light">{{ slug }}</span>
-                </a>
-              {{/each}}
-            {{/ifeq}}
-          {{/ifeq}}
-
-          {{#ifeq feed_info.feed "search"}}
-            {{#each topics}}
-              <a href="/tag/{{ slug }}/new/">
-                  <span class="tag is-light">{{ slug }}</span>
-              </a>
-            {{/each}}
-          {{/ifeq}}
-      </div>
-      <nav class="level is-mobile">
-        <div class="level-left">
-          <a data-toggle="tooltip" title="Like post" class="level-item">
-            <span class="icon is-small">
-              <span data-post-id="{{id}}" data-vote-upvoted="{{upvoted}}" class="vote_button">
-                {{#if upvoted}}
-                <i class="fas fa-heart"></i>
-                {{else}}
-                <i class="far fa-heart"></i>
-                {{/if}}
-              </span>
-            </span>
-            &nbsp;
-            <span id="feed_upvotes_counter_{{id}}">{{ aggregate_votes_count }}</span>
-          </a>
-          <a class="level-item comment_link" data-toggle="tooltip" title="Discussions" href="/post/{{slug}}">
-              <i class="far fa-comment"></i>
-          </a>
-          {{#if is_admin}}
-          <a class="level-item">
-            <span class="boost_button" data-post-id="{{id}}">
-              <i class="fas fa-magic"></i>
-            </span>
-          </a>
-          {{/if}}
-        </div>
-        <div class="level-right">
-          {{#if show_pocket }}
-          <a data-toggle="tooltip" title="Save to Pocket" class="level-item">
-            <span class="icon is-small">
-              <span class="pocket_save_button" data-post-id="{{id}}">
-                <i class="fab fa-get-pocket"></i>
-              </span>
-            </span>
-          </a>
-          {{/if}}
-        </div>
-      </nav>
+<div class="mb-5">
+    <div class="flex justify-start items-center">
+        <img class="flex-initial h-6 rounded"
+            src="https://avatars.githubusercontent.com/{{profile.github_username}}?s=64">
+        <a class="flex-initial font-medium has-text-dark mx-2 text-sm"
+            href="/{{profile.github_username}}">{{ profile.full_name }}</a>
     </div>
-  </article>
+    <h2>
+        <a href="{{link}}" class="post_link text-2xl font-semibold text-gray-900" target="_blank"
+            rel="noopener noreferrer">
+            {{ title }}
+        </a>
+    </h2>
+    <p class="text-gray-600">
+        {{ summary }}
+    </p>
+
+    <div class="flex mt-2 flex-wrap -ml-1">
+        <div class="mr-2">
+            <a data-toggle="tooltip" title="Like post">
+                <span class="icon text-gray-600 text-sm">
+                    <span data-post-id="{{id}}" data-vote-upvoted="{{upvoted}}" class="vote_button">
+                        {{#if upvoted}}
+                        <i class="fas fa-heart"></i>
+                        {{else}}
+                        <i class="far fa-heart"></i>
+                        {{/if}}
+                    </span>
+                </span>
+                <span class="text-gray-600 text-sm -ml-1" id="feed_upvotes_counter_{{id}}">{{ aggregate_votes_count }}</span>
+            </a>
+        </div>
+
+        <div class="mr-2">
+            <a class="comment_link text-gray-600 text-sm" data-toggle="tooltip" title="Discussions"
+                href="/post/{{slug}}">
+                <i class="far fa-comment"></i>
+            </a>
+        </div>
+
+        <div class=""">
+            {{#ifeq feed_info.feed "main"}}
+            {{#each topics}}
+            <a href="/tag/{{ slug }}/{{ ../feed_info.sort_by }}/">
+                <span class="text-gray-600 text-sm mx-1 bg-gray-100 rounded p-1">{{ slug }}</span>
+            </a>
+            {{/each}}
+            {{/ifeq}}
+
+            {{#ifeq feed_info.feed "user"}}
+            {{#ifeq feed_info.subcategory "following"}}
+            {{#each topics}}
+            <a href="/tag/{{ slug }}/following/">
+                <span class="tag is-light">{{ slug }}</span>
+            </a>
+            {{/each}}
+            {{else}}
+            {{#each topics}}
+            <a href="/tag/{{ slug }}/{{ ../feed_info.sort_by }}/">
+                <span class="tag is-light">{{ slug }}</span>
+            </a>
+            {{/each}}
+            {{/ifeq}}
+            {{/ifeq}}
+
+            {{#ifeq feed_info.feed "search"}}
+            {{#each topics}}
+            <a href="/tag/{{ slug }}/new/">
+                <span class="tag is-light">{{ slug }}</span>
+            </a>
+            {{/each}}
+            {{/ifeq}}
+        </div>
+
+
+        <div>
+            {{#if is_admin}}
+            <a>
+                <span class="boost_button" data-post-id="{{id}}">
+                    <i class="fas fa-magic"></i>
+                </span>
+            </a>
+            {{/if}}
+        </div>
+
+    </div>
 </div>

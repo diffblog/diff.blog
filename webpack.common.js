@@ -30,6 +30,12 @@ module.exports = {
             filename: 'bulma.css',
             path: path.resolve(__dirname, 'app','static') 
         }),
+        require('tailwindcss'),
+        require('autoprefixer'),
+        new webpack.ProvidePlugin({
+          $: "jquery",
+          jQuery: "jquery"
+        }),
     ],
     module: {
         rules: [

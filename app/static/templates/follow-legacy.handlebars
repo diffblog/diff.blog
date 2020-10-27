@@ -1,0 +1,32 @@
+    <div class="card">
+        <div class="card-content">
+            <div class="media">
+            <div class="media-left">
+                <figure class="image is-48x48">
+                    <a href="/{{github_username}}">
+                        <img src="https://avatars.githubusercontent.com/{{github_username}}?s=48" alt="Placeholder image">
+                    </a>
+                </figure>
+            </div>
+            <div class="media-content">
+                <a href="/{{github_username}}" class="title is-5">
+                {{ full_name }}
+                </a>
+               {{> follow_button}}
+                <a class="subtitle is-6" href="/{{github_username}}">@{{ github_username }}</a>
+            </div>
+            </div>
+            
+            <div class="content">
+            {{#if bio}}
+                {{ bio }}
+            {{/if}}
+            <br>
+            {{#if show_topics }}
+            {{#each topics}}
+                <span class="tag is-light">{{ display_name }}</span>
+            {{/each}}
+            {{/if}}
+            </div>
+        </div>
+    </div>

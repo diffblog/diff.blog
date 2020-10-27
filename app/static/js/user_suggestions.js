@@ -1,4 +1,4 @@
-var template = require("./../templates/follow.handlebars")
+var template = require("./../templates/follow-legacy.handlebars")
 
 $(function () {
     $.ajax({

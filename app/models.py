@@ -142,9 +142,9 @@ class Post(models.Model):
         if not self.summary:
             return ""
 
-        if len(self.summary) < 250:
+        if len(self.summary) < 150:
             return self.summary
-        return self.summary[:200] + "..."
+        return self.summary[:150] + "..."
 
     def serialize(self):
         topics = []

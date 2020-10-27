@@ -91,10 +91,11 @@
   </head>
   <body>
 
-  <nav class="navbar is-fixed-top is-black" role="navigation" aria-label="main navigation">
+
+  <nav class="navbar is-fixed-top flex border" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
-          <h2 class="brand-title">diff.blog()</h2>
+          <h2 class="text-2xl font-semibold text-gray-900">diff.blog</h2>
       </a>
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
@@ -104,18 +105,18 @@
     </div>
 
     <div class="navbar-menu">
-      <div class="navbar-end" style="background-color: #0a0a0a;">
+      <div class="navbar-end">
         <a class="navbar-item">
           <form method="GET" action="/search">
-            <input name="s" class="input" type="text" placeholder="Search diff.blog" autocomplete="off" pattern=".{3,}" required title="3 characters minimum" value="{{ search_query }}">
+            <input class="" name="s" class="input" type="text" placeholder="Search diff.blog" autocomplete="off" pattern=".{3,}" required title="3 characters minimum" value="{{ search_query }}">
             <input type="hidden" name="type" value="users">
           </form>
         </a>
           {% if request.user.is_authenticated %}
-            <nav class="navbar is-black" role="navigation" aria-label="dropdown navigation">
+            <nav class="navbar" role="navigation" aria-label="dropdown navigation">
                 <div class="navbar-item has-dropdown is-hoverable">
                   <a class="navbar-link">
-                      <img src="https://avatars.githubusercontent.com/{{request.user.profile.github_username}}">
+                      <img class="rounded" src="https://avatars.githubusercontent.com/{{request.user.profile.github_username}}">
                   </a>
                   <div class="navbar-dropdown is-right">
                     <a class="navbar-item" href="/{{ request.user.profile.github_username }}">
@@ -135,10 +136,7 @@
             <div class="navbar-end">
               <div class="navbar-item">
                 <div class="buttons">
-                  <a class="button is-primary" href="{% url "social:begin" "github" %}">
-                    <strong>Sign up <i class="fab fa-github"></i></strong>
-                  </a>
-                  <a class="button is-light" href="{% url "social:begin" "github" %}">
+                  <a class="button" href="{% url "social:begin" "github" %}">
                     Log in &nbsp <i class="fab fa-github"></i>
                   </a>
                 </div>
@@ -149,6 +147,7 @@
     </div>
   </div>
   </nav>
+
   <br>
   {% block content %}
   {% endblock %}

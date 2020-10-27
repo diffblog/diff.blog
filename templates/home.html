@@ -1,71 +1,92 @@
 {% extends "base.html" %}
 
 {% block seo_tags %}
-  {% if landing_page %}
-    <title>diff.blog - Home</title>
-    <meta name="description" content="diff.blog is the home page of the developer community. Join diff.blog to keep updated with the blogs of developers from all over the internet.">
-  {% elif feed_type == "top" %}
-    <title>Top {{ topic_display_name }} blog posts - diff.blog</title>
-    <meta name="description" content="Popular {{ topic_display_name }} blog posts in diff.blog.">
-  {% elif feed_type == "following" %}
-  <title>New {{ topic_display_name }} blog posts - diff.blog</title>
-  <meta name="description" content="Latest {{ topic_display_name }} blog posts from users you follow.">
-  {% elif feed_type == "new" %}
-  <title>New {{ topic_display_name }} blog posts | diff.blog</title>
-  <meta name="description" content="Popular {{ topic_display_name }} blog posts in diff.blog.">
-  {% else %}
-  <title>Top {{ topic_display_name }} blog posts | diff.blog</title>
-  <meta name="description" content="diff.blog is the home page of the developer community. Join diff.blog to keep updated with the blogs of developers from all over the internet.">
-  {% endif %}
+{% if landing_page %}
+<title>diff.blog - Home</title>
+<meta name="description"
+  content="diff.blog is the home page of the developer community. Join diff.blog to keep updated with the blogs of developers from all over the internet.">
+{% elif feed_type == "top" %}
+<title>Top {{ topic_display_name }} blog posts - diff.blog</title>
+<meta name="description" content="Popular {{ topic_display_name }} blog posts in diff.blog.">
+{% elif feed_type == "following" %}
+<title>New {{ topic_display_name }} blog posts - diff.blog</title>
+<meta name="description" content="Latest {{ topic_display_name }} blog posts from users you follow.">
+{% elif feed_type == "new" %}
+<title>New {{ topic_display_name }} blog posts | diff.blog</title>
+<meta name="description" content="Popular {{ topic_display_name }} blog posts in diff.blog.">
+{% else %}
+<title>Top {{ topic_display_name }} blog posts | diff.blog</title>
+<meta name="description"
+  content="diff.blog is the home page of the developer community. Join diff.blog to keep updated with the blogs of developers from all over the internet.">
+{% endif %}
 {% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
-      <div class="columns">
-        <div class="column is-one-quarter">
-          {% include "main_side_menu.html" %}
-        </div>
-        <div class="column is-6">
-          {% if topic_display_name %}
-            {% if feed_type == "top" %}
-            <h1 id="topic-info-header" class="is-size-4">Popular blog posts in <b>{{ topic_display_name }}</b></h1>
-            {% endif %}
-            {% if feed_type == "new" %}
-            <h1 id="topic-info-header" class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b></h1>
-            {% endif %}
-            {% if feed_type == "following" %}
-            <h1 id="topic-info-header" class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b> from the users you follow</h1>
-            {% endif %}
-            <br>
-          {% endif %}
+    <div class="columns">
+      <div class="column is-6">
+        {% if topic_display_name %}
+        {% if feed_type == "top" %}
+        <h1 id="topic-info-header" class="is-size-4">Popular blog posts in <b>{{ topic_display_name }}</b></h1>
+        {% endif %}
+        {% if feed_type == "new" %}
+        <h1 id="topic-info-header" class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b></h1>
+        {% endif %}
+        {% if feed_type == "following" %}
+        <h1 id="topic-info-header" class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b> from the users
+          you follow</h1>
+        {% endif %}
+        <br>
+        {% endif %}
 
-          <div id="home_feed"></div>
-        </div>
-        <div class="column is-one-quarter">
-          {% if user.is_authenticated %}
-          <div id="user_suggestions_box">
-              <aside class="menu">
-                  <p class="menu-label">
-                    Recommended users
-                  </p>
-              </aside>
-              <div class="column is-20">
-                <div class="box">
-                <div id="follow_list"></div>
-                <aside class="see-more-rusers">
-                    <a href="/users/suggestions/" style="font-size: 14px; color: #7a7a7a;">
-                        See more recommended users
-                    </a>
-                </aside>
-              </div>
-            </div>
-          </div>
-          {% else %}
-          {% include "join_banner.html" %}
-          {% endif %}
-        </div>
+        <div id="home_feed"></div>
       </div>
+
+      <div class="column is-1 w-1">
+        <div class="h-full border-r text-gray-600"></div>
+      </div>
+
+      <div class="column is-4">
+
+        <div id="user_recommendations_section" class="mb-10 hidden">
+          <a href="/users/suggestions/">
+            <div class="text-gray-900 text-sm font-semibold mb-4 w-f">
+              DEVELOPERS TO FOLLOW
+            </div>
+          </a>
+          <div id="follow_list"></div>
+        </div>
+
+        <div id="following_posts_section" class="mb-10 hidden">
+          <a href="/following/">
+            <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
+              FROM USERS YOU FOLLOW
+            </div>
+          </a>
+          <div id="following_posts"></div>
+        </div>
+
+        <div id="recent_posts_section" class="mb-10 hidden hidden">
+          <a href="/new/">
+            <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
+              RECENT POSTS
+            </div>
+          </a>
+          <div id="recent_posts"></div>
+        </div>
+
+        <div id="top_posts_section" class="mb-10 hidden hidden">
+          <a href="/">
+            <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
+              TRENDING NOW
+            </div>
+          </a>
+          <div id="top_posts"></div>
+        </div>
+
+      </div>
+    </div>
   </div>
 </section>
 {% verbatim %}
@@ -73,7 +94,7 @@
 <script>
   var page_params = {
     pocket_show_button: {{ js_pocket_show_button }},
-    auth_username: "{{ auth_username }}",
+  auth_username: "{{ auth_username }}",
     topic: "{{ topic }}",
   };
 </script>
