@@ -5,10 +5,10 @@
     <div class="container">
       <div class="columns">
         <div class="column is-one-fifth">
-            <div class="card">
+            <div class="">
               <div class="card-image">
                 <figure class="image">
-                  <img src="https://avatars.githubusercontent.com/{{profile.github_username}}" alt="Placeholder image">
+                  <img class="rounded-full"  src="https://avatars.githubusercontent.com/{{profile.github_username}}" alt="Placeholder image">
                 </figure>
               </div>
               <div class="card-content">
@@ -52,7 +52,7 @@
           {% endif %}
         </div>
         <div class="column is-8">
-            <div class="tabs is-boxed">
+            <div class="tabs">
                 <ul>
                     <li {% if type == "posts"%}class="is-active"{% endif %}>
                         <a href="/{{profile.github_username}}/">

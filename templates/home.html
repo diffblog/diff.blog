@@ -28,15 +28,24 @@
       <div class="column is-6">
         {% if topic_display_name %}
         {% if feed_type == "top" %}
-        <h1 id="topic-info-header" class="is-size-4">Popular blog posts in <b>{{ topic_display_name }}</b></h1>
+        <h1 class="text-4xl font-semibold">
+          {{ topic_display_name }}
+        </h1>
+        <p id="topic-info-header" class="text-xl">Popular blog posts in {{ topic_display_name }}.</p>
         {% endif %}
         {% if feed_type == "new" %}
-        <h1 id="topic-info-header" class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b></h1>
+        <h1 class="text-4xl font-semibold">
+          {{ topic_display_name }}
+        </h1>
+        <p id="topic-info-header" class="text-xl">Latest blog posts in {{ topic_display_name }}.</p>
         {% endif %}
         {% if feed_type == "following" %}
-        <h1 id="topic-info-header" class="is-size-4">Latest blog posts in <b>{{ topic_display_name }}</b> from the users
-          you follow</h1>
+        <h1 class="text-4xl font-semibold">
+          {{ topic_display_name }}
+        </h1>
+        <p id="topic-info-header" class="text-xl">Latest blog posts in {{ topic_display_name }} from users you follow.</p>
         {% endif %}
+        <hr>
         <br>
         {% endif %}
 
@@ -79,7 +88,7 @@
         <div id="top_posts_section" class="mb-10 hidden hidden">
           <a href="/">
             <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
-              TRENDING NOW
+              POPULAR POSTS
             </div>
           </a>
           <div id="top_posts"></div>
