@@ -1,0 +1,31 @@
+[tool.black]
+line-length = 88
+target-version = ['py36']
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+    | \.git          # root of the project
+    | \.mypy_cache
+
+    | _build
+    | bin
+    | build
+    | dist
+    | etc
+    | include
+    | lib
+    | node_modules
+    | share
+    | var
+
+    | app/migrations/*
+    | challenge/migrations/*
+    | challenge/migrations/*
+  )/
+  | foo.py           # also separately exclude a file named foo.py in
+                     # the root of the project
+  
+)
+'''
