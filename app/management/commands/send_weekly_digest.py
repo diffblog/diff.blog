@@ -12,26 +12,29 @@ from django.template.loader import render_to_string
 from django.core import mail
 from django.urls import reverse
 
+
 class Command(BaseCommand):
-    help = 'Send the weekly email comprising of top blog posts'
+    help = "Send the weekly email comprising of top blog posts"
 
     def add_arguments(self, parser):
-        parser.add_argument('--username', action="store", default=None)
-        parser.add_argument('--confirm', action="store_true", default=False)
-        parser.add_argument('--test-run', action="store_true", default=False)
+        parser.add_argument("--username", action="store", default=None)
+        parser.add_argument("--confirm", action="store_true", default=False)
+        parser.add_argument("--test-run", action="store_true", default=False)
 
     def handle(self, *args, **options):
         username = options["username"]
         if options["username"] is None:
-            assert(options["confirm"] or options["test_run"])
-            users = UserProfile.objects.filter(is_activated=True, send_weekly_digest_email=True)
+            assert options["confirm"] or options["test_run"]
+            users = UserProfile.objects.filter(
+                is_activated=True, send_weekly_digest_email=True
+            )
         else:
             user = UserProfile.objects.get(github_username=username)
             users = [user]
 
         top_posts = get_posts_for_weekly_digest()
 
-        connection = mail.get_connection()   # Use default email connection
+        connection = mail.get_connection()  # Use default email connection
 
         to_users = []
         for user in users:
@@ -39,17 +42,20 @@ class Command(BaseCommand):
                 continue
             to_users.append(user)
 
-        subject = 'Popular engineering blog posts of last week'
+        subject = "Popular engineering blog posts of last week"
         from_email = settings.DEFAULT_FROM_EMAIL
-
 
         messages = []
         for to_user in to_users:
             to_email = to_user.auth.email
-            unsubscribe_link = "https://diff.blog{}".format(reverse("unsubscribe_from_emails", kwargs={"key": to_user.unsubscribe_key}))
+            unsubscribe_link = "https://diff.blog{}".format(
+                reverse(
+                    "unsubscribe_from_emails", kwargs={"key": to_user.unsubscribe_key}
+                )
+            )
             context = {"top_posts": top_posts, "unsubscribe_link": unsubscribe_link}
-            msg_plain = render_to_string('emails/digest.txt', context)
-            msg_html = render_to_string('emails/compiled/digest.html', context)
+            msg_plain = render_to_string("emails/digest.txt", context)
+            msg_html = render_to_string("emails/compiled/digest.html", context)
             msg = EmailMultiAlternatives(subject, msg_plain, from_email, [to_email])
             msg.attach_alternative(msg_html, "text/html")
             if options["test_run"]:

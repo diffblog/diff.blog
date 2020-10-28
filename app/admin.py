@@ -4,16 +4,46 @@ from django.db.models import ManyToOneRel, ForeignKey, OneToOneField
 
 # Register your models here.
 
-ShowAllAdminFeilds = lambda model: type('SubClass'+model.__name__, (admin.ModelAdmin,), {
-    'list_display': [x.name for x in model._meta.fields],
-    'list_select_related': [x.name for x in model._meta.fields if isinstance(x, (ManyToOneRel, ForeignKey, OneToOneField,))]
-})
+ShowAllAdminFeilds = lambda model: type(
+    "SubClass" + model.__name__,
+    (admin.ModelAdmin,),
+    {
+        "list_display": [x.name for x in model._meta.fields],
+        "list_select_related": [
+            x.name
+            for x in model._meta.fields
+            if isinstance(
+                x,
+                (
+                    ManyToOneRel,
+                    ForeignKey,
+                    OneToOneField,
+                ),
+            )
+        ],
+    },
+)
 
-BlogSuggestionFields = lambda model: type('SubClass'+model.__name__, (admin.ModelAdmin,), {
-    'list_display': [x.name for x in model._meta.fields],
-    'list_editable': ["status"],
-    'list_select_related': [x.name for x in model._meta.fields if isinstance(x, (ManyToOneRel, ForeignKey, OneToOneField,))]
-})
+BlogSuggestionFields = lambda model: type(
+    "SubClass" + model.__name__,
+    (admin.ModelAdmin,),
+    {
+        "list_display": [x.name for x in model._meta.fields],
+        "list_editable": ["status"],
+        "list_select_related": [
+            x.name
+            for x in model._meta.fields
+            if isinstance(
+                x,
+                (
+                    ManyToOneRel,
+                    ForeignKey,
+                    OneToOneField,
+                ),
+            )
+        ],
+    },
+)
 
 admin.site.register(Post, ShowAllAdminFeilds(Post))
 admin.site.register(Topic, ShowAllAdminFeilds(Topic))

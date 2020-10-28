@@ -15,6 +15,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class Topic(models.Model):
     display_name = models.CharField(max_length=30)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
@@ -37,9 +38,12 @@ class Topic(models.Model):
     def get_absolute_url(self):
         return "/tag/{}/new".format(self.slug)
 
+
 class UserProfile(models.Model):
     extra_data = models.TextField()
-    auth = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name="profile")
+    auth = models.OneToOneField(
+        User, on_delete=models.CASCADE, null=True, related_name="profile"
+    )
     feed_url = models.CharField(max_length=200)
     github_username = models.CharField(max_length=50)
     github_id = models.IntegerField(null=True)
@@ -54,7 +58,9 @@ class UserProfile(models.Model):
     bio = models.TextField(null=True)
     company = models.CharField(max_length=100, null=True)
     location = models.CharField(max_length=100, null=True)
-    following = models.ManyToManyField("self", related_name="followers", symmetrical=False)
+    following = models.ManyToManyField(
+        "self", related_name="followers", symmetrical=False
+    )
     is_organization = models.BooleanField(default=False)
     fetched_following_users = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
@@ -108,12 +114,15 @@ class UserProfile(models.Model):
         self.send_weekly_digest_email = False
         self.save(update_fields=["send_weekly_digest_email"])
 
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     link = models.CharField(max_length=300)
     summary = models.TextField(null=True)
     content = models.TextField()
-    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="posts")
+    profile = models.ForeignKey(
+        UserProfile, on_delete=models.CASCADE, related_name="posts"
+    )
     updated_on = models.DateTimeField(null=True)
     upvotes_count = models.IntegerField(default=1)
     aggregate_votes_count = models.IntegerField(default=1)
@@ -129,7 +138,7 @@ class Post(models.Model):
             self.save()
 
     def get_summary(self):
-        #TODO: Don't stop the summary in between words.
+        # TODO: Don't stop the summary in between words.
         if not self.summary:
             return ""
 
@@ -159,7 +168,7 @@ class Post(models.Model):
             "profile": {
                 "github_username": self.profile.github_username,
                 "full_name": self.profile.full_name,
-            }
+            },
         }
 
     def get_mirror_votes(self):
@@ -179,7 +188,7 @@ class Post(models.Model):
         order = log(s, 10)
         seconds = epoch_seconds() - 1134028003
         self.score = round(order + seconds / 45000, 7)
-        self.save(update_fields=['score'])
+        self.save(update_fields=["score"])
 
     def update_aggregate_votes_count_and_score(self):
         self.update_aggregate_votes_count()
@@ -192,9 +201,13 @@ class Post(models.Model):
     def uri(self):
         return "https://diff.blog/post/" + str(self.slug)
 
+
 class Vote(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="votes")
-    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="votes")
+    profile = models.ForeignKey(
+        UserProfile, on_delete=models.CASCADE, related_name="votes"
+    )
+
 
 class Comment(models.Model):
     content = models.TextField()
@@ -216,9 +229,11 @@ class Comment(models.Model):
             "upvotes_count": self.upvotes_count,
         }
 
+
 class CommentVote(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+
 
 class BlogSuggestion(models.Model):
     username = models.CharField(max_length=100)
@@ -228,29 +243,38 @@ class BlogSuggestion(models.Model):
     NO_GITHUB_ACCOUNT = 1
     ADDED = 10
     STATUS_CHOICES = {
-        (0, 'Pending'),
-        (1, 'No GitHub account'),
-        (2, 'No feed'),
-        (3, 'Should be added by the user'),
-        (4, 'Non English blog'),
-        (10, 'Blog added'),
+        (0, "Pending"),
+        (1, "No GitHub account"),
+        (2, "No feed"),
+        (3, "Should be added by the user"),
+        (4, "Non English blog"),
+        (10, "Blog added"),
     }
     status = models.IntegerField(default=0, choices=STATUS_CHOICES)
+
 
 class MirrorSource(models.Model):
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=200)
 
+
 class MirrorPost(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="mirror_posts")
-    source = models.ForeignKey(MirrorSource, on_delete=models.CASCADE, related_name="mirror_posts")
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name="mirror_posts"
+    )
+    source = models.ForeignKey(
+        MirrorSource, on_delete=models.CASCADE, related_name="mirror_posts"
+    )
     votes = models.IntegerField(default=0)
     url = models.CharField(max_length=200)
+
 
 class UserList(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    created_by = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="created_user_lists")
+    created_by = models.ForeignKey(
+        UserProfile, on_delete=models.CASCADE, related_name="created_user_lists"
+    )
     users = models.ManyToManyField("UserProfile", related_name="listed_in")
     slug = models.SlugField(unique=True, null=True)
 
@@ -258,16 +282,20 @@ class UserList(models.Model):
         self.slug = self.slug or slugify(self.name)
         super().save(*args, **kwargs)
 
+
 class GitHubCampaign(models.Model):
     github_username = models.CharField(max_length=100)
     repo_name = models.CharField(max_length=150)
     ISSUE_CREATED_TO_ADD_BLOG_TO_DIFFBLOG = 60
     status = models.IntegerField()
 
+
 class Search(models.Model):
     query = models.CharField(max_length=100)
     time = models.DateTimeField(auto_now_add=True)
-    profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="searches", null=True)
+    profile = models.ForeignKey(
+        UserProfile, on_delete=models.CASCADE, related_name="searches", null=True
+    )
 
     def get_absolute_url(self):
         return "/search/{}".format(self.query.replace(" ", "+"))
