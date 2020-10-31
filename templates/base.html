@@ -41,8 +41,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
-    <link rel="stylesheet" href="/static/dist/bulma.css">
+    <link rel="stylesheet" href="/static/dist/base-min.css">
     <link rel="stylesheet" href="/static/css/base.css">
     <style>
       .box {
@@ -68,11 +67,10 @@
     </style>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-    <script src="https://momentjs.com/downloads/moment.min.js"></script>
     {% csrf_token %}
     <script type="text/javascript">
     // using jQuery
-    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    var csrftoken = document.getElementsByName("csrfmiddlewaretoken")[0].value;
     var logged_in = {{request.user.is_authenticated|yesno:"true,false"}};
     var is_admin = {{request.user.profile.is_admin|yesno:"true,false"}};
     {% if request.user.is_authenticated %}

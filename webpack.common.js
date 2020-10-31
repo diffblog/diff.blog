@@ -28,11 +28,9 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'bulma.css',
-            path: path.resolve(__dirname, 'app','static') 
+            filename: '[name]-min.css',
+            path: path.resolve(__dirname, 'app','static', 'dist')
         }),
-        require('tailwindcss'),
-        require('autoprefixer'),
         new webpack.ProvidePlugin({
           $: "jquery",
           jQuery: "jquery"
@@ -59,7 +57,19 @@ module.exports = {
                       options: {
                         sourceMap: true,
                       }
-                    }
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                          postcssOptions: {
+                            ident: 'postcss',
+                            plugins: [
+                              require('tailwindcss'),
+                              require('autoprefixer'),
+                            ],
+                          },
+                        }
+                    },
                 ]
             }
         ]

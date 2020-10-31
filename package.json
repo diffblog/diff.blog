@@ -32,10 +32,10 @@
     "express": "^4.16.4",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "^3.2.0",
-    "mini-css-extract-plugin": "^0.11.2",
+    "mini-css-extract-plugin": "^0.11.3",
     "node-sass": "^4.14.1",
     "react": "^16.8.4",
-    "sass-loader": "^10.0.2",
+    "sass-loader": "^10.0.4",
     "style-loader": "^0.23.1",
     "webpack": "^4.44.2",
     "webpack-bundle-tracker": "^0.4.2-beta",
@@ -50,6 +50,8 @@
     "jquery": "^3.5.1",
     "lodash": "^4.17.11",
     "moment": "^2.29.1",
+    "postcss": "^8.1.4",
+    "postcss-loader": "^4.0.4",
     "tailwindcss": "^1.9.6"
   }
 }

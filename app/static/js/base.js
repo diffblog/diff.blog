@@ -1,4 +1,4 @@
-require('./../sass/bulma.scss');
+require('./../sass/base.scss');
 
 $(function() {
     $("#navbar-dropdown").on("click", function() {
