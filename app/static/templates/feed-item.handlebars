@@ -3,7 +3,13 @@
         <img class="flex-initial h-6 rounded"
             src="https://avatars.githubusercontent.com/{{profile.github_username}}?s=64">
         <a class="flex-initial font-medium has-text-dark mx-2 text-sm"
-            href="/{{profile.github_username}}">{{ profile.full_name }}</a>
+            href="/{{profile.github_username}}">
+            {{#if profile.full_name}}
+            {{ profile.full_name }}
+            {{else}}
+            {{ profile.github_username }}
+            {{/if}}
+        </a>
     </div>
     <h2>
         <a href="{{link}}" class="post_link text-2xl font-semibold text-gray-900" target="_blank"
