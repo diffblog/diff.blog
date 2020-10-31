@@ -2,7 +2,7 @@ from app.models import UserProfile, Topic, Category
 import requests as r
 from multiprocessing import Queue, Pool
 import time
-from diffblog.secrets import github_access_token, diffblog_github_access_token
+from diffblog.secrets import diffblog_github_access_token
 from feedfinder2 import find_feeds
 from googlesearch import search
 from django.db import connection
@@ -11,7 +11,6 @@ from polyglot.detect import Detector
 
 from feed.blogs import recommended_blog_list
 
-headers = {"Authorization": "token {}".format(github_access_token)}
 diffblog_headers = {"Authorization": "token {}".format(diffblog_github_access_token)}
 
 blog_item = """
@@ -29,7 +28,7 @@ def _populate_user_profile_details(user):
         return
     print("Populating user profile of ", user.github_username)
     response = r.get(
-        "https://api.github.com/users/{}".format(user.github_username), headers=headers
+        "https://api.github.com/users/{}".format(user.github_username), headers=diffblog_headers
     )
     if response.status_code != 200:
         print(user.github_username)
