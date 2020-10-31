@@ -4,5 +4,5 @@ setup_ajax();
 var follow_button_template = require("./../templates/follow_button.handlebars");
 
 $(function () {
-    $("#follow_button").html(follow_button_template(page_params));
+  $("#follow_button").html(follow_button_template(page_params));
 });

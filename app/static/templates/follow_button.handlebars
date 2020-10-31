@@ -1,7 +1,11 @@
 {{#unless is_me}}
-    {{#if following}}
-        <a data-user-id="{{ id }}" class="button is-light is-pulled-right following">Following</a>
+   {{#if following }}
+    <button data-user-id="{{ id }}" class="following border py-1 px-2 rounded ml-auto text-white bg-gray-900 hover:bg-gray-800">
+        Following
+    </button>
     {{else}}
-        <a data-user-id="{{ id }}" class="button is-dark is-pulled-right follow">Follow</a>
+    <button data-user-id="{{ id }}" class="follow border py-1 px-2 rounded ml-auto border-gray-400 hover:border-gray-500">
+        Follow
+    </button>
     {{/if}}
 {{/unless}}

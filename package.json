@@ -52,6 +52,7 @@
     "moment": "^2.29.1",
     "postcss": "^8.1.4",
     "postcss-loader": "^4.0.4",
+    "prettier": "^2.1.2",
     "tailwindcss": "^1.9.6"
   }
 }
