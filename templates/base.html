@@ -97,9 +97,9 @@
 
     <div class="navbar-menu">
       <div class="navbar-end">
-        <a class="navbar-item">
+        <a class="navbar-item" style="background-color: white;">
           <form method="GET" action="/search">
-            <input class="" name="s" class="input" type="text" placeholder="Search diff.blog" autocomplete="off" pattern=".{3,}" required title="3 characters minimum" value="{{ search_query }}">
+            <input class="py-1 px-2 bg-gray-100 border border-gray-400 rounded w-full placeholder-gray-500  focus:outline-none focus:bg-white focus:text-gray-900" name="s" class="input" type="text" placeholder="Search" autocomplete="off" pattern=".{3,}" required title="3 characters minimum" value="{{ search_query }}">
             <input type="hidden" name="type" value="users">
           </form>
         </a>
