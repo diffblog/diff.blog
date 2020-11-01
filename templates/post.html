@@ -1,122 +1,111 @@
 {% extends "base.html" %}
 
 {% block seo_tags %}
-    <title>{{ post.title }} - diff.blog</title>
-    <meta name="description" content="{{ post.summary }}">
+<title>{{ post.title }} - diff.blog</title>
+<meta name="description" content="{{ post.summary|slice:"0:200" }}">
 {% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
     <div class="columns">
-        <div class="column is-3">
-            {% include "main_side_menu.html" %}
-          </div>
       <div class="column is-6">
-        <div class="box">
-          <div class="media">
-              <div class="media-left">
-                <figure class="image is-48x48">
-                  <a href="/{{post.profile.github_username}}">
-                    <img src="https://avatars.githubusercontent.com/{{post.profile.github_username}}?s=48" alt="Placeholder image">
-                  </a>
-                </figure>
-              </div>
-              <div class="media-content">
-                <a href="{{post.link}}" target="_blank" rel="noopener noreferrer" class="title is-4">{{ post.title }}</a><br>
-                <a>
-                  <span class="icon is-small">
-                    <span data-post-id="{{post.id}}" data-vote-upvoted="{{upvoted|yesno:'true,false'}}" class="vote_button">
-                      {% if upvoted %}
-                        <i class="fas fa-heart"></i>
-                      {% else %}
-                        <i class="far fa-heart"></i>
-                      {% endif %}
-                    </span>
-                  </span>
-                </a>
-                <span id="feed_upvotes_counter_{{post.id}}">{{ post.aggregate_votes_count }}</span>
-                ·
-                <a style="color: #4a4a4a;" href="/{{post.profile.github_username}}">{{ post.profile.full_name }}</a>
-                ·
-                <a style="color: #4a4a4a;" href="/post/{{post.id}}"><small>{{ post.updated_on }}</small></a>
-                <br>
-                <br>
-                <p id="post-summary">
-                  {{ post.summary|slice:"0:500" }}...
-                </p>
-                <br>
-              </div>
+        <a href="{{post.link}}" target="_blank" rel="noopener noreferrer"
+          class="text-4xl font-semibold text-gray-900">{{ post.title }}</a>
+
+          <div id="post_details" class="mt-3 mb-5">
+            <span class="icon is-small">
+              <span data-post-id="{{post.id}}" data-vote-upvoted="{{upvoted|yesno:'true,false'}}" class="vote_button">
+                {% if upvoted %}
+                <i class="fas fa-heart"></i>
+                {% else %}
+                <i class="far fa-heart"></i>
+                {% endif %}
+              </span>
+            </span>
+
+            <span id="feed_upvotes_counter_{{post.id}}" class="">{{ post.aggregate_votes_count }}</span>
+            ·
+            <a class="" href="/{{post.profile.github_username}}">{{ post.profile.full_name }}</a>
+            ·
+            <a class="" href="/post/{{post.id}}"><small>{{ post.updated_on }}</small></a>
+
           </div>
-          <article class="media">
-            {% if user.is_authenticated %}
-            <figure class="media-left">
-              <p class="image is-48x48">
-                <img src="https://avatars.githubusercontent.com/{{user.profile.github_username}}?s=48">
-              </p>
-            </figure>
-            {% endif %}
-            <div class="media-content">
-                <div class="field">
-                  <p class="control">
-                    <textarea id="comment-content" class="textarea" placeholder="Add a comment..."></textarea>
-                  </p>
-                </div>
-                <nav class="level">
-                  <div class="level-left">
-                    <div class="level-item">
-                      <a id="submit-comment-button" data-post-id='{{post.id}}' class="button is-info">Submit</a>
-                    </div>
-                  </div>
-                </nav>
-              </div>
-          </article>
-          <br>
+
+          <blockquote class="text-l text-gray-800 mb-4">
+            {{ post.summary|slice:"0:500" }}...
+          </blockquote>
+
+          <div class="border-b pb-5 mb-10 text-gray-800 underline">
+          <a href="{{post.link}}" class="" target="_blank">
+            Read full post on {{ domain }}
+          </a>
+          </div>
+
+
           <div id="comments-holder">
           </div>
-        </div>
-        </div>
-        <div class="column is-3">
-            {% if not user.is_authenticated %}
-            {% include "join_banner.html" %}
-            {% endif %}
-            <div id="follow_list"></div>
-            {% if featured_on %}
-            <hr>
-            <h2 class="subtitle is-5">
-              <i class="em em-trophy"></i> Blog post featured on
-            </h2>
-            {% for site in featured_on %}
-            <div class="card">
-              <div class="card-content">
-                  <div class="media">
-                    <div class="media-left">
-                        <figure class="image is-48x48">
-                            <a href="{{ site.url }}" target="_blank">
-                                {% if site.source.name == "Hacker News" %}
-                                <img src="/static/images/hn.png" alt="Placeholder image">
-                                {% else %}
-                                <img src="/static/images/reddit.png" alt="Placeholder image">
-                                {% endif %}
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <a href="{{ site.url }}" class="title is-5" target="_blank">
-                          {{ site.source.name }}
-                        </a>
-                        <div class="is-subtitle is-6">
-                          {{ site.votes }} points
-                        </div>
-                    </div>
-                  </div>
-              </div>
-            </div>
-            <br>
-            {% endfor %}
-            {% endif %}
-        </div>
+
+          
+          <textarea id="comment-content" class="mt-4 py-3 px-2 bg-gray-100 border border-gray-400 rounded w-full h-20 ont-medium placeholder-gray-700  focus:outline-none focus:bg-white" placeholder="Write your comment..."></textarea>
+          <br>
+          <button id="submit-comment-button" data-post-id='{{post.id}}' class="border py-1 px-2 rounded ml-auto border-gray-400 hover:border-gray-500">Submit</button>
+      
       </div>
+
+      <div class="column is-1 w-1">
+        <div class="h-full border-r text-gray-600"></div>
+      </div>
+
+      <div class="column is-4">
+        {% if not user.is_authenticated %}
+        {% endif %}
+
+
+        <div id="follow_list" class="mb-10"></div>
+
+        {% if featured_on %}
+        <div id="blog_post_featured_on_section" class="mb-10">
+          <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
+            Blog post featured on
+          </div>
+          <h2 class="subtitle is-5">
+          </h2>
+          {% for site in featured_on %}
+          <div class="flex mb-2 items-center">
+            <img class="rounded-full h-12 w-12"
+              src="/static/images/{% if site.source.name == 'Hacker News' %}hn.png{% else %}reddit.png{% endif %}"
+              alt="Placeholder image">
+            <div class="ml-2">
+              <a class="text-gray-900 font-bold text-sm" href="/{{site.url}}" target="_blank">
+                {{ site.source.name }}
+              </a>
+              <p>
+                <a href="/{{site.url}}" target="_blank">
+                  {{ site.votes }} points
+                </a>
+              </p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+
+        {% if not slug %}
+        <div id="recent_posts_from_author_section" class="mb-10 hidden">
+          <a href="/{{post.profile.github_username}}/">
+            <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
+              RECENT POSTS FROM THE AUTHOR
+            </div>
+          </a>
+          <div id="recent_posts_from_author"></div>
+        </div>
+        {% endif %}
+
+
+      </div>
+    </div>
   </div>
 </section>
 <script>

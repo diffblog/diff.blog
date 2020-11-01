@@ -1,9 +1,8 @@
 <div class="mb-5">
     <div class="flex justify-start items-center">
-        <img class="flex-initial h-6 rounded"
+        <img class="flex-initial h-5 rounded"
             src="https://avatars.githubusercontent.com/{{profile.github_username}}?s=64">
-        <a class="flex-initial font-medium has-text-dark mx-2 text-sm"
-            href="/{{profile.github_username}}">
+        <a class="flex-initial font-medium has-text-dark mx-2 text-sm" href="/{{profile.github_username}}">
             {{#if profile.full_name}}
             {{ profile.full_name }}
             {{else}}
@@ -33,7 +32,8 @@
                         {{/if}}
                     </span>
                 </span>
-                <span class="text-gray-600 text-sm -ml-1" id="feed_upvotes_counter_{{id}}">{{ aggregate_votes_count }}</span>
+                <span class="text-gray-600 text-sm -ml-1"
+                    id="feed_upvotes_counter_{{id}}">{{ aggregate_votes_count }}</span>
             </a>
         </div>
 
@@ -44,38 +44,18 @@
             </a>
         </div>
 
+        <div class="mr-2">
+            <a class="text-gray-600 text-sm">
+                {{ time }}
+            </a>
+        </div>
+
         <div class=""">
-            {{#ifeq feed_info.feed "main"}}
             {{#each topics}}
-            <a href="/tag/{{ slug }}/{{ ../feed_info.sort_by }}/">
-                <span class="text-gray-600 text-sm mx-1 bg-gray-100 rounded p-1">{{ slug }}</span>
+            <a href=" /tag/{{ slug }}/top/">
+            <span class="text-gray-600 text-sm mx-1 bg-gray-100 rounded p-1">{{ slug }}</span>
             </a>
             {{/each}}
-            {{/ifeq}}
-
-            {{#ifeq feed_info.feed "user"}}
-            {{#ifeq feed_info.subcategory "following"}}
-            {{#each topics}}
-            <a href="/tag/{{ slug }}/following/">
-                <span class="tag is-light">{{ slug }}</span>
-            </a>
-            {{/each}}
-            {{else}}
-            {{#each topics}}
-            <a href="/tag/{{ slug }}/{{ ../feed_info.sort_by }}/">
-                <span class="tag is-light">{{ slug }}</span>
-            </a>
-            {{/each}}
-            {{/ifeq}}
-            {{/ifeq}}
-
-            {{#ifeq feed_info.feed "search"}}
-            {{#each topics}}
-            <a href="/tag/{{ slug }}/new/">
-                <span class="tag is-light">{{ slug }}</span>
-            </a>
-            {{/each}}
-            {{/ifeq}}
         </div>
 
 

@@ -68,7 +68,11 @@
         </div>
 
         <div id="following_posts_section" class="mb-10 hidden">
+          {% if slug %}
+          <a href="/tag/{{ slug }}/following/">
+          {% else %}
           <a href="/following/">
+          {% endif %}
             <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
               FROM USERS YOU FOLLOW
             </div>
@@ -76,7 +80,8 @@
           <div id="following_posts"></div>
         </div>
 
-        <div id="recent_posts_section" class="mb-10 hidden hidden">
+        {% if not slug %}
+        <div id="recent_posts_section" class="mb-10 hidden">
           <a href="/new/">
             <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
               RECENT POSTS
@@ -84,10 +89,15 @@
           </a>
           <div id="recent_posts"></div>
         </div>
+        {% endif %}
 
-        <div id="top_posts_section" class="mb-10 hidden hidden">
+        <div id="top_posts_section" class="mb-10 hidden">
+          {% if slug %}
+          <a href="/tag/{{ slug }}/top/">
+          {% else %}
           <a href="/">
-            <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
+          {% endif %}
+                      <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
               POPULAR POSTS
             </div>
           </a>

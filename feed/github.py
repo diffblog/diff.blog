@@ -28,7 +28,8 @@ def _populate_user_profile_details(user):
         return
     print("Populating user profile of ", user.github_username)
     response = r.get(
-        "https://api.github.com/users/{}".format(user.github_username), headers=diffblog_headers
+        "https://api.github.com/users/{}".format(user.github_username),
+        headers=diffblog_headers,
     )
     if response.status_code != 200:
         print(user.github_username)
