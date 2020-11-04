@@ -83,7 +83,8 @@
   <body>
 
 
-  <nav class="navbar is-fixed-top flex border" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-fixed-top border" role="navigation" aria-label="main navigation">
+    <div class="container">
     <div class="navbar-brand">
       <a class="navbar-item" href="/">
           <h2 class="text-2xl font-semibold text-gray-900">diff.blog</h2>
@@ -96,7 +97,7 @@
     </div>
 
     <div class="navbar-menu">
-      <div class="navbar-end">
+      <div class="navbar-end ">
         <a class="navbar-item" style="background-color: white;">
           <form method="GET" action="/search">
             <input class="py-1 px-2 bg-gray-100 border border-gray-400 rounded w-full placeholder-gray-500  focus:outline-none focus:bg-white focus:text-gray-900" name="s" class="input" type="text" placeholder="Search" autocomplete="off" pattern=".{3,}" required title="3 characters minimum" value="{{ search_query }}">
@@ -124,7 +125,6 @@
                 </div>
               </nav>
             {% else %}
-            <div class="navbar-end">
               <div class="navbar-item">
                 <div class="buttons">
                   <a class="button" href="{% url "social:begin" "github" %}">
@@ -132,7 +132,6 @@
                   </a>
                 </div>
               </div>
-            </div>
           </div>
             {% endif %}
     </div>
