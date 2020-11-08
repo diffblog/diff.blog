@@ -1,0 +1,2 @@
+black .
+npx prettier --write app/static/js
