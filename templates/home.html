@@ -59,7 +59,11 @@
       <div class="column is-4">
 
         <div id="user_recommendations_section" class="mb-10 hidden">
-          <a href="/users/suggestions/">
+          {% if slug %}
+          <a href="/tag/{{ slug }}/users/">
+          {% else %}
+          <a href="/users/recommended/">
+          {% endif %}
             <div class="text-gray-900 text-sm font-semibold mb-4 w-f">
               DEVELOPERS TO FOLLOW
             </div>

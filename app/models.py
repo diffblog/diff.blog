@@ -39,6 +39,10 @@ class Topic(models.Model):
         return "/tag/{}/new".format(self.slug)
 
 
+def get_topic(slug):
+    return Topic.objects.filter(slug__iexact=slug).first()
+
+
 class UserProfile(models.Model):
     extra_data = models.TextField()
     auth = models.OneToOneField(
@@ -64,6 +68,7 @@ class UserProfile(models.Model):
     is_organization = models.BooleanField(default=False)
     fetched_following_users = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
+    last_post_date = models.DateTimeField(null=True)
 
     unsubscribe_key = models.CharField(max_length=50, null=True)
     send_weekly_digest_email = models.BooleanField(default=True)

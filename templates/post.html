@@ -36,7 +36,7 @@
             {{ post.summary|slice:"0:500" }}...
           </blockquote>
 
-          <div class="border-b pb-5 mb-10 text-gray-800 underline">
+          <div class="border-b pb-10 mb-10 text-gray-800 underline">
           <a href="{{post.link}}" class="" target="_blank">
             Read full post on {{ domain }}
           </a>
@@ -47,9 +47,9 @@
           </div>
 
           
-          <textarea id="comment-content" class="mt-4 py-3 px-2 bg-gray-100 border border-gray-400 rounded w-full h-20 placeholder-gray-700  focus:outline-none focus:bg-white" placeholder="Write your comment..."></textarea>
+          <textarea id="comment-content" class="mt-2 py-3 px-2 bg-gray-100 border border-gray-400 rounded w-full h-20 placeholder-gray-700  focus:outline-none focus:bg-white" placeholder="Write your comment..."></textarea>
           <br>
-          <button id="submit-comment-button" data-post-id='{{post.id}}' class="border py-1 px-2 rounded ml-auto border-gray-400 hover:border-gray-500">Submit</button>
+          <button id="submit-comment-button" data-post-id='{{post.id}}' class="border py-1 px-2 mt-4 rounded ml-auto border-gray-400 hover:border-gray-500">Submit</button>
       
       </div>
 

@@ -1,0 +1,16 @@
+<div class="flex mb-2 items-center border-b pb-4 pt-2">
+    <img class="rounded-full h-16 w-16" src="https://avatars.githubusercontent.com/{{github_username}}" alt="Placeholder image">
+    <div class="ml-2">
+        <a class="text-gray-900 font-bold text-sm" href="/{{github_username}}">
+         {{#if full_name}}
+            {{ full_name }}
+        {{else}}
+            {{ github_username }}
+        {{/if}}
+        </a>
+        <p class="text-gray-700 text-xs max-w-lg">
+            {{ bio }}
+        </p>
+    </div>
+    {{> follow_button}}
+</div>
