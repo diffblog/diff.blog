@@ -101,7 +101,7 @@ class UserProfile(models.Model):
             "full_name": self.full_name,
             "github_username": self.github_username,
             "company": self.company,
-            "bio": self.bio,
+            "bio": self.bio or "",
             "topics": topics,
         }
 
