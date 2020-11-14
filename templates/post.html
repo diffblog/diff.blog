@@ -73,17 +73,17 @@
           </h2>
           {% for site in featured_on %}
           <div class="flex mb-5 items-center">
-            <a href="/{{site.url}}">
+            <a href="{{site.url}}" target="_blank">
             <img class="rounded-full h-12 w-12"
               src="/static/images/{% if site.source.name == 'Hacker News' %}hn.png{% else %}reddit.png{% endif %}"
               alt="Placeholder image">
             </a>
             <div class="ml-2">
-              <a class="text-gray-900 font-bold text-sm" href="/{{site.url}}" target="_blank">
+              <a class="text-gray-900 font-bold text-sm" href="{{site.url}}" target="_blank">
                 {{ site.source.name }}
               </a>
               <p>
-                <a href="/{{site.url}}" target="_blank">
+                <a href="{{site.url}}" target="_blank">
                   {{ site.votes }} points
                 </a>
               </p>
