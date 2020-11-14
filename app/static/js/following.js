@@ -1,4 +1,4 @@
-var template = require("./../templates/follow-legacy.handlebars");
+var template = require("./../templates/user-suggestion.handlebars");
 
 $(function () {
   $.ajax({
@@ -9,8 +9,7 @@ $(function () {
       for (index in following) {
         user = following[index];
         var html = template(user);
-        var column = "<div class='column is-6'>" + html + "</div>";
-        $("#follow_list").append(column);
+        $("#follow_list").append(html);
       }
     },
   });
