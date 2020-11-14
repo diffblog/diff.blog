@@ -1,73 +1,84 @@
 <div class="mb-5">
-    <div class="flex justify-start items-center">
-        <img class="flex-initial h-5 rounded"
-            src="https://avatars.githubusercontent.com/{{profile.github_username}}?s=64">
-        <a class="flex-initial font-medium has-text-dark mx-2 text-sm" href="/{{profile.github_username}}">
-            {{#if profile.full_name}}
-            {{ profile.full_name }}
-            {{else}}
-            {{ profile.github_username }}
-            {{/if}}
-        </a>
+    <div class="md:flex">
+        <div classs="max-w-lg">
+            <div class="flex justify-start items-center">
+                <img class="flex-initial h-5 rounded"
+                    src="https://avatars.githubusercontent.com/{{profile.github_username}}?s=64">
+                <a class="flex-initial font-medium has-text-dark mx-2 text-sm" href="/{{profile.github_username}}">
+                    {{#if profile.full_name}}
+                    {{ profile.full_name }}
+                    {{else}}
+                    {{ profile.github_username }}
+                    {{/if}}
+                </a>
+            </div>
+            <h2>
+                <a href="{{link}}" class="post_link text-2xl font-semibold text-gray-900" target="_blank"
+                    rel="noopener noreferrer">
+                    {{ title }}
+                </a>
+            </h2>
+
+            <p class="text-gray-600">
+                {{ summary }}
+            </p>
+
+            <div class="flex mt-2 flex-wrap -ml-1">
+                <div class="mr-2">
+                    <a data-toggle="tooltip" title="Like post">
+                        <span class="icon text-gray-600 text-sm">
+                            <span data-post-id="{{id}}" data-vote-upvoted="{{upvoted}}" class="vote_button">
+                                {{#if upvoted}}
+                                <i class="fas fa-heart"></i>
+                                {{else}}
+                                <i class="far fa-heart"></i>
+                                {{/if}}
+                            </span>
+                        </span>
+                        <span class="text-gray-600 text-sm -ml-1"
+                            id="feed_upvotes_counter_{{id}}">{{ aggregate_votes_count }}</span>
+                    </a>
+                </div>
+
+                <div class="mr-2">
+                    <a class="comment_link text-gray-600 text-sm" data-toggle="tooltip" title="Discussions"
+                        href="/post/{{slug}}">
+                        <i class="far fa-comment"></i>
+                    </a>
+                </div>
+
+                <div class="mr-2">
+                    <a class="text-gray-600 text-sm">
+                        {{ time }}
+                    </a>
+                </div>
+
+                <div class="">
+                    {{#each topics}}
+                    <a href=" /tag/{{ slug }}/top/">
+                        <span class="text-gray-600 text-sm mx-1 bg-gray-100 rounded p-1">{{ slug }}</span>
+                    </a>
+                    {{/each}}
+                </div>
+
+
+                <div>
+                    {{#if is_admin}}
+                    <a>
+                        <span class="boost_button" data-post-id="{{id}}">
+                            <i class="fas fa-magic"></i>
+                        </span>
+                    </a>
+                    {{/if}}
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--div>
+            <img class="rounded-lg" src="{{ cover_photo_url }}">
+        </div-->
     </div>
-    <h2>
-        <a href="{{link}}" class="post_link text-2xl font-semibold text-gray-900" target="_blank"
-            rel="noopener noreferrer">
-            {{ title }}
-        </a>
-    </h2>
-    <p class="text-gray-600">
-        {{ summary }}
-    </p>
 
-    <div class="flex mt-2 flex-wrap -ml-1">
-        <div class="mr-2">
-            <a data-toggle="tooltip" title="Like post">
-                <span class="icon text-gray-600 text-sm">
-                    <span data-post-id="{{id}}" data-vote-upvoted="{{upvoted}}" class="vote_button">
-                        {{#if upvoted}}
-                        <i class="fas fa-heart"></i>
-                        {{else}}
-                        <i class="far fa-heart"></i>
-                        {{/if}}
-                    </span>
-                </span>
-                <span class="text-gray-600 text-sm -ml-1"
-                    id="feed_upvotes_counter_{{id}}">{{ aggregate_votes_count }}</span>
-            </a>
-        </div>
-
-        <div class="mr-2">
-            <a class="comment_link text-gray-600 text-sm" data-toggle="tooltip" title="Discussions"
-                href="/post/{{slug}}">
-                <i class="far fa-comment"></i>
-            </a>
-        </div>
-
-        <div class="mr-2">
-            <a class="text-gray-600 text-sm">
-                {{ time }}
-            </a>
-        </div>
-
-        <div class=""">
-            {{#each topics}}
-            <a href=" /tag/{{ slug }}/top/">
-            <span class="text-gray-600 text-sm mx-1 bg-gray-100 rounded p-1">{{ slug }}</span>
-            </a>
-            {{/each}}
-        </div>
-
-
-        <div>
-            {{#if is_admin}}
-            <a>
-                <span class="boost_button" data-post-id="{{id}}">
-                    <i class="fas fa-magic"></i>
-                </span>
-            </a>
-            {{/if}}
-        </div>
-
-    </div>
 </div>

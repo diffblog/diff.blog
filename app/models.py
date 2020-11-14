@@ -125,6 +125,7 @@ class Post(models.Model):
     link = models.CharField(max_length=300)
     summary = models.TextField(null=True)
     content = models.TextField()
+    cover_photo_url = models.CharField(max_length=300, null=True)
     profile = models.ForeignKey(
         UserProfile, on_delete=models.CASCADE, related_name="posts"
     )
@@ -147,9 +148,9 @@ class Post(models.Model):
         if not self.summary:
             return ""
 
-        if len(self.summary) < 150:
+        if len(self.summary) < 200:
             return self.summary
-        return self.summary[:150] + "..."
+        return self.summary[:200] + "..."
 
     def serialize(self):
         topics = []
@@ -162,6 +163,7 @@ class Post(models.Model):
             "id": self.id,
             "title": self.title,
             "link": self.link,
+            "cover_photo_url": self.cover_photo_url,
             "slug": self.slug,
             "summary": self.get_summary(),
             "updated_on": self.updated_on.isoformat(),

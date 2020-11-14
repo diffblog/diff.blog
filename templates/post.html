@@ -72,10 +72,12 @@
           <h2 class="subtitle is-5">
           </h2>
           {% for site in featured_on %}
-          <div class="flex mb-2 items-center">
+          <div class="flex mb-5 items-center">
+            <a href="/{{site.url}}">
             <img class="rounded-full h-12 w-12"
               src="/static/images/{% if site.source.name == 'Hacker News' %}hn.png{% else %}reddit.png{% endif %}"
               alt="Placeholder image">
+            </a>
             <div class="ml-2">
               <a class="text-gray-900 font-bold text-sm" href="/{{site.url}}" target="_blank">
                 {{ site.source.name }}
