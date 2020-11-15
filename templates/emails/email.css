@@ -384,3 +384,7 @@ hr {
 .new-line {
     border-bottom: 2px solid hsl(209, 10%, 92%);
 }
+
+.points {
+    color: rgb(121, 115, 121);
+}

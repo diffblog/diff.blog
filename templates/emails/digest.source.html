@@ -9,7 +9,7 @@ Popular blog posts of last week
 {% block content %}
 <h1>
     <img class="diff-logo" src="https://diff.blog/static/images/icons/apple-icon-76x76.png" />
-    Popular blog posts of last week
+    Best blog posts of last week
 </h1>
 <table>
     {% for post in top_posts %}
@@ -18,7 +18,7 @@ Popular blog posts of last week
             <img class="avatar" src="https://github.com/{{ post.profile.github_username }}.png" />
         </td>
         <td class="title-col">
-            <a class="post-title" href="{{ post.uri }}">
+            <a class="post-title" target="_blank" href="{{ post.link }}">
                 {{ post.title }}
             </a>
         </td>
@@ -36,9 +36,9 @@ Popular blog posts of last week
         </td>
         <td class="post-info-col">
             {% if post.profile.full_name %}
-           <b>{{ post.aggregate_votes_count }}</b> points by <a class="author-name" href="{{ post.profile.uri }}">{{ post.profile.full_name }}</a>
+           <a href="{{ post.uri }}" target="_blank" class="points">{{ post.aggregate_votes_count }} points</a> by <a class="author-name" href="{{ post.profile.uri }}">{{ post.profile.full_name }}</a>
            {% else %}
-           <b>{{ post.aggregate_votes_count }}</b> points by <a class="author-name" href="{{ post.profile.uri }}">{{ post.profile.github_username }}</a>
+           <a href="{{ post.uri }}" target="_blank" class="points">{{ post.aggregate_votes_count }} points</a> by <a class="author-name" href="{{ post.profile.uri }}">{{ post.profile.github_username }}</a>
             {% endif %}
         </td>
     </tr>

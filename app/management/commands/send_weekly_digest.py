@@ -42,7 +42,7 @@ class Command(BaseCommand):
                 continue
             to_users.append(user)
 
-        subject = "Popular engineering blog posts of last week"
+        subject = "Best engineering blog posts of last week"
         from_email = settings.DEFAULT_FROM_EMAIL
 
         messages = []

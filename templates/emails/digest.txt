@@ -1,6 +1,7 @@
  {% for post in top_posts %}
     Title: {{ post.title }}
-    Link: {{ post.uri }}
+    Post link: {{ post.link }}
+    diff.blog link: {{ post.url }}
     Points: {{ post.aggregate_votes_count }}
     Author: {{ post.profile.uri }}
 
