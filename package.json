@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -p --config webpack.prod.js",
+    "build": "webpack --config webpack.prod.js",
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "watch": "webpack --watch --config webpack.dev.js"
   },
@@ -38,7 +38,7 @@
     "react": "^16.8.4",
     "sass-loader": "^10.0.4",
     "style-loader": "^0.23.1",
-    "terser-webpack-plugin": "^5.0.3",
+    "terser-webpack-plugin": "^4.2.3",
     "webpack": "^4.44.2",
     "webpack-bundle-tracker": "^0.4.2-beta",
     "webpack-cli": "^3.3.12",
