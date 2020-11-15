@@ -27,28 +27,25 @@
     <div class="columns">
       <div class="column is-7">
         {% if topic_display_name %}
-        {% if feed_type == "top" %}
-        <h1 class="text-4xl font-semibold">
+        <h1 class="text-4xl text-gray-900 font-semibold">
           {{ topic_display_name }}
         </h1>
-        <p id="topic-info-header" class="text-xl">Popular blog posts in {{ topic_display_name }}.</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-7">
+        {% if topic_display_name %}
+        {% if feed_type == "top" %}
+          <div id="topic-info-header" class="text-gray-900 text-sm font-semibold mb-4 w-f">POPULAR POSTS</div>
         {% endif %}
         {% if feed_type == "new" %}
-        <h1 class="text-4xl font-semibold">
-          {{ topic_display_name }}
-        </h1>
-        <p id="topic-info-header" class="text-xl">Latest blog posts in {{ topic_display_name }}.</p>
+          <div id="topic-info-header" class="text-gray-900 text-sm font-semibold mb-4 w-f">RECENT POSTS</div>
         {% endif %}
         {% if feed_type == "following" %}
-        <h1 class="text-4xl font-semibold">
-          {{ topic_display_name }}
-        </h1>
-        <p id="topic-info-header" class="text-xl">Latest blog posts in {{ topic_display_name }} from users you follow.</p>
+          <div id="topic-info-header" class="text-gray-900 text-sm font-semibold mb-4 w-f">POSTS FROM USERS YOU FOLLOW</div>
         {% endif %}
-        <hr>
-        <br>
         {% endif %}
-
         <div id="home_feed"></div>
       </div>
 
