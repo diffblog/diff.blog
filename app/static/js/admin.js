@@ -3,7 +3,7 @@ setup_ajax();
 
 $(function () {
   $("#home_feed").on("click", ".boost_button", function (event) {
-    if (show_login_prompt_if_required()) {
+    if (show_login_prompt_if_required("boost")) {
       return;
     }
     var post_id = $(this).data("post-id");

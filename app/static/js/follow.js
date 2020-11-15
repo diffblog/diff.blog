@@ -19,7 +19,7 @@ function toggle_button_classes(elem) {
 
 $(function () {
   $("body").on("click", ".following", function () {
-    if (show_login_prompt_if_required()) {
+    if (show_login_prompt_if_required("follow")) {
       return;
     }
     send_event("unfollow");
@@ -35,7 +35,7 @@ $(function () {
     });
   });
   $("body").on("click", ".follow", function () {
-    if (show_login_prompt_if_required()) {
+    if (show_login_prompt_if_required("follow")) {
       return;
     }
     send_event("follow");
