@@ -48,7 +48,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.scss$/,
+                test: /.s?css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     {
@@ -77,6 +77,7 @@ module.exports = {
         ]
     },
     optimization: {
+      minimize: true,
       minimizer: [
         new CssMinimizerPlugin(),
       ],
