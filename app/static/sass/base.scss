@@ -6,11 +6,35 @@
 $body-background-color: #FFFFFF;
 $menu-item-active-background-color: $grey;
 
-@import "./../../../node_modules/bulma/sass/elements/_all.sass";
-@import "./../../../node_modules/bulma/sass/form/_all.sass";
-@import "./../../../node_modules/bulma/sass/components/_all.sass";
-@import "./../../../node_modules/bulma/sass/grid/_all.sass";
-@import "./../../../node_modules/bulma/sass/helpers/_all.sass";
+@import "./../../../node_modules/bulma/sass/components/card.sass";
+@import "./../../../node_modules/bulma/sass/components/level.sass";
+@import "./../../../node_modules/bulma/sass/components/media.sass";
+@import "./../../../node_modules/bulma/sass/components/menu.sass";
+@import "./../../../node_modules/bulma/sass/components/modal.sass";
+@import "./../../../node_modules/bulma/sass/components/navbar.sass";
+@import "./../../../node_modules/bulma/sass/components/tabs.sass";
+
+@import "./../../../node_modules/bulma/sass/elements/box.sass";
+@import "./../../../node_modules/bulma/sass/elements/button.sass";
+@import "./../../../node_modules/bulma/sass/elements/container.sass";
+@import "./../../../node_modules/bulma/sass/elements/icon.sass";
+@import "./../../../node_modules/bulma/sass/elements/image.sass";
+@import "./../../../node_modules/bulma/sass/elements/notification.sass";
+@import "./../../../node_modules/bulma/sass/elements/progress.sass";
+@import "./../../../node_modules/bulma/sass/elements/table.sass";
+@import "./../../../node_modules/bulma/sass/elements/tag.sass";
+@import "./../../../node_modules/bulma/sass/elements/title.sass";
+
+@import "./../../../node_modules/bulma/sass/form/shared.sass";
+@import "./../../../node_modules/bulma/sass/form/tools.sass";
+
+@import "./../../../node_modules/bulma/sass/grid/columns.sass";
+
+@import "./../../../node_modules/bulma/sass/helpers/color.sass";
+@import "./../../../node_modules/bulma/sass/helpers/float.sass";
+@import "./../../../node_modules/bulma/sass/helpers/typography.sass";
+@import "./../../../node_modules/bulma/sass/helpers/visibility.sass";
+
 @import "./../../../node_modules/bulma/sass/layout/_all.sass";
 
 @tailwind base;
