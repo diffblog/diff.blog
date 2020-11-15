@@ -57,18 +57,13 @@ class UserSitemap(Sitemap):
         return UserProfile.objects.filter()
 
     def lastmod(self, profile):
-        last_post = Post.objects.filter(profile=profile).order_by("-updated_on").first()
-        if last_post is not None:
-            return last_post.updated_on
-        return None
+        return profile.last_post_date
 
     def changefreq(self, profile):
-        last_post = Post.objects.filter(profile=profile).order_by("-updated_on").first()
-
-        if last_post is None:
+        if profile.last_post_date is None:
             return "monthly"
 
-        return get_changefreq_from_last_updated_time(last_post.updated_on)
+        return get_changefreq_from_last_updated_time(profile.last_post_date)
 
 
 class SearchSitemap(Sitemap):
