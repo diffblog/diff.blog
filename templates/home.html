@@ -26,26 +26,6 @@
   <div class="container">
     <div class="columns">
       <div class="column is-7">
-        {% if topic_display_name %}
-        <h1 class="text-4xl text-gray-900 font-semibold">
-          {{ topic_display_name }}
-        </h1>
-        {% endif %}
-      </div>
-    </div>
-    <div class="columns">
-      <div class="column is-7">
-        {% if topic_display_name %}
-        {% if feed_type == "top" %}
-          <div id="topic-info-header" class="text-gray-900 text-sm font-semibold mb-4 w-f">POPULAR POSTS</div>
-        {% endif %}
-        {% if feed_type == "new" %}
-          <div id="topic-info-header" class="text-gray-900 text-sm font-semibold mb-4 w-f">RECENT POSTS</div>
-        {% endif %}
-        {% if feed_type == "following" %}
-          <div id="topic-info-header" class="text-gray-900 text-sm font-semibold mb-4 w-f">POSTS FROM USERS YOU FOLLOW</div>
-        {% endif %}
-        {% endif %}
         <div id="home_feed"></div>
       </div>
 
@@ -54,6 +34,11 @@
       </div>
 
       <div class="column is-4">
+        {% if topic_display_name %}
+        <h1 class="text-4xl text-gray-900 font-semibold mb-10">
+          {{ topic_display_name }}
+        </h1>
+        {% endif %}
 
         <div id="user_recommendations_section" class="mb-10 hidden">
           {% if slug %}
@@ -61,7 +46,7 @@
           {% else %}
           <a href="/users/recommended/">
           {% endif %}
-            <div class="text-gray-900 text-sm font-semibold mb-4 w-f">
+            <div class="text-gray-900 border-b text-sm font-semibold mb-4 w-f">
               DEVELOPERS TO FOLLOW
             </div>
           </a>
