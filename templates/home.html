@@ -41,29 +41,37 @@
         {% endif %}
 
         <div id="user_recommendations_section" class="mb-10 hidden">
-          {% if slug %}
-          <a href="/tag/{{ slug }}/users/">
-          {% else %}
-          <a href="/users/recommended/">
-          {% endif %}
-            <div class="text-gray-900 border-b text-sm font-semibold mb-4 w-f">
+          <div class="text-gray-900 border-b text-sm font-semibold mb-4 w-f">
               DEVELOPERS TO FOLLOW
-            </div>
-          </a>
+          </div>
           <div id="follow_list"></div>
+          {% if slug %}
+          <a href="/tag/{{ slug }}/users/" class="text-gray-800 text-sm mt-5">
+            See more
+          </a>
+          {% else %}
+          <a href="/users/recommended/" class="text-gray-800 text-sm mt-5">
+            See more
+          </a>
+          {% endif %}
+          </a>
         </div>
 
         <div id="following_posts_section" class="mb-10 hidden">
-          {% if slug %}
-          <a href="/tag/{{ slug }}/following/">
-          {% else %}
-          <a href="/following/">
-          {% endif %}
-            <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
-              FROM USERS YOU FOLLOW
-            </div>
+          <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
+            FROM USERS YOU FOLLOW
+          </div>
           </a>
           <div id="following_posts"></div>
+          {% if slug %}
+          <a href="/tag/{{ slug }}/following/" class="text-gray-800 text-sm mt-5">
+            See more
+          </a>
+          {% else %}
+          <a href="/following/" class="text-gray-800 text-sm mt-5">
+            See more
+          </a>
+          {% endif %}
         </div>
 
         {% if not slug %}
@@ -74,20 +82,27 @@
             </div>
           </a>
           <div id="recent_posts"></div>
+          <a href="/new/" class="text-gray-800 text-sm mt-5">
+            See more
+          </a>
         </div>
         {% endif %}
 
         <div id="top_posts_section" class="mb-10 hidden">
-          {% if slug %}
-          <a href="/tag/{{ slug }}/top/">
-          {% else %}
-          <a href="/">
-          {% endif %}
-                      <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
+            <div class="text-gray-900 text-sm font-semibold mb-4 mt-4 border-b">
               POPULAR POSTS
             </div>
           </a>
           <div id="top_posts"></div>
+          {% if slug %}
+          <a href="/tag/{{ slug }}/top/" class="text-gray-800 text-sm mt-5">
+            See more
+          </a>
+          {% else %}
+          <a href="/" class="text-gray-800 text-sm mt-5">
+            See more
+          </a>
+          {% endif %}
         </div>
 
       </div>
