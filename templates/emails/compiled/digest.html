@@ -8,10 +8,9 @@ Popular blog posts of last week
 {% endblock %}
 
 {% block content %}
-<h1 style="color:#444040; font-family:sans-serif; font-weight:300; line-height:1.4; margin:0; margin-bottom:30px; font-size:30px; text-align:center" align="center">
-    <img class="diff-logo" src="https://diff.blog/static/images/icons/apple-icon-76x76.png" style="-ms-interpolation-mode:bicubic; border:none; max-width:30px; border-radius:10%; position:relative; top:5px">
-    Best blog posts of last week
-</h1>
+<h2 style="color:#444040; font-family:sans-serif; font-weight:500; line-height:1.4; margin:0; margin-bottom:30px; font-size:25px; text-align:center" align="center">
+    Best blog posts of last week in diff.blog
+</h2>
 <table style="border-collapse:separate; mso-table-lspace:0; mso-table-rspace:0; width:100%" width="100%">
     {% for post in top_posts %}
     <tr>
@@ -19,7 +18,7 @@ Popular blog posts of last week
             <img class="avatar" src="https://github.com/{{ post.profile.github_username }}.png" style="-ms-interpolation-mode:bicubic; border:none; max-width:30px; border-radius:100%">
         </td>
         <td class="title-col" style="font-family:sans-serif; font-size:14px; vertical-align:top; position:relative" valign="top">
-            <a class="post-title" target="_blank" href="{{ post.link }}" style="color:#3498db; text-decoration:solid; font-size:20px">
+            <a class="post-title" target="_blank" href="{{ post.link }}" style="color:#3498db; text-decoration:solid; font-size:20px; margin-top:5px">
                 {{ post.title }}
             </a>
         </td>
