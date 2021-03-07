@@ -66,7 +66,7 @@ class UserProfile(models.Model):
     following = models.ManyToManyField(
         "self", related_name="followers", symmetrical=False
     )
-    is_organization = models.BooleanField(default=False)
+    is_organization = models.BooleanField(null=True)
     fetched_following_users = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     last_post_date = models.DateTimeField(null=True)
