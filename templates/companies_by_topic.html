@@ -1,0 +1,25 @@
+{% extends "search_base.html" %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+          <div class="column is-6">
+            {% if topic.display_name %}
+            <p id="topic-info-header" class="text-xl mb-4 text-gray-900">Companies that use {{ topic.display_name }}</p>
+            {% else %}
+            <p id="topic-info-header" class="text-xl mb-4 text-gray-900">Recommended developers for you to follow</p>
+            {% endif %}
+            <div id="user_list"></div>
+          </div>
+        </div>
+    </div>
+    <div id="data" data-topic="{{ topic.slug }}"></div>
+  </section>
+
+{% block footer %}
+<script src="/static/dist/companies.bundle.js"></script>
+<script src="/static/dist/follow.bundle.js"></script>
+{% endblock %}
+
+{% endblock %}

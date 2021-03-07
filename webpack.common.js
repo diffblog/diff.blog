@@ -22,6 +22,7 @@ module.exports = {
         profile: './app/static/js/profile.js',
         signup_finish: './app/static/js/signup_finish.js',
         user_suggestions: './app/static/js/user_suggestions.js',
+        companies: './app/static/js/companies.js',
         search: './app/static/js/search.js',
         blog_settings: './app/static/js/blog_settings.js',
         admin: './app/static/js/admin.js',
