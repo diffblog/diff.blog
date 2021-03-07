@@ -31,6 +31,21 @@ class TopicSitemap(Sitemap):
         return get_changefreq_from_last_updated_time(topic.updated_on)
 
 
+class CompanySitemap(Sitemap):
+    priority = 0.5
+
+    def items(self):
+        return Topic.objects.filter()
+
+    def lastmod(self, topic):
+        return topic.updated_on
+
+    def changefreq(self, topic):
+        return get_changefreq_from_last_updated_time(topic.updated_on)
+
+    def location(self, topic):
+        return "/companies/companies-using-{}".format(topic.slug)
+
 class PostSitemap(Sitemap):
     changefreq = "never"
     priority = 0.5
@@ -81,5 +96,6 @@ sitemaps = {
     "post": PostSitemap,
     "user": UserSitemap,
     "tag": TopicSitemap,
+    "company": CompanySitemap,
     #"search": SearchSitemap,
 }
