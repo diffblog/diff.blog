@@ -25,18 +25,10 @@ class TopicSitemap(Sitemap):
         return Topic.objects.filter()
 
     def lastmod(self, topic):
-        last_post = Post.objects.filter(topics=topic).order_by("-updated_on").first()
-        if last_post is not None:
-            return last_post.updated_on
-        return None
+        return topic.updated_on
 
     def changefreq(self, topic):
-        last_post = Post.objects.filter(topics=topic).order_by("-updated_on").first()
-
-        if last_post is None:
-            return "monthly"
-
-        return get_changefreq_from_last_updated_time(last_post.updated_on)
+        return get_changefreq_from_last_updated_time(topic.updated_on)
 
 
 class PostSitemap(Sitemap):
@@ -89,5 +81,5 @@ sitemaps = {
     "post": PostSitemap,
     "user": UserSitemap,
     "tag": TopicSitemap,
-    "search": SearchSitemap,
+    #"search": SearchSitemap,
 }

@@ -21,6 +21,7 @@ class Topic(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     recommended = models.ManyToManyField("UserProfile", related_name="recommended_in")
     slug = models.SlugField(unique=False, null=True)
+    updated_on = models.DateTimeField(null=True, auto_now_add=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.display_name)
