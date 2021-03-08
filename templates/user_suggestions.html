@@ -1,5 +1,16 @@
 {% extends "search_base.html" %}
 
+{% block seo_tags %}
+    {% if topic %}
+    <title>Recommended developers to follow in {{ topic.display_name }}</title>
+    <meta name="description" content="Top developers to follow in {{ topic.display_name }}.">
+    {% else %}
+    <title>Recommended developers to follow</title>
+    <meta name="description" content="Top developers for you to follow.">
+    {% endif %}
+{% endblock %}
+
+
 {% block content %}
 <section class="section">
     <div class="container">
