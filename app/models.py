@@ -50,7 +50,7 @@ class UserProfile(models.Model):
         User, on_delete=models.CASCADE, null=True, related_name="profile"
     )
     feed_url = models.CharField(max_length=200)
-    github_username = models.CharField(max_length=50)
+    github_username = models.CharField(max_length=50, unique=True)
     github_id = models.IntegerField(null=True)
     github_token = models.CharField(max_length=100, null=True)
     is_activated = models.BooleanField(default=False)
