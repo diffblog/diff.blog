@@ -1,14 +1,17 @@
 {% extends "search_base.html" %}
 
+{% block seo_tags %}
+    <title>Top companies that use {{ topic.display }}</title>
+    <meta name="description" content="List of companies that use {{ topic.display }} in production.">
+{% endblock %}
+
 {% block content %}
 <section class="section">
     <div class="container">
         <div class="columns">
           <div class="column is-6">
             {% if topic.display_name %}
-            <p id="topic-info-header" class="text-xl mb-4 text-gray-900">Companies that use {{ topic.display_name }}</p>
-            {% else %}
-            <p id="topic-info-header" class="text-xl mb-4 text-gray-900">Recommended developers for you to follow</p>
+            <h1 id="topic-info-header" class="text-2xl mb-4 text-gray-900">Top <span id="company-count"></span> companies that use {{ topic.display_name }}</h2>
             {% endif %}
             <div id="user_list"></div>
           </div>
