@@ -45,6 +45,7 @@ def _populate_user_profile_details(user):
     user.website_url = (user_response["blog"] or "")[:100]
     user.followers_count = user_response["followers"]
     user.following_count = user_response["following"]
+    user.is_organization = user_response["type"] == "Organization"
     user.save()
 
 
