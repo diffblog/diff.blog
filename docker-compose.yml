@@ -8,3 +8,11 @@
         - .:/code
       ports:
         - "8000:8000"
+
+    db:
+      image: postgres
+      restart: always
+      environment:
+        POSTGRES_PASSWORD: postgres_password
+        POSTGRES_USER: postgres
+        POSTGRES_DB: diffblog
