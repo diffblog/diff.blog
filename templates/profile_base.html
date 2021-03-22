@@ -45,7 +45,7 @@
                 </div>
               </div>
           </div>
-          {% if not profile.is_activated %}
+          {% if not profile.is_activated and not profile.is_organization %}
           <div class="is-size-7 has-text-grey" style="margin-top: 5px;">
             This user has not joined diff.blog yet
           </div>
