@@ -11,7 +11,7 @@
 
 {% block info %}
 
-{% if not profile.blog_url or not profile.feed_url %}
+{% if not profile.blog_url and not profile.feed_url %}
     {% if is_me %}
     <div class="box" id="is-me-step-1">
         Please set a blog URL so that we can start fetching your posts.
