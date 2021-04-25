@@ -24,7 +24,7 @@ show_all_admin_fields = lambda model: type(
     },
 )
 
-BlogSuggestionFields = lambda model: type(
+show_blog_suggestion_fields = lambda model: type(
     "SubClass" + model.__name__,
     (admin.ModelAdmin,),
     {
@@ -50,4 +50,4 @@ admin.site.register(Topic, show_all_admin_fields(Topic))
 admin.site.register(Category, show_all_admin_fields(Category))
 admin.site.register(Vote, show_all_admin_fields(Vote))
 admin.site.register(UserProfile, show_all_admin_fields(UserProfile))
-admin.site.register(BlogSuggestion, BlogSuggestionFields(BlogSuggestion))
+admin.site.register(BlogSuggestion, show_blog_suggestion_fields(BlogSuggestion))
