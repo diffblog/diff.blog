@@ -1,0 +1,25 @@
+{% extends "search_base.html" %}
+
+{% block seo_tags %}
+    <title>Jobs</title>
+    <meta name="description" content="">
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+          <div class="column is-6">
+            <h1 id="topic-info-header" class="text-2xl mb-4 text-gray-900">Jobs</h2>
+            <div id="job_list"></div>
+          </div>
+        </div>
+    </div>
+    <div id="data" data-topic="{{ topic.slug }}"></div>
+  </section>
+
+{% block footer %}
+<script src="/static/dist/jobs.bundle.js"></script>
+{% endblock %}
+
+{% endblock %}

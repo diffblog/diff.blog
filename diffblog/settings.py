@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     "feed",
     "app",
+    "jobs",
     "mirrors",
     "challenge",
     "social_django",

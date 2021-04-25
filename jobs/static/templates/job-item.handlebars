@@ -1,0 +1,21 @@
+<div class="flex mb-2 items-center border-b pb-4 pt-2">
+    <img class="rounded-full h-20 w-20" src="https://logo.clearbit.com/{{ company_url }}" alt="Placeholder image">
+    <div class="ml-2">
+        <a class="text-gray-900 font-bold text-xl" href="{{ company_url }}">
+            {{ company_name }}
+        </a>
+        <br>
+        <a class="text-gray-900 font-bold text-sm" href="{{ job_url }}">
+            {{ title }}
+        </a>
+        <br>
+        <div class="">
+            {{#each locations}}
+            <a href=" /tag/{{ slug }}/top/">
+                <span class="text-gray-600 text-sm mx-1 bg-gray-100 rounded px-2 py-1">{{ name }}</span>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+
+</div>
