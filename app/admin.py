@@ -4,7 +4,7 @@ from django.db.models import ManyToOneRel, ForeignKey, OneToOneField
 
 # Register your models here.
 
-ShowAllAdminFeilds = lambda model: type(
+show_all_admin_fields = lambda model: type(
     "SubClass" + model.__name__,
     (admin.ModelAdmin,),
     {
@@ -45,9 +45,9 @@ BlogSuggestionFields = lambda model: type(
     },
 )
 
-admin.site.register(Post, ShowAllAdminFeilds(Post))
-admin.site.register(Topic, ShowAllAdminFeilds(Topic))
-admin.site.register(Category, ShowAllAdminFeilds(Category))
-admin.site.register(Vote, ShowAllAdminFeilds(Vote))
-admin.site.register(UserProfile, ShowAllAdminFeilds(UserProfile))
+admin.site.register(Post, show_all_admin_fields(Post))
+admin.site.register(Topic, show_all_admin_fields(Topic))
+admin.site.register(Category, show_all_admin_fields(Category))
+admin.site.register(Vote, show_all_admin_fields(Vote))
+admin.site.register(UserProfile, show_all_admin_fields(UserProfile))
 admin.site.register(BlogSuggestion, BlogSuggestionFields(BlogSuggestion))
