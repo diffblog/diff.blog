@@ -3,11 +3,13 @@
 from django.db import migrations, models
 import random, string
 
+from app.lib import get_random_lowercase_string
+
 def set_default_key(apps, schema_editor):
     UserProfile = apps.get_model('app', 'UserProfile')
     profiles = UserProfile.objects.all()
     for profile in profiles:
-        profile.unsubscribe_key = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(50))
+        profile.unsubscribe_key = get_random_lowercase_string(50)
         profile.save()
 
 class Migration(migrations.Migration):

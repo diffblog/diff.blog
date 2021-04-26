@@ -9,6 +9,11 @@ from datetime import datetime, timedelta
 from math import log
 
 
+from app.lib import get_random_lowercase_string
+
+def get_random_lowercase_string_of_50_chars():
+    return get_random_lowercase_string(50)
+
 class Category(models.Model):
     name = models.CharField(max_length=30)
 
@@ -71,7 +76,7 @@ class UserProfile(models.Model):
     is_admin = models.BooleanField(default=False)
     last_post_date = models.DateTimeField(null=True)
 
-    unsubscribe_key = models.CharField(max_length=50, null=True)
+    unsubscribe_key = models.CharField(max_length=50, default=get_random_lowercase_string_of_50_chars)
     send_weekly_digest_email = models.BooleanField(default=True)
 
     pocket_api_key = models.CharField(max_length=100, null=True)
