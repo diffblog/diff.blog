@@ -6,7 +6,7 @@ from django.db import migrations, models
 def set_default_key(apps, schema_editor):
     UserProfile = apps.get_model('app', 'UserProfile')
 
-    for profile in UserProfile.filter(unsubscribe_key=None):
+    for profile in UserProfile.objects.filter(unsubscribe_key=None):
         profile.unsubscribe_key = app.models.get_random_lowercase_string_of_50_chars()
         profile.save(update_fields=["unsubscribe_key"])
 
