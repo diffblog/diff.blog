@@ -1,0 +1,71 @@
+{% extends "search_base.html" %}
+
+{% block seo_tags %}
+{% if location %}
+<title>Jobs in {{ location.name }}</title>
+<meta name="description" content="">
+{% else %}
+<title>Jobs</title>
+<meta name="description" content="">
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-6">
+        <h1 id="topic-info-header" class="text-2xl mb-4 text-gray-900">
+            Post a new job
+        </h2>
+        <form>
+            <label class="text-l">Company name</label>
+            <br>
+            <input type="text" class="placeholder-gray-500 border p-1 rounded" placeholder="">
+            <br>
+
+            <label class="text-l my-4">Company URL</label>
+            <br>
+            <input type="text" class="placeholder-gray-500 border p-1 rounded">
+
+            <br>
+            <label class="text-l my-4">Position</label>
+            <br>
+            <input type="text" class="placeholder-gray-500 border p-1 rounded">
+
+            <br>
+            <label class="text-l my-4">Job URL</label>
+            <br>
+            <input type="text" class="placeholder-gray-500 border p-1 rounded">
+
+            <br>
+            <label class="text-l my-4">Location</label>
+            <br>
+            <input type="text" class="placeholder-gray-500 border p-1 rounded">
+
+            <br>
+            <label class="text-l my-4">Category</label>
+            <br>
+            <select>
+                {% for domain in domains %}
+                <option value="{{ domain.id }}">{{ domain.display_name }}</option>
+                {% endfor %}
+            </select>
+            
+            <br>
+            <label class="text-l my-4">Tags</label>
+            <br>
+            <input type="text" class="placeholder-gray-500 border p-1 rounded">
+
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% block footer %}
+<script src="/static/dist/jobs.bundle.js"></script>
+{% endblock %}
+
+{% endblock %}

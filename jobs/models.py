@@ -1,4 +1,5 @@
 from django.db import models
+from app.models import Topic
 
 class Location(models.Model):
     name = models.CharField(max_length=200)
@@ -21,6 +22,7 @@ class Job(models.Model):
     url = models.CharField(max_length=300)
     locations = models.ManyToManyField(Location, related_name="jobs")
     posted_on = models.DateTimeField(auto_now_add=True)
+    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
 
     def serialize(self):
         return {
