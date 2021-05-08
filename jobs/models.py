@@ -1,6 +1,7 @@
 from django.db import models
 from app.models import Topic
 
+
 class Location(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, null=True)
@@ -10,10 +11,8 @@ class Location(models.Model):
         super().save(*args, **kwargs)
 
     def serialize(self):
-        return {
-            "name": self.name,
-            "slug": self.slug
-        }
+        return {"name": self.name, "slug": self.slug}
+
 
 class Job(models.Model):
     company_name = models.CharField(max_length=200)
@@ -31,5 +30,5 @@ class Job(models.Model):
             "title": self.title,
             "url": self.url,
             "posted_on": self.posted_on.isoformat(),
-            "locations": [location.serialize() for location in self.locations.all()]
+            "locations": [location.serialize() for location in self.locations.all()],
         }

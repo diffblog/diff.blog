@@ -5,7 +5,7 @@ from datetime import timedelta
 
 def get_posts_for_weekly_digest():
     time_cutoff = timezone.now() - timedelta(days=7)
-    all_posts =  Post.objects.filter(updated_on__gte=time_cutoff).order_by(
+    all_posts = Post.objects.filter(updated_on__gte=time_cutoff).order_by(
         "-aggregate_votes_count"
     )[:30]
 
@@ -21,4 +21,3 @@ def get_posts_for_weekly_digest():
             break
 
     return posts
-

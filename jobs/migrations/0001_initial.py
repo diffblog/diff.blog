@@ -7,32 +7,47 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Job',
+            name="Job",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('company_name', models.CharField(max_length=200)),
-                ('company_url', models.CharField(max_length=200)),
-                ('title', models.CharField(max_length=200)),
-                ('job_url', models.CharField(max_length=300)),
-                ('posted_on', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("company_name", models.CharField(max_length=200)),
+                ("company_url", models.CharField(max_length=200)),
+                ("title", models.CharField(max_length=200)),
+                ("job_url", models.CharField(max_length=300)),
+                ("posted_on", models.DateTimeField(auto_now_add=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Location',
+            name="Location",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('slug', models.SlugField(null=True, unique=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("slug", models.SlugField(null=True, unique=True)),
             ],
         ),
         migrations.AddField(
-            model_name='job',
-            name='locations',
-            field=models.ManyToManyField(related_name='jobs', to='jobs.Location'),
+            model_name="job",
+            name="locations",
+            field=models.ManyToManyField(related_name="jobs", to="jobs.Location"),
         ),
     ]

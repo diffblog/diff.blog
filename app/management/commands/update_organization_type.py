@@ -5,6 +5,7 @@ import requests as r
 
 diffblog_headers = {"Authorization": "token {}".format(diffblog_github_access_token)}
 
+
 def get_user_profile_details(user):
     response = r.get(
         "https://api.github.com/users/{}".format(user.github_username),
@@ -23,12 +24,14 @@ def get_user_profile_details(user):
         user.is_organization = False
         user.save()
 
+
 class Command(BaseCommand):
     help = ""
 
     def handle(self, *args, **options):
-        users = UserProfile.objects.filter(is_activated=False, is_organization=None).exclude(recommended_in__isnull=True)
+        users = UserProfile.objects.filter(
+            is_activated=False, is_organization=None
+        ).exclude(recommended_in__isnull=True)
 
         for user in users:
             get_user_profile_details(user)
-

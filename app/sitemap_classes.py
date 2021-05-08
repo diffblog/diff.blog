@@ -46,6 +46,7 @@ class CompanySitemap(Sitemap):
     def location(self, topic):
         return "/companies/companies-using-{}".format(topic.slug)
 
+
 class PostSitemap(Sitemap):
     changefreq = "never"
     priority = 0.5
@@ -97,5 +98,5 @@ sitemaps = {
     "user": UserSitemap,
     "tag": TopicSitemap,
     "company": CompanySitemap,
-    #"search": SearchSitemap,
+    # "search": SearchSitemap,
 }

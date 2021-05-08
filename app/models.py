@@ -11,8 +11,10 @@ from math import log
 
 from app.lib import get_random_lowercase_string
 
+
 def get_random_lowercase_string_of_50_chars():
     return get_random_lowercase_string(50)
+
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
@@ -76,7 +78,9 @@ class UserProfile(models.Model):
     is_admin = models.BooleanField(default=False)
     last_post_date = models.DateTimeField(null=True)
 
-    unsubscribe_key = models.CharField(max_length=50, default=get_random_lowercase_string_of_50_chars)
+    unsubscribe_key = models.CharField(
+        max_length=50, default=get_random_lowercase_string_of_50_chars
+    )
     send_weekly_digest_email = models.BooleanField(default=True)
 
     pocket_api_key = models.CharField(max_length=100, null=True)
@@ -312,3 +316,10 @@ class Search(models.Model):
 
     def get_absolute_url(self):
         return "/search/{}".format(self.query.replace(" ", "+"))
+
+
+class Tweet(models.Model):
+    github_username = models.CharField(max_length=100)
+    repo_name = models.CharField(max_length=150)
+    ISSUE_CREATED_TO_ADD_BLOG_TO_DIFFBLOG = 60
+    status = models.IntegerField()
