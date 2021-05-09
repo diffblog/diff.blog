@@ -17,7 +17,7 @@ def get_user_profile_details(user):
         print(response.content)
         return
     user_response = response.json()
-    user.twitter_username = user_response.get("twitter_username", "")
+    user.twitter_username = user_response.get("twitter_username", "") or ""
     user.save(update_fields=["twitter_username"])
 
 
