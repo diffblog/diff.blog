@@ -48,10 +48,10 @@ class Command(BaseCommand):
             if post.tweets.all().exists():
                 continue
 
-            if post.aggregate_votes_count < 50 and not post.profile.is_activated:
+            if post.aggregate_votes_count < 30 and not post.profile.is_activated:
                 continue
 
-            if post.aggregate_votes_count < 10:
+            if post.aggregate_votes_count < 5:
                 break
 
             content = tweet_template.format(post_title=post.title, post_link=post.link)
