@@ -18,6 +18,10 @@ def get_user_profile_details(user):
         return
     user_response = response.json()
     user.twitter_username = user_response.get("twitter_username", "") or ""
+    if user.twitter_username:
+        print("✅")
+    else:
+        print("❌")
     user.save(update_fields=["twitter_username"])
 
 
