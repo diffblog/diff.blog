@@ -56,7 +56,7 @@ class Command(BaseCommand):
 
             twitter_username = ""
             if post.profile.twitter_username:
-                twitter_username = " @" + post.profile.twitter_username
+                twitter_username = " (@" + post.profile.twitter_username + ")"
 
             content = tweet_template.format(post_title=post.title, post_link=post.link, twitter_username=twitter_username)
             response = api.update_status(content)
