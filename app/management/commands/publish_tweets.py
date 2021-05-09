@@ -41,6 +41,13 @@ class Command(BaseCommand):
         for post in posts:
             if post.tweets.all().exists():
                 continue
+
+            if post.aggregate_votes_count < 50 and not post.profile.is_activated:
+                continue
+
+            if post.aggregate_votes_count < 10:
+                break
+
             content = tweet_template.format(post_title=post.title, post_link=post.link)
             response = api.update_status(content)
             Tweet.objects.create(tweet_id=response.id_str, post=post)
