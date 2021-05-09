@@ -13,7 +13,12 @@ from django.core import mail
 from django.urls import reverse
 
 
-from diffblog.secrets import twitter_api_key, twitter_api_secret_key, twitter_access_token, twitter_access_token_secret
+from diffblog.secrets import (
+    twitter_api_key,
+    twitter_api_secret_key,
+    twitter_access_token,
+    twitter_access_token_secret,
+)
 
 import tweepy
 
@@ -28,6 +33,7 @@ tweet_template = """
 {post_title}
 {post_link}
 """
+
 
 class Command(BaseCommand):
     help = "Publish the most popular post to Twitter"
