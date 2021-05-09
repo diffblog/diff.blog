@@ -48,7 +48,7 @@ class Command(BaseCommand):
             if post.tweets.all().exists():
                 continue
 
-            if post.aggregate_votes_count < 30 and not post.profile.is_activated:
+            if post.aggregate_votes_count < 15 and not post.profile.is_activated:
                 continue
 
             if post.aggregate_votes_count < 5:
