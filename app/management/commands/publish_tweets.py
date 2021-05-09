@@ -3,7 +3,7 @@ import time
 from django.core.management.base import BaseCommand, CommandError
 from datetime import timedelta
 from django.utils import timezone
-from app.models import Topic, UserProfile, UserList, Post
+from app.models import Topic, UserProfile, UserList, Post, Tweet
 from app.digest import get_posts_for_weekly_digest
 from django.core.mail import send_mail
 from django.conf import settings
@@ -13,12 +13,7 @@ from django.core import mail
 from django.urls import reverse
 
 
-from diffblog.secrets import (
-    twitter_api_key,
-    twitter_api_secret_key,
-    twitter_access_token,
-    twitter_access_token_secret,
-)
+from diffblog.secrets import twitter_api_key, twitter_api_secret_key, twitter_access_token, twitter_access_token_secret
 
 import tweepy
 
@@ -29,13 +24,24 @@ api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
 timeline = api.home_timeline()
 
+tweet_template = """
+{post_title}
+{post_link}
+"""
 
 class Command(BaseCommand):
     help = "Publish the most popular post to Twitter"
 
-    def add_arguments(self, parser):
-        # parser.add_argument("--username", action="store", default=None)
-        pass
-
     def handle(self, *args, **options):
-        pass
+        time_cutoff = timezone.now() - timedelta(days=3)
+        posts = Post.objects.filter(updated_on__gte=time_cutoff).order_by(
+            "-aggregate_votes_count"
+        )[:100]
+
+        for post in posts:
+            if post.tweets.all().exists():
+                continue
+            content = tweet_template.format(post_title=post.title, post_link=post.link)
+            response = api.update_status(content)
+            Tweet.objects.create(tweet_id=response.id_str, post=post)
+            break
