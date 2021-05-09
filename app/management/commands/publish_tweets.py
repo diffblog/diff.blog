@@ -30,7 +30,7 @@ api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 timeline = api.home_timeline()
 
 tweet_template = """
-{post_title}
+{post_title}{twitter_username}
 {post_link}
 """
 
@@ -54,7 +54,11 @@ class Command(BaseCommand):
             if post.aggregate_votes_count < 5:
                 break
 
-            content = tweet_template.format(post_title=post.title, post_link=post.link)
+            twitter_username = ""
+            if post.profile.twitter_username:
+                twitter_username = " @" + post.profile.twitter_username
+
+            content = tweet_template.format(post_title=post.title, post_link=post.link, twitter_username=twitter_username)
             response = api.update_status(content)
             Tweet.objects.create(tweet_id=response.id_str, post=post)
             break
