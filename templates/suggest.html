@@ -31,7 +31,7 @@
                         {% csrf_token %}
                         <label class="label">GitHub username</label>
                         <p class="control has-icons-left has-icons-right">
-                        <input class="input" name="username" type="text" value="{{ username }}" placeholder="GitHub username of the user/organization (optional)">
+                        <input class="input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="username" type="text" value="{{ username }}" placeholder="GitHub username of the user/organization (optional)">
                         <span class="icon is-small is-left">
                             <i class="fab fa-github"></i>
                         </span>
@@ -40,7 +40,7 @@
                     <div class="field">
                         <label class="label">URL of the blog</label>
                         <p class="control has-icons-left">
-                        <input class="input" name="url" type="text" placeholder="Blog or RSS URL" required>
+                        <input class="input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="url" type="text" placeholder="Blog or RSS URL" required>
                         <span class="icon is-small is-left">
                             <i class="fas fa-rss"></i>
                         </span>

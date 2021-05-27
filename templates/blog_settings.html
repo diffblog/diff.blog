@@ -39,7 +39,7 @@
         {% endif %}
 
         {% csrf_token %}
-        <input class="input" name="blog_url" type="text" placeholder="eg https://ma.tt" value="{{blog_url}}" required>
+        <input class="input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="blog_url" type="text" placeholder="eg https://ma.tt" value="{{blog_url}}" required>
         <br><br>
         <button id="blog_setting_submit_button" class="button is-success">Save</button>
     </form>
