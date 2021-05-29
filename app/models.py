@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, User
+from django.contrib.auth.models import AbstractUser, User  # pylint: disable=E5142
 from django.core import serializers
 from django.forms.models import model_to_dict
 from django.db.models import Sum

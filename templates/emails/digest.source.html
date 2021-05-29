@@ -2,50 +2,37 @@
 
 {% block title %}
 <title>
-Popular blog posts of last week
+    diff.blog weekly digest.
 </title>
 {% endblock %}
 
 {% block content %}
-<h2>
-    Best blog posts of last week in diff.blog
-</h2>
+
+<h1>
+    diff.blog weekly digest
+</h1>
+
+{% if following_posts %}
+<h3>
+    From users you follow 📰
+</h3>
 <table>
-    {% for post in top_posts %}
-    <tr>
-        <td class="avatar-col">
-            <img class="avatar" src="https://github.com/{{ post.profile.github_username }}.png" />
-        </td>
-        <td class="title-col">
-            <a class="post-title" target="_blank" href="{{ post.link }}">
-                {{ post.title }}
-            </a>
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>
-            <p class="post-summary">
-                {{ post.summary|truncatechars:200 }}
-            </p>
-        </td>
-    </tr>
-    <tr>
-        <td>
-        </td>
-        <td class="post-info-col">
-            {% if post.profile.full_name %}
-           <a href="{{ post.uri }}" target="_blank" class="points">{{ post.aggregate_votes_count }} points</a> by <a class="author-name" href="{{ post.profile.uri }}">{{ post.profile.full_name }}</a>
-           {% else %}
-           <a href="{{ post.uri }}" target="_blank" class="points">{{ post.aggregate_votes_count }} points</a> by <a class="author-name" href="{{ post.profile.uri }}">{{ post.profile.github_username }}</a>
-            {% endif %}
-        </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td class="new-line">
-        </td>
-    </tr>
+    {% for post in following_posts %}
+    {% include "emails/compiled/digest_post.html" %}
     {% endfor %}
 </table>
+{% endif %}
+
+
+{% if global_posts %}
+<h3>
+    Popular in diff.blog last week 🎉
+</h3>
+<table>
+    {% for post in global_posts %}
+    {% include "emails/compiled/digest_post.html" %}
+    {% endfor %}
+</table>
+{% endif %}
+
 {% endblock %}

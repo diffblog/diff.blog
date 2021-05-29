@@ -1,2 +1,3 @@
 black .
 npx prettier --write app/static/js
+pylint -E --load-plugins pylint_django app/

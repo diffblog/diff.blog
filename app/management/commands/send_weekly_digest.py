@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand, CommandError
 from datetime import timedelta
 from django.utils import timezone
 from app.models import Topic, UserProfile, UserList, Post
-from app.digest import get_posts_for_weekly_digest
+from app.digest import get_weekly_digest_posts
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
@@ -32,8 +32,6 @@ class Command(BaseCommand):
             user = UserProfile.objects.get(github_username=username)
             users = [user]
 
-        top_posts = get_posts_for_weekly_digest()
-
         connection = mail.get_connection()  # Use default email connection
 
         to_users = []
@@ -53,7 +51,12 @@ class Command(BaseCommand):
                     "unsubscribe_from_emails", kwargs={"key": to_user.unsubscribe_key}
                 )
             )
-            context = {"top_posts": top_posts, "unsubscribe_link": unsubscribe_link}
+            global_posts, following_posts = get_weekly_digest_posts(to_user)
+            context = {
+                "global_posts": global_posts,
+                "following_posts": following_posts,
+                "unsubscribe_link": unsubscribe_link,
+            }
             msg_plain = render_to_string("emails/digest.txt", context)
             msg_html = render_to_string("emails/compiled/digest.html", context)
             msg = EmailMultiAlternatives(subject, msg_plain, from_email, [to_email])

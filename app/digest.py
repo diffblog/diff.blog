@@ -2,12 +2,16 @@ from app.models import Post
 from django.utils import timezone
 from datetime import timedelta
 
+cutoff_days = 7
 
-def get_posts_for_weekly_digest():
-    time_cutoff = timezone.now() - timedelta(days=7)
-    all_posts = Post.objects.filter(updated_on__gte=time_cutoff).order_by(
-        "-aggregate_votes_count"
-    )[:30]
+
+def get_global_popular_posts_from_last_week(ignore_post_ids):
+    time_cutoff = timezone.now() - timedelta(days=cutoff_days)
+    all_posts = (
+        Post.objects.filter(updated_on__gte=time_cutoff)
+        .order_by("-aggregate_votes_count")
+        .exclude(id__in=ignore_post_ids)[:30]
+    )
 
     users_ids = set()
     posts = []
@@ -21,3 +25,19 @@ def get_posts_for_weekly_digest():
             break
 
     return posts
+
+
+def get_popular_posts_from_following_users_last_week(user_profile):
+    time_cutoff = timezone.now() - timedelta(days=cutoff_days)
+    all_posts = Post.objects.filter(
+        updated_on__gte=time_cutoff, profile__in=user_profile.following.all()
+    ).order_by("-aggregate_votes_count")[:10]
+    return list(all_posts)
+
+
+def get_weekly_digest_posts(user_profile):
+    following_posts = get_popular_posts_from_following_users_last_week(user_profile)
+    following_post_ids = [post.id for post in following_posts]
+
+    popular_posts = get_global_popular_posts_from_last_week(following_post_ids)
+    return popular_posts, following_posts

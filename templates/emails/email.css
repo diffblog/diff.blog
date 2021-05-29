@@ -11,7 +11,6 @@ img {
 }
 
 body {
-    background-color: #f6f6f6;
     font-family: sans-serif;
     -webkit-font-smoothing: antialiased;
     font-size: 14px;
@@ -40,7 +39,6 @@ table td {
 ------------------------------------- */
 
 .body {
-    background-color: #f6f6f6;
     width: 100%;
 }
 
@@ -49,9 +47,9 @@ table td {
     display: block;
     margin: 0 auto !important;
     /* makes it centered */
-    max-width: 580px;
+    max-width: 600px;
     padding: 10px;
-    width: 580px;
+    width: 600px;
 }
 
 /* This should also be a block element, so that it will fill 100% of the .container */
@@ -59,7 +57,7 @@ table td {
     box-sizing: border-box;
     display: block;
     margin: 0 auto;
-    max-width: 580px;
+    max-width: 600px;
     padding: 10px;
 }
 
@@ -101,9 +99,7 @@ table td {
 /* -------------------------------------
   TYPOGRAPHY
 ------------------------------------- */
-h1,
 h2,
-h3,
 h4 {
     color: #444040;
     font-family: sans-serif;
@@ -113,11 +109,24 @@ h4 {
     margin-bottom: 30px;
 }
 
+h1 {
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+}
+
 h2 {
     font-size: 25px;
     font-weight: 500;
     text-align: center;
 }
+
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
 
 p,
 ul,
@@ -346,8 +355,12 @@ hr {
 }
 
 .avatar {
-    max-width: 30px;
-    border-radius: 100%
+    max-width: 35px;
+    border-radius: 50%;
+}
+
+.avatar-col {
+    position: relative;
 }
 
 .title-col {
@@ -356,8 +369,15 @@ hr {
 
 .post-title {
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 500;
     text-decoration: solid;
+    color: black;
+    margin-bottom: 0px;
+}
+
+.post {
+    margin-bottom: 5px;
 }
 
 .diff-logo {
@@ -372,12 +392,22 @@ hr {
     font-family: BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.5em;
-    text-decoration: none
+    text-decoration: none;
 }
 
 .post-info-col {
     color: rgb(121, 115, 121);
 }
+
+.summary-row {
+    background-color: brown;
+    padding-bottom: 0px;
+}
+
+.post-info-row {
+    margin-top: -15px;
+}
+
 .author-name {
     color: rgb(121, 115, 121);
 }
