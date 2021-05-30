@@ -32,7 +32,7 @@ def get_popular_posts_from_following_users_last_week(user_profile):
     all_posts = Post.objects.filter(
         updated_on__gte=time_cutoff,
         profile__in=user_profile.following.all(),
-        aggregate_votes_count__gte=1,
+        aggregate_votes_count__gte=10,
     ).order_by("-aggregate_votes_count")[:7]
     return list(all_posts)
 
