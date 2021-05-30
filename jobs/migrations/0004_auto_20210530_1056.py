@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('jobs', '0003_job_topic'),
+        ("jobs", "0003_job_topic"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='job',
-            name='topic',
+            model_name="job",
+            name="topic",
         ),
         migrations.AddField(
-            model_name='job',
-            name='github_username',
+            model_name="job",
+            name="github_username",
             field=models.CharField(max_length=200, null=True),
         ),
     ]

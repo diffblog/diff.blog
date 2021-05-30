@@ -51,7 +51,9 @@ class Command(BaseCommand):
                     "unsubscribe_from_emails", kwargs={"key": to_user.unsubscribe_key}
                 )
             )
-            global_posts, following_posts, job_postings = get_weekly_digest_posts(to_user)
+            global_posts, following_posts, job_postings = get_weekly_digest_posts(
+                to_user
+            )
             context = {
                 "global_posts": global_posts,
                 "following_posts": following_posts,
