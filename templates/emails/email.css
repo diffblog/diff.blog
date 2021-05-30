@@ -451,3 +451,8 @@ hr {
     color: rgb(121, 115, 121);
     text-decoration: none;
 }
+
+.who-is-hiring {
+    text-decoration: none;
+    color: black;
+}
