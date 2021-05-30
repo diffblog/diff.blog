@@ -46,9 +46,8 @@ table td {
 .container {
     display: block;
     margin: 0 auto !important;
-    /* makes it centered */
     max-width: 600px;
-    padding: 10px;
+    padding: 5px;
     width: 600px;
 }
 
@@ -58,7 +57,7 @@ table td {
     display: block;
     margin: 0 auto;
     max-width: 600px;
-    padding: 10px;
+    padding: 5px;
 }
 
 /* -------------------------------------
@@ -76,13 +75,13 @@ table td {
 }
 
 .content-block {
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
 
 .footer {
     clear: both;
-    margin-top: 10px;
+    margin-top: 5px;
     text-align: center;
     width: 100%;
 }
@@ -355,7 +354,7 @@ hr {
 }
 
 .avatar {
-    max-width: 35px;
+    max-width: 18px;
     border-radius: 50%;
 }
 

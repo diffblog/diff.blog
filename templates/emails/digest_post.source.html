@@ -1,24 +1,37 @@
 <tr>
-    <td class="avatar-col">
-        <img class="avatar" src="https://github.com/{{ post.profile.github_username }}.png" />
-    </td>
     <td class="title-col">
         <a class="post-title" target="_blank" href="{{ post.link }}">
             {{ post.title }}
         </a>
         <br>
         {% if post.profile.full_name %}
-        <a href="{{ post.uri }}" target="_blank" class="points">{{ post.aggregate_votes_count }} points</a> by <a class="author-name" href="{{ post.profile.uri }}">{{ post.profile.full_name }}</a>
+        <img class="avatar" src="https://github.com/{{ post.profile.github_username }}.png" />
+        <a class="author-name" href="{{ post.profile.uri }}">{{ post.profile.full_name }}</a> <a href="{{ post.uri }}" target="_blank" class="points">{{ post.aggregate_votes_count }} points</a>
         {% else %}
-        <a href="{{ post.uri }}" target="_blank" class="points">{{ post.aggregate_votes_count }} points</a> by <a class="author-name" href="{{ post.profile.uri }}">{{ post.profile.github_username }}</a>
-         {% endif %}
+        <img class="avatar" src="https://github.com/{{ post.profile.github_username }}.png" />
+        <a class="author-name" href="{{ post.profile.uri }}">{{ post.profile.github_username }}</a> <a href="{{ post.uri }}" target="_blank" class="points">{{ post.aggregate_votes_count }} points</a>
+        {% endif %}
+    </td>
+</tr>
+<tr>
+    <td>
+        <div class="post-summary">
+            {{ post.summary|truncatechars:145 }}
+        </div>
     </td>
 </tr>
 <tr>
     <td></td>
-    <td>
-        <div class="post-summary">
-            {{ post.summary|truncatechars:125 }}
-        </div>
-    </td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
+</tr>
+<tr>
+    <td></td>
 </tr>

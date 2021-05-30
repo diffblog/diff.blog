@@ -23,14 +23,13 @@ def get_global_popular_posts_from_last_week(ignore_post_ids):
 
         if len(users_ids) == 10:
             break
-
     return posts
 
 
 def get_popular_posts_from_following_users_last_week(user_profile):
     time_cutoff = timezone.now() - timedelta(days=cutoff_days)
     all_posts = Post.objects.filter(
-        updated_on__gte=time_cutoff, profile__in=user_profile.following.all()
+        updated_on__gte=time_cutoff, profile__in=user_profile.following.all(), aggregate_votes_count__gte=5
     ).order_by("-aggregate_votes_count")[:10]
     return list(all_posts)
 
