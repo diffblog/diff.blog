@@ -1,4 +1,7 @@
- {% for post in top_posts %}
+ {% if following_posts %}
+ ## Popular posts from users you follow
+
+ {% for post in following_posts %}
     Title: {{ post.title }}
     Post link: {{ post.link }}
     diff.blog link: {{ post.uri }}
@@ -8,7 +11,41 @@
     Summary:
     {{ post.summary|truncatechars:200 }}
 
-    ----
+    ...
+{% endfor %}
+{% endif %}
+
+{% if global_posts %}
+## Popular posts across diff.blog
+
+ {% for post in global_posts %}
+    Title: {{ post.title }}
+    Post link: {{ post.link }}
+    diff.blog link: {{ post.uri }}
+    Points: {{ post.aggregate_votes_count }}
+    Author: {{ post.profile.uri }}
+
+    Summary:
+    {{ post.summary|truncatechars:200 }}
+    ...
+{% endfor %}
+{% endif %}
+
+
+{% if job_postings %}
+## Who is hiring?
+
+{% for job in job_postings %}
+    {{ job.company_name }} is hiring a {{job.title}} in
+    {% for location in job.locations.all %}
+    * {{ location.name }}
+    {% endfor %}
+    Apply at {{ job.description_link }}.
+    ...
 {% endfor %}
 
+Hiring? Post a job at https://diff.blog/jobs/new.
+{% endif %}
+
+ 
 Don't like these emails? Unsubscribe by going to {{ unsubscribe_link }}

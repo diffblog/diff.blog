@@ -20,6 +20,11 @@
     {% for post in following_posts %}
     {% include "emails/compiled/digest_post.html" %}
     {% endfor %}
+    <tr>
+        <td>
+            <a class="see-all-posts" href="https://diff.blog/following">Read More »</a>
+        </td>
+    </tr>
 </table>
 {% endif %}
 
@@ -35,4 +40,16 @@
 </table>
 {% endif %}
 
+{% if job_postings %}
+<h3>
+    Who is hiring?
+</h3>
+<table>
+{% for job in job_postings %}
+{% include "emails/compiled/digest_job.html" %}
+{% endfor %}
+</table>
+<div></div>
+<a class="see-all-posts" href="https://diff.blog/jobs/new">Hiring? Post a job.</a>
+{% endif %}
 {% endblock %}

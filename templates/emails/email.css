@@ -375,6 +375,13 @@ hr {
     margin-bottom: 0px;
 }
 
+.post-summary {
+    color: hsl(210, 10%, 10%) !important;
+    font-family: BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+    text-decoration: none;
+}
 .post {
     margin-bottom: 5px;
 }
@@ -386,13 +393,7 @@ hr {
     border-radius: 10%;
 }
 
-.post-summary {
-    color: hsl(210, 10%, 10%) !important;
-    font-family: BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5em;
-    text-decoration: none;
-}
+
 
 .post-info-col {
     color: rgb(121, 115, 121);
@@ -416,4 +417,37 @@ hr {
 
 .points {
     color: rgb(121, 115, 121);
+}
+
+.see-all-posts {
+    color: black;
+    text-decoration: none;
+}
+
+.job-post-company-name {
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    color: black;
+}
+
+.job-post-title {
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    color: black;
+}
+
+.company-image-col {
+    width: 52px;
+}
+
+.job-post-company-logo {
+    max-width: 50px;
+}
+
+.location {
+    font-size: 14px;
+    color: rgb(121, 115, 121);
+    text-decoration: none;
 }

@@ -16,18 +16,8 @@
     <div class="columns">
       <div class="column is-6">
         <h1 id="topic-info-header" class="text-2xl mb-4 text-gray-900">
-          {% if location %}
-          Jobs in {{ location.name }}
-          {% else %}
-          Jobs
-          {% endif %}
+            Job posted successfully. Visit <a class="underline" href="/jobs">job listings</a> to see the post.
         </h2>
-          <div id="job_list"></div>
-      </div>
-      <div class="column is-4">
-        <a href="/jobs/new">
-        <button class="button is-success">Post job</button>
-        </a>
       </div>
     </div>
   </div>
@@ -36,12 +26,6 @@
 
 {% block footer %}
 <script src="/static/dist/jobs.bundle.js"></script>
-<script>
-  var page_params = {
-    location_slug: "{{ location.slug }}",
-  };
-</script>
-
 {% endblock %}
 
 {% endblock %}

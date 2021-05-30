@@ -51,11 +51,12 @@ class Command(BaseCommand):
                     "unsubscribe_from_emails", kwargs={"key": to_user.unsubscribe_key}
                 )
             )
-            global_posts, following_posts = get_weekly_digest_posts(to_user)
+            global_posts, following_posts, job_postings = get_weekly_digest_posts(to_user)
             context = {
                 "global_posts": global_posts,
                 "following_posts": following_posts,
                 "unsubscribe_link": unsubscribe_link,
+                "job_postings": job_postings,
             }
             msg_plain = render_to_string("emails/digest.txt", context)
             msg_html = render_to_string("emails/compiled/digest.html", context)

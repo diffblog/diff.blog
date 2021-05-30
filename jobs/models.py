@@ -1,5 +1,6 @@
 from django.db import models
 from app.models import Topic
+from django.utils.text import slugify
 
 
 class Location(models.Model):
@@ -18,17 +19,18 @@ class Job(models.Model):
     company_name = models.CharField(max_length=200)
     company_url = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
-    url = models.CharField(max_length=300)
+    description_link = models.CharField(max_length=300)
     locations = models.ManyToManyField(Location, related_name="jobs")
     posted_on = models.DateTimeField(auto_now_add=True)
-    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
+    github_username = models.CharField(max_length=200, null=True)
+    is_verified = models.BooleanField(default=False)
 
     def serialize(self):
         return {
             "company_name": self.company_name,
             "company_url": self.company_url,
             "title": self.title,
-            "url": self.url,
+            "description_link": self.description_link,
             "posted_on": self.posted_on.isoformat(),
             "locations": [location.serialize() for location in self.locations.all()],
         }

@@ -18,46 +18,45 @@
         <h1 id="topic-info-header" class="text-2xl mb-4 text-gray-900">
             Post a new job
         </h2>
-        <form>
+        <form method="POST">
             <label class="text-l">Company name</label>
             <br>
-            <input type="text" class="placeholder-gray-500 border p-1 rounded" placeholder="">
+            <input name="company-name" placeholder="Ex: Acme" type="text" class="input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            
+            <br>
             <br>
 
             <label class="text-l my-4">Company URL</label>
             <br>
-            <input type="text" class="placeholder-gray-500 border p-1 rounded">
+            <input name="company-url" placeholder="Ex: https://www.example.com" type="text" class="input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
 
             <br>
-            <label class="text-l my-4">Position</label>
             <br>
-            <input type="text" class="placeholder-gray-500 border p-1 rounded">
+
+            <label class="text-l my-4">What is the title of this role?</label>
+            <br>
+            <input name="title" placeholder="Ex: Full Stack Engineer" type="text" class="input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
 
             <br>
-            <label class="text-l my-4">Job URL</label>
             <br>
-            <input type="text" class="placeholder-gray-500 border p-1 rounded">
+
+            <label class="text-l my-4">Link to the job description</label>
+            <br>
+            <input name="description-link" type="text" class="input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
 
             <br>
+            <br>
+
             <label class="text-l my-4">Location</label>
             <br>
-            <input type="text" class="placeholder-gray-500 border p-1 rounded">
-
+            <input name="locations"  placeholder="Location(s) of the job" type="text" class="input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <p class="text-gray-600 text-s">
+              Separate multiple job locations with commas
+            </p>
             <br>
-            <label class="text-l my-4">Category</label>
-            <br>
-            <select>
-                {% for domain in domains %}
-                <option value="{{ domain.id }}">{{ domain.display_name }}</option>
-                {% endfor %}
-            </select>
-            
-            <br>
-            <label class="text-l my-4">Tags</label>
-            <br>
-            <input type="text" class="placeholder-gray-500 border p-1 rounded">
-
-        </form>
+            <button class="button is-success">Post job</button>
+            {% csrf_token %}
+            </form>
       </div>
     </div>
   </div>

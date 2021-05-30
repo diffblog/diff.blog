@@ -1,0 +1,24 @@
+<tr style="table-layout: fixed;">
+    <td class="company-image-col">
+        <a href="{{ job.company_url }}">
+            <img class="job-post-company-logo" src="https://logo.clearbit.com/{{ job.company_url }}" />
+        </a>
+    </td>
+    <td>
+        <div>
+            <a href="{{ job.company_url }}" class="job-post-company-name">{{ job.company_name }}</a> is hiring a
+            <a href="{{ job.description_link }}" class="job-post-title">{{job.title}}</a>
+        </div>
+        <div>
+            {% for location in job.locations.all %}
+            <a href="https://diff.blog/jobs/{{ location.slug }}" class="location">
+                {{ location.name }}
+            </a>
+            {% endfor %}
+        </div>
+
+    </td>
+</tr>
+<tr>
+    <td></td>
+</tr>
