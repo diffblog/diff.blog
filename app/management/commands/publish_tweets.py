@@ -4,7 +4,6 @@ from django.core.management.base import BaseCommand, CommandError
 from datetime import timedelta
 from django.utils import timezone
 from app.models import Topic, UserProfile, UserList, Post, Tweet
-from app.digest import get_posts_for_weekly_digest
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
