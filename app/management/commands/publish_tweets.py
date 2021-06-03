@@ -30,7 +30,6 @@ timeline = api.home_timeline()
 
 tweet_template = """
 {post_title}{twitter_username}
-
 {topics_string}
 
 {post_link}
