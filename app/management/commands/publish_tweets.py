@@ -30,12 +30,22 @@ timeline = api.home_timeline()
 
 tweet_template = """
 {post_title}{twitter_username}
+
+{topics_string}
+
 {post_link}
 """
 
 
+
 class Command(BaseCommand):
     help = "Publish the most popular post to Twitter"
+
+    def get_tags_as_string_from_post(self, post):
+        string = ""
+        for topic in post.topics.all()[:4]:
+            string += "#{} ".format(topic.slug)
+        return string.replace("-", "")
 
     def handle(self, *args, **options):
         time_cutoff = timezone.now() - timedelta(days=3)
@@ -61,7 +71,8 @@ class Command(BaseCommand):
                 post_title=post.title,
                 post_link=post.link,
                 twitter_username=twitter_username,
+                topics_string=self.get_tags_as_string_from_post(post),
             )
             response = api.update_status(content)
-            Tweet.objects.create(tweet_id=response.id_str, post=post)
+            Tweet.objects.create(tweet_id=response.id, post=post)
             break
