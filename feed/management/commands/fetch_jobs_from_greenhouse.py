@@ -65,7 +65,7 @@ class Command(BaseCommand):
         cleaned_location = []
         for location in set(q):
             stripped_location = location.lstrip().rstrip()
-            if len(stripped_location) >= 200:
+            if len(stripped_location) == 0 or len(stripped_location) >= 200:
                 continue
             location = Location.objects.filter(slug=slugify(stripped_location)).last()
             if location is None:
