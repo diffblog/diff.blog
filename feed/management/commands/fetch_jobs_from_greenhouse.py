@@ -57,7 +57,7 @@ class Command(BaseCommand):
 
     def get_cleaned_locations(self, location_string):
         q = [location_string]
-        for split_char in ["/", ";", " or ", " OR ", ","]:
+        for split_char in ["/", ";", " or ", " OR ", ",", "|"]:
             locations = []
             for location in q:
                 locations.extend(location.split(split_char))
