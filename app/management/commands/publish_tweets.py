@@ -36,7 +36,6 @@ tweet_template = """
 """
 
 
-
 class Command(BaseCommand):
     help = "Publish the most popular post to Twitter"
 

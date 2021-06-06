@@ -39,9 +39,24 @@ def get_popular_posts_from_following_users_last_week(user_profile):
 
 def get_job_postings():
     time_cutoff = timezone.now() - timedelta(days=cutoff_days)
-    return Job.objects.filter(posted_on__gte=time_cutoff, is_verified=True).order_by(
-        "-id"
-    )
+    jobs = Job.objects.filter(posted_on__gte=time_cutoff, is_verified=True).order_by(
+        "-posted_on"
+    )[:100]
+
+    companies_added = set()
+    featured_jobs = []
+    for job in jobs:
+        if (
+            job.company_name in companies_added
+            or job.github_username in companies_added
+        ):
+            continue
+        featured_jobs.append(job)
+        companies_added.add(job.company_name)
+        companies_added.add(job.github_username)
+        if len(featured_jobs) == 5:
+            break
+    return featured_jobs
 
 
 def get_weekly_digest_posts(user_profile):

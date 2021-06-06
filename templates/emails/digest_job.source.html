@@ -1,12 +1,12 @@
 <tr style="table-layout: fixed;">
     <td class="company-image-col">
-        <a href="{{ job.company_url }}">
-            <img class="job-post-company-logo" src="https://logo.clearbit.com/{{ job.company_url }}" />
+        <a href="{{ job.get_company_url }}">
+            <img class="job-post-company-logo" src="{{ job.get_company_logo_url }}" />
         </a>
     </td>
     <td>
         <div>
-            <a href="{{ job.company_url }}" class="job-post-company-name">{{ job.company_name }}</a> is hiring a
+            <a href="{{ job.get_company_url }}" class="job-post-company-name">{{ job.company_name }}</a> is hiring a
             <a href="{{ job.description_link }}" class="job-post-title">{{job.title}}</a>
         </div>
         <div>

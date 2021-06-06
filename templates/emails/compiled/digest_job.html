@@ -68,13 +68,13 @@
 <body style="-ms-text-size-adjust:100%; -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%; font-family:sans-serif; font-size:14px; line-height:1.4; margin:0; padding:0">
 <tr style="table-layout: fixed;">
     <td class="company-image-col" style="width:52px" width="52">
-        <a href="{{ job.company_url }}" style="color:#3498db; text-decoration:underline">
-            <img class="job-post-company-logo" src="https://logo.clearbit.com/{{ job.company_url }}" style="-ms-interpolation-mode:bicubic; border:none; max-width:50px">
+        <a href="{{ job.get_company_url }}" style="color:#3498db; text-decoration:underline">
+            <img class="job-post-company-logo" src="{{ job.get_company_logo_url }}" style="-ms-interpolation-mode:bicubic; border:none; max-width:50px">
         </a>
     </td>
     <td>
         <div>
-            <a href="{{ job.company_url }}" class="job-post-company-name" style="color:black; text-decoration:none; font-size:16px; font-weight:600">{{ job.company_name }}</a> is hiring a
+            <a href="{{ job.get_company_url }}" class="job-post-company-name" style="color:black; text-decoration:none; font-size:16px; font-weight:600">{{ job.company_name }}</a> is hiring a
             <a href="{{ job.description_link }}" class="job-post-title" style="color:black; text-decoration:none; font-size:16px; font-weight:600">{{job.title}}</a>
         </div>
         <div>
