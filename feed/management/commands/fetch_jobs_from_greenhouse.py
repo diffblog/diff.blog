@@ -93,6 +93,7 @@ class Command(BaseCommand):
             if response.status_code != 200:
                 continue
             data = response.json()
+            created = False
             for job_dict in data["jobs"]:
                 title = job_dict["title"]
                 if (
@@ -118,4 +119,8 @@ class Command(BaseCommand):
                 job.save()
                 locations = self.get_cleaned_locations(job_dict["location"]["name"])
                 job.locations.set(locations)
-                print("Job created")
+                created = True
+            if created:
+                print("✅ ", user_profile.github_username)
+            else:
+                print("❌ ", user_profile.github_username)
