@@ -5,7 +5,7 @@ from django.utils.text import slugify
 
 class Location(models.Model):
     name = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, null=True)
+    slug = models.SlugField(unique=True, null=True, max_length=200)
 
     def save(self, *args, **kwargs):
         self.slug = self.slug or slugify(self.name)
