@@ -239,6 +239,7 @@ class Comment(models.Model):
             "id": self.id,
             "content": self.content,
             "profile": {
+                "author_name": self.profile.full_name or self.profile.github_username,
                 "github_username": self.profile.github_username,
                 "full_name": self.profile.full_name,
             },
