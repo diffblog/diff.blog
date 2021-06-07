@@ -104,18 +104,37 @@ class Command(BaseCommand):
             data = response.json()
             created = False
             for job_dict in data["jobs"]:
-                title = job_dict["title"]
-                if (
-                    "engineer" not in title.lower()
-                    and "developer" not in title.lower()
-                    and "programmer" not in title.lower()
-                ):
-                    continue
                 if Job.objects.filter(
                     github_username=user_profile.github_username,
                     global_job_id=job_dict["id"],
                 ).exists():
                     continue
+
+                title = job_dict["title"]
+                valid_roles = [
+                    "engineer",
+                    "developer",
+                    "programmer",
+                    "writer",
+                    "project manager",
+                    "product manager",
+                    "architect",
+                    "software",
+                    "engineering",
+                    "researcher",
+                    "tech lead",
+                    "sre",
+                    "devops",
+                    "team lead",
+                ]
+                is_valid_role = False
+                for valid_role in valid_roles:
+                    if valid_role in title.lower():
+                        is_valid_role = True
+                        break
+                if not is_valid_role:
+                    continue
+
                 job = Job.objects.create(
                     title=title,
                     description_link=job_dict["absolute_url"],
