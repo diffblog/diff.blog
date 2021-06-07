@@ -1,3 +1,5 @@
+from datetime import timedelta
+from django.utils import timezone
 from jobs.models import Job
 from django.core.management.base import BaseCommand, CommandError
 from dateutil import parser as date_parser
@@ -85,6 +87,13 @@ class Command(BaseCommand):
             user_profiles = UserProfile.objects.filter(is_organization=True)
 
         for user_profile in user_profiles:
+            two_days_back = timezone.now() - timedelta(days=2)
+            if Job.objects.filter(
+                github_username=user_profile.github_username,
+                posted_on__gte=two_days_back,
+            ).exists():
+                continue
+
             url = "https://boards-api.greenhouse.io/v1/boards/{}/jobs".format(
                 user_profile.github_username
             )
