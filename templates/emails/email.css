@@ -421,7 +421,7 @@ hr {
 
 .see-all-posts {
     color: black;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .job-post-company-name {

@@ -140,7 +140,7 @@ class Command(BaseCommand):
                     description_link=job_dict["absolute_url"],
                     github_username=user_profile.github_username,
                     company_name=user_profile.full_name or user_profile.github_username,
-                    is_verified=True,
+                    source=Job.GREENHOUSE,
                     global_job_id=job_dict["id"],
                 )
                 job.posted_on = date_parser.parse(job_dict["updated_at"])

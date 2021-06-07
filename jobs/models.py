@@ -23,7 +23,11 @@ class Job(models.Model):
     locations = models.ManyToManyField(Location, related_name="jobs")
     posted_on = models.DateTimeField(auto_now_add=True)
     github_username = models.CharField(max_length=200, null=True)
-    is_verified = models.BooleanField(default=False)
+
+    JOB_FORM_FREE = 1
+    JOB_FORM_PAID = 10
+    GREENHOUSE = 100
+    source = models.IntegerField(null=True)
     global_job_id = models.CharField(max_length=200, null=True)
 
     def get_company_logo_url(self):
