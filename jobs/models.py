@@ -19,6 +19,7 @@ class Job(models.Model):
     company_name = models.CharField(max_length=200)
     company_url = models.CharField(max_length=200, null=True)
     title = models.CharField(max_length=200)
+    title_slug = models.SlugField(max_length=200, null=True)
     description_link = models.CharField(max_length=300)
     locations = models.ManyToManyField(Location, related_name="jobs")
     posted_on = models.DateTimeField(auto_now_add=True)
@@ -29,6 +30,10 @@ class Job(models.Model):
     GREENHOUSE = 100
     source = models.IntegerField(null=True)
     global_job_id = models.CharField(max_length=200, null=True)
+
+    def save(self, *args, **kwargs):
+        self.title_slug = self.title_slug or slugify(self.title)
+        super().save(*args, **kwargs)
 
     def get_company_logo_url(self):
         if self.company_url:

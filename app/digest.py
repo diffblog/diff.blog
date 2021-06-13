@@ -39,9 +39,9 @@ def get_popular_posts_from_following_users_last_week(user_profile):
 
 def get_job_postings():
     time_cutoff = timezone.now() - timedelta(days=cutoff_days)
-    jobs = Job.objects.filter(posted_on__gte=time_cutoff, source__in=[Job.JOB_FORM_PAID, Job.GREENHOUSE]).order_by(
-        "-posted_on"
-    )[:100]
+    jobs = Job.objects.filter(
+        posted_on__gte=time_cutoff, source__in=[Job.JOB_FORM_PAID, Job.GREENHOUSE]
+    ).order_by("-posted_on")[:100]
 
     companies_added = set()
     featured_jobs = []

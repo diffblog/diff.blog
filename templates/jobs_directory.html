@@ -2,7 +2,11 @@
 
 {% block seo_tags %}
 {% if location %}
-<title>Jobs in {{ location.name }}</title>
+  {% if title %}
+  <title>{{ title }} jobs in {{ location.name }}</title>
+  {% else %}
+  <title>Jobs in {{ location.name }}</title>
+  {% endif %}
 <meta name="description" content="">
 {% else %}
 <title>Jobs</title>
@@ -22,7 +26,11 @@
           Jobs
           {% endif %}
         </h2>
-          <div id="job_list"></div>
+          <div id="job_list">
+            {% for job in jobs %}
+            {% include "job_item.html" %}
+            {% endfor %}
+          </div>
       </div>
       <div class="column is-4">
         <a href="/jobs/new">

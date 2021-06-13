@@ -1,0 +1,20 @@
+<div class="flex mb-2 items-center border-b pb-4 pt-2">
+    <img class="rounded-full h-20 w-20" src="{{ job.get_company_logo_url }}" alt="Placeholder image">
+    <div class="ml-2">
+        <a class="text-gray-900 font-bold text-xl" href="{{ job.get_company_url }}">
+            {{ job.company_name }}
+        </a>
+        <br>
+        <a class="text-gray-700 font-semibold text-sm" href="{{ job.description_link }}">
+            {{ job.title }}
+        </a>
+        <br>
+        <div class="">
+            {% for location in job.locations.all %}
+            <a href=" /jobs/{{ location.slug }}/">
+                <span class="text-gray-600 text-sm mx-1 bg-gray-100 rounded px-2 py-1">{{ location.name }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
