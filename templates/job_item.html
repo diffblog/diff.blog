@@ -11,9 +11,15 @@
         <br>
         <div class="">
             {% for location in job.locations.all %}
-            <a href=" /jobs/{{ location.slug }}/">
+            {% if not title_slug %}
+            <a href=" /jobs-in-{{ location.slug }}">
                 <span class="text-gray-600 text-sm mx-1 bg-gray-100 rounded px-2 py-1">{{ location.name }}</span>
             </a>
+            {% else %}
+            <a href=" /{{ title_slug }}-jobs-in-{{ location.slug }}">
+                <span class="text-gray-600 text-sm mx-1 bg-gray-100 rounded px-2 py-1">{{ location.name }}</span>
+            </a>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
