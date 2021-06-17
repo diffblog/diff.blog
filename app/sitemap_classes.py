@@ -1,6 +1,7 @@
 from django.contrib.sitemaps import Sitemap
 from app.models import Post, UserProfile, Topic, Search
 from app.json_views.search import do_search
+from jobs.models import Job, Location
 
 import datetime
 
@@ -73,6 +74,37 @@ class UserSitemap(Sitemap):
 
         return get_changefreq_from_last_updated_time(profile.last_post_date)
 
+class JobsByLocationSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 0.5
+
+    def items(self):
+        return Location.objects.filter()
+
+    def lastmod(self, location):
+        return datetime.datetime.now() - datetime.timedelta(days=1)
+
+    def changefreq(self, location):
+        return "daily"
+
+    def location(self, location):
+        return "/jobs-in-{}".format(location.slug)
+
+class JobsByTitleSitemap(Sitemap):
+    changefreq = "daily"
+    priority = 0.5
+
+    def items(self):
+        return Job.objects.all().values_list("title_slug", flat=True).distinct()
+
+    def lastmod(self, title_slug):
+        return datetime.datetime.now() - datetime.timedelta(days=1)
+
+    def changefreq(self, title_slug):
+        return "daily"
+
+    def location(self, title_slug):
+        return "/{}-jobs".format(title_slug)
 
 class SearchSitemap(Sitemap):
     priority = 0.5
@@ -98,5 +130,6 @@ sitemaps = {
     "user": UserSitemap,
     "tag": TopicSitemap,
     "company": CompanySitemap,
-    # "search": SearchSitemap,
+    "jobs-by-location": JobsByLocationSitemap,
+    "jobs-by-title": JobsByTitleSitemap,
 }
