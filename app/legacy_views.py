@@ -1,3 +1,4 @@
+from django.http.response import Http404
 from django.shortcuts import render, redirect
 
 from app.models import Post
@@ -8,5 +9,8 @@ def topic_page(request, topic, feed_type):
 
 
 def get_post_legacy(request, post_id):
-    post = Post.objects.get(id=post_id)
+    try:
+        post = Post.objects.get(id=post_id)
+    except Post.DoesNotExist:
+        raise Http404()
     return redirect("/post/" + post.slug, permanent=True)
