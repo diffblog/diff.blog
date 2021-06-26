@@ -34,13 +34,18 @@ tweet_template = """
 class Command(BaseCommand):
     help = "Publish the most popular post to Twitter"
 
+    def add_arguments(self, parser):
+        parser.add_argument("--twitter-account", action="store", default=None)
+
     def get_tags_as_string_from_post(self, post, twitter_account):
         hashtags = set()
         if twitter_account == "ThePythonDaily":
             hashtags = ["python", "pythonnews", "pythondaily"]
+        if twitter_account == "TheJavascriptDaly":
+            hashtags = ["javascript", "javascriptnews", "javascriptdaily"]
 
         for topic in post.topics.all():
-            hashtag = topic.replace("-", "")
+            hashtag = topic.slug.replace("-", "")
             if hashtag not in hashtags:
                 hashtags.append(hashtag)
 
@@ -63,11 +68,27 @@ class Command(BaseCommand):
                 if post.aggregate_votes_count < 5:
                     return None
                 return post
+
         if twitter_account == "ThePythonDaily":
             time_cutoff = timezone.now() - timedelta(days=7)
             posts = (
                 Post.objects.filter(
                     Q(topics__display_name__search="python") | Q(title__search="python")
+                )
+                .filter(updated_on__gte=time_cutoff)
+                .order_by("-aggregate_votes_count")
+            )
+            for post in posts:
+                if Tweet.objects.filter(post=post).exists():
+                    continue
+                return post
+
+        if twitter_account == "TheJavascriptDaly":
+            time_cutoff = timezone.now() - timedelta(days=7)
+            posts = (
+                Post.objects.filter(
+                    Q(topics__display_name__search="javascript")
+                    | Q(title__search="javascript")
                 )
                 .filter(updated_on__gte=time_cutoff)
                 .order_by("-aggregate_votes_count")
@@ -108,6 +129,10 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        twitter_accounts = ["diffblog", "ThePythonDaily"]
+        if options["twitter_account"] is None:
+            twitter_accounts = ["diffblog", "ThePythonDaily", "TheJavascriptDaly"]
+        else:
+            twitter_accounts = [options["twitter_account"]]
+
         for twitter_account in twitter_accounts:
             self.publish_tweets_for_twitter_account(twitter_account)
