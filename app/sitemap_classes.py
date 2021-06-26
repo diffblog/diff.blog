@@ -74,6 +74,7 @@ class UserSitemap(Sitemap):
 
         return get_changefreq_from_last_updated_time(profile.last_post_date)
 
+
 class JobsByLocationSitemap(Sitemap):
     changefreq = "daily"
     priority = 0.5
@@ -84,11 +85,9 @@ class JobsByLocationSitemap(Sitemap):
     def lastmod(self, location):
         return datetime.datetime.now() - datetime.timedelta(days=1)
 
-    def changefreq(self, location):
-        return "daily"
-
     def location(self, location):
         return "/jobs-in-{}".format(location.slug)
+
 
 class JobsByTitleSitemap(Sitemap):
     changefreq = "daily"
@@ -100,11 +99,9 @@ class JobsByTitleSitemap(Sitemap):
     def lastmod(self, title_slug):
         return datetime.datetime.now() - datetime.timedelta(days=1)
 
-    def changefreq(self, title_slug):
-        return "daily"
-
     def location(self, title_slug):
         return "/{}-jobs".format(title_slug)
+
 
 class SearchSitemap(Sitemap):
     priority = 0.5

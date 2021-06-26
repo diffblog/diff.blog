@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand, CommandError
 from datetime import timedelta
 from django.utils import timezone
 from app.models import Topic, UserProfile, UserList, Post, Tweet
+from django.db.models import Q
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
@@ -13,23 +14,17 @@ from django.urls import reverse
 
 
 from diffblog.secrets import (
-    twitter_api_key,
-    twitter_api_secret_key,
-    twitter_access_token,
-    twitter_access_token_secret,
+    twitter_api_keys,
+    twitter_api_secret_keys,
+    twitter_access_tokens,
+    twitter_access_token_secrets,
 )
 
 import tweepy
 
-auth = tweepy.OAuthHandler(twitter_api_key, twitter_api_secret_key)
-auth.set_access_token(twitter_access_token, twitter_access_token_secret)
-
-api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
-
-timeline = api.home_timeline()
 
 tweet_template = """
-{post_title}{twitter_username}
+{post_title}{post_author_twitter_username}
 {topics_string}
 
 {post_link}
@@ -39,38 +34,80 @@ tweet_template = """
 class Command(BaseCommand):
     help = "Publish the most popular post to Twitter"
 
-    def get_tags_as_string_from_post(self, post):
+    def get_tags_as_string_from_post(self, post, twitter_account):
+        hashtags = set()
+        if twitter_account == "ThePythonDaily":
+            hashtags = ["python", "pythonnews", "pythondaily"]
+
+        for topic in post.topics.all():
+            hashtag = topic.replace("-", "")
+            if hashtag not in hashtags:
+                hashtags.append(hashtag)
+
         string = ""
-        for topic in post.topics.all()[:4]:
-            string += "#{} ".format(topic.slug)
-        return string.replace("-", "")
+        for hashtag in hashtags[:6]:
+            string += "#{} ".format(hashtag)
+        return string
+
+    def get_post_to_publish(self, twitter_account):
+        if twitter_account == "diffblog":
+            time_cutoff = timezone.now() - timedelta(days=3)
+            posts = Post.objects.filter(updated_on__gte=time_cutoff).order_by(
+                "-aggregate_votes_count"
+            )[:100]
+            for post in posts:
+                if Tweet.objects.filter(post=post).exists():
+                    continue
+                if post.aggregate_votes_count < 15 and not post.profile.is_activated:
+                    continue
+                if post.aggregate_votes_count < 5:
+                    return None
+                return post
+        if twitter_account == "ThePythonDaily":
+            time_cutoff = timezone.now() - timedelta(days=7)
+            posts = (
+                Post.objects.filter(
+                    Q(topics__display_name__search="python") | Q(title__search="python")
+                )
+                .filter(updated_on__gte=time_cutoff)
+                .order_by("-aggregate_votes_count")
+            )
+            for post in posts:
+                if Tweet.objects.filter(post=post).exists():
+                    continue
+                return post
+
+    def publish_tweets_for_twitter_account(self, twitter_account):
+        auth = tweepy.OAuthHandler(
+            twitter_api_keys[twitter_account], twitter_api_secret_keys[twitter_account]
+        )
+        auth.set_access_token(
+            twitter_access_tokens[twitter_account],
+            twitter_access_token_secrets[twitter_account],
+        )
+        api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+        timeline = api.home_timeline()
+
+        post = self.get_post_to_publish(twitter_account)
+        if post is None:
+            return
+
+        post_author_twitter_username = ""
+        if post.profile.twitter_username:
+            post_author_twitter_username = " (@" + post.profile.twitter_username + ")"
+
+        content = tweet_template.format(
+            post_title=post.title,
+            post_link=post.link,
+            post_author_twitter_username=post_author_twitter_username,
+            topics_string=self.get_tags_as_string_from_post(post, twitter_account),
+        )
+        response = api.update_status(content)
+        Tweet.objects.create(
+            tweet_id=response.id, post=post, posted_from=twitter_account
+        )
 
     def handle(self, *args, **options):
-        time_cutoff = timezone.now() - timedelta(days=3)
-        posts = Post.objects.filter(updated_on__gte=time_cutoff).order_by(
-            "-aggregate_votes_count"
-        )[:100]
-
-        for post in posts:
-            if post.tweets.all().exists():
-                continue
-
-            if post.aggregate_votes_count < 15 and not post.profile.is_activated:
-                continue
-
-            if post.aggregate_votes_count < 5:
-                break
-
-            twitter_username = ""
-            if post.profile.twitter_username:
-                twitter_username = " (@" + post.profile.twitter_username + ")"
-
-            content = tweet_template.format(
-                post_title=post.title,
-                post_link=post.link,
-                twitter_username=twitter_username,
-                topics_string=self.get_tags_as_string_from_post(post),
-            )
-            response = api.update_status(content)
-            Tweet.objects.create(tweet_id=response.id, post=post)
-            break
+        twitter_accounts = ["diffblog", "ThePythonDaily"]
+        for twitter_account in twitter_accounts:
+            self.publish_tweets_for_twitter_account(twitter_account)

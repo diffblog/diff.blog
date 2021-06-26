@@ -324,3 +324,4 @@ class Tweet(models.Model):
     tweet_id = models.CharField(max_length=100)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="tweets")
     created_on = models.DateTimeField(auto_now_add=True)
+    posted_from = models.CharField(max_length=100, null=True, default="diffblog")
