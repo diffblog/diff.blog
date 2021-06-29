@@ -38,7 +38,7 @@ class Command(BaseCommand):
         parser.add_argument("--twitter-account", action="store", default=None)
 
     def get_tags_as_string_from_post(self, post, twitter_account):
-        hashtags = set()
+        hashtags = []
         if twitter_account == "ThePythonDaily":
             hashtags = ["python", "pythonnews", "pythondaily"]
         if twitter_account == "TheJavascriptDaly":
