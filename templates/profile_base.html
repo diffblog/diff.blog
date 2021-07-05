@@ -15,8 +15,8 @@
                 <div class="media">
                   <div class="media-content">
                     <div id="follow_button" class="is-pulled-left"></div><br><br>
-                    <p class="title is-4">{{ profile.full_name }}</p>
-                    <p class="subtitle is-6">@{{ profile.github_username }}</p>
+                    <h1 class="title is-4">{{ profile.full_name }}</h1>
+                    <h2 class="subtitle is-6">@{{ profile.github_username }}</h2>
                   </div>
                 </div>
                 <a data-toggle="tooltip" title="GitHub profile" target="_blank" rel="noopener noreferrer" href="https://github.com/{{profile.github_username}}">
@@ -38,11 +38,11 @@
                   </span>
                 </a>
                 {% endif %}
-                <div class="content" style="word-wrap: break-word;">
+                <h2 class="content" style="word-wrap: break-word;">
                   {% if profile.bio %}
                   {{ profile.bio }}
                   {% endif %}
-                </div>
+                </h2>
               </div>
           </div>
           {% if not profile.is_activated and not profile.is_organization %}

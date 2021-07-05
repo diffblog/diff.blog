@@ -39,13 +39,14 @@
           {{jobs_count }} jobs worldwide
           {% endif %}
         {% endif %}
-
-          <div id="job_list">
-            {% for job in jobs %}
-            {% include "job_item.html" %}
-            {% endfor %}
-          </div>
+      </h1>
+        <div id="job_list">
+          {% for job in jobs %}
+          {% include "job_item.html" %}
+          {% endfor %}
+        </div>
       </div>
+
       <div class="column is-4">
         <a href="/jobs/new">
         <button class="button is-success">Post job</button>
