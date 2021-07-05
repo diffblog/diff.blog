@@ -1,0 +1,5 @@
+Sitemap: https://diff.blog/sitemap.xml
+User-Agent: *
+Disallow: /api/
+Disallow: /admin/
+
