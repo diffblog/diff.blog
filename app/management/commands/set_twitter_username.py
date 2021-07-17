@@ -17,13 +17,19 @@ class Command(BaseCommand):
     help = "Set the Twitter username of diff.blog profiles"
 
     def handle(self, *args, **options):
-        for profile in UserProfile.objects.filter(Q(twitter_username__isnull=True) | Q(twitter_username__exact='')).order_by('followers_count'):
+        for profile in (
+            UserProfile.objects.filter(
+                Q(twitter_username__isnull=True) | Q(twitter_username__exact="")
+            )
+            .exclude(followers_count=None)
+            .order_by("-followers_count")
+        ):
             print("https://github.com/" + profile.github_username)
             print("❔ Is the Twitter username?")
             print("https://twitter.com/" + profile.github_username)
             print("")
             user_input = input("(Y/N): ")
-            if user_input.lower() == 'y':
+            if user_input.lower() == "y":
                 profile.twitter_username = profile.github_username
                 profile.save()
                 print("🎉 Saved")
