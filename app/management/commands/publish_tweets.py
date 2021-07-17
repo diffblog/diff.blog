@@ -61,7 +61,9 @@ class Command(BaseCommand):
                 "-aggregate_votes_count"
             )[:100]
             for post in posts:
-                if Tweet.objects.filter(post=post, posted_from=twitter_account).exists():
+                if Tweet.objects.filter(
+                    post=post, posted_from=twitter_account
+                ).exists():
                     continue
                 if post.aggregate_votes_count < 15 and not post.profile.is_activated:
                     continue
@@ -79,7 +81,9 @@ class Command(BaseCommand):
                 .order_by("-aggregate_votes_count")
             )
             for post in posts:
-                if Tweet.objects.filter(post=post, posted_from=twitter_account).exists():
+                if Tweet.objects.filter(
+                    post=post, posted_from=twitter_account
+                ).exists():
                     continue
                 return post
 
@@ -94,7 +98,9 @@ class Command(BaseCommand):
                 .order_by("-aggregate_votes_count")
             )
             for post in posts:
-                if Tweet.objects.filter(post=post, posted_from=twitter_account).exists():
+                if Tweet.objects.filter(
+                    post=post, posted_from=twitter_account
+                ).exists():
                     continue
                 return post
 
