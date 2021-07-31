@@ -109,6 +109,11 @@ RQ_QUEUES = {
         "PORT": 6379,
         "DB": 0,
     },
+    "set_plugin_post_info": {
+        "HOST": "localhost",
+        "PORT": 6379,
+        "DB": 0,
+    },
 }
 
 CACHES = {

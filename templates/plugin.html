@@ -1,0 +1,10 @@
+<div id="diffblog-votes"></div>
+<script id="diffblogscript" async src="/static/js/plugin.js"></script>
+<script>
+    document.getElementById("diffblogscript").addEventListener("load", function () {
+        initialize_diffblog_plugin(
+            plugin_holder_id = "diffblog-votes",
+            plugin_public_api_key = "***REMOVED***",
+        );
+    });
+</script>

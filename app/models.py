@@ -87,6 +87,9 @@ class UserProfile(models.Model):
     pocket_api_key = models.CharField(max_length=100, null=True)
     pocket_show_button = models.BooleanField(default=True)
     pocket_auto_save = models.BooleanField(default=False)
+    plugin_public_api_key = models.CharField(
+        max_length=50, default=get_random_lowercase_string_of_50_chars
+    )
 
     FROM_GITHUB = 1
     FROM_GOOGLE = 2
@@ -134,6 +137,12 @@ class UserProfile(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=200)
     link = models.CharField(max_length=300)
+
+    RSS_FEED = 1
+    PLUGIN = 100
+    source = models.IntegerField(default=RSS_FEED)
+
+    normalized_link = models.CharField(max_length=300, null=True)
     summary = models.TextField(null=True)
     content = models.TextField()
     cover_photo_url = models.CharField(max_length=300, null=True)
@@ -286,6 +295,14 @@ class MirrorPost(models.Model):
     )
     votes = models.IntegerField(default=0)
     url = models.CharField(max_length=200)
+
+    def serialize(self):
+        return {
+            "post": self.post.id,
+            "mirror_url": self.url,
+            "source": self.source.name,
+            "votes": self.votes,
+        }
 
 
 class UserList(models.Model):

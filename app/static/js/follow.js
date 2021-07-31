@@ -22,6 +22,7 @@ $(function () {
     if (show_login_prompt_if_required("follow")) {
       return;
     }
+    console.log("ehehehe");
     send_event("unfollow");
 
     $(this).text("Follow");
@@ -38,6 +39,7 @@ $(function () {
     if (show_login_prompt_if_required("follow")) {
       return;
     }
+    console.log("wywouye");
     send_event("follow");
 
     $(this).text("Following");

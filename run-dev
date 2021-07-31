@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 ./manage.py runserver 0.0.0.0:8000 --settings=diffblog.dev_settings &
-./manage.py rqworker --settings=diffblog.dev_settings following_bootstrapper followers_bootstrapper feed language_scanner follow_organizations event_log_processor &
+./manage.py rqworker --settings=diffblog.dev_settings following_bootstrapper followers_bootstrapper feed language_scanner follow_organizations event_log_processor set_plugin_post_info &
 npm run watch & redis-server

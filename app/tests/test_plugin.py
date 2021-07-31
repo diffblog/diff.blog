@@ -54,9 +54,7 @@ class NormalizeTestCase(TestCase):
         )
 
         self.assertEqual(
-            normalize_link(
-                "https://google.com/path/subpath/?source=google"
-            ),
+            normalize_link("https://google.com/path/subpath/?source=google"),
             "google.com/path/subpath",
         )
 
