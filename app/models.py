@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User  # pylint: disable=E5142
 from django.core import serializers
+from django.conf import settings
 from django.forms.models import model_to_dict
 from django.db.models import Sum
 from django.utils.text import slugify
@@ -159,9 +160,17 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        if not self.slug:
+        if self.slug and self.slug != str(self.id):
+            return
+
+        if self.slug and self.slug == str(self.id) and not self.title:
+            return
+
+        if self.title:
             self.slug = "{}-{}".format(slugify(self.title), str(self.id))
-            self.save()
+        else:
+            self.slug = str(self.id)
+        self.save()
 
     def get_summary(self):
         # TODO: Don't stop the summary in between words.
@@ -226,7 +235,7 @@ class Post(models.Model):
 
     @property
     def uri(self):
-        return "https://diff.blog/post/" + str(self.slug)
+        return "{}/post/{}/".format(settings.SITE_BASE_URL, self.slug)
 
 
 class Vote(models.Model):

@@ -67,16 +67,17 @@ function get_source_image_url(source) {
 function create_vote_div(vote) {
   const source_image_url = get_source_image_url(vote.source);
   html = `
-  <div class="vote" style="display: inline-block !important; margin-right: 10px !important;">
-      <span style='margin-top: 0px !important; padding-top: -15px !important;'>
-          <div style="margin-bottom: -5px;">
-              <img height="16" width="16" src="${source_image_url}" style="border-radius: 50%">
-              <span style='font-size: 14px !important;'>${vote.source.toLowerCase()}</span>
+  <div style="all: initial; display: inline-block !important; margin-right: 10px !important;">
+        <a href="${vote.mirror_url}" style="all: initial; text-decoration:none !important; color: black !important; cursor: pointer !important;">
+          <div style="all: initial; margin-bottom: -5px; !important; cursor: pointer !important;">
+              <img src="${source_image_url}" style="all: initial; border-radius: 50% !important; height: 16px; cursor: pointer !important;">
+              <span style='all: initial; font-size: 14px !important; cursor: pointer !important;'>${vote.source.toLowerCase()}</span>
           </div>
-          <span style='margin-left: 20px !important; margin-top: -22px !important; font-size: 12px !important;'>${
+          <br style="all: initial;">
+          <span style='all: initial; margin-left: 20px !important; margin-top: -22px !important; font-size: 12px !important; cursor: pointer !important;'>${
             vote.votes
           }  points</span>
-      </span>
+        </a>
   </div>
 `;
   return create_element_from_html(html);
@@ -85,21 +86,27 @@ function create_vote_div(vote) {
 function create_plugin_div() {
   let html = `
 <div
-  style="border: solid; border-width: 1px; border-color: rgb(218, 213, 213); padding: 10px; padding-left: 10px; border-radius: 10px;">
+  style="all: initial; border: solid !important; border-width: 1px !important; border-color: rgb(218, 213, 213) !important; padding: 20px !important; padding-left: 10px !important; padding-top: 35px !important; border-radius: 10px !important;">
+  <div id="diffblog-plugin-votes-holder" style="all: initial;"></div>
 </div>
 `;
   return create_element_from_html(html);
 }
 
-function initialize_diffblog_plugin(plugin_holder_id, plugin_public_api_key) {
+function initialize_diffblog_plugin(plugin_holder_id, plugin_public_api_key, limit=5) {
+  if (limit === 0) {
+    return;
+  }
+
   //const post_url = window.location.href;
-  const post_url = "https://feross.org/introducing-thanks/";
+  const post_url = "https://deepmind.com/blog/article/generally-capable-agents-emerge-from-open-ended-play";
 
   const url_encoded_post_url = encodeURIComponent(post_url);
   const api_url = `http://localhost:8000/api/plugin/post_info?url=${url_encoded_post_url}&plugin_public_api_key=${plugin_public_api_key}`;
   let plugin_holder = document.getElementById(plugin_holder_id);
   let plugin_div = create_plugin_div();
   plugin_holder.appendChild(plugin_div);
+  let votes_holder = document.getElementById("diffblog-plugin-votes-holder");
 
   httpGetAsync(api_url, function (response) {
     var json = JSON.parse(response);
@@ -109,17 +116,22 @@ function initialize_diffblog_plugin(plugin_holder_id, plugin_public_api_key) {
     const diffblog_entry = {
       votes: json["diffblog_aggregate_votes_count"],
       source: "diff.blog",
-      url: json["diffblog_url"],
+      mirror_url: json["diffblog_url"],
     };
-    plugin_div.appendChild(create_vote_div(diffblog_entry));
+    votes_holder.appendChild(create_vote_div(diffblog_entry));
 
     var mirror_posts = json["mirror_posts"];
     if (!mirror_posts || mirror_posts.length == 0) {
       return;
     }
+    console.log(mirror_posts)
     mirror_posts.sort((a, b) => b.votes - a.votes);
     for (var i = 0; i < mirror_posts.length; i++) {
-      plugin_div.appendChild(create_vote_div(json["mirror_posts"][i]));
+      console.log(i)
+      if (i === limit - 1) {
+        break;
+      }
+      votes_holder.appendChild(create_vote_div(mirror_posts[i]));
     }
   });
 }
