@@ -25,9 +25,6 @@ class Command(BaseCommand):
             "https://api.github.com/repos/{github_username}/{repo}/commits?author=github_username",
             headers=diffblog_headers,
         )
-        import pdb
-
-        pdb.set_trace()
 
     def get_final_url_after_redirect(self, repo_name):
         github_page_url = "https://" + repo_name
