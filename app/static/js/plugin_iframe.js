@@ -67,33 +67,37 @@ function show_mirror_votes(plugin_public_api_key, encoded_blog_post_url, limit=5
     "encoded_blog_post_url": encoded_blog_post_url,
   }
   
-  $.post(api_url, data, function (json) {
-    // console.log(response)
-    // var json = JSON.parse(response);
-    if (!json["diffblog_url"]) {
-      return;
-    }
-    var discussed_on_text_holder = document.getElementById("discussed-on-text-holder");
-    discussed_on_text_holder.style.display = "";
-    const diffblog_entry = {
-      votes: json["diffblog_aggregate_votes_count"],
-      source: "diff.blog",
-      mirror_url: json["diffblog_url"],
-    };
-    votes_holder.appendChild(create_vote_div(diffblog_entry));
-
-    var mirror_posts = json["mirror_posts"];
-    if (!mirror_posts || mirror_posts.length == 0) {
-      return;
-    }
-    mirror_posts.sort((a, b) => b.votes - a.votes);
-    for (var i = 0; i < mirror_posts.length; i++) {
-      if (i === limit - 1) {
-        break;
+  $.ajax({
+    type: "POST",
+    url: api_url,
+    data: data,
+    success: function (json) {
+      // console.log(response)
+      // var json = JSON.parse(response);
+      if (!json["diffblog_url"]) {
+        return;
       }
-      votes_holder.appendChild(create_vote_div(mirror_posts[i]));
-    }
-  });
+      var discussed_on_text_holder = document.getElementById("discussed-on-text-holder");
+      discussed_on_text_holder.style.display = "";
+      const diffblog_entry = {
+        votes: json["diffblog_aggregate_votes_count"],
+        source: "diff.blog",
+        mirror_url: json["diffblog_url"],
+      };
+      votes_holder.appendChild(create_vote_div(diffblog_entry));
+
+      var mirror_posts = json["mirror_posts"];
+      if (!mirror_posts || mirror_posts.length == 0) {
+        return;
+      }
+      mirror_posts.sort((a, b) => b.votes - a.votes);
+      for (var i = 0; i < mirror_posts.length; i++) {
+        if (i === limit - 1) {
+          break;
+        }
+        votes_holder.appendChild(create_vote_div(mirror_posts[i]));
+      }
+  }});
 }
 
 document.getElementById("diffblogscript").addEventListener("load", function () {
