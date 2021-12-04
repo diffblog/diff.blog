@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %} 
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-9">
+                <h1 class="text-3xl">Show votes from diff.blog, Hacker News and Reddit in your blog post!</h1>
+
+                <br>
+                <h1 class="text-2xl underline">
+                    Demo
+                </h1>
+                <hr>
+                <br>
+                <br>
+              
+                <script id="diffblog-plugin-script" async="false" src="/static/js/diffblog_plugin_v1.js"></script> 
+                <script>
+                        document.getElementById("diffblog-plugin-script").addEventListener("load", function () {
+                            DiffBlog(
+                                "***REMOVED***",
+                                "https://www.troyhunt.com/pwned-passwords-open-source-in-the-dot-net-foundation-and-working-with-the-fbi/"
+                            );
+                         });
+                </script>
+                <br>
+                <br>
+                <h2 class="text-2xl underline">
+                    Installation
+                </h2>
+
+                <br>
+                <h3 class="text-xl">
+                    1. Copy the code
+                </h3>
+                <br>
+
+                <pre class="rounded-lg bg-white">
+                <code class="language-html">
+                    {{ code_snippet }}
+                </code>
+            </pre>
+
+                <h3 class="text-xl">
+                    2. Paste it in the HTML template file of your blog post. That's it!
+                </h3>
+                <br>
+
+              
+            </div>
+        </div>
+    </div>
+</section>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/atom-one-light.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
+</pre>
+<script>hljs.highlightAll();</script>
+
+
+{% endblock %}

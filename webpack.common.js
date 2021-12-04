@@ -27,7 +27,7 @@ module.exports = {
         blog_settings: './app/static/js/blog_settings.js',
         admin: './app/static/js/admin.js',
         base: './app/static/js/base.js',
-        plugin: './app/static/js/plugin.js',
+        plugin_iframe: './app/static/js/plugin_iframe.js',
         jobs: './jobs/static/js/jobs.js',
     },
     devtool: 'inline-source-map',

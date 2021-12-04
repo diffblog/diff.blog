@@ -8,9 +8,11 @@ from app.plugin import create_base_post_object
 
 
 def get_post_info(request):
-    url = request.GET.get("url")
-    plugin_public_api_key = request.GET.get("plugin_public_api_key")
+    encoded_blog_post_url = request.POST.get("encoded_blog_post_url")
+    plugin_public_api_key = request.POST.get("plugin_public_api_key")
 
+    url = encoded_blog_post_url.replace("%3A", ":").replace("%2F", "/")
+    
     try:
         profile = UserProfile.objects.get(plugin_public_api_key=plugin_public_api_key)
     except UserProfile.DoesNotExist:

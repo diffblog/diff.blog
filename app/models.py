@@ -305,6 +305,7 @@ class MirrorPost(models.Model):
     )
     votes = models.IntegerField(default=0)
     url = models.CharField(max_length=200)
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
 
     def serialize(self):
         return {

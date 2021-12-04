@@ -1,0 +1,38 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    {% csrf_token %}
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-9">
+                    <div
+                        id="discussed-on-text-holder" 
+                        style="
+                        font-family: -apple-system,segoe ui,sans-serif;
+                        text-align: center;
+                        color: #111111;
+                        box-sizing: border-box;
+                        font-weight: 600;
+                        margin-bottom: 11px;
+                        font-size: 1.1rem;
+                        display: none;">Discussed on</div>
+
+                    <div id="diffblog-votes" style="
+                    font-family: -apple-system,segoe ui,sans-serif;
+                    color: #111111;
+                    box-sizing: border-box;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    display: flex;
+                    justify-content: center;
+                    "></div>
+                    <script id="diffblogscript" async src="/static/dist/plugin_iframe.bundle.js" data-plugin-public-api-key="{{ plugin_public_api_key }}" data-blog-post-url="{{ url_encoded_blog_post_url }}"></script>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
