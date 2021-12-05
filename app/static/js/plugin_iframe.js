@@ -56,7 +56,7 @@ function show_mirror_votes(plugin_public_api_key, encoded_blog_post_url, limit=5
     return;
   }
 
-  const api_url = `http://localhost:8000/api/plugin/post_info`;
+  const api_url = `/api/plugin/post_info`;
   let plugin_holder = document.getElementById("diffblog-votes");
   let plugin_div = create_plugin_div();
   plugin_holder.appendChild(plugin_div);
