@@ -5,11 +5,16 @@ from app.models import Post
 from app.lib import normalize_link
 from mirrors.lib import sync_mirror_upvotes
 
+
 def create_base_post_object(link, profile):
     return Post.objects.create(
-        link=link, profile=profile, updated_on=now(), source=Post.PLUGIN,
-        normalized_link=normalize_link(link)
+        link=link,
+        profile=profile,
+        updated_on=now(),
+        source=Post.PLUGIN,
+        normalized_link=normalize_link(link),
     )
+
 
 def set_post_info(post):
     article = Article(url=post.link)

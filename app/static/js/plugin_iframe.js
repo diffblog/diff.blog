@@ -1,9 +1,5 @@
-import {
-  setup_ajax,
-} from "./helpers";
+import { setup_ajax } from "./helpers";
 setup_ajax();
-
-
 
 function create_element_from_html(html) {
   const element = document.createElement("div");
@@ -27,7 +23,9 @@ function create_vote_div(vote) {
   let html = `
   <div style="display: inline-block; margin-right: 10px; border-radius: 20px;
   box-shadow: 0px 2px 5px 0px rgb(0 52 102 / 11%); border: 0px solid #aaaaaa; padding: 10px;">
-    <a href="${vote.mirror_url}" style="text-decoration:none; color: black; cursor: pointer;">
+    <a href="${
+      vote.mirror_url
+    }" style="text-decoration:none; color: black; cursor: pointer;">
           <div style="margin-bottom: 3px; cursor: pointer;">
               <img src="${source_image_url}" style="border-radius: 50%; height: 16px; cursor: pointer;">
               <span style='font-size: 14px; cursor: pointer;'>${vote.source.toLowerCase()}</span>
@@ -51,7 +49,11 @@ function create_plugin_div() {
   return create_element_from_html(html);
 }
 
-function show_mirror_votes(plugin_public_api_key, encoded_blog_post_url, limit=5) {
+function show_mirror_votes(
+  plugin_public_api_key,
+  encoded_blog_post_url,
+  limit = 5
+) {
   if (limit === 0) {
     return;
   }
@@ -63,10 +65,10 @@ function show_mirror_votes(plugin_public_api_key, encoded_blog_post_url, limit=5
   let votes_holder = document.getElementById("diffblog-plugin-votes-holder");
 
   let data = {
-    "plugin_public_api_key": plugin_public_api_key,
-    "encoded_blog_post_url": encoded_blog_post_url,
-  }
-  
+    plugin_public_api_key: plugin_public_api_key,
+    encoded_blog_post_url: encoded_blog_post_url,
+  };
+
   $.ajax({
     type: "POST",
     url: api_url,
@@ -77,7 +79,9 @@ function show_mirror_votes(plugin_public_api_key, encoded_blog_post_url, limit=5
       if (!json["diffblog_url"]) {
         return;
       }
-      var discussed_on_text_holder = document.getElementById("discussed-on-text-holder");
+      var discussed_on_text_holder = document.getElementById(
+        "discussed-on-text-holder"
+      );
       discussed_on_text_holder.style.display = "";
       const diffblog_entry = {
         votes: json["diffblog_aggregate_votes_count"],
@@ -97,13 +101,18 @@ function show_mirror_votes(plugin_public_api_key, encoded_blog_post_url, limit=5
         }
         votes_holder.appendChild(create_vote_div(mirror_posts[i]));
       }
-  }});
+    },
+  });
 }
 
 document.getElementById("diffblogscript").addEventListener("load", function () {
   show_mirror_votes(
-      document.getElementById("diffblogscript").getAttribute("data-plugin-public-api-key"),
-      document.getElementById("diffblogscript").getAttribute("data-blog-post-url"),
-      7
+    document
+      .getElementById("diffblogscript")
+      .getAttribute("data-plugin-public-api-key"),
+    document
+      .getElementById("diffblogscript")
+      .getAttribute("data-blog-post-url"),
+    7
   );
 });
