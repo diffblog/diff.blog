@@ -5,8 +5,10 @@ from django.db.models import Q
 from app.models import MirrorPost, Post, UserProfile
 from app.queue import add_to_set_plugin_post_info_processor_queue
 from app.plugin import create_base_post_object
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 def get_post_info(request):
     encoded_blog_post_url = request.POST.get("encoded_blog_post_url")
     plugin_public_api_key = request.POST.get("plugin_public_api_key")
