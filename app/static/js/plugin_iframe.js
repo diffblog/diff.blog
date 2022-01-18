@@ -52,10 +52,13 @@ function create_plugin_div() {
 function show_mirror_votes(
   plugin_public_api_key,
   encoded_blog_post_url,
-  limit = 5
+  limit
 ) {
   if (limit === 0) {
     return;
+  }
+  if (!limit) {
+    limit = 5;
   }
 
   const api_url = `/api/plugin/post_info`;
