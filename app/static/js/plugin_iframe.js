@@ -77,8 +77,6 @@ function show_mirror_votes(
     url: api_url,
     data: data,
     success: function (json) {
-      // console.log(response)
-      // var json = JSON.parse(response);
       if (!json["diffblog_url"]) {
         return;
       }
