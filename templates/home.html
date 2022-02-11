@@ -38,6 +38,9 @@
         <h1 class="text-4xl text-gray-900 font-semibold mb-10">
           {{ topic_display_name }}
         </h1>
+        <button data-user-id="{{ id }}" class="topic-following border py-1 px-2 rounded ml-auto text-white bg-gray-900 hover:bg-gray-800">
+          Follow
+        </button>
         {% endif %}
 
         <div id="user_recommendations_section" class="mb-10 hidden">
@@ -121,6 +124,6 @@
 <script src="/static/dist/feed.bundle.js"></script>
 <script src="/static/dist/like.bundle.js" defer></script>
 <script src="/static/dist/save.bundle.js" defer></script>
-<script src="/static/dist/follow.bundle.js" defer></script>
+<script src="/static/dist/follow_user.bundle.js" defer></script>
 <script src="/static/dist/admin.bundle.js" defer></script>
 {% endblock %}

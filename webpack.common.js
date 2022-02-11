@@ -14,7 +14,7 @@ module.exports = {
     entry: {
         followers: './app/static/js/followers.js',
         following: './app/static/js/following.js',
-        follow: './app/static/js/follow.js',
+        follow_user: './app/static/js/follow_user.js',
         feed: './app/static/js/feed.js',
         post: './app/static/js/post.js',
         like: './app/static/js/like.js',
