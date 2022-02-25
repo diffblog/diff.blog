@@ -1,0 +1,9 @@
+{{#if following }}
+<button data-topic-id="{{ id }}" class="topic-following border py-1 px-2 rounded ml-auto text-white bg-gray-900 hover:bg-gray-800">
+    Following
+</button>
+{{else}}
+<button data-topic-id="{{ id }}" class="topic-follow border py-1 px-2 rounded ml-auto border-gray-400 hover:border-gray-500">
+    Follow
+</button>
+{{/if}}

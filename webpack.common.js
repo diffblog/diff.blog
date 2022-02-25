@@ -19,6 +19,7 @@ module.exports = {
         post: './app/static/js/post.js',
         like: './app/static/js/like.js',
         save: './app/static/js/save.js',
+        topic: './app/static/js/topic.js',
         profile: './app/static/js/profile.js',
         signup_finish: './app/static/js/signup_finish.js',
         user_suggestions: './app/static/js/user_suggestions.js',

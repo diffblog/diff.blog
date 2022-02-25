@@ -25,7 +25,26 @@
 <section class="section">
   <div class="container">
     <div class="columns">
-      <div class="column is-7">
+      <div class="column is-2">
+        {%if request.user.is_authenticated %}
+        <div class="text-gray-900 border-b text-sm font-semibold mb-4 w-f">
+          YOUR TOPICS
+        </div>
+        <div id="my-topics"></div>
+        {% else %}
+        <div class="text-gray-900 border-b text-sm font-semibold mb-4 w-f">
+          POPULAR TOPICS
+        </div>
+        <div id="popular-topics"></div>
+        {% endif %}
+
+      </div>
+
+      <div class="column is-1 w-1">
+        <div class="h-full border-r text-gray-600"></div>
+      </div>
+
+      <div class="column is-5">
         <div id="home_feed"></div>
       </div>
 
@@ -33,14 +52,13 @@
         <div class="h-full border-r text-gray-600"></div>
       </div>
 
-      <div class="column is-4">
+      <div class="column is-3">
         {% if topic_display_name %}
-        <h1 class="text-4xl text-gray-900 font-semibold mb-10">
+        <h1 class="text-3xl text-gray-900 font-semibold mb-4">
           {{ topic_display_name }}
         </h1>
-        <button data-user-id="{{ id }}" class="topic-following border py-1 px-2 rounded ml-auto text-white bg-gray-900 hover:bg-gray-800">
-          Follow
-        </button>
+        <div id="topic-follow-button-holder" data-topic-id="{{ topic_id }}">
+        </div>
         {% endif %}
 
         <div id="user_recommendations_section" class="mb-10 hidden">
@@ -123,6 +141,7 @@
 </script>
 <script src="/static/dist/feed.bundle.js"></script>
 <script src="/static/dist/like.bundle.js" defer></script>
+<script src="/static/dist/topic.bundle.js" defer></script>
 <script src="/static/dist/save.bundle.js" defer></script>
 <script src="/static/dist/follow_user.bundle.js" defer></script>
 <script src="/static/dist/admin.bundle.js" defer></script>
