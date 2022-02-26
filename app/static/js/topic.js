@@ -16,29 +16,34 @@ import {
       return false;
   }
 
+  function load_my_topics_sidebar() {
+    $.ajax({
+      type: "GET",
+      url: "/api/user/topics",
+      success: function (my_topics) {
+          $("#my-topics").empty()
+          for (let topic of my_topics) {
+              const html = topic_item_sidebar_template(topic);
+              $("#my-topics").append(html);
+          }
+
+          if($("#topic-follow-button-holder").length) {
+              const page_topic_id = $("#topic-follow-button-holder").data("topic-id");
+              let html;
+              if(is_subscribed_to_topic(my_topics, page_topic_id)) {
+                  html = topic_follow_template({following: true, id: page_topic_id})
+              } else {
+                  html = topic_follow_template({following: false, id: page_topic_id})
+              }
+              $("#topic-follow-button-holder").html(html);
+          }
+      }
+  });
+  }
+
   $(function () {
     if($("#my-topics").length) {
-        $.ajax({
-            type: "GET",
-            url: "/api/user/topics",
-            success: function (my_topics) {
-                for (let topic of my_topics) {
-                    const html = topic_item_sidebar_template(topic);
-                    $("#my-topics").append(html);
-                }
-
-                if($("#topic-follow-button-holder").length) {
-                    const page_topic_id = $("#topic-follow-button-holder").data("topic-id");
-                    let html;
-                    if(is_subscribed_to_topic(my_topics, page_topic_id)) {
-                        html = topic_follow_template({following: true, id: page_topic_id})
-                    } else {
-                        html = topic_follow_template({following: false, id: page_topic_id})
-                    }
-                    $("#topic-follow-button-holder").append(html);
-                }
-            }
-        });
+       load_my_topics_sidebar();
     }
 
     if($("#popular-topics").length) {
@@ -54,7 +59,7 @@ import {
               if($("#topic-follow-button-holder").length) {
                   const page_topic_id = $("#topic-follow-button-holder").data("topic-id");
                   const html = topic_follow_template({following: false, id: page_topic_id})
-                  $("#topic-follow-button-holder").append(html);
+                  $("#topic-follow-button-holder").html(html);
               }
           }
       });
@@ -68,15 +73,15 @@ import {
           send_event("unfollow_topic");
           const topic_id = $(this).data("topic-id");
           
-          let html = topic_follow_template({following: false, id: topic_id})
-          $("#topic-follow-button-holder").html(html);
-      
           $.ajax({
             type: "DELETE",
             url: "/api/user/topics",
             data: { topic_id:  topic_id},
-            success: function (response) {},
-          });
+            success: function (response) {
+              load_my_topics_sidebar();
+            },
+            });
+
         });
 
         $("body").on("click", ".topic-follow", function () {
@@ -86,14 +91,14 @@ import {
           send_event("follow_topic");
           const topic_id = $(this).data("topic-id");
       
-          let html = topic_follow_template({following: true, id: topic_id})
-          $("#topic-follow-button-holder").html(html);
       
           $.ajax({
             type: "POST",
             url: "/api/user/topics",
             data: { topic_ids: JSON.stringify([topic_id])},
-            success: function (response) {},
+            success: function (response) {
+              load_my_topics_sidebar();
+            },
           });
         });
 

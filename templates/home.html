@@ -54,10 +54,12 @@
 
       <div class="column is-3">
         {% if topic_display_name %}
-        <h1 class="text-3xl text-gray-900 font-semibold mb-4">
-          {{ topic_display_name }}
-        </h1>
-        <div id="topic-follow-button-holder" data-topic-id="{{ topic_id }}">
+        <div class="mb-6">
+          <h1 class="text-3xl text-gray-900 font-semibold mb-2">
+            {{ topic_display_name }}
+          </h1>
+          <div id="topic-follow-button-holder" data-topic-id="{{ topic_id }}">
+          </div>
         </div>
         {% endif %}
 
