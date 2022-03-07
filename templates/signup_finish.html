@@ -8,11 +8,11 @@
     <div id="topics-selection-box">
         <h6 class="subtitle is-4">What areas are you interested?</h6>
         <div class="field is-grouped is-grouped-multiline">
-            {% for domain in domains %}
+            {% for topic in topics %}
             <p class="control">
-                <a class="button topic-option" data-id="{{ domain.id }}">
+                <a class="button topic-option" data-id="{{ topic.id }}">
                     &nbsp
-                    {{ domain.display_name }}
+                    {{ topic.display_name }}
                 </a>
             </p>
             {% endfor %}

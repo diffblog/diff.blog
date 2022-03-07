@@ -1,6 +1,6 @@
 from django.contrib.sitemaps import Sitemap
 from app.models import Post, UserProfile, Topic, Search
-from app.json_views.search import do_search
+from app.json_views.search import do_post_search
 from jobs.models import Job, Location
 
 import datetime
@@ -110,13 +110,13 @@ class SearchSitemap(Sitemap):
         return Search.objects.filter().exclude(query__exact="")
 
     def lastmod(self, search):
-        posts = do_search(search.query, 1)
+        posts = do_post_search(search.query, 1)
         if posts:
             return posts[0].updated_on
         return None
 
     def changefreq(self, search):
-        posts = do_search(search.query, 1)
+        posts = do_post_search(search.query, 1)
         if posts:
             return get_changefreq_from_last_updated_time(posts[0].updated_on)
         return "monthly"

@@ -53,6 +53,8 @@
       </div>
 
       <div class="column is-3">
+        <div id="like_button_container"></div>
+
         {% if topic_display_name %}
         <div class="mb-6">
           <h1 class="text-3xl text-gray-900 font-semibold mb-2">
@@ -147,4 +149,10 @@
 <script src="/static/dist/save.bundle.js" defer></script>
 <script src="/static/dist/follow_user.bundle.js" defer></script>
 <script src="/static/dist/admin.bundle.js" defer></script>
+<script src="/static/dist/components.bundle.js" defer></script>
+
+<script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+<!-- Load our React component. -->
 {% endblock %}

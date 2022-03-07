@@ -12,6 +12,7 @@ var Handlebars = require('handlebars/runtime');
 module.exports = {
     mode: 'production',
     entry: {
+        components: './app/static/js/components.js',
         followers: './app/static/js/followers.js',
         following: './app/static/js/following.js',
         follow_user: './app/static/js/follow_user.js',
@@ -45,6 +46,16 @@ module.exports = {
     ],
     module: {
         rules: [
+          {
+            test: /\.m?js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env']
+              }
+            }
+          },
             {
                 test: /\.handlebars$/,
                 loader: "handlebars-loader",

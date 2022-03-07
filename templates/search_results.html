@@ -1,6 +1,6 @@
 {% extends "search_base.html" %}
 
-{% block seo_tags %}
+{% block seo_topics %}
 <title>{{ search_query }} - diff.blog</title>
 {% endblock %}
 
@@ -9,6 +9,7 @@
     <ul>
       <li {% if search_type == "users" %}class="is-active"{% endif %}><a href="/search/?s={{ search_param }}&type=users" >Users</a></li>
       <li {% if search_type == "posts" %}class="is-active"{% endif %}><a href="/search/?s={{ search_param }}" >Posts</a></li>
+      <li {% if search_type == "topics" %}class="is-active"{% endif %}><a href="/search/?s={{ search_param }}&type=topics" >Topics</a></li>
     </ul>
   </div>
   <h2 id="status">Loading....</h2>
@@ -18,6 +19,7 @@
 
 {% block footer %}
 <script src="/static/dist/search.bundle.js"></script>
+<script src="/static/dist/topic.bundle.js"></script>
 <script src="/static/dist/like.bundle.js"></script>
 <script src="/static/dist/save.bundle.js"></script>
 <script src="/static/dist/follow_user.bundle.js"></script>

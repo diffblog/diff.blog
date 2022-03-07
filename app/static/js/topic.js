@@ -16,7 +16,12 @@ import {
       return false;
   }
 
-  function load_my_topics_sidebar() {
+
+  function load_my_topics_left_sidebar_if_required() {
+    if(!$("#my-topics").length) {
+      return;
+    }
+
     $.ajax({
       type: "GET",
       url: "/api/user/topics",
@@ -38,13 +43,13 @@ import {
               $("#topic-follow-button-holder").html(html);
           }
       }
-  });
+    });
   }
 
+  
+
   $(function () {
-    if($("#my-topics").length) {
-       load_my_topics_sidebar();
-    }
+    load_my_topics_left_sidebar_if_required();
 
     if($("#popular-topics").length) {
       $.ajax({
@@ -78,7 +83,7 @@ import {
             url: "/api/user/topics",
             data: { topic_id:  topic_id},
             success: function (response) {
-              load_my_topics_sidebar();
+              load_my_topics_left_sidebar_if_required();
             },
             });
 
@@ -97,7 +102,7 @@ import {
             url: "/api/user/topics",
             data: { topic_ids: JSON.stringify([topic_id])},
             success: function (response) {
-              load_my_topics_sidebar();
+              load_my_topics_left_sidebar_if_required();
             },
           });
         });
