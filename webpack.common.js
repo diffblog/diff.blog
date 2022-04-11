@@ -12,7 +12,6 @@ var Handlebars = require('handlebars/runtime');
 module.exports = {
     mode: 'production',
     entry: {
-        components: './app/static/js/components.js',
         followers: './app/static/js/followers.js',
         following: './app/static/js/following.js',
         follow_user: './app/static/js/follow_user.js',
@@ -31,6 +30,7 @@ module.exports = {
         base: './app/static/js/base.js',
         plugin_iframe: './app/static/js/plugin_iframe.js',
         jobs: './jobs/static/js/jobs.js',
+        page_home: './app/static/js/pages/home.js'
     },
     devtool: 'inline-source-map',
     plugins: [

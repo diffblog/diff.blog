@@ -7,7 +7,7 @@ import {
   var topic_item_sidebar_template = require("./../templates/topic-item-home-sidebar.handlebars");
   var topic_follow_template = require("./../templates/topic-follow-button.handlebars")
 
-  function is_subscribed_to_topic(my_topics, topic_id) {
+  export function is_subscribed_to_topic(my_topics, topic_id) {
       for (let my_topic of my_topics) {
           if (my_topic.id === parseInt(topic_id)) {
               return true;
@@ -71,41 +71,41 @@ import {
     }
       
       $(function () {
-        $("body").on("click", ".topic-following", function () {
-          if (show_login_prompt_if_required("follow_topic")) {
-            return;
-          }
-          send_event("unfollow_topic");
-          const topic_id = $(this).data("topic-id");
+        // $("body").on("click", ".topic-following", function () {
+        //   if (show_login_prompt_if_required("follow_topic")) {
+        //     return;
+        //   }
+        //   send_event("unfollow_topic");
+        //   const topic_id = $(this).data("topic-id");
           
-          $.ajax({
-            type: "DELETE",
-            url: "/api/user/topics",
-            data: { topic_id:  topic_id},
-            success: function (response) {
-              load_my_topics_left_sidebar_if_required();
-            },
-            });
+        //   $.ajax({
+        //     type: "DELETE",
+        //     url: "/api/user/topics",
+        //     data: { topic_id:  topic_id},
+        //     success: function (response) {
+        //       load_my_topics_left_sidebar_if_required();
+        //     },
+        //     });
 
-        });
+        // });
 
-        $("body").on("click", ".topic-follow", function () {
-          if (show_login_prompt_if_required("follow")) {
-            return;
-          }
-          send_event("follow_topic");
-          const topic_id = $(this).data("topic-id");
+        // $("body").on("click", ".topic-follow", function () {
+        //   if (show_login_prompt_if_required("follow")) {
+        //     return;
+        //   }
+        //   send_event("follow_topic");
+        //   const topic_id = $(this).data("topic-id");
       
       
-          $.ajax({
-            type: "POST",
-            url: "/api/user/topics",
-            data: { topic_ids: JSON.stringify([topic_id])},
-            success: function (response) {
-              load_my_topics_left_sidebar_if_required();
-            },
-          });
-        });
+        //   $.ajax({
+        //     type: "POST",
+        //     url: "/api/user/topics",
+        //     data: { topic_ids: JSON.stringify([topic_id])},
+        //     success: function (response) {
+        //       load_my_topics_left_sidebar_if_required();
+        //     },
+        //   });
+        // });
 
       });
       
