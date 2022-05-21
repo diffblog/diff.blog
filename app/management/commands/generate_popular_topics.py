@@ -5,32 +5,35 @@ from django.core.cache import cache
 
 from collections import Counter
 
-EXCLUDED_TOPICS = set([
-    "uncategorized",
-    "news",
-    "article",
-    "link",
-    "sponsored",
-    "articles",
-    "engineering",
-    "tech"
-])
+EXCLUDED_TOPICS = set(
+    [
+        "uncategorized",
+        "news",
+        "article",
+        "link",
+        "sponsored",
+        "articles",
+        "engineering",
+        "tech",
+    ]
+)
+
 
 class Command(BaseCommand):
     help = ""
 
     def handle(self, *args, **options):
-        posts = Post.objects.filter().order_by('-id')[:10000]
+        posts = Post.objects.filter().order_by("-id")[:10000]
         counter = Counter()
-       
+
         for post in posts:
             for topic in post.topics.all():
-               counter[topic.slug] += 1
+                counter[topic.slug] += 1
 
         for topic in Topic.objects.filter(is_popular=True):
             topic.is_popular = False
             topic.save()
-                
+
         for topic_slug, _ in counter.most_common()[:100]:
             if topic_slug in EXCLUDED_TOPICS:
                 continue

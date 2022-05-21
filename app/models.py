@@ -44,7 +44,7 @@ class Topic(models.Model):
             "display_name": self.display_name,
             "slug": self.slug,
             "id": self.id,
-            "url": self.get_absolute_url()
+            "url": self.get_absolute_url(),
         }
 
     def get_absolute_url(self):
