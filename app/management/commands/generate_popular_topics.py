@@ -5,11 +5,22 @@ from django.core.cache import cache
 
 from collections import Counter
 
+EXCLUDED_TOPICS = set([
+    "uncategorized",
+    "news",
+    "article",
+    "link",
+    "sponsored",
+    "articles",
+    "engineering",
+    "tech"
+])
+
 class Command(BaseCommand):
     help = ""
 
     def handle(self, *args, **options):
-        posts = Post.objects.filter().order_by('id')[:1000]
+        posts = Post.objects.filter().order_by('id')[10000:20000]
         counter = Counter()
        
         for post in posts:
@@ -18,7 +29,9 @@ class Command(BaseCommand):
         
         topics = []
         for topic_slug, _ in counter.most_common()[:100]:
+            if topic_slug in EXCLUDED_TOPICS:
+                continue
             topic = Topic.objects.filter(slug=topic_slug)[0]
             topics.append(topic)
-            
+
         cache.set("popular_topics", topics, timeout=None)
