@@ -30,6 +30,7 @@ class Topic(models.Model):
     recommended = models.ManyToManyField("UserProfile", related_name="recommended_in")
     slug = models.SlugField(unique=True, null=False)
     updated_on = models.DateTimeField(null=True, auto_now_add=True)
+    is_popular = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.display_name)
