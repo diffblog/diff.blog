@@ -43,9 +43,14 @@ import {
           type: "GET",
           url: "/api/topics/popular",
           success: function (popular_topics) {
+              let count = 0;
               for (let topic of popular_topics) {
                   const html = topic_item_sidebar_template(topic);
                   $("#popular-topics").append(html);
+                  count += 1;
+                  if (count === 30) {
+                    break;
+                  }
               }
               
               if($("#topic-follow-button-holder").length) {
