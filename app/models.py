@@ -336,7 +336,10 @@ class UserList(models.Model):
 class GitHubCampaign(models.Model):
     github_username = models.CharField(max_length=100)
     repo_name = models.CharField(max_length=150)
+
     ISSUE_CREATED_TO_ADD_BLOG_TO_DIFFBLOG = 60
+    STAR_REPO = 70
+
     status = models.IntegerField()
 
 
