@@ -26,6 +26,7 @@
   <div class="container">
     <div class="columns">
       <div class="column is-2">
+        <div class="hidden sm:block">
         {%if request.user.is_authenticated %}
         <div class="text-gray-900 border-b text-sm font-semibold mb-4 w-f">
           YOUR TOPICS
@@ -37,6 +38,7 @@
         </div>
         <div id="popular-topics"></div>
         {% endif %}
+      </div>
 
       </div>
 
