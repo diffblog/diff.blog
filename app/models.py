@@ -341,6 +341,7 @@ class GitHubCampaign(models.Model):
     STAR_REPO = 70
 
     status = models.IntegerField()
+    event_time = models.DateTimeField(auto_now_add=True, null=True)
 
 
 class Search(models.Model):
