@@ -12,7 +12,7 @@ def basic_post_filter(query, last_post_score, limit):
 
 def get_top_posts(topic, limit, last_post_score):
     if topic:
-        query = query.filter(topics__slug=topic)
+        query = Post.objects.filter(topics__slug=topic)
     else:
         query = Post.objects.filter(
             aggregate_votes_count__gte=20
