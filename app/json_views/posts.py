@@ -28,7 +28,7 @@ def get_top_posts_for_user(profile, limit, last_post_score):
     MIN_VOTES = 50
 
     query = Post.objects.filter(
-        Q(topics__in=profile.topics.all()) | Q(profile__in=profile.following.all()) | Q(aggregate_votes_count__gte=MIN_VOTES)
+        Q(topics__in=profile.topics.all(), aggregate_votes_count__gte=2) | Q(profile__in=profile.following.all()) | Q(aggregate_votes_count__gte=MIN_VOTES)
     )
     return basic_post_filter(query, last_post_score, limit)
     
