@@ -8,6 +8,7 @@ from googlesearch import search
 from django.db import connection
 import feedparser
 from polyglot.detect import Detector
+from feedsearch import search
 
 from feed.blogs import recommended_blog_list
 
@@ -63,10 +64,10 @@ def populate_user_profile_details_serial():
 
 
 def get_rss_feed_url_from_blog_url(blog_url):
-    feed_urls = find_feeds(blog_url)
-    if len(feed_urls) == 0:
+    feeds = search(blog_url)
+    if len(feeds) == 0:
         return False
-    return feed_urls[0]
+    return feeds[0].url
 
 
 def feed_has_valid_english_posts(feed_url):
