@@ -9,5 +9,6 @@ RUN apt-get update && apt-get install -y nodejs && apt-get -y install npm && npm
 RUN npm install
 RUN apt-get install -y redis-server
 RUN apt-get install -y sqlite3
+RUN ./manage.py migrate
 ENV DEVELOPMENT 1
 COPY . /code/
