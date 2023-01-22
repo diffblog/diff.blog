@@ -64,7 +64,10 @@ def populate_user_profile_details_serial():
 
 
 def get_rss_feed_url_from_blog_url(blog_url):
-    feeds = search(blog_url)
+    try:
+        feeds = search(blog_url)
+    except:
+        return False
     if len(feeds) == 0:
         return False
     return feeds[0].url
