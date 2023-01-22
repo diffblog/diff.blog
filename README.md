@@ -1,10 +1,8 @@
 ## Dev Environment Setup
 
 ### Install docker-compose
-```bash
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-```
+
+https://docs.docker.com/compose/install/linux/
 
 ### Set up config files
 * Create `diffblog/secrets.py` using the secrets_default.py template
@@ -17,13 +15,15 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ### Start the development server
 ```bash
-sudo docker-compose up
+docker-compose up
+```
 
-# Then attach shell to the diffblog_web docker container
-
-./manage.py migrate
-npm install
-# Might want to comment out populate_user_profile_details_serial
+### Populate users
+```
 ./manage.py update_recommended_blog_list
+```
+
+### Populate blogs
+```
 ./mange.py sync_posts
 ```
