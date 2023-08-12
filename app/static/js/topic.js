@@ -50,7 +50,7 @@ $(function () {
 
         if ($("#topic-follow-button-holder").length) {
           const page_topic_id = $("#topic-follow-button-holder").data(
-            "topic-id"
+            "topic-id",
           );
           const html = topic_follow_template({
             following: false,

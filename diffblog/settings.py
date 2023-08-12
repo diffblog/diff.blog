@@ -20,7 +20,7 @@ from diffblog.secrets import (
     smtp_username,
     smtp_password,
     smtp_port,
-    django_secret
+    django_secret,
 )
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -62,7 +62,6 @@ INSTALLED_APPS = [
     "app",
     "jobs",
     "mirrors",
-    "challenge",
     "social_django",
     "django_rq",
     "corsheaders",

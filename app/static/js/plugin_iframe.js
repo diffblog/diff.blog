@@ -52,7 +52,7 @@ function create_plugin_div() {
 function show_mirror_votes(
   plugin_public_api_key,
   encoded_blog_post_url,
-  limit
+  limit,
 ) {
   if (limit === 0) {
     return;
@@ -81,7 +81,7 @@ function show_mirror_votes(
         return;
       }
       var discussed_on_text_holder = document.getElementById(
-        "discussed-on-text-holder"
+        "discussed-on-text-holder",
       );
       discussed_on_text_holder.style.display = "";
       const diffblog_entry = {
@@ -114,6 +114,6 @@ document.getElementById("diffblogscript").addEventListener("load", function () {
     document
       .getElementById("diffblogscript")
       .getAttribute("data-blog-post-url"),
-    7
+    7,
   );
 });

@@ -7,4 +7,4 @@ class Command(BaseCommand):
     help = "Fetches the top users from GitHub"
 
     def handle(self, *args, **options):
-        update_recommended_blog_list()
+        update_recommended_blog_list(populate_github_details=False)

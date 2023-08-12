@@ -14,12 +14,12 @@ function create_iframe(plugin_public_api_key, blog_post_url) {
   iframe.setAttribute("src", iframe_url);
   iframe.setAttribute(
     "style",
-    "width: 1px; min-width: 100%; border: none; user-select: none; visibility: visible;"
+    "width: 1px; min-width: 100%; border: none; user-select: none; visibility: visible;",
   );
   const iframe_holder = document.createElement("div");
   plugin_script.parentNode.insertBefore(
     iframe_holder,
-    plugin_script.nextSibling
+    plugin_script.nextSibling,
   );
   iframe_holder.appendChild(iframe);
 }

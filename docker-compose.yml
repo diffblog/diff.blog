@@ -3,12 +3,14 @@
   services:
     web:
       build: .
+      depends_on:
+        - db
       command: ./run-dev
       volumes:
         - .:/code
+        - node_modules:/code/node_modules
       ports:
         - "8000:8000"
-
     db:
       image: postgres
       restart: always
@@ -16,3 +18,7 @@
         POSTGRES_PASSWORD: postgres_password
         POSTGRES_USER: postgres
         POSTGRES_DB: diffblog
+  volumes:
+    node_modules:
+
+    

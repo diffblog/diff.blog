@@ -2,7 +2,7 @@
 
 ### Install docker-compose
 
-https://docs.docker.com/compose/install/linux/
+https://docs.docker.com/compose/install/
 
 ### Set up config files
 * Create `diffblog/secrets.py` using the secrets_default.py template
@@ -18,12 +18,25 @@ https://docs.docker.com/compose/install/linux/
 docker-compose up
 ```
 
-### Populate users
-```
+### Populate users with RSS feed URLs
+Run inside the docker container
+
+```bash
 ./manage.py update_recommended_blog_list
 ```
 
-### Populate blogs
-```
+### Populate blog posts from RSS feeds
+Run inside the docker container.
+
+Note: You can stop this command in between since this might take a while to fully complete.
+
+```bash
 ./mange.py sync_posts
+```
+
+### Generate popular topics
+Run inside the docker container.
+
+```bash
+./manage.py generate_popular_topics
 ```

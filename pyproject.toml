@@ -21,8 +21,6 @@ exclude = '''
     | var
 
     | app/migrations/*
-    | challenge/migrations/*
-    | challenge/migrations/*
   )/
   | foo.py           # also separately exclude a file named foo.py in
                      # the root of the project

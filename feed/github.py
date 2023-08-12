@@ -7,7 +7,6 @@ from feedfinder2 import find_feeds
 from googlesearch import search
 from django.db import connection
 import feedparser
-from polyglot.detect import Detector
 from feedsearch import search
 
 from feed.blogs import recommended_blog_list
