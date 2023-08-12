@@ -1,42 +1,43 @@
+# diff.blog
+
+In a world increasingly dominated by centralized platforms, diff.blog takes a stand for the independent voices of the internet. Our mission is clear and vital: *Revive and amplify the power of self-hosted blogs.*
+
+**Our Goals:**
+
+1. **Champion the Underdogs**: We spotlight posts from self-hosted blogs, ensuring they don't get overshadowed by big platforms.
+2. **Build Better Tools**: We're crafting tools to make self-hosting not just feasible, but desirable.
+
+---
+
+## Join the Revolution
+
+This repository powers [diff.blog](https://diff.blog). If you believe in a decentralized web and the power of individual voices, we want you on board.
+
+---
+
 ## Dev Environment Setup
 
-### Install docker-compose
+### 1. **Install Docker-Compose**
 
-https://docs.docker.com/compose/install/
+Get docker-compose [here](https://docs.docker.com/compose/install/).
 
-### Set up config files
-* Create `diffblog/secrets.py` using the secrets_default.py template
-    * The bare minimum secrets are
-        * `diffblog_github_access_token`
-        * `social_auth_github_key` and `social_auth_github_secret`
-        * All the reddit keys for syncing upvotes
-* Create `blacklist.py` file with `users = []`
+### 2. **Clone the Repository**
 
+```bash
+git clone https://github.com/diffblog/diff.blog
+```
 
-### Start the development server
+### 3. **Run the Setup Script**
+
+```bash
+cd diff.blog
+docker-compose run web ./setup.sh
+```
+
+### 4. **Start the Development Server**
+
 ```bash
 docker-compose up
 ```
 
-### Populate users with RSS feed URLs
-Run inside the docker container
-
-```bash
-./manage.py update_recommended_blog_list
-```
-
-### Populate blog posts from RSS feeds
-Run inside the docker container.
-
-Note: You can stop this command in between since this might take a while to fully complete.
-
-```bash
-./mange.py sync_posts
-```
-
-### Generate popular topics
-Run inside the docker container.
-
-```bash
-./manage.py generate_popular_topics
-```
+Visit [http://localhost:8000/](http://localhost:8000/) to access the local server.
