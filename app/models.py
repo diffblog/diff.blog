@@ -161,6 +161,11 @@ class Post(models.Model):
     score = models.FloatField(default=0)
     topics = models.ManyToManyField(Topic, related_name="posts")
     slug = models.SlugField(unique=True, null=True, max_length=250)
+    language = models.CharField(
+        max_length=2, 
+        null=True, 
+        blank=True
+    )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

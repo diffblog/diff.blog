@@ -4,6 +4,7 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.core.cache import cache
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 from dateutil.parser import parse as iso_date_parser
 from app.json_views.posts import get_top_posts, get_top_posts_for_user
@@ -45,6 +46,7 @@ def get_posts(request, feed_type):
             query = query.filter(updated_on__lte=last_post_date)
         if topic:
             query = query.filter(topics__slug=topic)
+        query = query.filter(Q(language='en') | Q(language__isnull=True))
         query = query.order_by("-updated_on")
         posts = query.exclude(title__isnull=True).exclude(title="")[:limit]
 

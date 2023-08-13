@@ -11,8 +11,11 @@ if settings.DEBUG:
 
 def basic_post_filter(query, last_post_score, limit):
     query = query.filter(source=Post.RSS_FEED)
+    
     if last_post_score is not None:
         query = query.filter(score__lte=last_post_score)
+    
+    query = query.filter(Q(language='en') | Q(language__isnull=True))
     query = query.order_by("-score")
     return query.exclude(title__isnull=True).exclude(title="")[:limit]
 

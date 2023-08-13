@@ -1,3 +1,4 @@
+from typing import Optional
 import feedparser
 from dateutil import parser as date_parser
 from datetime import datetime, timedelta
@@ -25,8 +26,11 @@ from feed.github import (
 from feed.blogs import recommended_blog_list
 from feed.blacklist import users as blacklisted_users
 from app.lib import normalize_link, save_to_pocket
+from langdetect import detect, DetectorFactory, LangDetectException
+from typing import Optional
 
-# Get an instance of a logger
+DetectorFactory.seed = 0
+
 logger = logging.getLogger(__name__)
 
 domain_topics = [
@@ -146,16 +150,17 @@ def set_users_feed_url_from_blog_url():
     pool.map(_set_feed_url_from_blog_url, users)
 
 
-def get_valid_english_summary(entry, feed_url):
+def extract_summary_from_feed_entry(entry: dict, feed_url: str) -> Optional[str]:
     content = None
     if "content" in entry:
         content = entry["content"]
         try:
             content = content[0]["value"]
             if "medium.com" in feed_url and len(content) < 1000:
-                return False
-        except:
-            print("Invalid content for ", feed_url)
+                return None
+        except Exception as e:
+            logger.error(f"Invalid content for {feed_url}. Exception: {e}")
+            return None
 
     if "summary" in entry:
         summary = entry["summary"]
@@ -167,24 +172,18 @@ def get_valid_english_summary(entry, feed_url):
     else:
         logger.warning("Content not found for", feed_url)
         return None
+    
+    soup = BeautifulSoup(summary, 'html.parser')
+    return soup.get_text().replace("\n", " ")
 
-    soup = BeautifulSoup(summary)
-    summary = soup.get_text().replace("\n", " ")
-
-    # try:
-    #     language = Detector(summary).languages[0]
-    #     if language.code != "en":
-    #         logger.warning("Non english language", feed_url)
-    #         return None
-    # except polyglot.detect.base.UnknownLanguage:
-    #     logger.warning("Unknown language for summary", feed_url)
-    #     return summary
-    # except pycld2.error:
-    #     logger.warning("pycld2.error while analyzing language", feed_url)
-    # except:
-    #     logger.warning("Unknown exception while analyzing language for")
-    #     return summary
-    return summary
+def detect_summary_language(summary: str, feed_url: str) -> Optional[str]:
+    try:
+        return detect(summary)
+    except LangDetectException:
+        logger.warning("Unknown language for summary", feed_url)
+    except Exception as e:
+        logger.warning(f"Unknown exception while analyzing language for {feed_url}. Exception: {e}")
+    return None
 
 
 def fetch_cover_photo(post):
@@ -226,6 +225,7 @@ def read_feed(feed_url):
 
 
 def fetch_posts(user):
+    print("Fetching posts for ", user.github_username)
     if user.github_username in blacklisted_users:
         return
 
@@ -287,11 +287,11 @@ def fetch_posts(user):
                 date_parsed = random_date()
                 # For now
                 continue
-
-            summary = get_valid_english_summary(entry, feed_url)
+            
+            summary = extract_summary_from_feed_entry(entry, feed_url)
             if not summary:
                 continue
-
+            language = detect_summary_language(summary, feed_url)
             try:
                 seconds_since_posted = (now() - date_parsed).total_seconds()
             except TypeError:
@@ -317,9 +317,9 @@ def fetch_posts(user):
                 updated_on=date_parsed,
                 source=Post.RSS_FEED,
                 normalized_link=normalize_link(link),
+                language=language,
+                upvotes_count=1,
             )
-
-            post.upvotes_count = 1
             post.save()
 
             fetch_cover_photo(post)
