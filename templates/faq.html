@@ -73,6 +73,23 @@
         You can add your blog by going to <a href="account/settings/blog/">settings</a> page after signup.
     </p>
     <h2 class="text-xl font-medium my-4">
+        How do I add tags to my tags to my posts?
+    </h2>
+    <p>
+        diff.blog reads posts' tags from RSS feeds. It supports both RSS and Atom, so you'll need to specify tags in your
+        format correctly.
+        <ul>
+            <li>
+                For Atom 1.0, you need to add <code>&lt;category term="tag" /&gt;</code> to your posts. See
+                <a href="https://datatracker.ietf.org/doc/html/rfc4287#section-4.2.2">RFC 4287 Section 4.2.2</a> for details.
+            </li>
+            <li>
+                For RSS 2.0, you need to add <code>&lt;category&gt;tag&lt;/category&gt;</code> to your posts. See
+                <a href="https://www.rssboard.org/rss-specification#ltcategorygtSubelementOfLtitemgt">RSS 2.0 Specification</a> for details.
+            </li>
+        </ul>
+    </p>
+    <h2 class="text-xl font-medium my-4">
         What if a blog I want to follow is not there in diff.blog?
     </h2>
     <p>
