@@ -12,7 +12,7 @@ In a world increasingly dominated by centralized platforms, diff.blog takes a st
 ## Join the Revolution
 
 This repository powers [diff.blog](https://diff.blog). If you believe in a decentralized web and the power of individual voices, we want you on board.
-"`
+
 ---
 
 ## Dev Environment Setup
