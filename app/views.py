@@ -17,7 +17,11 @@ from app.models import (
     BlogSuggestion,
     UserList,
     get_topic,
+    get_or_create_user_profile
 )
+from typing import Union, Optional, Tuple
+from django.http import HttpRequest
+
 from feed.lib import _set_feed_url_from_blog_url, update_feed_url, fetch_posts
 from app.digest import (
     get_global_popular_posts_from_last_week,
@@ -252,27 +256,27 @@ def logout_user(request):
     return HttpResponseRedirect("/")
 
 
-def suggest(request):
-    username = ""
+
+
+def suggest(request: HttpRequest) -> HttpResponse:
+    username: str = ""
     if request.method == "POST":
-        suggested_username = request.POST.get("username", None)
-        suggested_url = request.POST.get("url", None)
+        suggested_username: Optional[str] = request.POST.get("username", None)
+        suggested_url: Optional[str] = request.POST.get("url", None)
 
         if request.user.is_authenticated and request.user.is_staff:
             assert suggested_username is not None
-            profile, created = UserProfile.objects.get_or_create(
-                github_username=suggested_username
-            )
+            blog_profile, created = get_or_create_user_profile(suggested_username)
             if created:
-                _populate_user_profile_details(profile)
-            profile.blog_url = suggested_url
-            profile.save()
-            _set_feed_url_from_blog_url(profile)
+                _populate_user_profile_details(blog_profile)
+            blog_profile.blog_url = suggested_url
+            blog_profile.save()
+            _set_feed_url_from_blog_url(blog_profile)
         else:
-            suggestion = BlogSuggestion.objects.create(
+            suggestion: BlogSuggestion = BlogSuggestion.objects.create(
                 username=suggested_username, url=suggested_url
             )
-            profile = None
+            profile: Optional[UserProfile] = None
             if request.user.is_authenticated:
                 profile = request.user.profile
                 suggestion.suggested_by = profile
@@ -286,6 +290,7 @@ def suggest(request):
         "suggest.html",
         context={"show_confirmation": request.method == "POST", "username": username},
     )
+
 
 
 def faq(request):

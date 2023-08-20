@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from typing import List
 from diffblog.secrets import (
     social_auth_github_key,
     social_auth_github_secret,
@@ -45,7 +46,7 @@ CORS_ORIGIN_WHITELIST = [
     "https://vishnuks.com",
 ]
 
-STATICFILES_DIRS = []
+STATICFILES_DIRS: List[str] = []
 
 # Application definition
 

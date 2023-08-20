@@ -1,0 +1,20 @@
+name: Django CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build the Docker Compose stack
+      run: docker-compose build
+
+    - name: Run Django tests
+      run: docker-compose run --rm web python manage.py test
+
+    - name: Run mypy checks
+      run: docker-compose run --rm web mypy .
+
