@@ -66,7 +66,7 @@ urlpatterns = [
         app.views.unsubscribe_from_emails,
         name="unsubscribe_from_emails",
     ),
-    path("suggest/", app.views.suggest),
+    path("suggest/", app.views.suggest, name="suggest"),
     path("FAQ/", app.views.faq),
     path("django-rq/", include("django_rq.urls")),
     path(

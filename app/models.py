@@ -5,6 +5,8 @@ from django.conf import settings
 from django.forms.models import model_to_dict
 from django.db.models import Sum
 from django.utils.text import slugify
+from django.db import IntegrityError
+from typing import Tuple
 
 from datetime import datetime, timedelta
 from math import log
@@ -138,6 +140,18 @@ class UserProfile(models.Model):
         self.send_weekly_digest_email = False
         self.save(update_fields=["send_weekly_digest_email"])
 
+
+def get_or_create_user_profile(github_username: str) -> Tuple[UserProfile, bool]:
+    try:
+        profile = UserProfile.objects.get(github_username__iexact=github_username)
+        created = False
+    except UserProfile.DoesNotExist:
+        try:
+            profile, created = UserProfile.objects.get_or_create(github_username=github_username)
+        except IntegrityError:
+            profile = UserProfile.objects.get(github_username__iexact=github_username)
+            created = False
+    return profile, created
 
 class Post(models.Model):
     title = models.CharField(max_length=200)

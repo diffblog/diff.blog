@@ -166,7 +166,10 @@ DATABASES = {
     }
 }
 
-AUTHENTICATION_BACKENDS = ("social_core.backends.github.GithubOAuth2",)
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.github.GithubOAuth2",
+)
 
 
 # Password validation
