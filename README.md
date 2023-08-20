@@ -12,7 +12,7 @@ In a world increasingly dominated by centralized platforms, diff.blog takes a st
 ## Join the Revolution
 
 This repository powers [diff.blog](https://diff.blog). If you believe in a decentralized web and the power of individual voices, we want you on board.
-
+"`
 ---
 
 ## Dev Environment Setup
@@ -31,7 +31,7 @@ git clone https://github.com/diffblog/diff.blog
 
 ```bash
 cd diff.blog
-docker-compose run web ./setup.sh
+docker-compose run web ./scripts/setup_docker_dev_env
 ```
 
 ### 4. **Start the Development Server**

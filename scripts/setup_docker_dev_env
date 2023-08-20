@@ -1,0 +1,7 @@
+#!/bin/bash
+
+./setup_config_files
+
+python manage.py migrate
+
+./manage.py loaddata all_data.json

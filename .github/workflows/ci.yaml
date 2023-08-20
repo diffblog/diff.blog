@@ -11,10 +11,12 @@ jobs:
 
     - name: Build the Docker Compose stack
       run: docker-compose build
-
+    
+    - name: Setup configuration files
+      run: docker-compose run --rm web ./scripts/setup_config_files
+    
     - name: Run Django tests
       run: docker-compose run --rm web python manage.py test
 
     - name: Run mypy checks
       run: docker-compose run --rm web mypy .
-
