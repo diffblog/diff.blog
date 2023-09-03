@@ -140,6 +140,8 @@ class UserProfile(models.Model):
         self.send_weekly_digest_email = False
         self.save(update_fields=["send_weekly_digest_email"])
 
+def get_user_profile(github_username: str) -> UserProfile:
+    return UserProfile.objects.get(github_username__iexact=github_username)
 
 def get_or_create_user_profile(github_username: str) -> Tuple[UserProfile, bool]:
     try:

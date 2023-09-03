@@ -10,7 +10,7 @@ import json
 import logging
 import random
 
-from app.models import Vote, Post, Comment, UserProfile, Topic, get_topic
+from app.models import Vote, Post, Comment, UserProfile, Topic, get_topic, get_user_profile
 from app.queue import add_feed_initializer_to_queue
 
 logger = logging.getLogger(__name__)
@@ -38,9 +38,7 @@ def serialize_users(request, users, get_topics=False):
 
 def following_users(request):
     if request.method == "GET":
-        user_profile = UserProfile.objects.get(
-            github_username=request.GET.get("username", None)
-        )
+        user_profile = get_user_profile(request.GET.get("username", None))
         following = user_profile.following.all()
         serialized_users = serialize_users(request, following)
         return JsonResponse(serialized_users, safe=False)
@@ -60,9 +58,7 @@ def following_users(request):
 
 
 def follower_users(request):
-    user_profile = UserProfile.objects.get(
-        github_username=request.GET.get("username", None)
-    )
+    user_profile = get_user_profile(request.GET.get("username", None))
     followers = user_profile.followers.all()
     serialized_users = serialize_users(request, followers)
     return JsonResponse(serialized_users, safe=False)
