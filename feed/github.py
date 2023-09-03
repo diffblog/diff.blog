@@ -24,16 +24,23 @@ blog_item = """
 
 
 def refresh_profile_from_github(user):
-    response = r.get(
-        "https://api.github.com/users/{}".format(user.github_username),
-        headers=diffblog_headers,
-    )
+    if user.github_id:
+        response = r.get(
+            "https://api.github.com/user/{}".format(user.github_id),
+            headers=diffblog_headers,
+        )
+    else:
+        response = r.get(
+            "https://api.github.com/users/{}".format(user.github_username),
+            headers=diffblog_headers,
+        )
     if response.status_code != 200:
         # TODO: Log this
         return
     user_response = response.json()
-    user.full_name = (user_response["name"] or "")[:50]
     user.github_id = user_response["id"]
+    user.github_username = user_response["login"]
+    user.full_name = (user_response["name"] or "")[:50]
     user.company = (user_response["company"] or "")[:100]
     user.bio = user_response["bio"] or ""
     user.location = (user_response["location"] or "")[:100]
@@ -41,6 +48,7 @@ def refresh_profile_from_github(user):
     user.followers_count = user_response["followers"]
     user.following_count = user_response["following"]
     user.is_organization = user_response["type"] == "Organization"
+    user.twitter_username = (user_response["twitter_username"] or "")[:100]
     user.save()
 
 def initialize_profile_details_from_github_username(profile):
