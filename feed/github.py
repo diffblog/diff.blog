@@ -113,22 +113,6 @@ def _populate_user_model_feed_urls_from_google(username, language=None):
 
     return
 
-    for url in search("{} {} blog".format(response["name"], username), stop=1):
-        if "github.com" in url:
-            continue
-        if "twitter.com" in url:
-            continue
-        if "linkedin.com" in url:
-            continue
-        if "facebook.com" in url:
-            continue
-        feeds = find_feeds(url)
-        if len(feeds) == 0:
-            continue
-        print('("{}", "{}"),'.format(username, feed_urls[0]))
-        break
-
-
 def get_most_followed_users(language, limit=10):
     users = []
     for i in range(0, limit):
