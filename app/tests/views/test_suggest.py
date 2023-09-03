@@ -32,7 +32,7 @@ class SuggestViewTestCase(TestCase):
         suggestion = BlogSuggestion.objects.get(username='test_username')
         self.assertEqual(suggestion.suggested_by, self.user.profile)
 
-    @patch('app.views._populate_user_profile_details')
+    @patch('app.views.refresh_profile_from_github')
     @patch('app.views._set_feed_url_from_blog_url')
     def test_post_suggest_view_as_staff(self, mock_set_feed_url, mock_populate_details):
         self.client.login(username='staffuser', password='password')

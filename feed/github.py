@@ -23,18 +23,13 @@ blog_item = """
 """
 
 
-def _populate_user_profile_details(user):
-    if user.github_id:
-        return
-    print("Populating user profile of ", user.github_username)
+def refresh_profile_from_github(user):
     response = r.get(
         "https://api.github.com/users/{}".format(user.github_username),
         headers=diffblog_headers,
     )
     if response.status_code != 200:
-        print(user.github_username)
-        print("Unxpected status code ", response.status_code)
-        print(response.content)
+        # TODO: Log this
         return
     user_response = response.json()
     user.full_name = (user_response["name"] or "")[:50]
@@ -48,18 +43,22 @@ def _populate_user_profile_details(user):
     user.is_organization = user_response["type"] == "Organization"
     user.save()
 
+def initialize_profile_details_from_github_username(profile):
+    if profile.github_id:
+        return
+    refresh_profile_from_github(profile)    
 
 def populate_user_profile_details_parallel():
     users = UserProfile.objects.all()
     pool = Pool()
     connection.close()
-    pool.map(_populate_user_profile_details, users)
+    pool.map(initialize_profile_details_from_github_username, users)
 
 
 def populate_user_profile_details_serial():
     users = UserProfile.objects.all()
     for user in users:
-        _populate_user_profile_details(user)
+        initialize_profile_details_from_github_username(user)
 
 
 def get_rss_feed_url_from_blog_url(blog_url):

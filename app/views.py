@@ -1,5 +1,5 @@
 from app.topic import get_popular_topics
-from feed.github import _populate_user_profile_details
+from feed.github import refresh_profile_from_github
 from urllib.parse import urlparse
 
 from django.shortcuts import render, redirect
@@ -268,7 +268,7 @@ def suggest(request: HttpRequest) -> HttpResponse:
             assert suggested_username is not None
             blog_profile, created = get_or_create_user_profile(suggested_username)
             if created:
-                _populate_user_profile_details(blog_profile)
+                refresh_profile_from_github(blog_profile)
             blog_profile.blog_url = suggested_url
             blog_profile.save()
             _set_feed_url_from_blog_url(blog_profile)
