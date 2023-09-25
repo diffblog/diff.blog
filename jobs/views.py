@@ -12,7 +12,7 @@ def jobs_directory(request, location_slug="", title_slug=""):
         location = Location.objects.filter(slug=location_slug).last()
 
     title = title_slug
-    if title_slug is not None:
+    if title_slug:
         job = Job.objects.filter(title_slug=title_slug).first()
         if job is not None:
             title = job.title
