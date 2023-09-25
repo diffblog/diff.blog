@@ -1,4 +1,4 @@
-from app.models import UserProfile, Topic, Category
+from app.models import UserProfile, Topic, Category, get_user_profile
 import requests as r
 from multiprocessing import Queue, Pool
 import time
@@ -50,6 +50,24 @@ def refresh_profile_from_github(user):
     user.is_organization = user_response["type"] == "Organization"
     user.twitter_username = (user_response["twitter_username"] or "")[:100]
     user.save()
+
+def get_or_create_profile_from_github_id_and_github_username(github_user_id: int, github_username: str) -> UserProfile:
+    try:
+        user = UserProfile.objects.get(github_id=github_user_id)
+        if user.github_username != github_username:
+            user.github_username = github_username
+            user.save()
+        return user
+    except UserProfile.DoesNotExist:
+        pass
+    
+    user = get_user_profile(github_username)
+    if user:
+        return user
+    
+    user = UserProfile(github_id=github_user_id, github_username=github_username)
+    refresh_profile_from_github(user)
+    return user
 
 def initialize_profile_details_from_github_username(profile):
     if profile.github_id:
