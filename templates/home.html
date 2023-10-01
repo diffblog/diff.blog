@@ -4,7 +4,7 @@
 {% if landing_page %}
 <title>diff.blog - Home</title>
 <meta name="description"
-  content="diff.blog is the home page of the developer community. Join diff.blog to keep updated with the blogs of developers from all over the internet.">
+  content="diff.blog is the home page of the developers. Join diff.blog to keep updated with the blogs of developers from all over the internet.">
 {% elif feed_type == "top" %}
 <title>Top {{ topic_display_name }} blog posts - diff.blog</title>
 <meta name="description" content="Popular {{ topic_display_name }} blog posts in diff.blog.">
@@ -27,6 +27,24 @@
     <div class="columns">
       <div class="column is-2">
         <div class="hidden sm:block">
+          {%if not request.user.is_authenticated %}
+          <div class="mb-4 w-f drop-shadow-lg">
+            <div class="text-lg mb-2 text-gray-900 font-bold">
+            A news reader built for developers!
+            </div>
+            <div class="text-sm mb-2">
+            Join to follow developer blogs, topics and engage in community!
+          </div>
+          <div class="buttons">
+            <a class="button" href="{% url "social:begin" "github" %}">
+              Join now &nbsp <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+
+          {% endif %}
+
+
         {%if request.user.is_authenticated %}
         <div class="text-gray-900 border-b text-sm font-semibold mb-4 w-f">
           YOUR TOPICS
