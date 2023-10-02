@@ -244,9 +244,6 @@ def fetch_posts(user):
         # TODO: Make the check more robust
         keys = set(entry.keys())
 
-        if not set(["content", "summary", "description"]).intersection(keys):
-            continue
-
         if "title" not in keys:
             continue
 
@@ -290,7 +287,7 @@ def fetch_posts(user):
             
             summary = extract_summary_from_feed_entry(entry, feed_url)
             if not summary:
-                continue
+                summary = title
             language = detect_summary_language(summary, feed_url)
             try:
                 seconds_since_posted = (now() - date_parsed).total_seconds()
