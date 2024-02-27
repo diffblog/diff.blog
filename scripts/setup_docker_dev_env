@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./setup_config_files
+./scripts/setup_config_files
 
 python manage.py migrate
 
