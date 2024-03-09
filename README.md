@@ -1,17 +1,8 @@
 # diff.blog
 
-In a world increasingly dominated by centralized platforms, diff.blog takes a stand for the independent voices of the internet. Our mission is clear and vital: *Revive and amplify the power of self-hosted blogs.*
+diff.blog is an aggregtor of developer blogs.
 
-**Our Goals:**
-
-1. **Champion the Underdogs**: We spotlight posts from self-hosted blogs, ensuring they don't get overshadowed by big platforms.
-2. **Build Better Tools**: We're crafting tools to make self-hosting not just feasible, but desirable.
-
----
-
-## Join the Revolution
-
-This repository powers [diff.blog](https://diff.blog). If you believe in a decentralized web and the power of individual voices, we want you on board.
+Our mission is to bring visibility to great developer blogs and fight against centralized blogging platforms like Medium.
 
 ---
 
