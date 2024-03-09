@@ -1,8 +1,8 @@
 # diff.blog
 
-diff.blog is an aggregtor of developer blogs.
+diff.blog is an aggregator of developer blogs.
 
-Our mission is to bring visibility to great developer blogs and fight against centralized blogging platforms like Medium.
+Our mission is to bring visibility to great self hosted developer blogs and fight against centralized blogging platforms like Medium.
 
 Read more at https://diff.blog/FAQ
 
