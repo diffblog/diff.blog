@@ -4,6 +4,8 @@ diff.blog is an aggregtor of developer blogs.
 
 Our mission is to bring visibility to great developer blogs and fight against centralized blogging platforms like Medium.
 
+Read more at https://diff.blog/faq
+
 ---
 
 ## Dev Environment Setup
