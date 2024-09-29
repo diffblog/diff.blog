@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
 <section class="section">
     <div class="container">
+
+
       <div class="columns">
         <div class="column is-one-fifth">
             <div class="">
@@ -76,8 +80,17 @@
                   </li>
                 </ul>
               </div>
+              {%if not request.user.is_authenticated %}
+              <div class="bg-black text-center py-4 lg:px-4 rounded">
+                <div class="p-2 bg-gray-800 items-center text-gray-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+                  <span class="font-semibold mr-2 text-left flex-auto">Sign up now to not miss the next blog post from <b>{{ profile.full_name|default:profile.github_username }}</b>!</span>
+                </div>
+              </div>
+              {% endif %}
+              <br>
               {% block info %}
               {% endblock %}
+              
           </div>
     </div>
   </div>
