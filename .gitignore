@@ -131,3 +131,5 @@ etc
 node_modules/
 
 .vscode/
+
+static/
