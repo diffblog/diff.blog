@@ -207,22 +207,15 @@ def fetch_cover_photo(post):
 
 
 def read_feed(feed_url):
+    # TODO: Fix long request to http://brandonmarlow.com/feed.xml
     try:
         resp = requests.get(
-            feed_url, timeout=20.0, headers={"User-Agent": "https://diff.blog"}
+            feed_url, timeout=(2.0, 2.0), headers={"User-Agent": "https://diff.blog"}
         )
-    except requests.exceptions.ConnectTimeout:
-        return
-    except requests.exceptions.ConnectionError:
-        return
-    except requests.exceptions.SSLError:
-        return
-    except requests.ReadTimeout:
-        return
-
-    content = io.BytesIO(resp.content)
-    return feedparser.parse(content)
-
+        content = io.BytesIO(resp.content)
+        return feedparser.parse(content)
+    except Exception:
+        return None
 
 def fetch_posts(user):
     print("Fetching posts for ", user.github_username)
@@ -239,7 +232,7 @@ def fetch_posts(user):
         user.feed_status = UserProfile.FEED_POSTS_NOT_FOUND
         user.save()
         return
-
+    
     for entry in blog_feed.entries:
         # TODO: Make the check more robust
         keys = set(entry.keys())
@@ -259,6 +252,7 @@ def fetch_posts(user):
 
         new_post_count = 0
         post = Post.objects.filter(Q(title=title) | Q(link=link), profile=user)
+
         if not post:
             if "published" in entry:
                 try:
